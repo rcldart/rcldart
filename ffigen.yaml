@@ -1,0 +1,48 @@
+# # Run with `flutter pub run ffigen --config ffigen.yaml`.
+# name: RcldartBindings
+# description: |
+#   Bindings for `src/rcldart.h`.
+
+#   Regenerate bindings with `flutter pub run ffigen --config ffigen.yaml`.
+# output: 'lib/rcldart_bindings_generated.dart'
+# headers:
+#   entry-points:
+#     - 'src/rcldart.h'
+#   include-directives:
+#     - 'src/rcldart.h'
+# preamble: |
+#   // ignore_for_file: always_specify_types
+#   // ignore_for_file: camel_case_types
+#   // ignore_for_file: non_constant_identifier_names
+# comments:
+#   style: any
+#   length: full
+
+
+# Run with `flutter pub run ffigen --config ffigen.yaml`.
+name: RcldartBindings
+description: |
+  Regenerate bindings with `flutter pub run ffigen --config ffigen_rcl.yaml`.
+  
+output:
+  bindings: 'lib/src/gen/rcldart_bindings_generated.dart'
+  symbol-file:
+    output: 'lib/src/gen/rcldart_bindings_generated_symbols.yaml'
+    import-path: 'package:rcldart/src/gen/rcldart_bindings_generated.dart'
+
+headers:
+  entry-points:
+    - 'src/ros2/rcl/rcl/include/rcl/rcl.h'
+    - 'src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/primitives_sequence.h'
+    - 'src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/string.h'
+comments:
+  style: any
+  length: full
+
+compiler-opts:
+  - '-I src/ros2/rcl/rcl/include/'
+  - '-I src/ros2/rcl/rcl_yaml_param_parser/include/'
+  - '-I src/ros2/rcutils/include/'
+  - '-I src/ros2/rmw/rmw/include/'
+  - '-I src/ros2/rosidl/rosidl_runtime_c/include'
+  - '-I src/ros2/rosidl/rosidl_typesupport_interface/include'
