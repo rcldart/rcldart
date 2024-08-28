@@ -28,9 +28,9 @@ flutter:
   plugin:
     platforms:
       android:
-        ffiPlugin: true
+        ffiPlugin: false
       ios:
-        ffiPlugin: true
+        ffiPlugin: false
       linux:
         ffiPlugin: true
       macos:
