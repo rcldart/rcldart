@@ -1,6 +1,6 @@
 # rcldart
 
-A new Flutter FFI plugin project.
+A new binding Flutter and Dart for the ROS2
 
 ## Getting Started
 
@@ -12,8 +12,7 @@ a specialized package that includes native code directly invoked with Dart FFI.
 
 This template uses the following structure:
 
-* `src`: Contains the native source code, and a CmakeFile.txt file for building
-  that source code into a dynamic library.
+* `src`: contains ros2 packages and dds protocols.
 
 * `lib`: Contains the Dart code that defines the API of the plugin, and which
   calls into the native code using `dart:ffi`.
@@ -74,19 +73,3 @@ To use the native code, bindings in Dart are needed.
 To avoid writing these by hand, they are generated from the header file
 (`src/rcldart.h`) by `package:ffigen`.
 Regenerate the bindings by running `flutter pub run ffigen --config ffigen.yaml`.
-
-## Invoking native code
-
-Very short-running native functions can be directly invoked from any isolate.
-For example, see `sum` in `lib/rcldart.dart`.
-
-Longer-running functions should be invoked on a helper isolate to avoid
-dropping frames in Flutter applications.
-For example, see `sumAsync` in `lib/rcldart.dart`.
-
-## Flutter help
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
