@@ -6,13 +6,6 @@ import 'package:rcldart/src/util/dynamic_library_loader.dart';
 import 'package:rcldart/src/gen/rcldart_bindings_generated.dart';
 
 
-/// Struct defined in msg/Int32 in the package std_msgs.
-// class std_msgs__msg__Int32 extends ffi.Struct {
-//   // external rosidl_runtime_c__int32_t data;
-//   external ffi.Pointer<rosidl_runtime_c__int32> data;
-// }
-
-
 
 class StdMsgsInt32 {
   late ffi.Pointer<ffi.Int32> int32Msg;

@@ -4,7 +4,7 @@ import 'dart:io';
 DynamicLibrary dynamiclibraryloader(String libName) {
   final DynamicLibrary dylib = () {
     if (Platform.isMacOS || Platform.isIOS) {
-      return DynamicLibrary.open('$libName.framework/$libName');
+      return DynamicLibrary.open('/Users/harunkurtdev/ros2_jazzy/install/rcl/lib/lib$libName.dylib');
     }
     if (Platform.isAndroid || Platform.isLinux) {
       return DynamicLibrary.open('lib$libName.so');
