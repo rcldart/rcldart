@@ -18,7 +18,6 @@ class Subscriber<T extends BaseRosMessage> {
     _callback = callback;
   }
 
-  /// Subscription'ı aktif hale getirir
   void subscribe() {
     print("Subscription ready to receive messages on topic");
   }
@@ -63,7 +62,6 @@ class Subscriber<T extends BaseRosMessage> {
           }
           return receivingMessage;
         } else if (rc == RCL_RET_SUBSCRIPTION_TAKE_FAILED) {
-          // Normal durum - mesaj yok
           return null;
         } else {
           print("rcl_take failed with code: $rc");
@@ -89,13 +87,11 @@ class Subscriber<T extends BaseRosMessage> {
     }
   }
 
-  /// Callback fonksiyonunu set eder
   void setCallback(void Function(T) callback) {
     _callback = callback;
     print("Callback set for subscriber");
   }
 
-  /// Subscription'ı temizle
   void dispose() {
     print("Disposing subscriber");
   }
