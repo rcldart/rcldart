@@ -1,18 +1,26 @@
 name: rcldart
-description: "A new Flutter FFI plugin project."
+description: "A new Flutter FFI plugin for ROS2 bindings"
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.0.0'
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   logger: ^2.3.0
-  plugin_platform_interface: ^2.0.2
 
+  plugin_platform_interface: ^2.0.2
+  
+  
+  std_msgs:
+    git:
+      url: https://github.com/rcldart/std_msgs.git
+      # branch: master
+      ref: 8765c67 
+         
 dev_dependencies:
   ffi: ^2.1.0
   ffigen: ^9.0.1
@@ -20,17 +28,13 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
   plugin:
     platforms:
-      android:
-        ffiPlugin: false
-      ios:
-        ffiPlugin: false
+      # android:
+      #   ffiPlugin: false
+      # ios:
+      #   ffiPlugin: false
       linux:
         ffiPlugin: true
       macos:
@@ -38,7 +42,6 @@ flutter:
       windows:
         ffiPlugin: true
 
-  # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
@@ -65,6 +68,3 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
-  # For details regarding fonts in packages, see
-  # https://flutter.dev/custom-fonts/#from-packages

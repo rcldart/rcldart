@@ -4,72 +4,72 @@ A new binding Flutter and Dart for the ROS2
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[FFI plugin](https://docs.flutter.dev/development/platform-integration/c-interop),
-a specialized package that includes native code directly invoked with Dart FFI.
+### Pritimitives
+![primitives](./docs/images/primitives.png)
 
-## Project structure
+### Integers
+![integers](./docs/images/integers.png)
 
-This template uses the following structure:
+### Floats
+![floats](./docs/images/floats.png)
 
-* `src`: contains ros2 packages and dds protocols.
+### Complex
+![complex](./docs/images/complex.png)
 
-* `lib`: Contains the Dart code that defines the API of the plugin, and which
-  calls into the native code using `dart:ffi`.
+### Received
+![received](./docs/images/received.png)
 
-* platform folders (`android`, `ios`, `windows`, etc.): Contains the build files
-  for building and bundling the native code library with the platform application.
-
-## Building and bundling native code
-
-The `pubspec.yaml` specifies FFI plugins as follows:
-
-```yaml
-  plugin:
-    platforms:
-      some_platform:
-        ffiPlugin: true
+```bash
+ros2 topic pub /chatter std_msgs/String "data: Hello ROS Developers" 
+```
+```bash
+ros2 topic pub /std_msgs/float32 std_msgs/Float32 "data: 3.14159" 
 ```
 
-This configuration invokes the native build for the various target platforms
-and bundles the binaries in Flutter applications using these FFI plugins.
-
-This can be combined with dartPluginClass, such as when FFI is used for the
-implementation of one platform in a federated plugin:
-
-```yaml
-  plugin:
-    implements: some_other_plugin
-    platforms:
-      some_platform:
-        dartPluginClass: SomeClass
-        ffiPlugin: true
+```bash
+ros2 topic pub /std_msgs/float64 std_msgs/Float64 "data: 2.718281828"
 ```
 
-A plugin can have both FFI and method channels:
+logs:
 
-```yaml
-  plugin:
-    platforms:
-      some_platform:
-        pluginClass: SomeName
-        ffiPlugin: true
+```bash
+flutter: 📊 Float32 message: 3.141590118408203
+flutter: 📈 Float64 message: 2.718281828
+flutter: 📦 Raw message data: Hello ROS Developers
+flutter: 📊 Float32 message: 3.141590118408203
+flutter: 📈 Float64 message: 2.718281828
+flutter: 📦 Raw message data: Hello ROS Developers
+flutter: 📊 Float32 message: 3.141590118408203
+flutter: 📈 Float64 message: 2.718281828
+flutter: 📦 Raw message data: Hello ROS Developers
+flutter: 📊 Float32 message: 3.141590118408203
+flutter: 📈 Float64 message: 2.718281828
+flutter: 📦 Raw message data: Hello ROS Developers
+flutter: 📊 Float32 message: 3.141590118408203
+flutter: 📈 Float64 message: 2.718281828
 ```
 
-The native build systems that are invoked by FFI (and method channel) plugins are:
 
-* For Android: Gradle, which invokes the Android NDK for native builds.
-  * See the documentation in android/build.gradle.
-* For iOS and MacOS: Xcode, via CocoaPods.
-  * See the documentation in ios/rcldart.podspec.
-  * See the documentation in macos/rcldart.podspec.
-* For Linux and Windows: CMake.
-  * See the documentation in linux/CMakeLists.txt.
-  * See the documentation in windows/CMakeLists.txt.
+## Supporting ROS2
 
-## Binding to native code
+- [ ] Jazzy
+- [x] Humble
+- [ ] Galactic (EOL)
 
-To use the native code, bindings in Dart are needed.
-To avoid writing these by hand, they are generated from the header file
-(`src/rcldart.h`) by `package:ffigen`.
-Regenerate the bindings by running `flutter pub run ffigen --config ffigen.yaml`.
+## Supporting DDS
+
+- [x] FastDDS
+
+## Progress
+
+- [x] Zero copy
+- [x] Custom memory allocator
+- [x] Topic (Pub/Sub)
+- [ ] Service (Client/Server)
+- [?] Asynchronous programming (async/await)
+- [x] Callback based programming
+- [x] Logging
+- [x] Signal handling
+- [ ] Parameter
+- [x] Timer
+- [ ] Action (service + topic)

@@ -1,7 +1,8 @@
+// src/rcldart.dart
 import 'package:rcldart/src/initOptions.dart';
 import 'package:rcldart/src/logger.dart';
 import 'dart:ffi';
-import 'package:rcldart/src/util/dynamic_library_loader.dart';
+import 'package:rcldart_utils/rcldart_utils.dart';
 
 import 'context.dart';
 import 'gen/rcldart_bindings_generated.dart';

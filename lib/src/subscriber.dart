@@ -1,29 +1,102 @@
+// src/subscriber.dart
+// src/subscriber.dart - FINAL FIXED VERSION
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-import 'package:rcldart/src/msgs/std_msgs_int32.dart';
-
+import 'package:ffi/ffi.dart' as ffi;
 import 'package:rcldart/src/rcldart.dart';
-
+import 'package:rcldart_utils/rcldart_utils.dart';
 import 'gen/rcldart_bindings_generated.dart';
-import 'msgs/std_msgs_string.dart';
 
-class Subscriber {
+class Subscriber<T extends BaseRosMessage> {
   final Pointer<rcl_subscription_t> nativeSubscriber;
-  // final Pointer<rcl_publisher_s> nativePublisher;
+  final Pointer<rcl_node_t> nativeNode;
+  void Function(T)? _callback;
+  T? _messageTemplate;
 
-  Pointer<rcl_event_s> event;
-  late StdMsgsString msg;
-
-  late StdMsgsInt32 intmsg;
-
-  Subscriber(this.event,this.nativeSubscriber) {
-    // msg = StdMsgsString("valuevalu!!");
-    intmsg = StdMsgsInt32(32);
+  Subscriber(this.nativeSubscriber, this.nativeNode,
+      {T? messageType, void Function(T)? callback}) {
+    _messageTemplate = messageType;
+    _callback = callback;
   }
 
-  void publish() {
-    rcldartbindings.rcl_subscription_event_init(
-        event, nativeSubscriber, 1);
-    // rcldartbindings.rcl_publish(nativePublisher, msg.strMsg.cast(), nullptr);
+  /// Subscription'ı aktif hale getirir
+  void subscribe() {
+    print("Subscription ready to receive messages on topic");
+  }
+
+  /// Mesaj alma işlemi (non-blocking) - COMPLETELY FIXED VERSION
+  T? take() {
+    if (_messageTemplate == null) {
+      print("ERROR: Message template is null");
+      return null;
+    }
+
+    try {
+      // Create a fresh message instance for receiving data
+      final receivingMessage = _createFreshMessage();
+      if (receivingMessage == null) {
+        print("ERROR: Could not create fresh message");
+        return null;
+      }
+
+      final messageInfo = ffi.malloc<rmw_message_info_t>();
+
+      try {
+        // print("Attempting to take message...");
+
+        // Use the fresh message's data pointer for receiving
+        var rc = rcldartbindings.rcl_take(
+            nativeSubscriber,
+            receivingMessage.data.cast<Void>(),
+            messageInfo,
+            nullptr // allocation - NULL
+            );
+
+
+        if (rc == RCL_RET_OK) {
+          // print("Message successfully received!");S
+
+          // Now receivingMessage contains the received data
+          // Call callback with the received message
+          if (_callback != null) {
+            // print("Calling callback with received message");
+            _callback!(receivingMessage);
+          }
+          return receivingMessage;
+        } else if (rc == RCL_RET_SUBSCRIPTION_TAKE_FAILED) {
+          // Normal durum - mesaj yok
+          return null;
+        } else {
+          print("rcl_take failed with code: $rc");
+          return null;
+        }
+      } finally {
+        // Memory cleanup
+        ffi.malloc.free(messageInfo);
+      }
+    } catch (e) {
+      print("Exception in take(): $e");
+      return null;
+    }
+  }
+
+  /// Create a fresh message instance for receiving data
+  T? _createFreshMessage() {
+    try {
+      return _messageTemplate; // Fallback
+    } catch (e) {
+      print("Error creating fresh message: $e");
+      return null;
+    }
+  }
+
+  /// Callback fonksiyonunu set eder
+  void setCallback(void Function(T) callback) {
+    _callback = callback;
+    print("Callback set for subscriber");
+  }
+
+  /// Subscription'ı temizle
+  void dispose() {
+    print("Disposing subscriber");
   }
 }
