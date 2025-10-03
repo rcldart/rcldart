@@ -22,7 +22,6 @@ class Subscriber<T extends BaseRosMessage> {
     print("Subscription ready to receive messages on topic");
   }
 
-  /// Mesaj alma işlemi (non-blocking) - COMPLETELY FIXED VERSION
   T? take() {
     if (_messageTemplate == null) {
       print("ERROR: Message template is null");
@@ -30,7 +29,6 @@ class Subscriber<T extends BaseRosMessage> {
     }
 
     try {
-      // Create a fresh message instance for receiving data
       final receivingMessage = _createFreshMessage();
       if (receivingMessage == null) {
         print("ERROR: Could not create fresh message");
@@ -52,12 +50,7 @@ class Subscriber<T extends BaseRosMessage> {
 
 
         if (rc == RCL_RET_OK) {
-          // print("Message successfully received!");S
-
-          // Now receivingMessage contains the received data
-          // Call callback with the received message
           if (_callback != null) {
-            // print("Calling callback with received message");
             _callback!(receivingMessage);
           }
           return receivingMessage;

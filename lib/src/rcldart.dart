@@ -29,7 +29,6 @@ class RclDart {
       return;
     }
 
-    // rclDartLogger.info("start initializing rcl");
 
     var initOptions = InitOptions();
 

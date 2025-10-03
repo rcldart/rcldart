@@ -15,8 +15,6 @@ class Publisher <T extends BaseRosMessage> {
     if (message.data == null) {
       throw ArgumentError('Message data cannot be null');
     }
-    // print("📦 Publishing message: ${message.data}");
-
     rcldartbindings.rcl_publish(
         nativePublisher, message.data.cast(), nullptr);
   }

@@ -44,38 +44,39 @@ class Node {
     return Node._(nativeNode, nodeName, nameSpace, context, nodeOptions);
   }
 
-Subscriber createSubscriber<T extends BaseRosMessage>({
-  required String topic_name,
-  T? messageType, // Optional message type
-  void Function(T)? callback, // Callback function for received messages
-}) {
-  var subscription = malloc<rcl_subscription_t>()
-    ..ref = rcldartbindings.rcl_get_zero_initialized_subscription();
+  Subscriber createSubscriber<T extends BaseRosMessage>({
+    required String topic_name,
+    T? messageType, // Optional message type
+    void Function(T)? callback, // Callback function for received messages
+  }) {
+    var subscription = malloc<rcl_subscription_t>()
+      ..ref = rcldartbindings.rcl_get_zero_initialized_subscription();
 
-  // Subscription options
-  var options = malloc<rcl_subscription_options_t>()
-    ..ref = rcldartbindings.rcl_subscription_get_default_options();
+    // Subscription options
+    var options = malloc<rcl_subscription_options_t>()
+      ..ref = rcldartbindings.rcl_subscription_get_default_options();
 
-  // Type support function lookup
-  final ttt = (messageType?.rosidlGeneratorDylib ?? dylib)
-    .lookup<NativeFunction<_typesupportMsgFunc>>(messageType
-        ?.typeSupportName ??
-        'rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__String')
-    .asFunction<_typesupportMsgFunc>();
+    // Type support function lookup
+    final ttt = (messageType?.rosidlGeneratorDylib ?? dylib)
+        .lookup<NativeFunction<_typesupportMsgFunc>>(messageType
+                ?.typeSupportName ??
+            'rosidl_typesupport_c__get_message_type_support_handle__std_msgs__msg__String')
+        .asFunction<_typesupportMsgFunc>();
 
-  // Subscription initialization
-  var rc = rcldartbindings.rcl_subscription_init(subscription, nativeNode,
-      ttt(), topic_name.toNativeUtf8().cast<Char>(), options);
-      
-  if (rc != RCL_RET_OK) {
-    throw Exception("unable to create subscriber, error code: $rc");
+    // Subscription initialization
+    var rc = rcldartbindings.rcl_subscription_init(subscription, nativeNode,
+        ttt(), topic_name.toNativeUtf8().cast<Char>(), options);
+
+    if (rc != RCL_RET_OK) {
+      throw Exception("unable to create subscriber, error code: $rc");
+    }
+
+    print("Subscription created successfully for topic: $topic_name");
+
+    // UPDATED: Pass nativeNode and remove event parameter
+    return Subscriber<T>(subscription, nativeNode,
+        callback: callback, messageType: messageType);
   }
-
-  print("Subscription created successfully for topic: $topic_name");
-
-  // UPDATED: Pass nativeNode and remove event parameter
-  return Subscriber<T>(subscription, nativeNode, callback: callback, messageType: messageType);
-}
 
   Publisher createPublisher<T extends BaseRosMessage>({
     required String topic_name,
@@ -101,6 +102,48 @@ Subscriber createSubscriber<T extends BaseRosMessage>({
 
     return Publisher<T>(publisher);
   }
+
+  // TODO: implement service and client creation methods
+/*
+  void createService<T extends BaseRosService>({
+    required String service_name,
+    T? serviceType, // Optional service type
+    void Function(T)? callback, // Callback function for service requests
+  }) {
+    var service = malloc<rcl_service_t>()
+      ..ref = rcldartbindings.rcl_get_zero_initialized_service();
+
+    // Service options
+    var options = malloc<rcl_service_options_t>()
+      ..ref = rcldartbindings.rcl_service_get_default_options();
+
+    final ttt = (serviceType?.rosidlGeneratorDylib ?? dylib)
+        .lookup<NativeFunction<_typesupportSrvFunc>>(serviceType
+            ?.typeSupportName ??
+            'rosidl_typesupport_c__get_service_type_support_handle__std_srvs__srv__Trigger')
+        .asFunction<_typesupportSrvFunc>();
+
+    var rc = rcldartbindings.rcl_service_init(service, nativeNode, ttt(),
+        service_name.toNativeUtf8().cast<Char>(), options);
+    if (rc != RCL_RET_OK) {
+      throw Exception("unable to create service");
+    }
+
+    print("Service created successfully for service: $service_name");
+
+    // UPDATED: Pass nativeNode and remove event parameter
+    return Service<T>(service, callback: callback, serviceType: serviceType);
+  }
+  */
+
+  /*
+  void dispose() {
+    var rc = rcldartbindings.rcl_node_fini(nativeNode, RclDart().getDefaultContext().nativeContext);
+    if (rc != RCL_RET_OK) {
+      throw Exception("unable to finalize node");
+    }
+    malloc.free(nativeNode);
+  }*/
 }
 
 typedef _typesupportMsgFunc = Pointer<rosidl_message_type_support_t> Function();
