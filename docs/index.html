@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rcldart · ROS 2 in Dart, down to the byte</title>
+<meta name="description" content="rcldart — talk to ROS 2 from Dart/Flutter with no ROS install. Interactive .msg → CDR byte tool + the CycloneDDS / Zenoh / Foxglove libraries.">
+<style>
+  :root{
+    --bg:#0B0E14; --surface:#131824; --surface2:#0E121B; --line:#232B3A;
+    --text:#E4E9F2; --dim:#8792A6; --faint:#5A6070;
+    --cyan:#35D0BA; --cyan-dim:#1c7a6e; --amber:#FFB454; --violet:#8B7CF6;
+    /* categorical byte-field hues */
+    --f0:#35D0BA; --f1:#5AA9FF; --f2:#8B7CF6; --f3:#F76D9C; --f4:#FFB454; --f5:#7DD36B; --f6:#E85D5D; --f7:#4DC3E0;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,.mono{font-family:var(--mono)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--mono);font-weight:600;letter-spacing:-.02em;margin:0}
+
+  /* ---- top rule / masthead ---- */
+  header.top{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;
+    background:rgba(11,14,20,.82);backdrop-filter:blur(10px)}
+  .top .wrap{display:flex;align-items:center;gap:20px;height:58px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:18px;letter-spacing:-.03em}
+  .brand b{color:var(--cyan)}
+  .top nav{margin-left:auto;display:flex;gap:22px;font-size:13.5px;color:var(--dim)}
+  .top nav a{color:var(--dim)}
+  .top nav a:hover{color:var(--text);text-decoration:none}
+
+  /* ---- hero ---- */
+  .hero{padding:56px 0 26px;border-bottom:1px solid var(--line);position:relative}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,5.2vw,54px);line-height:1.04}
+  .hero h1 .b{color:var(--amber)}
+  .hero p.lede{max-width:640px;color:var(--dim);font-size:17px;margin:18px 0 0}
+  .hero .lede b{color:var(--text);font-weight:600}
+
+  /* ---- the tool (signature) ---- */
+  .tool{padding:30px 0 60px}
+  .tool-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .tool-head h2{font-size:20px}
+  .tool-head .hint{color:var(--faint);font-size:13px;font-family:var(--mono)}
+  .presets{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .presets button{font-family:var(--mono);font-size:12px;color:var(--dim);background:var(--surface);
+    border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+  .presets button:hover{color:var(--text);border-color:var(--cyan-dim)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .panel .ph{display:flex;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--line);
+    font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.04em}
+  .panel .ph .dot{width:7px;height:7px;border-radius:2px;background:var(--cyan)}
+  textarea{width:100%;border:0;background:transparent;color:var(--text);font-family:var(--mono);
+    font-size:12.5px;line-height:1.5;padding:14px;resize:vertical;outline:none}
+  textarea#msg{min-height:210px}
+  textarea#vals{min-height:120px}
+
+  /* byte grid */
+  .out{margin-top:16px}
+  .bytes{display:flex;flex-wrap:wrap;gap:4px;padding:16px;background:var(--surface2);
+    border:1px solid var(--line);border-radius:12px}
+  .byte{width:38px;height:40px;border-radius:6px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;font-family:var(--mono);font-size:12.5px;font-weight:600;position:relative;
+    color:#0B0E14;cursor:default;transition:transform .08s}
+  .byte:hover{transform:translateY(-3px)}
+  .byte .off{position:absolute;top:2px;left:3px;font-size:8px;font-weight:500;opacity:.5}
+  .byte.pad{background:repeating-linear-gradient(45deg,#3a2f1a,#3a2f1a 4px,#2a2312 4px,#2a2312 8px);
+    color:var(--amber);border:1px dashed #6b5320}
+  .byte.hdr{background:#1b2230;color:var(--faint);border:1px solid var(--line)}
+  .summary{display:flex;gap:22px;flex-wrap:wrap;margin:14px 2px 0;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  .summary b{color:var(--text)}
+  .summary .sw{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:5px}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:16px 2px 0;font-family:var(--mono);font-size:12px}
+  .legend span{color:var(--dim)}
+  .err{color:#F76D9C;font-family:var(--mono);font-size:12.5px;padding:14px}
+
+  .codeout{margin-top:16px}
+  pre{margin:0;padding:16px;background:var(--surface2);border:1px solid var(--line);border-radius:12px;
+    overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:var(--text)}
+  pre .k{color:var(--violet)} pre .s{color:var(--cyan)} pre .c{color:var(--faint)}
+  .copybtn{float:right;font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--surface);
+    border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer;margin:-2px 0 8px 8px}
+  .copybtn:hover{color:var(--cyan)}
+
+  /* ---- sections ---- */
+  section.band{padding:64px 0;border-bottom:1px solid var(--line)}
+  .sec-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+  section.band h2{font-size:28px;margin:10px 0 8px}
+  section.band .sub{color:var(--dim);max-width:620px;margin-bottom:34px}
+
+  /* layered stack diagram */
+  .stack{display:flex;flex-direction:column;gap:10px;max-width:760px;margin:0 auto}
+  .layer{border:1px solid var(--line);border-radius:12px;padding:16px 20px;background:var(--surface);
+    display:flex;align-items:center;gap:16px}
+  .layer .tag{font-family:var(--mono);font-size:11px;color:var(--faint);width:74px;flex:none;letter-spacing:.08em;text-transform:uppercase}
+  .layer .name{font-family:var(--mono);font-weight:600;color:var(--text);min-width:130px}
+  .layer .desc{color:var(--dim);font-size:14px}
+  .layer.core{border-color:var(--cyan-dim);box-shadow:inset 0 0 0 1px rgba(53,208,186,.15)}
+  .layer.core .name{color:var(--cyan)}
+  .conn{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--surface);position:relative}
+  .card .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--pc,var(--cyan))}
+  .card h3{font-size:17px;margin:8px 0 6px;font-family:var(--mono)}
+  .card p{color:var(--dim);font-size:13.5px;margin:0 0 12px}
+  .card .meta{font-family:var(--mono);font-size:11.5px;color:var(--faint);border-top:1px solid var(--line);padding-top:10px}
+  .card .meta b{color:var(--dim);font-weight:500}
+  .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:20px;
+    border:1px solid var(--line);color:var(--dim);margin:2px 4px 0 0}
+
+  table.libs{width:100%;border-collapse:collapse;font-size:14px}
+  table.libs th,table.libs td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.libs th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:500}
+  table.libs td.n{font-family:var(--mono);color:var(--cyan);white-space:nowrap}
+  table.libs td.t{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+  footer{padding:40px 0;color:var(--faint);font-size:13px}
+  footer .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  footer .brand{font-size:15px}
+
+  @media(max-width:820px){
+    .grid2{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+    .top nav{display:none}
+    .layer{flex-wrap:wrap;gap:8px}
+    .layer .tag{width:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <span class="brand">rcl<b>dart</b></span>
+  <nav>
+    <a href="#tool">.msg → CDR</a>
+    <a href="#stack">Architecture</a>
+    <a href="#libs">Libraries</a>
+    <a href="#apps">Apps</a>
+    <a href="https://github.com/rcldart/rcldart">GitHub</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">ROS 2 · Dart · no ROS install required</div>
+  <h1>Talk to ROS 2 from Dart,<br>down to the <span class="b">byte</span>.</h1>
+  <p class="lede">rcldart speaks the ROS 2 wire directly — <b>CycloneDDS</b>, <b>Zenoh</b>, or the
+    <b>Foxglove</b> bridge — and serializes messages in pure Dart with <b>ros2_cdr</b>.
+    No rosidl typesupport, no bridge codegen. Below: watch any <code>.msg</code> become CDR bytes.</p>
+</div></div>
+
+<!-- ============ THE TOOL (signature) ============ -->
+<div class="tool" id="tool"><div class="wrap">
+  <div class="tool-head">
+    <h2>.msg → CDR</h2>
+    <span class="hint">// paste a message definition + values, see the exact bytes on the wire</span>
+    <span class="presets" id="presets"></span>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph"><span class="dot"></span> MESSAGE DEFINITION <span style="color:var(--faint)">— ros2msg (root + MSG: deps)</span></div>
+      <textarea id="msg" spellcheck="false"></textarea>
+    </div>
+    <div class="panel">
+      <div class="ph"><span class="dot" style="background:var(--amber)"></span> FIELD VALUES <span style="color:var(--faint)">— JSON</span></div>
+      <textarea id="vals" spellcheck="false"></textarea>
+      <div class="ph" style="border-top:1px solid var(--line);border-bottom:0"><span class="dot" style="background:var(--violet)"></span> ROOT TYPE</div>
+      <input id="rootType" spellcheck="false" style="width:100%;border:0;background:transparent;color:var(--cyan);
+        font-family:var(--mono);font-size:12.5px;padding:12px 14px;outline:none" value="std_msgs/msg/String">
+    </div>
+  </div>
+
+  <div class="out" id="out"></div>
+
+  <div class="codeout">
+    <button class="copybtn" onclick="copyCode()">copy</button>
+    <div class="ph" style="border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--surface)">
+      <span class="dot" style="background:var(--violet)"></span> DART — decode/encode with ros2_cdr (pub.dev)</div>
+    <pre id="code" style="border-radius:0 0 12px 12px"></pre>
+  </div>
+</div></div>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section class="band" id="stack"><div class="wrap">
+  <div class="sec-eyebrow">How it fits together</div>
+  <h2>One serialization core, many transports</h2>
+  <p class="sub">Every path shares the pure-Dart CDR codec. Only the transport under it changes —
+    so the same message model works over direct DDS, Zenoh, or a WebSocket bridge.</p>
+  <div class="stack">
+    <div class="layer"><span class="tag">App</span><span class="name">flutglove*</span><span class="desc">Foxglove-style viewers — subscribe & publish over any transport below</span></div>
+    <div class="conn">▲ Dart maps in / out</div>
+    <div class="layer core"><span class="tag">Serialize</span><span class="name">ros2_cdr</span><span class="desc">Pure-Dart CDR (XCDR1) codec + .msg schema parser — the tool above runs this exact logic</span></div>
+    <div class="conn">▲ CDR bytes</div>
+    <div class="layer"><span class="tag">Transport</span><span class="name">dds_direct · zenoh_ros2 · foxglove_ws</span><span class="desc">CycloneDDS FFI · Zenoh · Foxglove WebSocket — pick your wire</span></div>
+    <div class="conn">▲ RTPS / TCP</div>
+    <div class="layer"><span class="tag">Graph</span><span class="name">live ROS 2</span><span class="desc">Real nodes — no ROS installed on the Dart side</span></div>
+  </div>
+</div></section>
+
+<!-- ============ LIBRARIES ============ -->
+<section class="band" id="libs"><div class="wrap">
+  <div class="sec-eyebrow">Libraries — pub.dev-shareable</div>
+  <h2>The reusable layers</h2>
+  <p class="sub">Add one dependency; the native side builds itself. Consumers never touch a ROS install.</p>
+  <table class="libs">
+    <thead><tr><th>Package</th><th>Kind</th><th>What it does</th><th>Built on</th></tr></thead>
+    <tbody>
+      <tr><td class="n">ros2_cdr</td><td class="t">pure Dart</td><td>Encode/decode ROS 2 messages ↔ Dart maps over CDR; parses <code>.msg</code> schemas. No native code, no ROS.</td><td class="t">—</td></tr>
+      <tr><td class="n">dds_direct</td><td class="t">Flutter FFI plugin</td><td>Bridgeless ROS 2 straight over DDS: discovers the graph (DCPSPublication), publishes & subscribes.</td><td class="t">CycloneDDS · ros2_cdr</td></tr>
+      <tr><td class="n">zenoh_ros2</td><td class="t">Flutter library</td><td>ROS 2 over Zenoh via <code>zenoh-bridge-ros2dds</code> — one outbound TCP, NAT-friendly.</td><td class="t">zenoh_ffi · ros2_cdr</td></tr>
+      <tr><td class="n">rcldart</td><td class="t">Flutter FFI plugin</td><td>The full rcl/rmw binding — nodes, pub/sub, services, params when you do have ROS.</td><td class="t">rcl · rmw</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<!-- ============ APPS ============ -->
+<section class="band" id="apps"><div class="wrap">
+  <div class="sec-eyebrow">Apps — same architecture, one per transport</div>
+  <h2>Frontends over the core</h2>
+  <p class="sub">Each is a Foxglove-style Subscribe + Publish frontend on a different transport layer — proof the core swaps cleanly.</p>
+  <div class="cards">
+    <div class="card" style="--pc:#35D0BA">
+      <div class="lbl">CycloneDDS · direct</div>
+      <h3>flutglove_dds</h3>
+      <p>Discovers the live graph over DDS and decodes every type with a bundled schema registry. No bridge, no WebSocket.</p>
+      <div class="meta"><b>layer</b> dds_direct + ros2_cdr &nbsp;·&nbsp; <b>verified</b> live /clock, /chatter round-trip</div>
+    </div>
+    <div class="card" style="--pc:#8B7CF6">
+      <div class="lbl">Zenoh</div>
+      <h3>flutglove_zenoh</h3>
+      <p>Reaches the graph through a Zenoh router — a single outbound TCP that crosses NAT. Subscribe & publish by topic + type.</p>
+      <div class="meta"><b>layer</b> zenoh_ros2 + ros2_cdr &nbsp;·&nbsp; <b>needs</b> zenoh-bridge-ros2dds</div>
+    </div>
+    <div class="card" style="--pc:#FFB454">
+      <div class="lbl">Foxglove · WebSocket</div>
+      <h3>flutglove_foxglove</h3>
+      <p>Connects to <code>foxglove_bridge</code>; discovery and schemas come from the bridge. Publishes via clientPublish.</p>
+      <div class="meta"><b>layer</b> foxglove_ws + ros2_cdr &nbsp;·&nbsp; <b>verified</b> 206 topics discovered</div>
+    </div>
+  </div>
+  <p style="margin-top:26px;color:var(--dim);font-size:14px">
+    <span class="pill">flutglove</span> the full configurable-panel viewer supports all four transports (rcl · CycloneDDS · Zenoh · Foxglove) behind one connection dialog.
+  </p>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="brand">rcl<b>dart</b></span>
+  <span>ROS 2 from Dart, no install required.</span>
+  <span style="margin-left:auto"><a href="https://github.com/rcldart/rcldart">github.com/rcldart</a></span>
+</div></footer>
+
+<script>
+/* ============================================================
+   ros2_cdr, ported to JS — the same logic as the Dart package.
+   Parses a concatenated ros2msg schema, encodes a values object
+   to CDR (XCDR1, little-endian), and records a byte-span per field
+   so the grid can colour each field and show alignment padding.
+   ============================================================ */
+const PRIM = new Set(['bool','byte','char','int8','uint8','int16','uint16','int32','uint32','int64','uint64','float32','float64','string','wstring']);
+const SIZE = {bool:1,byte:1,char:1,int8:1,uint8:1,int16:2,uint16:2,int32:4,uint32:4,int64:8,uint64:8,float32:4,float64:8};
+
+function canon(raw, parentPkg){
+  let t = raw.trim().split('[')[0].split('<=')[0];
+  if(t==='Header') return 'std_msgs/Header';
+  const n = (t.match(/\//g)||[]).length;
+  if(n===2){const p=t.split('/');return p[0]+'/'+p[2];}
+  if(n===1) return t;
+  return parentPkg? parentPkg+'/'+t : t;
+}
+function parseRegistry(rootType, schema){
+  const defs = new Map();
+  const blocks = schema.split(/^=+\s*$/m);
+  for(const block of blocks){
+    let name=null; const body=[];
+    for(const raw of block.split('\n')){
+      const line=raw.trim();
+      if(line.startsWith('MSG:')) name=canon(line.slice(4).trim());
+      else body.push(raw);
+    }
+    const key = name || canon(rootType);
+    defs.set(key, parseBody(key, body));
+  }
+  return defs;
+}
+function parseBody(owner, lines){
+  const fields=[]; const pkg=owner.includes('/')?owner.split('/')[0]:owner;
+  for(let raw of lines){
+    const h=raw.indexOf('#'); if(h>=0) raw=raw.slice(0,h);
+    const line=raw.trim(); if(!line) continue;
+    const parts=line.split(/\s+/); if(parts.length<2) continue;
+    if(parts.length>=3 && parts[2]==='=') continue;
+    if(parts[1].includes('=')) continue;
+    let type=parts[0]; const nm=parts[1];
+    let isArray=false, fixed=null;
+    const br=type.indexOf('[');
+    if(br>=0){isArray=true; const inside=type.slice(br+1,type.indexOf(']')); type=type.slice(0,br);
+      if(inside && !inside.startsWith('<=')) fixed=parseInt(inside,10);}
+    const base=type.split('<=')[0];
+    const prim=PRIM.has(base);
+    fields.push({name:nm,type:prim?base:canon(type,pkg),prim,isArray,fixed});
+  }
+  return fields;
+}
+
+class Writer{
+  constructor(){ this.b=[0,1,0,0]; this.base=4; this.spans=[]; } // CDR_LE encapsulation header
+  _len(){return this.b.length;}
+  align(n,field){
+    const rel=this._len()-this.base; const pad=(n-(rel%n))%n;
+    if(pad>0){const s=this._len(); for(let i=0;i<pad;i++)this.b.push(0);
+      this.spans.push({start:s,len:pad,field,kind:'pad'});}
+  }
+  _rec(start,field,kind){this.spans.push({start,len:this._len()-start,field,kind:kind||'data'});}
+  u8(v,f){const s=this._len();this.b.push(v&0xff);this._rec(s,f);}
+  int(v,n,signed,f){this.align(n,f);const s=this._len();let x=BigInt(Math.trunc(v));
+    if(signed && x<0n) x=(1n<<BigInt(n*8))+x;
+    for(let i=0;i<n;i++){this.b.push(Number(x & 0xffn));x>>=8n;} this._rec(s,f);}
+  f32(v,f){this.align(4,f);const s=this._len();const a=new Uint8Array(new Float32Array([v]).buffer);
+    for(const x of a)this.b.push(x);this._rec(s,f);}
+  f64(v,f){this.align(8,f);const s=this._len();const a=new Uint8Array(new Float64Array([v]).buffer);
+    for(const x of a)this.b.push(x);this._rec(s,f);}
+  str(v,f){this.align(4,f);const bytes=new TextEncoder().encode(String(v??''));
+    const s=this._len();const len=bytes.length+1;
+    this.b.push(len&0xff,(len>>8)&0xff,(len>>16)&0xff,(len>>24)&0xff);
+    this._rec(s,f,'len');
+    const s2=this._len();for(const x of bytes)this.b.push(x);this.b.push(0);this._rec(s2,f,'str');}
+}
+
+function encodeOne(defs,field,val,w,path){
+  if(!field.prim){
+    const def=defs.get(field.type); if(!def) throw new Error('no schema for '+field.type);
+    for(const f of def) encodeOne(defs,f,(val||{})[f.name],w,path+'.'+f.name);
+    return;
+  }
+  const t=field.type;
+  switch(t){
+    case 'bool': w.u8(val?1:0,path); break;
+    case 'byte': case 'uint8': case 'char': w.u8(Number(val||0),path); break;
+    case 'int8': w.int(Number(val||0),1,true,path); break;
+    case 'int16': w.int(Number(val||0),2,true,path); break;
+    case 'uint16': w.int(Number(val||0),2,false,path); break;
+    case 'int32': w.int(Number(val||0),4,true,path); break;
+    case 'uint32': w.int(Number(val||0),4,false,path); break;
+    case 'int64': w.int(Number(val||0),8,true,path); break;
+    case 'uint64': w.int(Number(val||0),8,false,path); break;
+    case 'float32': w.f32(Number(val||0),path); break;
+    case 'float64': w.f64(Number(val||0),path); break;
+    case 'string': case 'wstring': w.str(val,path); break;
+  }
+}
+function encode(defs,rootType,values){
+  const def=defs.get(canon(rootType)); if(!def) throw new Error('root type '+rootType+' not found in the definition');
+  const w=new Writer();
+  for(const f of def){
+    if(f.isArray){
+      const arr=(values||{})[f.name]||[];
+      if(f.fixed===null){w.int(arr.length,4,false,f.name+'[]');} // seq length
+      for(let i=0;i<arr.length;i++) encodeOne(defs,f,arr[i],w,f.name+'['+i+']');
+    } else {
+      encodeOne(defs,f,(values||{})[f.name],w,f.name);
+    }
+  }
+  return {bytes:w.b, spans:w.spans};
+}
+
+/* ---- render ---- */
+const FHUES=['--f0','--f1','--f2','--f3','--f4','--f5','--f6','--f7'];
+function render(){
+  const out=document.getElementById('out');
+  const codeEl=document.getElementById('code');
+  try{
+    const schema=document.getElementById('msg').value;
+    const rootType=document.getElementById('rootType').value.trim();
+    const values=JSON.parse(document.getElementById('vals').value||'{}');
+    const defs=parseRegistry(rootType,schema);
+    const {bytes,spans}=encode(defs,rootType,values);
+
+    // assign a hue per top-level field name
+    const fieldColor=new Map(); let ci=0;
+    const topField=(f)=> f.split(/[.\[]/)[0];
+    for(const sp of spans){ if(sp.kind==='pad')continue; const tf=topField(sp.field);
+      if(!fieldColor.has(tf)){fieldColor.set(tf,FHUES[ci%FHUES.length]);ci++;} }
+    // byte -> {color,label,off,pad,hdr}
+    const meta=new Array(bytes.length).fill(null);
+    for(let i=0;i<4;i++) meta[i]={hdr:true,label:'encapsulation header',off:i};
+    for(const sp of spans){
+      for(let i=sp.start;i<sp.start+sp.len;i++){
+        meta[i]={off:i,pad:sp.kind==='pad',label:sp.field+(sp.kind==='pad'?' · alignment padding':sp.kind==='len'?' · length prefix':''),
+          color:sp.kind==='pad'?null:('var('+fieldColor.get(topField(sp.field))+')')};
+      }
+    }
+    let padCount=spans.filter(s=>s.kind==='pad').reduce((a,s)=>a+s.len,0);
+    let html='<div class="bytes">';
+    for(let i=0;i<bytes.length;i++){
+      const m=meta[i]||{off:i,label:'?'};
+      const cls=m.hdr?'byte hdr':m.pad?'byte pad':'byte';
+      const style=(!m.hdr&&!m.pad&&m.color)?('background:'+m.color):'';
+      const hex=bytes[i].toString(16).padStart(2,'0');
+      html+=`<div class="${cls}" style="${style}" title="[${i}] ${m.label} = 0x${hex} (${bytes[i]})"><span class="off">${i}</span>${hex}</div>`;
+    }
+    html+='</div>';
+    // legend
+    html+='<div class="legend">';
+    for(const [f,h] of fieldColor) html+=`<span><span class="sw" style="background:var(${h})"></span>${f}</span>`;
+    html+='<span><span class="sw" style="background:#3a2f1a;border:1px dashed #6b5320"></span>alignment padding</span>';
+    html+='<span><span class="sw" style="background:#1b2230;border:1px solid var(--line)"></span>encapsulation header</span></div>';
+    // summary
+    html+=`<div class="summary"><span><b>${bytes.length}</b> bytes on the wire</span>
+      <span><b>${bytes.length-4-padCount}</b> payload</span>
+      <span><b>${padCount}</b> alignment padding</span>
+      <span>encoding <b>CDR_LE</b> (XCDR1)</span></div>`;
+    out.innerHTML=html;
+
+    // generated Dart
+    codeEl.innerHTML =
+`<span class="c">// pub.dev: dds_direct / zenoh_ros2 pull this over the wire; ros2_cdr does the bytes.</span>
+<span class="k">final</span> reg = MsgRegistry()..addConcatenated(<span class="s">'${rootType}'</span>, schema);
+<span class="k">final</span> codec = Ros2Codec(reg);
+
+<span class="c">// encode a Dart map -> ${bytes.length} CDR bytes</span>
+<span class="k">final</span> bytes = codec.encode(<span class="s">'${rootType}'</span>, ${JSON.stringify(values)});
+
+<span class="c">// decode CDR bytes -> Dart map</span>
+<span class="k">final</span> msg = codec.decode(<span class="s">'${rootType}'</span>, bytes);`;
+  }catch(e){
+    out.innerHTML='<div class="err">⚠ '+e.message+'</div>';
+    codeEl.textContent='// fix the definition or JSON above to generate code';
+  }
+}
+function copyCode(){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('code').innerText);}
+
+/* ---- presets ---- */
+const PRESETS={
+  'std_msgs/String':{root:'std_msgs/msg/String',msg:'string data',vals:{data:'hello ROS 2'}},
+  'geometry_msgs/PoseStamped':{root:'geometry_msgs/msg/PoseStamped',
+    msg:`std_msgs/Header header
+geometry_msgs/Pose pose
+================
+MSG: std_msgs/Header
+builtin_interfaces/Time stamp
+string frame_id
+================
+MSG: builtin_interfaces/Time
+int32 sec
+uint32 nanosec
+================
+MSG: geometry_msgs/Pose
+geometry_msgs/Point position
+geometry_msgs/Quaternion orientation
+================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+================
+MSG: geometry_msgs/Quaternion
+float64 x
+float64 y
+float64 z
+float64 w`,
+    vals:{header:{stamp:{sec:12,nanosec:500},frame_id:'map'},pose:{position:{x:1.5,y:-2.0,z:0.0},orientation:{x:0,y:0,z:0,w:1}}}},
+  'geometry_msgs/Twist':{root:'geometry_msgs/msg/Twist',
+    msg:`geometry_msgs/Vector3 linear
+geometry_msgs/Vector3 angular
+================
+MSG: geometry_msgs/Vector3
+float64 x
+float64 y
+float64 z`,
+    vals:{linear:{x:0.2,y:0,z:0},angular:{x:0,y:0,z:0.5}}},
+  'sensor_msgs/LaserScan':{root:'sensor_msgs/msg/LaserScan',
+    msg:`std_msgs/Header header
+float32 angle_min
+float32 angle_max
+float32 angle_increment
+float32 time_increment
+float32 scan_time
+float32 range_min
+float32 range_max
+float32[] ranges
+float32[] intensities
+================
+MSG: std_msgs/Header
+builtin_interfaces/Time stamp
+string frame_id
+================
+MSG: builtin_interfaces/Time
+int32 sec
+uint32 nanosec`,
+    vals:{header:{stamp:{sec:3,nanosec:0},frame_id:'laser'},angle_min:-1.57,angle_max:1.57,angle_increment:0.01,time_increment:0,scan_time:0.1,range_min:0.1,range_max:10,ranges:[1.2,1.25,1.3],intensities:[]}},
+};
+const pc=document.getElementById('presets');
+for(const name of Object.keys(PRESETS)){
+  const b=document.createElement('button'); b.textContent=name;
+  b.onclick=()=>{const p=PRESETS[name];
+    document.getElementById('msg').value=p.msg;
+    document.getElementById('rootType').value=p.root;
+    document.getElementById('vals').value=JSON.stringify(p.vals,null,2);
+    render();};
+  pc.appendChild(b);
+}
+['msg','vals','rootType'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+// load default preset
+(function(){const p=PRESETS['geometry_msgs/PoseStamped'];
+  document.getElementById('msg').value=p.msg;
+  document.getElementById('rootType').value=p.root;
+  document.getElementById('vals').value=JSON.stringify(p.vals,null,2);
+  render();})();
+</script>
+</body>
+</html>
