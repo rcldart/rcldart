@@ -1,0 +1,20 @@
+name: ros_cdr
+description: >
+  Runtime, schema-driven decoding of ANY ROS 2 message into a plain Dart map —
+  no per-type code generation. Reads the message layout from the rosidl
+  introspection typesupport (loaded by name at runtime) and walks the
+  in-memory C struct produced by rcl_take. This is the Dart equivalent of the
+  generic deserialization Foxglove does from a runtime schema.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  ffi: ^2.1.0
+  rcldart_utils:
+    path: ../rcldart_utils
+
+dev_dependencies:
+  lints: ^3.0.0

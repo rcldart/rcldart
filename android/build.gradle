@@ -1,4 +1,14 @@
-// The Android Gradle Plugin builds the native code with the Android NDK.
+// rcldart Android module.
+//
+// This module does TWO things for Android support:
+//   1. Builds a small native shim (librcldart_ifaddrs.so) that provides a
+//      working getifaddrs()/freeifaddrs() — Android's bionic implementation
+//      does not enumerate interfaces the way CycloneDDS/FastDDS discovery
+//      expects, so DDS finds no peers without this. See src/main/cpp.
+//   2. BUNDLES the cross-compiled ROS 2 runtime (.so closure) that you drop
+//      into src/main/jniLibs/<abi>/ straight into the consuming app's APK.
+//      Android has no ROS install, so everything rcl dlopen()s at runtime must
+//      ship inside the APK. See tool/build_ros2_android.sh + docs/android_support.md.
 
 group 'com.example.rcldart'
 version '1.0'
@@ -8,10 +18,11 @@ buildscript {
         google()
         mavenCentral()
     }
-
     dependencies {
-        // The Android Gradle Plugin knows how to build native code with the NDK.
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        // Matches the zenoh_ffi FFI-plugin baseline. In a modern Flutter app the
+        // AGP version is actually resolved by the app's settings.gradle plugin
+        // management; this is the plugin's standalone fallback.
+        classpath 'com.android.tools.build:gradle:8.1.0'
     }
 }
 
@@ -29,28 +40,13 @@ android {
         namespace 'com.example.rcldart'
     }
 
-    // Bumping the plugin compileSdk version requires all clients of this plugin
-    // to bump the version in their app.
     compileSdk 34
-
-    // Use the NDK version
-    // declared in /android/app/build.gradle file of the Flutter project.
-    // Replace it with a version number if this plugin requires a specfic NDK version.
-    // (e.g. ndkVersion "23.1.7779620")
     ndkVersion android.ndkVersion
 
-    // Invoke the shared CMake build with the Android Gradle Plugin.
+    // Build the getifaddrs shim (Android-only) from our CMake file.
     externalNativeBuild {
         cmake {
-            path "../src/CMakeLists.txt"
-
-            // The default CMake version for the Android Gradle Plugin is 3.10.2.
-            // https://developer.android.com/studio/projects/install-ndk#vanilla_cmake
-            //
-            // The Flutter tooling requires that developers have CMake 3.10 or later
-            // installed. You should not increase this version, as doing so will cause
-            // the plugin to fail to compile for some customers of the plugin.
-            // version "3.10.2"
+            path "CMakeLists.txt"
         }
     }
 
@@ -60,6 +56,74 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 19
+        // API 24+: modern bionic (dlopen of many libs, RTLD_GLOBAL, getifaddrs
+        // symbol present) — the ROS 2 runtime does not load below this.
+        minSdkVersion 24
+
+        ndk {
+            // arm64-v8a = real phones; x86_64 = emulator. The getifaddrs shim is
+            // built for both; drop the ROS closure into jniLibs/<abi> per target.
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
     }
+
+    // The ROS 2 closure lives here; a library module merges its jniLibs into
+    // the app APK automatically.
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            // Keep the .so uncompressed and extractable so rcl can dlopen the
+            // typesupport / rmw plugin libraries by name at runtime.
+            useLegacyPackaging true
+        }
+        // ROS ships many libs sharing transitive deps — take the first.
+        pickFirsts += ['**/*.so']
+        // Do NOT strip: the cross-build already stripped, and further stripping
+        // can drop symbols the dynamic typesupport lookup needs.
+        doNotStrip '**/arm64-v8a/*.so'
+        doNotStrip '**/x86_64/*.so'
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Automatic ROS 2 closure fetch (zenoh_ffi-style).
+//
+// Android has no ROS, so the runtime .so closure must ship in the APK jniLibs.
+// Rather than commit ~tens-of-MB of binaries, this fetches a prebuilt closure
+// at build time from a URL you control (a GitHub release asset produced by
+// tool/build_ros2_android.sh + tool/package_ros_bundle.sh). Set it via:
+//   -PrcldartRosBundleUrl=https://…/ros-android-arm64-v8a.tar.gz   (gradle prop)
+//   or  RCLDART_ROS_BUNDLE_URL=…   (env)
+// No-op when jniLibs already has the closure or no URL is set — the app still
+// builds; it just has no ROS runtime until you drop the closure in.
+def rcldartRosBundleUrl =
+    project.findProperty('rcldartRosBundleUrl') ?: System.getenv('RCLDART_ROS_BUNDLE_URL')
+
+tasks.register('fetchRosBundle') {
+    doLast {
+        def jni = file("${projectDir}/src/main/jniLibs")
+        def present = file("${jni}/arm64-v8a/librcl.so").exists()
+        if (present) { logger.lifecycle('rcldart: ROS closure already present — skip fetch'); return }
+        if (!rcldartRosBundleUrl) {
+            logger.warn('rcldart: no rcldartRosBundleUrl/RCLDART_ROS_BUNDLE_URL — ' +
+                'bundle the ROS closure manually (see docs/android_support.md)')
+            return
+        }
+        logger.lifecycle("rcldart: fetching ROS closure from ${rcldartRosBundleUrl}")
+        def tmp = File.createTempFile('rcldart-ros', '.tar.gz')
+        new URL(rcldartRosBundleUrl).withInputStream { i -> tmp.withOutputStream { o -> o << i } }
+        jni.mkdirs()
+        exec { commandLine 'tar', 'xzf', tmp.absolutePath, '-C', jni.absolutePath }
+        tmp.delete()
+        logger.lifecycle('rcldart: ROS closure extracted into jniLibs')
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name == 'preBuild' }.configureEach { dependsOn 'fetchRosBundle' }
 }

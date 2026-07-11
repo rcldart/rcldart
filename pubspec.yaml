@@ -11,18 +11,27 @@ dependencies:
   flutter:
     sdk: flutter
   logger: ^2.3.0
+  logging: ^1.2.0
 
   plugin_platform_interface: ^2.0.2
-  
-  
-  std_msgs:
-    git:
-      url: https://github.com/rcldart/std_msgs.git
-      # branch: master
-      ref: 8765c67 
-         
-dev_dependencies:
+
   ffi: ^2.1.0
+
+  # rcldart_utils: core BaseRosMessage / BaseRosService / dynamiclibraryloader,
+  # used throughout lib/src. It is a separate package (generated message packages
+  # depend on it too) and must be published to pub.dev before rcldart — see
+  # PUBLISHING.md. The hosted constraint keeps this pubspec pub.dev-valid; the
+  # path override below is DEV-ONLY (ignored by consumers of rcldart).
+  rcldart_utils: ^1.0.0
+
+# Local development only: resolve the sibling package from the checkout. Consumers
+# of rcldart on pub.dev never see these overrides. (ros_cdr is now vendored into
+# lib/src/cdr; std_msgs was unused and removed.)
+dependency_overrides:
+  rcldart_utils:
+    path: ./rcldart_utils
+
+dev_dependencies:
   ffigen: ^9.0.1
   flutter_test:
     sdk: flutter
@@ -31,8 +40,11 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
-      # android:
-      #   ffiPlugin: false
+      # Android: ffiPlugin builds the getifaddrs shim (android/CMakeLists.txt)
+      # and the module bundles the cross-compiled ROS 2 closure from
+      # android/src/main/jniLibs/<abi>/ into the app APK. See docs/android_support.md.
+      android:
+        ffiPlugin: true
       # ios:
       #   ffiPlugin: false
       linux:

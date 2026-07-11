@@ -1,0 +1,7 @@
+# rmw_fastrtps overlay (default; validated on iOS by ROS2-On-iOS).
+repositories:
+  eProsima/Fast-CDR:        { type: git, url: https://github.com/eProsima/Fast-CDR.git,         version: 2.2.x }
+  eProsima/Fast-DDS:        { type: git, url: https://github.com/eProsima/Fast-DDS.git,         version: 2.14.x }
+  eProsima/foonathan_memory_vendor: { type: git, url: https://github.com/eProsima/foonathan_memory_vendor.git, version: master }
+  ros2/rmw_fastrtps:        { type: git, url: https://github.com/ros2/rmw_fastrtps.git,         version: jazzy }
+  ros2/rosidl_typesupport_fastrtps: { type: git, url: https://github.com/ros2/rosidl_typesupport_fastrtps.git, version: jazzy }

@@ -33,6 +33,9 @@ output:
 headers:
   entry-points:
     - 'src/ros2/rcl/rcl/include/rcl/rcl.h'
+    # Actions: uncomment after `vcs import`s the rcl sources (rcl_action ships
+    # inside the ros2/rcl repo). Regenerate, then enable lib/src/action.dart.
+    - 'src/ros2/rcl/rcl_action/include/rcl_action/rcl_action.h'
     - 'src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/primitives_sequence.h'
     - 'src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/string.h'
 comments:
@@ -41,6 +44,7 @@ comments:
 
 compiler-opts:
   - '-I src/ros2/rcl/rcl/include/'
+  - '-I src/ros2/rcl/rcl_action/include/'
   - '-I src/ros2/rcl/rcl_yaml_param_parser/include/'
   - '-I src/ros2/rcutils/include/'
   - '-I src/ros2/rmw/rmw/include/'

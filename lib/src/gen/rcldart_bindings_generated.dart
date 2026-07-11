@@ -4,8 +4,7 @@
 // ignore_for_file: type=lint
 import 'dart:ffi' as ffi;
 
-/// Regenerate bindings with `flutter pub run ffigen --config ffigen_rcl.yaml`.
-///
+/// Regenerated against ROS 2 Jazzy (/opt/ros/jazzy), incl rcl_action.
 class RcldartBindings {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -111,6 +110,162 @@ class RcldartBindings {
   late final _rcutils_reallocf = _rcutils_reallocfPtr.asFunction<
       ffi.Pointer<ffi.Void> Function(
           ffi.Pointer<ffi.Void>, int, ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Return a zero-initialized discovery options structure.
+  rmw_discovery_options_t rmw_get_zero_initialized_discovery_options() {
+    return _rmw_get_zero_initialized_discovery_options();
+  }
+
+  late final _rmw_get_zero_initialized_discovery_optionsPtr =
+      _lookup<ffi.NativeFunction<rmw_discovery_options_t Function()>>(
+          'rmw_get_zero_initialized_discovery_options');
+  late final _rmw_get_zero_initialized_discovery_options =
+      _rmw_get_zero_initialized_discovery_optionsPtr
+          .asFunction<rmw_discovery_options_t Function()>();
+
+  /// Initialize a discovery options structure with a set number of static peers.
+  /// /**
+  ///  * This function initializes rmw_discovery_options_t with space for a set number of static peers.
+  ///  *
+  ///  * \param[in] discovery_options Pointer to a zero initialized option structure to be initialized on
+  ///  * success, but left unchanged on failure.
+  ///  * \param[in] size Number of static peers to allocate space for.
+  ///  * \param[in] allocator Allocator to be used to allocate memory.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `discovery_options` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `discovery_options` is not
+  ///  *   zero initialized, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `allocator` is invalid,
+  ///  *   by rcutils_allocator_is_valid() definition, or
+  ///  * \returns `RMW_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  /// */
+  int rmw_discovery_options_init(
+    ffi.Pointer<rmw_discovery_options_t> discovery_options,
+    int size,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_discovery_options_init(
+      discovery_options,
+      size,
+      allocator,
+    );
+  }
+
+  late final _rmw_discovery_options_initPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_discovery_options_t>, ffi.Size,
+              ffi.Pointer<rcutils_allocator_t>)>>('rmw_discovery_options_init');
+  late final _rmw_discovery_options_init =
+      _rmw_discovery_options_initPtr.asFunction<
+          int Function(ffi.Pointer<rmw_discovery_options_t>, int,
+              ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Compare two discovery parameter instances for equality.
+  /// /**
+  ///  * Equality means the automatic_discovery_range values are equal, they have the same
+  ///  * static_peers_count value, and each entry in static_peers is evaluated as
+  ///  * equal using strncmp.
+  ///  *
+  ///  * NOTE: If the two parameter structs list the static peers in different orders
+  ///  * then this will evaulate as NOT equal.
+  ///  *
+  ///  * \param[in] left - The first set of options to compare
+  ///  * \param[in] right - The second set of options to compare
+  ///  * \param[out] result - The result of the calculation.
+  ///  *
+  ///  * \return RMW_RET_OK when the input arguments are valid.
+  ///  * \return RMW_RET_INVALID_ARGUMENT will be returned when any input is a nullptr,
+  ///  * or if something in either struct was malformed, such as static_peers being
+  ///  * a nullptr while static_peers_count is non-zero.
+  ///  */
+  int rmw_discovery_options_equal(
+    ffi.Pointer<rmw_discovery_options_t> left,
+    ffi.Pointer<rmw_discovery_options_t> right,
+    ffi.Pointer<ffi.Bool> result,
+  ) {
+    return _rmw_discovery_options_equal(
+      left,
+      right,
+      result,
+    );
+  }
+
+  late final _rmw_discovery_options_equalPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(
+              ffi.Pointer<rmw_discovery_options_t>,
+              ffi.Pointer<rmw_discovery_options_t>,
+              ffi.Pointer<ffi.Bool>)>>('rmw_discovery_options_equal');
+  late final _rmw_discovery_options_equal =
+      _rmw_discovery_options_equalPtr.asFunction<
+          int Function(ffi.Pointer<rmw_discovery_options_t>,
+              ffi.Pointer<rmw_discovery_options_t>, ffi.Pointer<ffi.Bool>)>();
+
+  /// Perform a deep copy of the discovery options from src into dst using the
+  /// given allocator.
+  /// /**
+  ///  * The dst will be left with an owned copy of the static peers array whose
+  ///  * string values match the src.
+  ///  * If successful, src and dst will evaluate as equal using
+  ///  * rmw_discovery_options_equal.
+  ///  *
+  ///  * \param[in] src discovery options to be copied.
+  ///  * \param[in] allocator to use.
+  ///  * \param[out] dst Destination options to use.
+  ///  * \return RMW_RET_OK if success.
+  ///  * \return RMW_RET_INVALID_ARGUMENT if either the src, allocator or dst is null, or
+  ///  * \return RMW_RET_INVALID_ARGUMENT if src and dst are the same object.
+  ///  * \return RMW_RET_BAD_ALLOC if allocation fails.
+  ///  */
+  int rmw_discovery_options_copy(
+    ffi.Pointer<rmw_discovery_options_t> src,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rmw_discovery_options_t> dst,
+  ) {
+    return _rmw_discovery_options_copy(
+      src,
+      allocator,
+      dst,
+    );
+  }
+
+  late final _rmw_discovery_options_copyPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<rmw_discovery_options_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rmw_discovery_options_t>)>>(
+      'rmw_discovery_options_copy');
+  late final _rmw_discovery_options_copy =
+      _rmw_discovery_options_copyPtr.asFunction<
+          int Function(
+              ffi.Pointer<rmw_discovery_options_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rmw_discovery_options_t>)>();
+
+  /// Destructor for rmw_discovery_options_t
+  /// /**
+  ///  * \param[in] discovery_options to destroy
+  ///  * \return RMW_RET_OK if success.
+  ///  * \return RMW_RET_INVALID_ARGUMENT if allocator is invalid
+  ///  * or discovery_options is null.
+  ///  */
+  int rmw_discovery_options_fini(
+    ffi.Pointer<rmw_discovery_options_t> discovery_options,
+  ) {
+    return _rmw_discovery_options_fini(
+      discovery_options,
+    );
+  }
+
+  late final _rmw_discovery_options_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_discovery_options_t>)>>(
+      'rmw_discovery_options_fini');
+  late final _rmw_discovery_options_fini = _rmw_discovery_options_finiPtr
+      .asFunction<int Function(ffi.Pointer<rmw_discovery_options_t>)>();
 
   /// Get zero initialized security options.
   rmw_security_options_t rmw_get_zero_initialized_security_options() {
@@ -767,6 +922,26 @@ class RcldartBindings {
   late final _fdopen = _fdopenPtr
       .asFunction<ffi.Pointer<FILE> Function(int, ffi.Pointer<ffi.Char>)>();
 
+  ffi.Pointer<FILE> fopencookie(
+    ffi.Pointer<ffi.Void> __magic_cookie,
+    ffi.Pointer<ffi.Char> __modes,
+    cookie_io_functions_t __io_funcs,
+  ) {
+    return _fopencookie(
+      __magic_cookie,
+      __modes,
+      __io_funcs,
+    );
+  }
+
+  late final _fopencookiePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Char>, cookie_io_functions_t)>>('fopencookie');
+  late final _fopencookie = _fopencookiePtr.asFunction<
+      ffi.Pointer<FILE> Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Char>,
+          cookie_io_functions_t)>();
+
   ffi.Pointer<FILE> fmemopen(
     ffi.Pointer<ffi.Void> __s,
     int __len,
@@ -1021,6 +1196,62 @@ class RcldartBindings {
   late final _vsnprintf = _vsnprintfPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<__va_list_tag>)>();
+
+  int vasprintf(
+    ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
+    ffi.Pointer<ffi.Char> __f,
+    ffi.Pointer<__va_list_tag> __arg,
+  ) {
+    return _vasprintf(
+      __ptr,
+      __f,
+      __arg,
+    );
+  }
+
+  late final _vasprintfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>, ffi.Pointer<__va_list_tag>)>>('vasprintf');
+  late final _vasprintf = _vasprintfPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<__va_list_tag>)>();
+
+  int __asprintf(
+    ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
+    ffi.Pointer<ffi.Char> __fmt,
+  ) {
+    return ___asprintf(
+      __ptr,
+      __fmt,
+    );
+  }
+
+  late final ___asprintfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>)>>('__asprintf');
+  late final ___asprintf = ___asprintfPtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>();
+
+  int asprintf(
+    ffi.Pointer<ffi.Pointer<ffi.Char>> __ptr,
+    ffi.Pointer<ffi.Char> __fmt,
+  ) {
+    return _asprintf(
+      __ptr,
+      __fmt,
+    );
+  }
+
+  late final _asprintfPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Char>)>>('asprintf');
+  late final _asprintf = _asprintfPtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Char>)>();
 
   int vdprintf(
     int __fd,
@@ -2713,6 +2944,45 @@ class RcldartBindings {
       int Function(
           ffi.Pointer<ffi.UnsignedShort>, ffi.Pointer<drand48_data>)>();
 
+  int arc4random() {
+    return _arc4random();
+  }
+
+  late final _arc4randomPtr =
+      _lookup<ffi.NativeFunction<__uint32_t Function()>>('arc4random');
+  late final _arc4random = _arc4randomPtr.asFunction<int Function()>();
+
+  void arc4random_buf(
+    ffi.Pointer<ffi.Void> __buf,
+    int __size,
+  ) {
+    return _arc4random_buf(
+      __buf,
+      __size,
+    );
+  }
+
+  late final _arc4random_bufPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>, ffi.Size)>>(
+      'arc4random_buf');
+  late final _arc4random_buf = _arc4random_bufPtr
+      .asFunction<void Function(ffi.Pointer<ffi.Void>, int)>();
+
+  int arc4random_uniform(
+    int __upper_bound,
+  ) {
+    return _arc4random_uniform(
+      __upper_bound,
+    );
+  }
+
+  late final _arc4random_uniformPtr =
+      _lookup<ffi.NativeFunction<__uint32_t Function(__uint32_t)>>(
+          'arc4random_uniform');
+  late final _arc4random_uniform =
+      _arc4random_uniformPtr.asFunction<int Function(int)>();
+
   ffi.Pointer<ffi.Void> malloc(
     int __size,
   ) {
@@ -3908,6 +4178,23 @@ class RcldartBindings {
   late final _strrchr = _strrchrPtr
       .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, int)>();
 
+  ffi.Pointer<ffi.Char> strchrnul(
+    ffi.Pointer<ffi.Char> __s,
+    int __c,
+  ) {
+    return _strchrnul(
+      __s,
+      __c,
+    );
+  }
+
+  late final _strchrnulPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>, ffi.Int)>>('strchrnul');
+  late final _strchrnul = _strchrnulPtr
+      .asFunction<ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>, int)>();
+
   int strcspn(
     ffi.Pointer<ffi.Char> __s,
     ffi.Pointer<ffi.Char> __reject,
@@ -4039,6 +4326,86 @@ class RcldartBindings {
   late final _strtok_r = _strtok_rPtr.asFunction<
       ffi.Pointer<ffi.Char> Function(ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  ffi.Pointer<ffi.Char> strcasestr(
+    ffi.Pointer<ffi.Char> __haystack,
+    ffi.Pointer<ffi.Char> __needle,
+  ) {
+    return _strcasestr(
+      __haystack,
+      __needle,
+    );
+  }
+
+  late final _strcasestrPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Char> Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>>('strcasestr');
+  late final _strcasestr = _strcasestrPtr.asFunction<
+      ffi.Pointer<ffi.Char> Function(
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+
+  ffi.Pointer<ffi.Void> memmem(
+    ffi.Pointer<ffi.Void> __haystack,
+    int __haystacklen,
+    ffi.Pointer<ffi.Void> __needle,
+    int __needlelen,
+  ) {
+    return _memmem(
+      __haystack,
+      __haystacklen,
+      __needle,
+      __needlelen,
+    );
+  }
+
+  late final _memmemPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>, ffi.Size,
+              ffi.Pointer<ffi.Void>, ffi.Size)>>('memmem');
+  late final _memmem = _memmemPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, int, ffi.Pointer<ffi.Void>, int)>();
+
+  ffi.Pointer<ffi.Void> __mempcpy(
+    ffi.Pointer<ffi.Void> __dest,
+    ffi.Pointer<ffi.Void> __src,
+    int __n,
+  ) {
+    return ___mempcpy(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final ___mempcpyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>, ffi.Size)>>('__mempcpy');
+  late final ___mempcpy = ___mempcpyPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+
+  ffi.Pointer<ffi.Void> mempcpy(
+    ffi.Pointer<ffi.Void> __dest,
+    ffi.Pointer<ffi.Void> __src,
+    int __n,
+  ) {
+    return _mempcpy(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _mempcpyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Void>, ffi.Size)>>('mempcpy');
+  late final _mempcpy = _mempcpyPtr.asFunction<
+      ffi.Pointer<ffi.Void> Function(
+          ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
 
   int strlen(
     ffi.Pointer<ffi.Char> __s,
@@ -4444,6 +4811,44 @@ class RcldartBindings {
   late final _stpncpy = _stpncpyPtr.asFunction<
       ffi.Pointer<ffi.Char> Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+
+  int strlcpy(
+    ffi.Pointer<ffi.Char> __dest,
+    ffi.Pointer<ffi.Char> __src,
+    int __n,
+  ) {
+    return _strlcpy(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _strlcpyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('strlcpy');
+  late final _strlcpy = _strlcpyPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
+
+  int strlcat(
+    ffi.Pointer<ffi.Char> __dest,
+    ffi.Pointer<ffi.Char> __src,
+    int __n,
+  ) {
+    return _strlcat(
+      __dest,
+      __src,
+      __n,
+    );
+  }
+
+  late final _strlcatPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('strlcat');
+  late final _strlcat = _strlcatPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
   /// Format a string.
   /// /**
@@ -5486,7 +5891,7 @@ class RcldartBindings {
   ///  * ```c
   ///  * rcutils_hash_map_t hash_map = rcutils_get_zero_initialized_hash_map();
   ///  * rcutils_ret_t ret =
-  ///  *   rcutils_hash_map_init(&hash_map, 10, rcutils_get_default_allocator());
+  ///  *   rcutils_hash_map_init(&hash_map, 2, rcutils_get_default_allocator());
   ///  * if (ret != RCUTILS_RET_OK) {
   ///  *   // ... do error handling
   ///  * }
@@ -5498,7 +5903,8 @@ class RcldartBindings {
   ///  * ```
   ///  *
   ///  * \param[inout] hash_map rcutils_hash_map_t to be initialized
-  ///  * \param[in] initial_capacity the amount of initial capacity for the hash_map
+  ///  * \param[in] initial_capacity the amount of initial capacity for the hash_map - this must be
+  ///  *                             greater than zero and will be automatically rounded up to the next power of 2
   ///  * \param[in] key_size the size (in bytes) of the key used to index the data
   ///  * \param[in] data_size the size (in bytes) of the data being stored
   ///  * \param[in] key_hashing_func a function that returns a hashed value for a key
@@ -6959,6 +7365,43 @@ class RcldartBindings {
   late final _rcutils_steady_time_now = _rcutils_steady_time_nowPtr
       .asFunction<int Function(ffi.Pointer<rcutils_time_point_value_t>)>();
 
+  /// Retrieve the current time as a rcutils_time_point_value_t object.
+  /// /**
+  ///  * This function returns the time from a monotonically increasing slew-free clock.
+  ///  *
+  ///  * The resolution (e.g. nanoseconds vs microseconds) is not guaranteed.
+  ///  *
+  ///  * The now argument must point to an allocated rcutils_time_point_value_t object,
+  ///  * as the result is copied into this variable.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] now a struct in which the current time is stored
+  ///  * \return #RCUTILS_RET_OK if the current time was successfully obtained, or
+  ///  * \return #RCUTILS_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCUTILS_RET_ERROR if an unspecified error occur.
+  ///  */
+  int rcutils_raw_steady_time_now(
+    ffi.Pointer<rcutils_time_point_value_t> now,
+  ) {
+    return _rcutils_raw_steady_time_now(
+      now,
+    );
+  }
+
+  late final _rcutils_raw_steady_time_nowPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(ffi.Pointer<rcutils_time_point_value_t>)>>(
+      'rcutils_raw_steady_time_now');
+  late final _rcutils_raw_steady_time_now = _rcutils_raw_steady_time_nowPtr
+      .asFunction<int Function(ffi.Pointer<rcutils_time_point_value_t>)>();
+
   /// Return a time point as nanoseconds in a string.
   /// /**
   ///  * The number is always fixed width, with left padding zeros up to the maximum
@@ -7010,6 +7453,52 @@ class RcldartBindings {
               ffi.Size)>>('rcutils_time_point_value_as_nanoseconds_string');
   late final _rcutils_time_point_value_as_nanoseconds_string =
       _rcutils_time_point_value_as_nanoseconds_stringPtr.asFunction<
+          int Function(ffi.Pointer<rcutils_time_point_value_t>,
+              ffi.Pointer<ffi.Char>, int)>();
+
+  /// Return a time point as an datetime in local time with milliseconds in a string.
+  /// /**
+  ///  *
+  ///  * If the given string is not large enough, the result will be truncated.
+  ///  * If you need a string with variable width, using `snprintf()` directly is
+  ///  * recommended.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No [1]
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] if `snprintf()` does not allocate additional memory internally</i>
+  ///  *
+  ///  * \param[in] time_point the time to be made into a string
+  ///  * \param[out] str the output string in which it is stored
+  ///  * \param[in] str_size the size of the output string
+  ///  * \return #RCUTILS_RET_OK if successful (even if truncated), or
+  ///  * \return #RCUTILS_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCUTILS_RET_ERROR if an unspecified error occur.
+  ///  */
+  int rcutils_time_point_value_as_date_string(
+    ffi.Pointer<rcutils_time_point_value_t> time_point,
+    ffi.Pointer<ffi.Char> str,
+    int str_size,
+  ) {
+    return _rcutils_time_point_value_as_date_string(
+      time_point,
+      str,
+      str_size,
+    );
+  }
+
+  late final _rcutils_time_point_value_as_date_stringPtr = _lookup<
+      ffi.NativeFunction<
+          rcutils_ret_t Function(
+              ffi.Pointer<rcutils_time_point_value_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('rcutils_time_point_value_as_date_string');
+  late final _rcutils_time_point_value_as_date_string =
+      _rcutils_time_point_value_as_date_stringPtr.asFunction<
           int Function(ffi.Pointer<rcutils_time_point_value_t>,
               ffi.Pointer<ffi.Char>, int)>();
 
@@ -7257,19 +7746,6 @@ class RcldartBindings {
           int Function(ffi.Pointer<ffi.Char>, rcutils_allocator_t,
               ffi.Pointer<ffi.Int>)>();
 
-  /// The function pointer of the current output handler.
-  late final ffi.Pointer<rcutils_logging_output_handler_t>
-      _g_rcutils_logging_output_handler =
-      _lookup<rcutils_logging_output_handler_t>(
-          'g_rcutils_logging_output_handler');
-
-  rcutils_logging_output_handler_t get g_rcutils_logging_output_handler =>
-      _g_rcutils_logging_output_handler.value;
-
-  set g_rcutils_logging_output_handler(
-          rcutils_logging_output_handler_t value) =>
-      _g_rcutils_logging_output_handler.value = value;
-
   /// Get the current output handler.
   /// /**
   ///  * <hr>
@@ -7381,22 +7857,6 @@ class RcldartBindings {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<rcutils_char_array_t>)>();
 
-  /// The default severity level for loggers.
-  /// /**
-  ///  * This level is used for (1) nameless log calls and (2) named log
-  ///  * calls where the effective level of the logger name is unspecified.
-  ///  *
-  ///  * \see rcutils_logging_get_logger_effective_level()
-  ///  */
-  late final ffi.Pointer<ffi.Int> _g_rcutils_logging_default_logger_level =
-      _lookup<ffi.Int>('g_rcutils_logging_default_logger_level');
-
-  int get g_rcutils_logging_default_logger_level =>
-      _g_rcutils_logging_default_logger_level.value;
-
-  set g_rcutils_logging_default_logger_level(int value) =>
-      _g_rcutils_logging_default_logger_level.value = value;
-
   /// Get the default level for loggers.
   /// /**
   ///  * <hr>
@@ -7467,7 +7927,7 @@ class RcldartBindings {
   ///  * \param[in] name The name of the logger, must be null terminated c string
   ///  * \return The level of the logger if it has been set, or
   ///  * \return `RCUTILS_LOG_SEVERITY_UNSET` if unset, or
-  ///  * \return `g_rcutils_logging_default_logger_level` for an empty name, or
+  ///  * \return the default logger level for an empty name, or
   ///  * \return -1 on invalid arguments, or
   ///  * \return -1 if an error occurred
   ///  */
@@ -7503,7 +7963,7 @@ class RcldartBindings {
   ///  * \param[in] name_length Logger name length
   ///  * \return The level of the logger if it has been set, or
   ///  * \return `RCUTILS_LOG_SEVERITY_UNSET` if unset, or
-  ///  * \return `g_rcutils_logging_default_logger_level` for `name_length` of `0`, or
+  ///  * \return the default logger level for an empty name, or
   ///  * \return -1 on invalid arguments, or
   ///  * \return -1 if an error occurred
   ///  */
@@ -7527,8 +7987,7 @@ class RcldartBindings {
 
   /// Set the severity level for a logger.
   /// /**
-  ///  * If an empty string is specified as the name, the
-  ///  * `g_rcutils_logging_default_logger_level` will be set.
+  ///  * If an empty string is specified as the name, the default logger level will be set.
   ///  *
   ///  * <hr>
   ///  * Attribute          | Adherence
@@ -7637,10 +8096,15 @@ class RcldartBindings {
       _rcutils_logging_get_logger_effective_levelPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// Log a message.
+  /// Internal call to log a message.
   /// /**
-  ///  * The attributes of this function are also being influenced by the currently
-  ///  * set output handler.
+  ///  * Unconditionally log a message.
+  ///  * This is an internal function, and assumes that the caller has already called
+  ///  * rcutils_logging_logger_is_enabled_for().
+  ///  * End-user software should never call this, and instead should call rcutils_log()
+  ///  * or one of the RCUTILS_LOG_ macros.
+  ///  *
+  ///  * The attributes of this function are influenced by the currently set output handler.
   ///  *
   ///  * <hr>
   ///  * Attribute          | Adherence
@@ -7650,6 +8114,61 @@ class RcldartBindings {
   ///  * Thread-Safe        | No
   ///  * Uses Atomics       | No
   ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] location The pointer to the location struct or NULL
+  ///  * \param[in] severity The severity level
+  ///  * \param[in] name The name of the logger, must be null terminated c string or NULL
+  ///  * \param[in] format The format string
+  ///  * \param[in] ... The variable arguments
+  ///  */
+  void rcutils_log_internal(
+    ffi.Pointer<rcutils_log_location_t> location,
+    int severity,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Char> format,
+  ) {
+    return _rcutils_log_internal(
+      location,
+      severity,
+      name,
+      format,
+    );
+  }
+
+  late final _rcutils_log_internalPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<rcutils_log_location_t>,
+              ffi.Int,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('rcutils_log_internal');
+  late final _rcutils_log_internal = _rcutils_log_internalPtr.asFunction<
+      void Function(ffi.Pointer<rcutils_log_location_t>, int,
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
+
+  /// Log a message.
+  /// /**
+  ///  * The attributes of this function are influenced by the currently set output handler.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No, for formatted outputs <= 1023 characters
+  ///  *                    | Yes, for formatted outputs >= 1024 characters
+  ///  * Thread-Safe        | Yes, with itself [1]
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] should be thread-safe with itself but not with other logging functions</i>
+  ///  *
+  ///  * This should be thread-safe with itself, but is not thread-safe with other
+  ///  * logging functions that do things like set logger levels.
+  ///  *
+  ///  * \todo There are no thread-safety gurantees between this function and other
+  ///  *   logging functions in rcutils, even though it is likely users are calling
+  ///  *   them concurrently today.
+  ///  *   We need to revisit these functions with respect to this issue and make
+  ///  *   guarantees where we can, and change functions higher in the stack to
+  ///  *   provide the thread-safety where we cannot.
   ///  *
   ///  * \param[in] location The pointer to the location struct or NULL
   ///  * \param[in] severity The severity level
@@ -9774,6 +10293,2008 @@ class RcldartBindings {
   late final _rcl_node_options_fini = _rcl_node_options_finiPtr
       .asFunction<int Function(ffi.Pointer<rcl_node_options_t>)>();
 
+  /// Initialize the sha256 algorithm context with starting state.
+  /// /**
+  ///  * Call this on any new context before starting to input data.
+  ///  *
+  ///  * \param[inout] ctx
+  ///  * \return void
+  ///  */
+  void rcutils_sha256_init(
+    ffi.Pointer<rcutils_sha256_ctx_t> ctx,
+  ) {
+    return _rcutils_sha256_init(
+      ctx,
+    );
+  }
+
+  late final _rcutils_sha256_initPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<rcutils_sha256_ctx_t>)>>('rcutils_sha256_init');
+  late final _rcutils_sha256_init = _rcutils_sha256_initPtr
+      .asFunction<void Function(ffi.Pointer<rcutils_sha256_ctx_t>)>();
+
+  /// Add data to the sha256 algorithm
+  /// /**
+  ///  * This may be called repeatedly on an initialized context.
+  ///  *
+  ///  * \param[inout] ctx Initialized sha256 context struct
+  ///  * \param[in] data Data to add to the total message being hashed
+  ///  * \param[in] data_len Size of the input data.
+  ///  * \return void
+  ///  */
+  void rcutils_sha256_update(
+    ffi.Pointer<rcutils_sha256_ctx_t> ctx,
+    ffi.Pointer<ffi.Uint8> data,
+    int data_len,
+  ) {
+    return _rcutils_sha256_update(
+      ctx,
+      data,
+      data_len,
+    );
+  }
+
+  late final _rcutils_sha256_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<rcutils_sha256_ctx_t>,
+              ffi.Pointer<ffi.Uint8>, ffi.Size)>>('rcutils_sha256_update');
+  late final _rcutils_sha256_update = _rcutils_sha256_updatePtr.asFunction<
+      void Function(
+          ffi.Pointer<rcutils_sha256_ctx_t>, ffi.Pointer<ffi.Uint8>, int)>();
+
+  void rcutils_sha256_final(
+    ffi.Pointer<rcutils_sha256_ctx_t> ctx,
+    ffi.Pointer<ffi.Uint8> output_hash,
+  ) {
+    return _rcutils_sha256_final(
+      ctx,
+      output_hash,
+    );
+  }
+
+  late final _rcutils_sha256_finalPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<rcutils_sha256_ctx_t>,
+              ffi.Pointer<ffi.Uint8>)>>('rcutils_sha256_final');
+  late final _rcutils_sha256_final = _rcutils_sha256_finalPtr.asFunction<
+      void Function(
+          ffi.Pointer<rcutils_sha256_ctx_t>, ffi.Pointer<ffi.Uint8>)>();
+
+  /// Get a new zero-initialized type hash structure.
+  /// /**
+  ///  * Note that the version equals ROSIDL_TYPE_HASH_VERSION_UNSET.
+  ///  */
+  rosidl_type_hash_t rosidl_get_zero_initialized_type_hash() {
+    return _rosidl_get_zero_initialized_type_hash();
+  }
+
+  late final _rosidl_get_zero_initialized_type_hashPtr =
+      _lookup<ffi.NativeFunction<rosidl_type_hash_t Function()>>(
+          'rosidl_get_zero_initialized_type_hash');
+  late final _rosidl_get_zero_initialized_type_hash =
+      _rosidl_get_zero_initialized_type_hashPtr
+          .asFunction<rosidl_type_hash_t Function()>();
+
+  /// Convert type hash to a standardized string representation.
+  /// /**
+  ///  * Follows format RIHS{version}_{value}.
+  ///  *
+  ///  * \param[in] type_hash Type hash to convert to string
+  ///  * \param[in] allocator Allocator to use for allocating string space
+  ///  * \param[out] output_string Handle to a pointer that will be set
+  ///  *   to the newly allocated null-terminated string representation.
+  ///  * \return RCUTILS_RET_INVALID_ARGUMENT if any pointer arguments are null or allocator invalid
+  ///  * \return RCUTILS_RET_BAD_ALLOC if space could not be allocated for resulting string
+  ///  * \return RCUTILS_RET_OK otherwise
+  ///  */
+  int rosidl_stringify_type_hash(
+    ffi.Pointer<rosidl_type_hash_t> type_hash,
+    rcutils_allocator_t allocator,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> output_string,
+  ) {
+    return _rosidl_stringify_type_hash(
+      type_hash,
+      allocator,
+      output_string,
+    );
+  }
+
+  late final _rosidl_stringify_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(ffi.Pointer<rosidl_type_hash_t>,
+                  rcutils_allocator_t, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'rosidl_stringify_type_hash');
+  late final _rosidl_stringify_type_hash =
+      _rosidl_stringify_type_hashPtr.asFunction<
+          int Function(ffi.Pointer<rosidl_type_hash_t>, rcutils_allocator_t,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// Parse a stringified type hash to a struct.
+  /// /**
+  ///  * \param[in] type_hash_string Null-terminated string with the hash representation
+  ///  * \param[out] hash_out Preallocated structure to be filled with parsed hash information.
+  ///  *   hash_out->version will be 0 if no version could be parsed,
+  ///  *   but if a version could be determined this field will be set even if an error is returned
+  ///  * \return RCTUILS_RET_INVALID_ARGUMENT on any null pointer argumunts, or malformed hash string.
+  ///  * \return RCUTILS_RET_OK otherwise
+  ///  */
+  int rosidl_parse_type_hash_string(
+    ffi.Pointer<ffi.Char> type_hash_string,
+    ffi.Pointer<rosidl_type_hash_t> hash_out,
+  ) {
+    return _rosidl_parse_type_hash_string(
+      type_hash_string,
+      hash_out,
+    );
+  }
+
+  late final _rosidl_parse_type_hash_stringPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<rosidl_type_hash_t>)>>(
+      'rosidl_parse_type_hash_string');
+  late final _rosidl_parse_type_hash_string =
+      _rosidl_parse_type_hash_stringPtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<rosidl_type_hash_t>)>();
+
+  /// Return a rosidl_message_type_support_t struct with members set to `NULL`.
+  rosidl_message_type_support_t
+      rosidl_get_zero_initialized_message_type_support_handle() {
+    return _rosidl_get_zero_initialized_message_type_support_handle();
+  }
+
+  late final _rosidl_get_zero_initialized_message_type_support_handlePtr =
+      _lookup<ffi.NativeFunction<rosidl_message_type_support_t Function()>>(
+          'rosidl_get_zero_initialized_message_type_support_handle');
+  late final _rosidl_get_zero_initialized_message_type_support_handle =
+      _rosidl_get_zero_initialized_message_type_support_handlePtr
+          .asFunction<rosidl_message_type_support_t Function()>();
+
+  /// Get the message type support handle specific to this identifier.
+  /// /**
+  ///  * The handle's message typesupport identifier function is returned or if the parameters are NULL
+  ///  * then an assert will happen.
+  ///  *
+  ///  * \param handle Handle to message type support
+  ///  * \param identifier The typesupport identifier to get the handle function for
+  ///  * \return The associated message typesupport handle function.
+  ///  */
+  ffi.Pointer<rosidl_message_type_support_t> get_message_typesupport_handle(
+    ffi.Pointer<rosidl_message_type_support_t> handle,
+    ffi.Pointer<ffi.Char> identifier,
+  ) {
+    return _get_message_typesupport_handle(
+      handle,
+      identifier,
+    );
+  }
+
+  late final _get_message_typesupport_handlePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<rosidl_message_type_support_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>,
+              ffi.Pointer<ffi.Char>)>>('get_message_typesupport_handle');
+  late final _get_message_typesupport_handle =
+      _get_message_typesupport_handlePtr.asFunction<
+          ffi.Pointer<rosidl_message_type_support_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// Get the message type support handle function specific to this identifier.
+  /// /**
+  ///  * If the identifier is the same as this handle's typesupport_identifier the handle is simply
+  ///  * returned or if the parameters are NULL then an assert will happen.
+  ///  *
+  ///  * \param handle Handle to message type support
+  ///  * \param identifier The typesupport identifier to get the handle function for
+  ///  * \return if the identifier match's the handle's identifier then the handle's function
+  ///  *   is returned.
+  ///  */
+  ffi.Pointer<rosidl_message_type_support_t>
+      get_message_typesupport_handle_function(
+    ffi.Pointer<rosidl_message_type_support_t> handle,
+    ffi.Pointer<ffi.Char> identifier,
+  ) {
+    return _get_message_typesupport_handle_function(
+      handle,
+      identifier,
+    );
+  }
+
+  late final _get_message_typesupport_handle_functionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_message_type_support_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>,
+                  ffi.Pointer<ffi.Char>)>>(
+      'get_message_typesupport_handle_function');
+  late final _get_message_typesupport_handle_function =
+      _get_message_typesupport_handle_functionPtr.asFunction<
+          ffi.Pointer<rosidl_message_type_support_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// Get the service type support handle specific to this identifier.
+  /// /**
+  ///  * The handle's message typesupport identifier function is returned or if the parameters are NULL
+  ///  * then an assert will happen.
+  ///  *
+  ///  * \param handle Handle to service type support
+  ///  * \param identifier The typesupport identifier to get the handle function for
+  ///  * \return The associated service typesupport handle function.
+  ///  */
+  ffi.Pointer<rosidl_service_type_support_t> get_service_typesupport_handle(
+    ffi.Pointer<rosidl_service_type_support_t> handle,
+    ffi.Pointer<ffi.Char> identifier,
+  ) {
+    return _get_service_typesupport_handle(
+      handle,
+      identifier,
+    );
+  }
+
+  late final _get_service_typesupport_handlePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<rosidl_service_type_support_t> Function(
+              ffi.Pointer<rosidl_service_type_support_t>,
+              ffi.Pointer<ffi.Char>)>>('get_service_typesupport_handle');
+  late final _get_service_typesupport_handle =
+      _get_service_typesupport_handlePtr.asFunction<
+          ffi.Pointer<rosidl_service_type_support_t> Function(
+              ffi.Pointer<rosidl_service_type_support_t>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// Get the service type support handle function specific to this identifier.
+  /// /**
+  /// * If the identifier is the same as this handle's typesupport_identifier the handle is simply
+  /// * returned or if the parameters are NULL then an assert will happen.
+  ///  *
+  ///  * \param handle Handle to service type support
+  ///  * \param identifier The typesupport identifier to get the handle function for
+  ///  * \return if the identifier match's the handle's identifier then the handle's function
+  ///  *   is returned.
+  ///  */
+  ffi.Pointer<rosidl_service_type_support_t>
+      get_service_typesupport_handle_function(
+    ffi.Pointer<rosidl_service_type_support_t> handle,
+    ffi.Pointer<ffi.Char> identifier,
+  ) {
+    return _get_service_typesupport_handle_function(
+      handle,
+      identifier,
+    );
+  }
+
+  late final _get_service_typesupport_handle_functionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_service_type_support_t> Function(
+                  ffi.Pointer<rosidl_service_type_support_t>,
+                  ffi.Pointer<ffi.Char>)>>(
+      'get_service_typesupport_handle_function');
+  late final _get_service_typesupport_handle_function =
+      _get_service_typesupport_handle_functionPtr.asFunction<
+          ffi.Pointer<rosidl_service_type_support_t> Function(
+              ffi.Pointer<rosidl_service_type_support_t>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      type_description_interfaces__srv__GetTypeDescription__get_type_hash(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_hashPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_type_hash_t> Function(
+                      ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription__get_type_hash');
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_hash =
+      _type_description_interfaces__srv__GetTypeDescription__get_type_hashPtr
+          .asFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      type_description_interfaces__srv__GetTypeDescription__get_type_description(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription__get_type_description');
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_description =
+      _type_description_interfaces__srv__GetTypeDescription__get_type_descriptionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source');
+  late final _type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source =
+      _type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      type_description_interfaces__srv__GetTypeDescription__get_type_description_sources(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription__get_type_description_sources');
+  late final _type_description_interfaces__srv__GetTypeDescription__get_type_description_sources =
+      _type_description_interfaces__srv__GetTypeDescription__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Initialize srv/GetTypeDescription message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request
+  ///  * )) before or use
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Request__init(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__init(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__init =
+      _type_description_interfaces__srv__GetTypeDescription_Request__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>)>();
+
+  /// Finalize srv/GetTypeDescription message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Request__fini(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__fini(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Request__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>)>();
+
+  /// Create srv/GetTypeDescription message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+      type_description_interfaces__srv__GetTypeDescription_Request__create() {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__create();
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>
+                      Function()>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__create =
+      _type_description_interfaces__srv__GetTypeDescription_Request__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>
+                  Function()>();
+
+  /// Destroy srv/GetTypeDescription message.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Request__destroy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__destroy(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Request__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>)>();
+
+  /// Check for srv/GetTypeDescription message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Request__are_equal(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        lhs,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Request__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Request__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>)>();
+
+  /// Copy a srv/GetTypeDescription message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Request__copy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        input,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__copyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>,
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Request__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Request>,
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Request>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_hashPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_type_hash_t> Function(
+                      ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash =
+      _type_description_interfaces__srv__GetTypeDescription_Request__get_type_hashPtr
+          .asFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      type_description_interfaces__srv__GetTypeDescription_Request__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__get_type_description');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description =
+      _type_description_interfaces__srv__GetTypeDescription_Request__get_type_descriptionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source =
+      _type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources =
+      _type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        array,
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                      ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                  int)>();
+
+  /// Finalize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>();
+
+  /// Create array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<
+          type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create(
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create(
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+                      Function(ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+                  Function(int)>();
+
+  /// Destroy array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>();
+
+  /// Check for srv/GetTypeDescription message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        lhs,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>();
+
+  /// Copy an array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        input,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Request__Sequence>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copyPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request__Sequence>)>();
+
+  /// Initialize srv/GetTypeDescription message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response
+  ///  * )) before or use
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Response__init(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__init(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__init =
+      _type_description_interfaces__srv__GetTypeDescription_Response__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>();
+
+  /// Finalize srv/GetTypeDescription message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Response__fini(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__fini(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Response__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>();
+
+  /// Create srv/GetTypeDescription message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+      type_description_interfaces__srv__GetTypeDescription_Response__create() {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__create();
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response>
+                      Function()>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__create =
+      _type_description_interfaces__srv__GetTypeDescription_Response__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>
+                  Function()>();
+
+  /// Destroy srv/GetTypeDescription message.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Response__destroy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__destroy(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Response__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>();
+
+  /// Check for srv/GetTypeDescription message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Response__are_equal(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        lhs,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Response__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Response__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>();
+
+  /// Copy a srv/GetTypeDescription message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Response__copy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        input,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Response__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Response__copyPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_hashPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_type_hash_t> Function(
+                      ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash =
+      _type_description_interfaces__srv__GetTypeDescription_Response__get_type_hashPtr
+          .asFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      type_description_interfaces__srv__GetTypeDescription_Response__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__get_type_description');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description =
+      _type_description_interfaces__srv__GetTypeDescription_Response__get_type_descriptionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source =
+      _type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources =
+      _type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        array,
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                      ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                  int)>();
+
+  /// Finalize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>();
+
+  /// Create array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<
+          type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create(
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create(
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+                      Function(ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+                  Function(int)>();
+
+  /// Destroy array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>();
+
+  /// Check for srv/GetTypeDescription message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        lhs,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>();
+
+  /// Copy an array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        input,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Response__Sequence>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copyPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response__Sequence>)>();
+
+  /// Initialize srv/GetTypeDescription message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event
+  ///  * )) before or use
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Event__init(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event> msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__init(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__init =
+      _type_description_interfaces__srv__GetTypeDescription_Event__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>)>();
+
+  /// Finalize srv/GetTypeDescription message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Event__fini(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event> msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__fini(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Event__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>)>();
+
+  /// Create srv/GetTypeDescription message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event>
+      type_description_interfaces__srv__GetTypeDescription_Event__create() {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__create();
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>
+                      Function()>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__create =
+      _type_description_interfaces__srv__GetTypeDescription_Event__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>
+                  Function()>();
+
+  /// Destroy srv/GetTypeDescription message.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void type_description_interfaces__srv__GetTypeDescription_Event__destroy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event> msg,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__destroy(
+      msg,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Event__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>)>();
+
+  /// Check for srv/GetTypeDescription message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Event__are_equal(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event> lhs,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event> rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Event__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Event__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event>)>();
+
+  /// Copy a srv/GetTypeDescription message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool type_description_interfaces__srv__GetTypeDescription_Event__copy(
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event>
+        input,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Event>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__copyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>,
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Event__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Event>,
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Event>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_hashPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_type_hash_t> Function(
+                      ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash =
+      _type_description_interfaces__srv__GetTypeDescription_Event__get_type_hashPtr
+          .asFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      type_description_interfaces__srv__GetTypeDescription_Event__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__get_type_description');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description =
+      _type_description_interfaces__srv__GetTypeDescription_Event__get_type_descriptionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source =
+      _type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources =
+      _type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        array,
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                      ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__initPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                  int)>();
+
+  /// Finalize array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__finiPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>();
+
+  /// Create array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<
+          type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create(
+    int size,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create(
+      size,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+                      Function(ffi.Size)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__createPtr
+          .asFunction<
+              ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+                  Function(int)>();
+
+  /// Destroy array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * It calls
+  ///  * type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        array,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>>(
+          'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroyPtr
+          .asFunction<
+              void Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>();
+
+  /// Check for srv/GetTypeDescription message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        lhs,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        rhs,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>();
+
+  /// Copy an array of srv/GetTypeDescription messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool
+      type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy(
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        input,
+    ffi.Pointer<
+            type_description_interfaces__srv__GetTypeDescription_Event__Sequence>
+        output,
+  ) {
+    return _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>>(
+      'type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy');
+  late final _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy =
+      _type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copyPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Event__Sequence>)>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_RequestPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request =
+      _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_RequestPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_ResponsePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response =
+      _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_ResponsePtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_EventPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event =
+      _rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_EventPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_service_type_support_t>
+      rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription() {
+    return _rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription();
+  }
+
+  late final _rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_service_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription');
+  late final _rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription =
+      _rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescriptionPtr
+          .asFunction<ffi.Pointer<rosidl_service_type_support_t> Function()>();
+
+  /// Forward declare the function to create a service event message for this type.
+  ffi.Pointer<ffi.Void>
+      rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription(
+    ffi.Pointer<rosidl_service_introspection_info_t> info,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<ffi.Void> request_message,
+    ffi.Pointer<ffi.Void> response_message,
+  ) {
+    return _rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription(
+      info,
+      allocator,
+      request_message,
+      response_message,
+    );
+  }
+
+  late final _rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<ffi.Void> Function(
+                      ffi.Pointer<rosidl_service_introspection_info_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription');
+  late final _rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription =
+      _rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescriptionPtr
+          .asFunction<
+              ffi.Pointer<ffi.Void> Function(
+                  ffi.Pointer<rosidl_service_introspection_info_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>)>();
+
+  /// Forward declare the function to destroy a service event message for this type.
+  bool
+      rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription(
+    ffi.Pointer<ffi.Void> event_msg,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription(
+      event_msg,
+      allocator,
+    );
+  }
+
+  late final _rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<rcutils_allocator_t>)>>(
+          'rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription');
+  late final _rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription =
+      _rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescriptionPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<rcutils_allocator_t>)>();
+
   late final ffi.Pointer<ffi.Pointer<ffi.Char>>
       _RCL_DISABLE_LOANED_MESSAGES_ENV_VAR =
       _lookup<ffi.Pointer<ffi.Char>>('RCL_DISABLE_LOANED_MESSAGES_ENV_VAR');
@@ -9878,8 +12399,8 @@ class RcldartBindings {
   ///  *   pass in.
   ///  * \return #RCL_RET_OK if the node was initialized successfully, or
   ///  * \return #RCL_RET_ALREADY_INIT if the node has already be initialized, or
-  ///  * \return #RCL_RET_NOT_INIT if the given context is invalid, or
-  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NOT_INIT if the given context is not initialized, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid or context is NULL, or
   ///  * \return #RCL_RET_BAD_ALLOC if allocating memory failed, or
   ///  * \return #RCL_RET_NODE_INVALID_NAME if the name is invalid, or
   ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the namespace_ is invalid, or
@@ -10468,68 +12989,108 @@ class RcldartBindings {
       _rcl_get_disable_loaned_messagePtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// Get the message type support handle specific to this identifier.
+  /// Initialize the node's ~/get_type_description service.
   /// /**
-  ///  * The handle's message typesupport identifier function is returned or if the parameters are NULL
-  ///  * then an assert will happen.
+  ///  * This function initializes the node's ~/get_type_description service
+  ///  * which can be used to retrieve information about types used by the node's
+  ///  * publishers, subscribers, services or actions.
   ///  *
-  ///  * \param handle Handle to message type support
-  ///  * \param identifier The typesupport identifier to get the handle function for
-  ///  * \return The associated message typesupport handle function.
+  ///  * Note that this will not register any callback for the service, client-level code
+  ///  * must register rcl_node_type_description_service_handle_request or a custom callback
+  ///  * to handle incoming requests, via that client's executor/waitset capabilities.
+  ///  *
+  ///  * Note that the returned service must be cleaned up by the caller by calling
+  ///  * rcl_service_fini.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] service the handle to the type description service to be initialized
+  ///  * \param[in] node handle to the node for which to initialize the service
+  ///  * \return #RCL_RET_OK if the service was successfully initialized, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ALREADY_INIT if the service is already initialized, or
+  ///  * \return #RCL_RET_BAD_ALLOC if memory allocation for the service failed, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
   ///  */
-  ffi.Pointer<rosidl_message_type_support_t> get_message_typesupport_handle(
-    ffi.Pointer<rosidl_message_type_support_t> handle,
-    ffi.Pointer<ffi.Char> identifier,
+  int rcl_node_type_description_service_init(
+    ffi.Pointer<rcl_service_t> service,
+    ffi.Pointer<rcl_node_t> node,
   ) {
-    return _get_message_typesupport_handle(
-      handle,
-      identifier,
+    return _rcl_node_type_description_service_init(
+      service,
+      node,
     );
   }
 
-  late final _get_message_typesupport_handlePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rosidl_message_type_support_t> Function(
-              ffi.Pointer<rosidl_message_type_support_t>,
-              ffi.Pointer<ffi.Char>)>>('get_message_typesupport_handle');
-  late final _get_message_typesupport_handle =
-      _get_message_typesupport_handlePtr.asFunction<
-          ffi.Pointer<rosidl_message_type_support_t> Function(
-              ffi.Pointer<rosidl_message_type_support_t>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// Get the message type support handle function specific to this identifier.
-  /// /**
-  ///  * If the identifier is the same as this handle's typesupport_identifier the handle is simply
-  ///  * returned or if the parameters are NULL then an assert will happen.
-  ///  *
-  ///  * \param handle Handle to message type support
-  ///  * \param identifier The typesupport identifier to get the handle function for
-  ///  * \return if the identifier match's the handle's identifier then the handle's function
-  ///  *   is returned.
-  ///  */
-  ffi.Pointer<rosidl_message_type_support_t>
-      get_message_typesupport_handle_function(
-    ffi.Pointer<rosidl_message_type_support_t> handle,
-    ffi.Pointer<ffi.Char> identifier,
-  ) {
-    return _get_message_typesupport_handle_function(
-      handle,
-      identifier,
-    );
-  }
-
-  late final _get_message_typesupport_handle_functionPtr = _lookup<
+  late final _rcl_node_type_description_service_initPtr = _lookup<
           ffi.NativeFunction<
-              ffi.Pointer<rosidl_message_type_support_t> Function(
-                  ffi.Pointer<rosidl_message_type_support_t>,
-                  ffi.Pointer<ffi.Char>)>>(
-      'get_message_typesupport_handle_function');
-  late final _get_message_typesupport_handle_function =
-      _get_message_typesupport_handle_functionPtr.asFunction<
-          ffi.Pointer<rosidl_message_type_support_t> Function(
-              ffi.Pointer<rosidl_message_type_support_t>,
-              ffi.Pointer<ffi.Char>)>();
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_service_t>, ffi.Pointer<rcl_node_t>)>>(
+      'rcl_node_type_description_service_init');
+  late final _rcl_node_type_description_service_init =
+      _rcl_node_type_description_service_initPtr.asFunction<
+          int Function(ffi.Pointer<rcl_service_t>, ffi.Pointer<rcl_node_t>)>();
+
+  /// Process a single pending request to the GetTypeDescription service.
+  /// /**
+  ///  * This function may be called to handle incoming requests by any client starting the service.
+  ///  * It is not intended to be called directly by users.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] node the handle to the node
+  ///  * \param[in] request_header ID of the incoming request
+  ///  * \param[in] request Request that came in to the service
+  ///  * \param[out] response Allocated, uninitialized response to the request
+  ///  * \return void
+  ///  */
+  void rcl_node_type_description_service_handle_request(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rmw_request_id_t> request_header,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+        request,
+    ffi.Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+        response,
+  ) {
+    return _rcl_node_type_description_service_handle_request(
+      node,
+      request_header,
+      request,
+      response,
+    );
+  }
+
+  late final _rcl_node_type_description_service_handle_requestPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rmw_request_id_t>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Request>,
+                  ffi.Pointer<
+                      type_description_interfaces__srv__GetTypeDescription_Response>)>>(
+      'rcl_node_type_description_service_handle_request');
+  late final _rcl_node_type_description_service_handle_request =
+      _rcl_node_type_description_service_handle_requestPtr.asFunction<
+          void Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Request>,
+              ffi.Pointer<
+                  type_description_interfaces__srv__GetTypeDescription_Response>)>();
 
   /// Check if the clock has started.
   /// /**
@@ -11468,6 +14029,7 @@ class RcldartBindings {
   ///  * - qos = rmw_qos_profile_default
   ///  * - allocator = rcl_get_default_allocator()
   ///  * - rmw_publisher_options = rmw_get_default_publisher_options()
+  ///  * - disable_loaned_message = false, true only if ROS_DISABLE_LOANED_MESSAGES=1
   ///  *
   ///  * \return A structure with the default publisher options.
   ///  */
@@ -11607,9 +14169,9 @@ class RcldartBindings {
   ///  * calling rcl_publish() at the same time as non-thread safe publisher
   ///  * functions is not, e.g. calling rcl_publish() and rcl_publisher_fini()
   ///  * concurrently is not allowed.
-  ///  * Before calling rcl_publish() the message can change and after calling
-  ///  * rcl_publish() the message can change, but it cannot be changed during the
-  ///  * publish call.
+  ///  * The message cannot change during the rcl_publish() call.
+  ///  * Before calling rcl_publish() the message can change but after calling
+  ///  * rcl_publish() it depends on RMW implementation behavior.
   ///  * The same `ros_message`, however, can be passed to multiple calls of
   ///  * rcl_publish() simultaneously, even if the publishers differ.
   ///  * The `ros_message` is unmodified by rcl_publish().
@@ -12166,6 +14728,7652 @@ class RcldartBindings {
       _rcl_publisher_can_loan_messagesPtr
           .asFunction<bool Function(ffi.Pointer<rcl_publisher_t>)>();
 
+  int mbrtoc16(
+    ffi.Pointer<char16_t> __pc16,
+    ffi.Pointer<ffi.Char> __s,
+    int __n,
+    ffi.Pointer<mbstate_t> __p,
+  ) {
+    return _mbrtoc16(
+      __pc16,
+      __s,
+      __n,
+      __p,
+    );
+  }
+
+  late final _mbrtoc16Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<char16_t>, ffi.Pointer<ffi.Char>,
+              ffi.Size, ffi.Pointer<mbstate_t>)>>('mbrtoc16');
+  late final _mbrtoc16 = _mbrtoc16Ptr.asFunction<
+      int Function(ffi.Pointer<char16_t>, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<mbstate_t>)>();
+
+  int c16rtomb(
+    ffi.Pointer<ffi.Char> __s,
+    int __c16,
+    ffi.Pointer<mbstate_t> __ps,
+  ) {
+    return _c16rtomb(
+      __s,
+      __c16,
+      __ps,
+    );
+  }
+
+  late final _c16rtombPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<ffi.Char>, char16_t,
+              ffi.Pointer<mbstate_t>)>>('c16rtomb');
+  late final _c16rtomb = _c16rtombPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<mbstate_t>)>();
+
+  int mbrtoc32(
+    ffi.Pointer<char32_t> __pc32,
+    ffi.Pointer<ffi.Char> __s,
+    int __n,
+    ffi.Pointer<mbstate_t> __p,
+  ) {
+    return _mbrtoc32(
+      __pc32,
+      __s,
+      __n,
+      __p,
+    );
+  }
+
+  late final _mbrtoc32Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<char32_t>, ffi.Pointer<ffi.Char>,
+              ffi.Size, ffi.Pointer<mbstate_t>)>>('mbrtoc32');
+  late final _mbrtoc32 = _mbrtoc32Ptr.asFunction<
+      int Function(ffi.Pointer<char32_t>, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<mbstate_t>)>();
+
+  int c32rtomb(
+    ffi.Pointer<ffi.Char> __s,
+    int __c32,
+    ffi.Pointer<mbstate_t> __ps,
+  ) {
+    return _c32rtomb(
+      __s,
+      __c32,
+      __ps,
+    );
+  }
+
+  late final _c32rtombPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Size Function(ffi.Pointer<ffi.Char>, char32_t,
+              ffi.Pointer<mbstate_t>)>>('c32rtomb');
+  late final _c32rtomb = _c32rtombPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<mbstate_t>)>();
+
+  rosidl_dynamic_typesupport_dynamic_data_impl_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_implPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_data_impl_t Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_implPtr
+          .asFunction<
+              rosidl_dynamic_typesupport_dynamic_data_impl_t Function()>();
+
+  rosidl_dynamic_typesupport_dynamic_data_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_dataPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_data_t Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_dataPtr
+          .asFunction<rosidl_dynamic_typesupport_dynamic_data_t Function()>();
+
+  /// DYNAMIC DATA UTILS ==============================================================================
+  int rosidl_dynamic_typesupport_dynamic_data_clear_all_values(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_clear_all_values(
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_all_valuesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_clear_all_values');
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_all_values =
+      _rosidl_dynamic_typesupport_dynamic_data_clear_all_valuesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values(
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_valuesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values');
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values =
+      _rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_valuesPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_clear_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_clear_value(
+      dynamic_data,
+      id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_valuePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  rosidl_dynamic_typesupport_member_id_t)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_clear_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_value =
+      _rosidl_dynamic_typesupport_dynamic_data_clear_valuePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_equals(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> other,
+    ffi.Pointer<ffi.Bool> equals,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_equals(
+      dynamic_data,
+      other,
+      equals,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_equalsPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_equals');
+  late final _rosidl_dynamic_typesupport_dynamic_data_equals =
+      _rosidl_dynamic_typesupport_dynamic_data_equalsPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_item_count(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Size> item_count,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_item_count(
+      dynamic_data,
+      item_count,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_item_countPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<ffi.Size>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_item_count');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_item_count =
+      _rosidl_dynamic_typesupport_dynamic_data_get_item_countPtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<ffi.Size>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> member_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name(
+      dynamic_data,
+      name,
+      name_length,
+      member_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_namePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name =
+      _rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_namePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int index,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> member_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index(
+      dynamic_data,
+      index,
+      member_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_indexPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index =
+      _rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_indexPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  /// You must use this for arrays
+  int rosidl_dynamic_typesupport_dynamic_data_get_array_index(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int index,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> array_index,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_array_index(
+      dynamic_data,
+      index,
+      array_index,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_array_indexPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_array_index');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_array_index =
+      _rosidl_dynamic_typesupport_dynamic_data_get_array_indexPtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_loan_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> loaned_dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_loan_value(
+      dynamic_data,
+      id,
+      allocator,
+      loaned_dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_loan_valuePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  rosidl_dynamic_typesupport_member_id_t,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_loan_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_loan_value =
+      _rosidl_dynamic_typesupport_dynamic_data_loan_valuePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_return_loaned_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> inner_dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_return_loaned_value(
+      dynamic_data,
+      inner_dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_return_loaned_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_return_loaned_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_return_loaned_value =
+      _rosidl_dynamic_typesupport_dynamic_data_return_loaned_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> inner_dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value(
+      dynamic_data,
+      inner_dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value =
+      _rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_name(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> name,
+    ffi.Pointer<ffi.Size> name_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_name(
+      dynamic_data,
+      name,
+      name_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_namePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Size>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_get_name');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_name =
+      _rosidl_dynamic_typesupport_dynamic_data_get_namePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// DYNAMIC DATA CONSTRUCTION =======================================================================
+  int rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder(
+      dynamic_type_builder,
+      allocator,
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder =
+      _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type(
+      dynamic_type,
+      allocator,
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_typePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type');
+  late final _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type =
+      _rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_typePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_clone(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> other_dynamic_data,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_clone(
+      other_dynamic_data,
+      allocator,
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_clonePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_clone');
+  late final _rosidl_dynamic_typesupport_dynamic_data_clone =
+      _rosidl_dynamic_typesupport_dynamic_data_clonePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_fini(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_fini(
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_fini');
+  late final _rosidl_dynamic_typesupport_dynamic_data_fini =
+      _rosidl_dynamic_typesupport_dynamic_data_finiPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_destroy(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_destroy(
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_destroy');
+  late final _rosidl_dynamic_typesupport_dynamic_data_destroy =
+      _rosidl_dynamic_typesupport_dynamic_data_destroyPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  /// DYNAMIC DATA SERIALIZATION ======================================================================
+  int rosidl_dynamic_typesupport_dynamic_data_serialize(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rcutils_uint8_array_t> buffer,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_serialize(
+      dynamic_data,
+      buffer,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_serializePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rcutils_uint8_array_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_serialize');
+  late final _rosidl_dynamic_typesupport_dynamic_data_serialize =
+      _rosidl_dynamic_typesupport_dynamic_data_serializePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<rcutils_uint8_array_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_deserialize(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rcutils_uint8_array_t> buffer,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_deserialize(
+      dynamic_data,
+      buffer,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_deserializePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rcutils_uint8_array_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_data_deserialize');
+  late final _rosidl_dynamic_typesupport_dynamic_data_deserialize =
+      _rosidl_dynamic_typesupport_dynamic_data_deserializePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<rcutils_uint8_array_t>)>();
+
+  /// DYNAMIC DATA PRIMITIVE MEMBER GETTERS ===========================================================
+  int rosidl_dynamic_typesupport_dynamic_data_get_bool_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Bool> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_bool_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bool_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Bool>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_bool_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bool_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_bool_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Bool>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_byte_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.UnsignedChar> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_byte_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_byte_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.UnsignedChar>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_byte_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_byte_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_byte_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.UnsignedChar>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_char_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Char> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_char_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_char_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_char_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_char_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_char_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Char>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_wchar_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<char16_t> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_wchar_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_wchar_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<char16_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_wchar_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_wchar_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_wchar_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<char16_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_float32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Float> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_float32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_float32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Float>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_float32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_float32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_float32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Float>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_float64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Double> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_float64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_float64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Double>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_float64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_float64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_float64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Double>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_int8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Int8> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_int8_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Int8>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_int8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_int8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Int8>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_uint8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Uint8> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_uint8_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Uint8>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_uint8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_uint8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Uint8>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_int16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Int16> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_int16_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Int16>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_int16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_int16_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Int16>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_uint16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Uint16> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_uint16_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Uint16>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_uint16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_uint16_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Uint16>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_int32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Int32> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_int32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Int32>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_int32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_int32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Int32>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_uint32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Uint32> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_uint32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Uint32>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_uint32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_uint32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Uint32>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_int64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Int64> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_int64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Int64>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_int64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_int64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_int64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Int64>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_uint64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Uint64> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_uint64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Uint64>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_uint64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_uint64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_uint64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Uint64>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> value,
+    ffi.Pointer<ffi.Size> value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                      ffi.Pointer<ffi.Size>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_string_valuePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<char16_t>> value,
+    ffi.Pointer<ffi.Size> value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<char16_t>>,
+                      ffi.Pointer<ffi.Size>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_wstring_valuePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int,
+              ffi.Pointer<ffi.Pointer<char16_t>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> value,
+    ffi.Pointer<ffi.Size> value_length,
+    int string_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      string_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                      ffi.Pointer<ffi.Size>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Size>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<char16_t>> value,
+    ffi.Pointer<ffi.Size> value_length,
+    int wstring_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      wstring_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<char16_t>>,
+                      ffi.Pointer<ffi.Size>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Pointer<char16_t>>,
+                  ffi.Pointer<ffi.Size>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> value,
+    ffi.Pointer<ffi.Size> value_length,
+    int string_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      string_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                      ffi.Pointer<ffi.Size>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Size>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Pointer<char16_t>> value,
+    ffi.Pointer<ffi.Size> value_length,
+    int wstring_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      wstring_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Pointer<char16_t>>,
+                      ffi.Pointer<ffi.Size>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Pointer<char16_t>>,
+                  ffi.Pointer<ffi.Size>,
+                  int)>();
+
+  /// DYNAMIC DATA PRIMITIVE MEMBER SETTERS ===========================================================
+  int rosidl_dynamic_typesupport_dynamic_data_set_bool_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    bool value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_bool_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bool_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Bool)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_bool_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bool_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_bool_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, bool)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_byte_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_byte_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_byte_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.UnsignedChar)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_byte_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_byte_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_byte_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_char_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_char_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_char_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Char)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_char_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_char_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_char_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_wchar_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_wchar_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_wchar_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      char16_t)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_wchar_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_wchar_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_wchar_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_float32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    double value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_float32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_float32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Float)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_float32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_float32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_float32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, double)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_float64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    double value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_float64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_float64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Double)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_float64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_float64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_float64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, double)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_int8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_int8_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Int8)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_int8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_int8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_uint8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_uint8_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Uint8)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_uint8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_uint8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_int16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_int16_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Int16)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_int16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_int16_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_uint16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_uint16_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Uint16)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_uint16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_uint16_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_int32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_int32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Int32)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_int32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_int32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_uint32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_uint32_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Uint32)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_uint32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_uint32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_int64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_int64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Int64)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_int64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_int64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_int64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_uint64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    int value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_uint64_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Uint64)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_uint64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_uint64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_uint64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_string_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<ffi.Char>, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_wstring_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<char16_t>, int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+    int string_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      string_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+    int wstring_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      wstring_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<char16_t>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+    int string_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      string_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+    int wstring_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value(
+      dynamic_data,
+      id,
+      value,
+      value_length,
+      wstring_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<char16_t>,
+                  int,
+                  int)>();
+
+  /// DYNAMIC DATA SEQUENCES ==========================================================================
+  int rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data(
+      dynamic_data,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_sequence_dataPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data');
+  late final _rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data =
+      _rosidl_dynamic_typesupport_dynamic_data_clear_sequence_dataPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data(
+      dynamic_data,
+      id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_remove_sequence_dataPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data');
+  late final _rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data =
+      _rosidl_dynamic_typesupport_dynamic_data_remove_sequence_dataPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data(
+      dynamic_data,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_sequence_dataPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_sequence_dataPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_bool_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    bool value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_bool_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bool_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Bool,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_bool_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bool_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_bool_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              bool, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_byte_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_byte_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_byte_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Uint8,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_byte_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_byte_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_byte_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_char_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_char_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_char_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Char,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_char_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_char_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_char_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_wchar_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      char16_t,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_wchar_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_float32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    double value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_float32_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_float32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Float,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_float32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_float32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_float32_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  double,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_float64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    double value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_float64_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_float64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Double,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_float64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_float64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_float64_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  double,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_int8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_int8_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Int8,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_int8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_int8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint8_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Uint8,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_uint8_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_int16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_int16_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Int16,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_int16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_int16_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint16_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Uint16,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_uint16_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_int32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_int32_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Int32,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_int32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_int32_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint32_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Uint32,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_uint32_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_int64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_int64_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Int64,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_int64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_int64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_int64_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint64_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Uint64,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_uint64_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_string_value(
+      dynamic_data,
+      value,
+      value_length,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value(
+      dynamic_data,
+      value,
+      value_length,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<char16_t>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+    int string_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value(
+      dynamic_data,
+      value,
+      value_length,
+      string_length,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+    int wstring_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value(
+      dynamic_data,
+      value,
+      value_length,
+      wstring_length,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<char16_t>,
+                  int,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<ffi.Char> value,
+    int value_length,
+    int string_bound,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value(
+      dynamic_data,
+      value,
+      value_length,
+      string_bound,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<char16_t> value,
+    int value_length,
+    int wstring_bound,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value(
+      dynamic_data,
+      value,
+      value_length,
+      wstring_bound,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<char16_t>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<char16_t>,
+                  int,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  /// DYNAMIC DATA NESTED =============================================================================
+  /// The user is expected to allocate the '** value' outparam outside
+  /// This function will then reassign the '** value''s 'serialization_support' member to match the
+  /// input's
+  int rosidl_dynamic_typesupport_dynamic_data_get_complex_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_get_complex_value(
+      dynamic_data,
+      id,
+      allocator,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_complex_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_get_complex_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_get_complex_value =
+      _rosidl_dynamic_typesupport_dynamic_data_get_complex_valuePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_set_complex_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    int id,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> value,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_set_complex_value(
+      dynamic_data,
+      id,
+      value,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_complex_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_set_complex_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_set_complex_value =
+      _rosidl_dynamic_typesupport_dynamic_data_set_complex_valuePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              int, ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>)>();
+
+  /// This deep copies the passed data
+  int rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copyPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_data_insert_complex_value(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_data,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> value,
+    ffi.Pointer<rosidl_dynamic_typesupport_member_id_t> out_id,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value(
+      dynamic_data,
+      value,
+      out_id,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_complex_valuePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_data_insert_complex_value');
+  late final _rosidl_dynamic_typesupport_dynamic_data_insert_complex_value =
+      _rosidl_dynamic_typesupport_dynamic_data_insert_complex_valuePtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_member_id_t>)>();
+
+  rosidl_dynamic_typesupport_dynamic_type_builder_impl_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_implPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_impl_t
+                      Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_implPtr
+          .asFunction<
+              rosidl_dynamic_typesupport_dynamic_type_builder_impl_t
+                  Function()>();
+
+  rosidl_dynamic_typesupport_dynamic_type_builder_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_t
+                      Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builderPtr
+          .asFunction<
+              rosidl_dynamic_typesupport_dynamic_type_builder_t Function()>();
+
+  rosidl_dynamic_typesupport_dynamic_type_impl_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_implPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_type_impl_t Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_implPtr
+          .asFunction<
+              rosidl_dynamic_typesupport_dynamic_type_impl_t Function()>();
+
+  rosidl_dynamic_typesupport_dynamic_type_t
+      rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_typePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_dynamic_type_t Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type =
+      _rosidl_dynamic_typesupport_get_zero_initialized_dynamic_typePtr
+          .asFunction<rosidl_dynamic_typesupport_dynamic_type_t Function()>();
+
+  /// DYNAMIC TYPE UTILS ==============================================================================
+  int rosidl_dynamic_typesupport_dynamic_type_equals(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> other,
+    ffi.Pointer<ffi.Bool> equals,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_equals(
+      dynamic_type,
+      other,
+      equals,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_equalsPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_equals');
+  late final _rosidl_dynamic_typesupport_dynamic_type_equals =
+      _rosidl_dynamic_typesupport_dynamic_type_equalsPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_get_member_count(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+    ffi.Pointer<ffi.Size> member_count,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_get_member_count(
+      dynamic_type,
+      member_count,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_get_member_countPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                      ffi.Pointer<ffi.Size>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_get_member_count');
+  late final _rosidl_dynamic_typesupport_dynamic_type_get_member_count =
+      _rosidl_dynamic_typesupport_dynamic_type_get_member_countPtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// DYNAMIC TYPE CONSTRUCTION =======================================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_init(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_init(
+      serialization_support,
+      name,
+      name_length,
+      allocator,
+      dynamic_type_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_init');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_init =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_initPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>,
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_clone(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t> other,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_clone(
+      other,
+      allocator,
+      dynamic_type_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_clonePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_clone');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_clone =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_clonePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+        description,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description(
+      serialization_support,
+      description,
+      allocator,
+      dynamic_type_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_init_from_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_init_from_descriptionPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>,
+                  ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeDescription>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_fini(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_fini(
+      dynamic_type_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_builder_fini');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_fini =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_finiPtr.asFunction<
+          int Function(
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_destroy(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_destroy(
+      dynamic_type_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_destroy');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_destroy =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_destroyPtr.asFunction<
+          int Function(
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder(
+      dynamic_type_builder,
+      allocator,
+      dynamic_type,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder =
+      _rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_init_from_description(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+        description,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_init_from_description(
+      serialization_support,
+      description,
+      allocator,
+      dynamic_type,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_init_from_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_init_from_description');
+  late final _rosidl_dynamic_typesupport_dynamic_type_init_from_description =
+      _rosidl_dynamic_typesupport_dynamic_type_init_from_descriptionPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>,
+                  ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeDescription>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_clone(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> other,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_clone(
+      other,
+      allocator,
+      dynamic_type,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_clonePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_clone');
+  late final _rosidl_dynamic_typesupport_dynamic_type_clone =
+      _rosidl_dynamic_typesupport_dynamic_type_clonePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_fini(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_fini(
+      dynamic_type,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_fini');
+  late final _rosidl_dynamic_typesupport_dynamic_type_fini =
+      _rosidl_dynamic_typesupport_dynamic_type_finiPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_destroy(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_destroy(
+      dynamic_type,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_destroyPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_destroy');
+  late final _rosidl_dynamic_typesupport_dynamic_type_destroy =
+      _rosidl_dynamic_typesupport_dynamic_type_destroyPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_get_name(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> dynamic_type,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> name,
+    ffi.Pointer<ffi.Size> name_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_get_name(
+      dynamic_type,
+      name,
+      name_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_get_namePtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Size>)>>(
+      'rosidl_dynamic_typesupport_dynamic_type_get_name');
+  late final _rosidl_dynamic_typesupport_dynamic_type_get_name =
+      _rosidl_dynamic_typesupport_dynamic_type_get_namePtr.asFunction<
+          int Function(ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_get_name(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> name,
+    ffi.Pointer<ffi.Size> name_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_get_name(
+      dynamic_type_builder,
+      name,
+      name_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_get_namePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                      ffi.Pointer<ffi.Size>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_get_name');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_get_name =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_get_namePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_set_name(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_set_name(
+      dynamic_type_builder,
+      name,
+      name_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_set_namePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_set_name');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_set_name =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_set_namePtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+              ffi.Pointer<ffi.Char>,
+              int)>();
+
+  /// DYNAMIC TYPE PRIMITIVE MEMBERS ==================================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  /// DYNAMIC TYPE STATIC ARRAY MEMBERS ===============================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_bound,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_bound,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_bound,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_bound,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_length,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_length,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  /// DYNAMIC TYPE UNBOUNDED SEQUENCE MEMBERS =========================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  /// DYNAMIC TYPE BOUNDED SEQUENCE MEMBERS ===========================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_bound,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_bound,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_bound,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_bound,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int string_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      string_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    int wstring_length,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      wstring_length,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Size,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  int,
+                  int)>();
+
+  /// DYNAMIC TYPE NESTED MEMBERS =====================================================================
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> nested_struct,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> nested_struct,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> nested_struct,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t> nested_struct,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_memberPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_memberPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_t>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        nested_struct_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        nested_struct_builder,
+    int array_length,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct_builder,
+      array_length,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        nested_struct_builder,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct_builder,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>)>();
+
+  int rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder(
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        dynamic_type_builder,
+    int id,
+    ffi.Pointer<ffi.Char> name,
+    int name_length,
+    ffi.Pointer<ffi.Char> default_value,
+    int default_value_length,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_type_builder_t>
+        nested_struct_builder,
+    int sequence_bound,
+  ) {
+    return _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder(
+      dynamic_type_builder,
+      id,
+      name,
+      name_length,
+      default_value,
+      default_value_length,
+      nested_struct_builder,
+      sequence_bound,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builderPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      rosidl_dynamic_typesupport_member_id_t,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<ffi.Char>,
+                      ffi.Size,
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                      ffi.Size)>>(
+          'rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder');
+  late final _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder =
+      _rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builderPtr
+          .asFunction<
+              int Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<ffi.Char>,
+                  int,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_dynamic_type_builder_t>,
+                  int)>();
+
+  rosidl_dynamic_typesupport_serialization_support_impl_t
+      rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl() {
+    return _rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl();
+  }
+
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_implPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rosidl_dynamic_typesupport_serialization_support_impl_t
+                      Function()>>(
+          'rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl');
+  late final _rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl =
+      _rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_implPtr
+          .asFunction<
+              rosidl_dynamic_typesupport_serialization_support_impl_t
+                  Function()>();
+
+  /// CORE ============================================================================================
+  ffi.Pointer<ffi.Char>
+      rosidl_dynamic_typesupport_serialization_support_get_library_identifier(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+  ) {
+    return _rosidl_dynamic_typesupport_serialization_support_get_library_identifier(
+      serialization_support,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_serialization_support_get_library_identifierPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<ffi.Char> Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>)>>(
+          'rosidl_dynamic_typesupport_serialization_support_get_library_identifier');
+  late final _rosidl_dynamic_typesupport_serialization_support_get_library_identifier =
+      _rosidl_dynamic_typesupport_serialization_support_get_library_identifierPtr
+          .asFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>)>();
+
+  int rosidl_dynamic_typesupport_serialization_support_init(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_impl_t> impl,
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_interface_t>
+        methods,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+  ) {
+    return _rosidl_dynamic_typesupport_serialization_support_init(
+      impl,
+      methods,
+      allocator,
+      serialization_support,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_serialization_support_initPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_impl_t>,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_interface_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>)>>(
+      'rosidl_dynamic_typesupport_serialization_support_init');
+  late final _rosidl_dynamic_typesupport_serialization_support_init =
+      _rosidl_dynamic_typesupport_serialization_support_initPtr.asFunction<
+          int Function(
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_serialization_support_impl_t>,
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_serialization_support_interface_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_serialization_support_t>)>();
+
+  int rosidl_dynamic_typesupport_serialization_support_fini(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+  ) {
+    return _rosidl_dynamic_typesupport_serialization_support_fini(
+      serialization_support,
+    );
+  }
+
+  late final _rosidl_dynamic_typesupport_serialization_support_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>)>>(
+      'rosidl_dynamic_typesupport_serialization_support_fini');
+  late final _rosidl_dynamic_typesupport_serialization_support_fini =
+      _rosidl_dynamic_typesupport_serialization_support_finiPtr.asFunction<
+          int Function(
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_serialization_support_t>)>();
+
+  late final ffi.Pointer<ffi.Pointer<ffi.Char>>
+      _rosidl_dynamic_typesupport_c__identifier =
+      _lookup<ffi.Pointer<ffi.Char>>(
+          'rosidl_dynamic_typesupport_c__identifier');
+
+  ffi.Pointer<ffi.Char> get rosidl_dynamic_typesupport_c__identifier =>
+      _rosidl_dynamic_typesupport_c__identifier.value;
+
+  set rosidl_dynamic_typesupport_c__identifier(ffi.Pointer<ffi.Char> value) =>
+      _rosidl_dynamic_typesupport_c__identifier.value = value;
+
+  /// Get the name of the rosidl_dynamic_typesupport_c identifier
+  /// /**
+  ///  * \return Name of rosidl_dynamic_typesupport_c identifier
+  ///  */
+  ffi.Pointer<ffi.Char> rosidl_get_dynamic_typesupport_identifier() {
+    return _rosidl_get_dynamic_typesupport_identifier();
+  }
+
+  late final _rosidl_get_dynamic_typesupport_identifierPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'rosidl_get_dynamic_typesupport_identifier');
+  late final _rosidl_get_dynamic_typesupport_identifier =
+      _rosidl_get_dynamic_typesupport_identifierPtr
+          .asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  /// Initialize a dynamic type message type support with encapsulated message description
+  /// /**
+  ///  * Take note of the ownership rules for the returned struct and the `description` argument.
+  ///  *
+  ///  * The `rosidl_message_type_support_t *` returned from this function has different ownership rules
+  ///  * compared to the statically allocated `rosidl_message_type_support_t` structs from code-generated
+  ///  * types.
+  ///  *
+  ///  * The `type_hash`, `type_description`, `type_description_sources`, and `allocator` arguments are
+  ///  * copied.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  */
+  int rosidl_dynamic_message_type_support_handle_init(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+    ffi.Pointer<rosidl_type_hash_t> type_hash,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+        type_description,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+        type_description_sources,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_message_type_support_t> ts,
+  ) {
+    return _rosidl_dynamic_message_type_support_handle_init(
+      serialization_support,
+      type_hash,
+      type_description,
+      type_description_sources,
+      allocator,
+      ts,
+    );
+  }
+
+  late final _rosidl_dynamic_message_type_support_handle_initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>,
+                      ffi.Pointer<rosidl_type_hash_t>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'rosidl_dynamic_message_type_support_handle_init');
+  late final _rosidl_dynamic_message_type_support_handle_init =
+      _rosidl_dynamic_message_type_support_handle_initPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>,
+              ffi.Pointer<rosidl_type_hash_t>,
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>,
+              ffi.Pointer<
+                  rosidl_runtime_c__type_description__TypeSource__Sequence>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Finalize a rosidl_message_type_support_t obtained with
+  /// `rosidl_dynamic_message_type_support_handle_init()`, which has dynamically allocated members
+  ///
+  /// NOTE: Using this on a statically allocated typesupport will cause undefined behavior!
+  /// (Static memory will get freed in that case.)
+  int rosidl_dynamic_message_type_support_handle_fini(
+    ffi.Pointer<rosidl_message_type_support_t> ts,
+  ) {
+    return _rosidl_dynamic_message_type_support_handle_fini(
+      ts,
+    );
+  }
+
+  late final _rosidl_dynamic_message_type_support_handle_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'rosidl_dynamic_message_type_support_handle_fini');
+  late final _rosidl_dynamic_message_type_support_handle_fini =
+      _rosidl_dynamic_message_type_support_handle_finiPtr.asFunction<
+          int Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialized a `rosidl_dynamic_message_type_support_impl_t` with encapsulated message description
+  /// /**
+  ///  * The `type_hash`, `type_description`, `type_description_sources`, and `allocator` arguments are
+  ///  * copied.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  */
+  int rosidl_dynamic_message_type_support_handle_impl_init(
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+    ffi.Pointer<rosidl_type_hash_t> type_hash,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+        type_description,
+    ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+        type_description_sources,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_message_type_support_impl_t> ts_impl,
+  ) {
+    return _rosidl_dynamic_message_type_support_handle_impl_init(
+      serialization_support,
+      type_hash,
+      type_description,
+      type_description_sources,
+      allocator,
+      ts_impl,
+    );
+  }
+
+  late final _rosidl_dynamic_message_type_support_handle_impl_initPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  rcutils_ret_t Function(
+                      ffi.Pointer<
+                          rosidl_dynamic_typesupport_serialization_support_t>,
+                      ffi.Pointer<rosidl_type_hash_t>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>,
+                      ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<
+                          rosidl_dynamic_message_type_support_impl_t>)>>(
+          'rosidl_dynamic_message_type_support_handle_impl_init');
+  late final _rosidl_dynamic_message_type_support_handle_impl_init =
+      _rosidl_dynamic_message_type_support_handle_impl_initPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>,
+              ffi.Pointer<rosidl_type_hash_t>,
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>,
+              ffi.Pointer<
+                  rosidl_runtime_c__type_description__TypeSource__Sequence>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<rosidl_dynamic_message_type_support_impl_t>)>();
+
+  /// Finalize a `rosidl_dynamic_message_type_support_impl_t`
+  int rosidl_dynamic_message_type_support_handle_impl_fini(
+    ffi.Pointer<rosidl_dynamic_message_type_support_impl_t> ts_impl,
+  ) {
+    return _rosidl_dynamic_message_type_support_handle_impl_fini(
+      ts_impl,
+    );
+  }
+
+  late final _rosidl_dynamic_message_type_support_handle_impl_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcutils_ret_t Function(
+                  ffi.Pointer<rosidl_dynamic_message_type_support_impl_t>)>>(
+      'rosidl_dynamic_message_type_support_handle_impl_fini');
+  late final _rosidl_dynamic_message_type_support_handle_impl_fini =
+      _rosidl_dynamic_message_type_support_handle_impl_finiPtr.asFunction<
+          int Function(
+              ffi.Pointer<rosidl_dynamic_message_type_support_impl_t>)>();
+
+  /// Return type_hash member in rosidl_dynamic_message_type_support_impl_t
+  ffi.Pointer<rosidl_type_hash_t>
+      rosidl_get_dynamic_message_type_support_type_hash_function(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _rosidl_get_dynamic_message_type_support_type_hash_function(
+      type_support,
+    );
+  }
+
+  late final _rosidl_get_dynamic_message_type_support_type_hash_functionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_type_hash_t> Function(
+                      ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'rosidl_get_dynamic_message_type_support_type_hash_function');
+  late final _rosidl_get_dynamic_message_type_support_type_hash_function =
+      _rosidl_get_dynamic_message_type_support_type_hash_functionPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Return description member in rosidl_dynamic_message_type_support_impl_t
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      rosidl_get_dynamic_message_type_support_type_description_function(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _rosidl_get_dynamic_message_type_support_type_description_function(
+      type_support,
+    );
+  }
+
+  late final _rosidl_get_dynamic_message_type_support_type_description_functionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'rosidl_get_dynamic_message_type_support_type_description_function');
+  late final _rosidl_get_dynamic_message_type_support_type_description_function =
+      _rosidl_get_dynamic_message_type_support_type_description_functionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Return type_description_sources member in rosidl_dynamic_message_type_support_impl_t
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      rosidl_get_dynamic_message_type_support_type_description_sources_function(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _rosidl_get_dynamic_message_type_support_type_description_sources_function(
+      type_support,
+    );
+  }
+
+  late final _rosidl_get_dynamic_message_type_support_type_description_sources_functionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'rosidl_get_dynamic_message_type_support_type_description_sources_function');
+  late final _rosidl_get_dynamic_message_type_support_type_description_sources_function =
+      _rosidl_get_dynamic_message_type_support_type_description_sources_functionPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Query if a feature is supported by the rmw implementation.
+  /// /**
+  ///  * \return `true` if the rmw implementation supports the feature, `false` if not.
+  ///  */
+  bool rmw_feature_supported(
+    int feature,
+  ) {
+    return _rmw_feature_supported(
+      feature,
+    );
+  }
+
+  late final _rmw_feature_supportedPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int32)>>(
+          'rmw_feature_supported');
+  late final _rmw_feature_supported =
+      _rmw_feature_supportedPtr.asFunction<bool Function(int)>();
+
+  /// Interfaces for runtime interface reflection
+  int rmw_take_dynamic_message(
+    ffi.Pointer<rmw_subscription_t> subscription,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_message,
+    ffi.Pointer<ffi.Bool> taken,
+    ffi.Pointer<rmw_subscription_allocation_t> allocation,
+  ) {
+    return _rmw_take_dynamic_message(
+      subscription,
+      dynamic_message,
+      taken,
+      allocation,
+    );
+  }
+
+  late final _rmw_take_dynamic_messagePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<rmw_subscription_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<rmw_subscription_allocation_t>)>>(
+      'rmw_take_dynamic_message');
+  late final _rmw_take_dynamic_message =
+      _rmw_take_dynamic_messagePtr.asFunction<
+          int Function(
+              ffi.Pointer<rmw_subscription_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<rmw_subscription_allocation_t>)>();
+
+  int rmw_take_dynamic_message_with_info(
+    ffi.Pointer<rmw_subscription_t> subscription,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_message,
+    ffi.Pointer<ffi.Bool> taken,
+    ffi.Pointer<rmw_message_info_t> message_info,
+    ffi.Pointer<rmw_subscription_allocation_t> allocation,
+  ) {
+    return _rmw_take_dynamic_message_with_info(
+      subscription,
+      dynamic_message,
+      taken,
+      message_info,
+      allocation,
+    );
+  }
+
+  late final _rmw_take_dynamic_message_with_infoPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<rmw_subscription_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<rmw_message_info_t>,
+                  ffi.Pointer<rmw_subscription_allocation_t>)>>(
+      'rmw_take_dynamic_message_with_info');
+  late final _rmw_take_dynamic_message_with_info =
+      _rmw_take_dynamic_message_with_infoPtr.asFunction<
+          int Function(
+              ffi.Pointer<rmw_subscription_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<rmw_message_info_t>,
+              ffi.Pointer<rmw_subscription_allocation_t>)>();
+
+  int rmw_serialization_support_init(
+    ffi.Pointer<ffi.Char> serialization_lib_name,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+        serialization_support,
+  ) {
+    return _rmw_serialization_support_init(
+      serialization_lib_name,
+      allocator,
+      serialization_support,
+    );
+  }
+
+  late final _rmw_serialization_support_initPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<
+                      rosidl_dynamic_typesupport_serialization_support_t>)>>(
+      'rmw_serialization_support_init');
+  late final _rmw_serialization_support_init =
+      _rmw_serialization_support_initPtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<
+                  rosidl_dynamic_typesupport_serialization_support_t>)>();
+
   /// Return an rmw_message_sequence_t struct with members initialized to `NULL`
   rmw_message_sequence_t rmw_get_zero_initialized_message_sequence() {
     return _rmw_get_zero_initialized_message_sequence();
@@ -12345,7 +22553,7 @@ class RcldartBindings {
   ///  * ```
   ///  *
   ///  * The rosidl_message_type_support_t object contains message type specific
-  ///  * information used to publish messages.
+  ///  * information used to subscribe to messages.
   ///  *
   ///  * The topic name must be a c string which follows the topic and service name
   ///  * format rules for unexpanded names, also known as non-fully qualified names:
@@ -12484,6 +22692,7 @@ class RcldartBindings {
   ///  * - qos = rmw_qos_profile_default
   ///  * - allocator = rcl_get_default_allocator()
   ///  * - rmw_subscription_options = rmw_get_default_subscription_options();
+  ///  * - disable_loaned_message = true, false only if ROS_DISABLE_LOANED_MESSAGES=0
   ///  *
   ///  * \return A structure containing the default options for a subscription.
   ///  */
@@ -13077,6 +23286,65 @@ class RcldartBindings {
               ffi.Pointer<rmw_message_info_t>,
               ffi.Pointer<rmw_subscription_allocation_t>)>();
 
+  /// Take a dynamic type message from a topic using a rcl subscription.
+  /// /**
+  ///  * In contrast to rcl_take(), this function takes a dynamic type message with dynamic data taken
+  ///  * directly from the middleware.
+  ///  * It is the job of the caller to ensure that the type associated with the subscription
+  ///  * matches, and that the subscription uses the dynamic type rosidl_message_type_support_t.
+  ///  *
+  ///  * Apart from the differences above, this function behaves like rcl_take().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] subscription the handle to the subscription from which to take
+  ///  * \param[inout] dynamic_message pointer to a (pre-allocated) dynamic type message.
+  ///  * \param[out] message_info rmw struct which contains meta-data for the message
+  ///  * \param[in] allocation structure pointer used for memory preallocation (may be NULL)
+  ///  * \return #RCL_RET_OK if the message was taken, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_SUBSCRIPTION_INVALID if the subscription is invalid, or
+  ///  * \return #RCL_RET_BAD_ALLOC if allocating memory failed, or
+  ///  * \return #RCL_RET_SUBSCRIPTION_TAKE_FAILED if take failed but no error
+  ///  *         occurred in the middleware, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_take_dynamic_message(
+    ffi.Pointer<rcl_subscription_t> subscription,
+    ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t> dynamic_message,
+    ffi.Pointer<rmw_message_info_t> message_info,
+    ffi.Pointer<rmw_subscription_allocation_t> allocation,
+  ) {
+    return _rcl_take_dynamic_message(
+      subscription,
+      dynamic_message,
+      message_info,
+      allocation,
+    );
+  }
+
+  late final _rcl_take_dynamic_messagePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_subscription_t>,
+                  ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+                  ffi.Pointer<rmw_message_info_t>,
+                  ffi.Pointer<rmw_subscription_allocation_t>)>>(
+      'rcl_take_dynamic_message');
+  late final _rcl_take_dynamic_message =
+      _rcl_take_dynamic_messagePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_subscription_t>,
+              ffi.Pointer<rosidl_dynamic_typesupport_dynamic_data_t>,
+              ffi.Pointer<rmw_message_info_t>,
+              ffi.Pointer<rmw_subscription_allocation_t>)>();
+
   /// Take a loaned message from a topic using a rcl subscription.
   /// /**
   ///  * Depending on the middleware, incoming messages can be loaned to the user's callback
@@ -13481,69 +23749,6 @@ class RcldartBindings {
           int Function(ffi.Pointer<rcl_subscription_t>, rcl_event_callback_t,
               ffi.Pointer<ffi.Void>)>();
 
-  /// Get the service type support handle specific to this identifier.
-  /// /**
-  ///  * The handle's message typesupport identifier function is returned or if the parameters are NULL
-  ///  * then an assert will happen.
-  ///  *
-  ///  * \param handle Handle to service type support
-  ///  * \param identifier The typesupport identifier to get the handle function for
-  ///  * \return The associated service typesupport handle function.
-  ///  */
-  ffi.Pointer<rosidl_service_type_support_t> get_service_typesupport_handle(
-    ffi.Pointer<rosidl_service_type_support_t> handle,
-    ffi.Pointer<ffi.Char> identifier,
-  ) {
-    return _get_service_typesupport_handle(
-      handle,
-      identifier,
-    );
-  }
-
-  late final _get_service_typesupport_handlePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<rosidl_service_type_support_t> Function(
-              ffi.Pointer<rosidl_service_type_support_t>,
-              ffi.Pointer<ffi.Char>)>>('get_service_typesupport_handle');
-  late final _get_service_typesupport_handle =
-      _get_service_typesupport_handlePtr.asFunction<
-          ffi.Pointer<rosidl_service_type_support_t> Function(
-              ffi.Pointer<rosidl_service_type_support_t>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// Get the service type support handle function specific to this identifier.
-  /// /**
-  /// * If the identifier is the same as this handle's typesupport_identifier the handle is simply
-  /// * returned or if the parameters are NULL then an assert will happen.
-  ///  *
-  ///  * \param handle Handle to service type support
-  ///  * \param identifier The typesupport identifier to get the handle function for
-  ///  * \return if the identifier match's the handle's identifier then the handle's function
-  ///  *   is returned.
-  ///  */
-  ffi.Pointer<rosidl_service_type_support_t>
-      get_service_typesupport_handle_function(
-    ffi.Pointer<rosidl_service_type_support_t> handle,
-    ffi.Pointer<ffi.Char> identifier,
-  ) {
-    return _get_service_typesupport_handle_function(
-      handle,
-      identifier,
-    );
-  }
-
-  late final _get_service_typesupport_handle_functionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Pointer<rosidl_service_type_support_t> Function(
-                  ffi.Pointer<rosidl_service_type_support_t>,
-                  ffi.Pointer<ffi.Char>)>>(
-      'get_service_typesupport_handle_function');
-  late final _get_service_typesupport_handle_function =
-      _get_service_typesupport_handle_functionPtr.asFunction<
-          ffi.Pointer<rosidl_service_type_support_t> Function(
-              ffi.Pointer<rosidl_service_type_support_t>,
-              ffi.Pointer<ffi.Char>)>();
-
   /// Return a rcl_client_t struct with members set to `NULL`.
   /// /**
   ///  * Should be called to get a null rcl_client_t before passing to
@@ -13761,9 +23966,9 @@ class RcldartBindings {
   ///  * but calling rcl_send_request() at the same time as non-thread safe client
   ///  * functions is not, e.g. calling rcl_send_request() and rcl_client_fini()
   ///  * concurrently is not allowed.
-  ///  * Before calling rcl_send_request() the message can change and after calling
-  ///  * rcl_send_request() the message can change, but it cannot be changed during
-  ///  * the `send_request` call.
+  ///  * The message cannot change during the rcl_send_request() call.
+  ///  * Before calling rcl_send_request() the message can change but after calling
+  ///  * rcl_send_request() it depends on RMW implementation behavior.
   ///  * The same `ros_request`, however, can be passed to multiple calls of
   ///  * rcl_send_request() simultaneously, even if the clients differ.
   ///  * The `ros_request` is unmodified by rcl_send_request().
@@ -14156,6 +24361,73 @@ class RcldartBindings {
           int Function(ffi.Pointer<rcl_client_t>, rcl_event_callback_t,
               ffi.Pointer<ffi.Void>)>();
 
+  /// Configures service introspection features for the client.
+  /// /**
+  ///  * Enables or disables service introspection features for this client.
+  ///  * If the introspection state is RCL_SERVICE_INTROSPECTION_OFF, then introspection will
+  ///  * be disabled.  If the state is RCL_SERVICE_INTROSPECTION_METADATA, the client metadata
+  ///  * will be published.  If the state is RCL_SERVICE_INTROSPECTION_CONTENTS, then the client
+  ///  * metadata and service request and response contents will be published.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] rmw implementation defined</i>
+  ///  *
+  ///  * \param[in] client client on which to configure service introspection
+  ///  * \param[in] node valid rcl_node_t to use to create the introspection publisher
+  ///  * \param[in] clock valid rcl_clock_t to use to generate the introspection timestamps
+  ///  * \param[in] type_support type support library associated with this client
+  ///  * \param[in] publisher_options options to use when creating the introspection publisher
+  ///  * \param[in] introspection_state rcl_service_introspection_state_t describing whether
+  ///  *            introspection should be OFF, METADATA, or CONTENTS
+  ///  * \return #RCL_RET_OK if the call was successful, or
+  ///  * \return #RCL_RET_ERROR if the event publisher is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID if the given node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if the client or node structure is invalid,
+  ///  * \return #RCL_RET_BAD_ALLOC if a memory allocation failed
+  ///  */
+  int rcl_client_configure_service_introspection(
+    ffi.Pointer<rcl_client_t> client,
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_clock_t> clock,
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+    rcl_publisher_options_t publisher_options,
+    int introspection_state,
+  ) {
+    return _rcl_client_configure_service_introspection(
+      client,
+      node,
+      clock,
+      type_support,
+      publisher_options,
+      introspection_state,
+    );
+  }
+
+  late final _rcl_client_configure_service_introspectionPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_client_t>,
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_clock_t>,
+              ffi.Pointer<rosidl_service_type_support_t>,
+              rcl_publisher_options_t,
+              ffi.Int32)>>('rcl_client_configure_service_introspection');
+  late final _rcl_client_configure_service_introspection =
+      _rcl_client_configure_service_introspectionPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_client_t>,
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_clock_t>,
+              ffi.Pointer<rosidl_service_type_support_t>,
+              rcl_publisher_options_t,
+              int)>();
+
   /// Return a rcl_service_t struct with members set to `NULL`.
   /// /**
   ///  * Should be called to get a null rcl_service_t before passing to
@@ -14218,7 +24490,7 @@ class RcldartBindings {
   ///  *
   ///  * The options struct allows the user to set the quality of service settings as
   ///  * well as a custom allocator which is used when initializing/finalizing the
-  ///  * client to allocate space for incidentals, e.g. the service name string.
+  ///  * service to allocate space for incidentals, e.g. the service name string.
   ///  *
   ///  * Expected usage (for C services):
   ///  *
@@ -14484,9 +24756,9 @@ class RcldartBindings {
   ///  * allowed, but calling rcl_send_response() at the same time as non-thread safe
   ///  * service functions is not, e.g. calling rcl_send_response() and
   ///  * rcl_service_fini() concurrently is not allowed.
-  ///  * Before calling rcl_send_response() the message can change and after calling
-  ///  * rcl_send_response() the message can change, but it cannot be changed during
-  ///  * the rcl_send_response() call.
+  ///  * The message cannot change during the rcl_send_response() call.
+  ///  * Before calling rcl_send_response() the message can change but after calling
+  ///  * rcl_send_response() it depends on RMW implementation behavior.
   ///  * The same `ros_response`, however, can be passed to multiple calls of
   ///  * rcl_send_response() simultaneously, even if the services differ.
   ///  * The `ros_response` is unmodified by rcl_send_response().
@@ -14804,6 +25076,73 @@ class RcldartBindings {
           int Function(ffi.Pointer<rcl_service_t>, rcl_event_callback_t,
               ffi.Pointer<ffi.Void>)>();
 
+  /// Configure service introspection features for the service.
+  /// /**
+  ///  * Enables or disables service introspection features for this service.
+  ///  * If the introspection state is RCL_SERVICE_INTROSPECTION_OFF, then introspection will
+  ///  * be disabled.  If the state is RCL_SERVICE_INTROSPECTION_METADATA, the client metadata
+  ///  * will be published.  If the state is RCL_SERVICE_INTROSPECTION_CONTENTS, then the client
+  ///  * metadata and service request and response contents will be published.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] rmw implementation defined</i>
+  ///  *
+  ///  * \param[in] service service on which to configure service introspection
+  ///  * \param[in] node valid rcl_node_t to use to create the introspection publisher
+  ///  * \param[in] clock valid rcl_clock_t to use to generate the introspection timestamps
+  ///  * \param[in] type_support type support library associated with this service
+  ///  * \param[in] publisher_options options to use when creating the introspection publisher
+  ///  * \param[in] introspection_state rcl_service_introspection_state_t describing whether
+  ///  *            introspection should be OFF, METADATA, or CONTENTS
+  ///  * \return #RCL_RET_OK if the call was successful, or
+  ///  * \return #RCL_RET_ERROR if the event publisher is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID if the given node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if the client or node structure is invalid,
+  ///  * \return #RCL_RET_BAD_ALLOC if a memory allocation failed
+  ///  */
+  int rcl_service_configure_service_introspection(
+    ffi.Pointer<rcl_service_t> service,
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_clock_t> clock,
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+    rcl_publisher_options_t publisher_options,
+    int introspection_state,
+  ) {
+    return _rcl_service_configure_service_introspection(
+      service,
+      node,
+      clock,
+      type_support,
+      publisher_options,
+      introspection_state,
+    );
+  }
+
+  late final _rcl_service_configure_service_introspectionPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_service_t>,
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_clock_t>,
+              ffi.Pointer<rosidl_service_type_support_t>,
+              rcl_publisher_options_t,
+              ffi.Int32)>>('rcl_service_configure_service_introspection');
+  late final _rcl_service_configure_service_introspection =
+      _rcl_service_configure_service_introspectionPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_service_t>,
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_clock_t>,
+              ffi.Pointer<rosidl_service_type_support_t>,
+              rcl_publisher_options_t,
+              int)>();
+
   /// Get the message bounds handle specific to this identifier.
   /// /**
   ///  * The handle's sequence bound is simply returned or if the parameters are NULL then an assert
@@ -14990,6 +25329,25 @@ class RcldartBindings {
   late final _rmw_event_fini =
       _rmw_event_finiPtr.asFunction<int Function(ffi.Pointer<rmw_event_t>)>();
 
+  /// Check if an event type is supported by the RMW implementation.
+  /// /*
+  ///  * \param[in] rmw_event_type to check
+  ///  * \return True if the event is supported false otherwise.
+  ///  */
+  bool rmw_event_type_is_supported(
+    int rmw_event_type,
+  ) {
+    return _rmw_event_type_is_supported(
+      rmw_event_type,
+    );
+  }
+
+  late final _rmw_event_type_is_supportedPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(ffi.Int32)>>(
+          'rmw_event_type_is_supported');
+  late final _rmw_event_type_is_supported =
+      _rmw_event_type_is_supportedPtr.asFunction<bool Function(int)>();
+
   /// Return a rmw_publisher_options_t initialized with default values.
   rmw_publisher_options_t rmw_get_default_publisher_options() {
     return _rmw_get_default_publisher_options();
@@ -15037,6 +25395,25 @@ class RcldartBindings {
   rmw_qos_profile_t get rmw_qos_profile_system_default =>
       _rmw_qos_profile_system_default.ref;
 
+  /// Match majority of endpoints currently available while maintaining the highest level of service
+  /// /**
+  ///  * Reliability, durability, deadline, liveliness, and liveliness lease duration policies will be
+  ///  * chosen at the time of creating a subscription or publisher.
+  ///  *
+  ///  * The actual QoS policy can be retrieved after the endpoint is created with
+  ///  * `rmw_get_subscriptions_info_by_topic` or `rmw_get_publishers_info_by_topic`.
+  ///  *
+  ///  * The middleware is not expected to update policies after creating a subscription or
+  ///  * publisher, even if one or more policies are incompatible with newly discovered endpoints.
+  ///  * Therefore, this profile should be used with care since non-deterministic behavior
+  ///  * can occur due to races with discovery.
+  ///  */
+  late final ffi.Pointer<rmw_qos_profile_t> _rmw_qos_profile_best_available =
+      _lookup<rmw_qos_profile_t>('rmw_qos_profile_best_available');
+
+  rmw_qos_profile_t get rmw_qos_profile_best_available =>
+      _rmw_qos_profile_best_available.ref;
+
   late final ffi.Pointer<rmw_qos_profile_t> _rmw_qos_profile_unknown =
       _lookup<rmw_qos_profile_t>('rmw_qos_profile_unknown');
 
@@ -15082,7 +25459,7 @@ class RcldartBindings {
   ///  * \param[in] reason_size: Size of the string buffer `reason`, if one is provided.
   ///  *   If `reason` is `nullptr`, then this parameter must be zero.
   ///  * \return `RMW_RET_OK` if the check was successful, or
-  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `compatiblity` is `nullptr`, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `compatibility` is `nullptr`, or
   ///  * \return `RMW_RET_INVALID_ARGUMENT` if `reason` is `NULL` and  `reason_size` is not zero, or
   ///  * \return `RMW_RET_ERROR` if there is an unexpected error.
   ///  */
@@ -15556,7 +25933,7 @@ class RcldartBindings {
   ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if `publisher` implementation identifier
   ///  *   does not match this implementation, or
   ///  * \return `RMW_RET_UNSUPPORTED` if the implementation does not support ROS message loaning, or
-  ///  * \return `RMW_RET_ERROR` if an unexpected error occured.
+  ///  * \return `RMW_RET_ERROR` if an unexpected error occurred.
   ///  */
   int rmw_borrow_loaned_message(
     ffi.Pointer<rmw_publisher_t> publisher,
@@ -18145,6 +28522,7 @@ class RcldartBindings {
   ///  * \return `RMW_RET_INVALID_ARGUMENT` if `ros_response` is NULL, or
   ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the `service`
   ///  *   implementation identifier does not match this implementation, or
+  ///  * \return `RMW_RET_TIMEOUT` if a response reader is not ready yet, or
   ///  * \return `RMW_RET_ERROR` if an unexpected error occurs.
   ///  */
   int rmw_send_response(
@@ -18837,7 +29215,133 @@ class RcldartBindings {
       int Function(ffi.Pointer<rmw_node_t>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// Get the unique identifier (gid) of a publisher.
+  /// Count the number of known clients matching a service name.
+  /// /**
+  ///  * This function returns the numbers of clients of a given service in the ROS graph,
+  ///  * as discovered so far by the given node.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation defined, check the implementation documentation</i>
+  ///  *
+  ///  * \par Runtime behavior
+  ///  *   To query the ROS graph is a synchronous operation.
+  ///  *   It is also non-blocking, but it is not guaranteed to be lock-free.
+  ///  *   Generally speaking, implementations may synchronize access to internal resources using
+  ///  *   locks but are not allowed to wait for events with no guaranteed time bound (barring
+  ///  *   the effects of starvation due to OS scheduling).
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Nodes are thread-safe objects, and so are all operations on them except for finalization.
+  ///  *   Therefore, it is safe to query the ROS graph using the same node concurrently.
+  ///  *   However, access to primitive data-type arguments is not synchronized.
+  ///  *   It is not safe to read or write `service_name` or `count` while rmw_count_clients()
+  ///  *   uses them.
+  ///  *
+  ///  * \pre Given `node` must be a valid node handle, as returned by rmw_create_node().
+  ///  *
+  ///  * \param[in] node Handle to node to use to query the ROS graph.
+  ///  * \param[in] service_name Fully qualified ROS topic name.
+  ///  * \param[out] count Number of clients matching the given topic name.
+  ///  * \return `RMW_RET_OK` if the query was successful, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `node` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `service_name` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `service_name` is not a fully qualified topic name,
+  ///  *   by rmw_validate_full_topic_name() definition, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `count` is NULL, or
+  ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the `node` implementation
+  ///  *   identifier does not match this implementation, or
+  ///  * \return `RMW_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rmw_count_clients(
+    ffi.Pointer<rmw_node_t> node,
+    ffi.Pointer<ffi.Char> service_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rmw_count_clients(
+      node,
+      service_name,
+      count,
+    );
+  }
+
+  late final _rmw_count_clientsPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rmw_count_clients');
+  late final _rmw_count_clients = _rmw_count_clientsPtr.asFunction<
+      int Function(ffi.Pointer<rmw_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Count the number of known servers matching a service name.
+  /// /**
+  ///  * This function returns the numbers of servers of a given service in the ROS graph,
+  ///  * as discovered so far by the given node.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation defined, check the implementation documentation</i>
+  ///  *
+  ///  * \par Runtime behavior
+  ///  *   To query the ROS graph is a synchronous operation.
+  ///  *   It is also non-blocking, but it is not guaranteed to be lock-free.
+  ///  *   Generally speaking, implementations may synchronize access to internal resources using
+  ///  *   locks but are not allowed to wait for events with no guaranteed time bound (barring
+  ///  *   the effects of starvation due to OS scheduling).
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Nodes are thread-safe objects, and so are all operations on them except for finalization.
+  ///  *   Therefore, it is safe to query the ROS graph using the same node concurrently.
+  ///  *   However, access to primitive data-type arguments is not synchronized.
+  ///  *   It is not safe to read or write `service_name` or `count` while rmw_count_services()
+  ///  *   uses them.
+  ///  *
+  ///  * \pre Given `node` must be a valid node handle, as returned by rmw_create_node().
+  ///  *
+  ///  * \param[in] node Handle to node to use to query the ROS graph.
+  ///  * \param[in] service_name Fully qualified ROS topic name.
+  ///  * \param[out] count Number of services matching the given topic name.
+  ///  * \return `RMW_RET_OK` if the query was successful, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `node` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `service_name` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `service_name` is not a fully qualified service name,
+  ///  *   by rmw_validate_full_topic_name() definition, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `count` is NULL, or
+  ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the `node` implementation
+  ///  *   identifier does not match this implementation, or
+  ///  * \return `RMW_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rmw_count_services(
+    ffi.Pointer<rmw_node_t> node,
+    ffi.Pointer<ffi.Char> service_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rmw_count_services(
+      node,
+      service_name,
+      count,
+    );
+  }
+
+  late final _rmw_count_servicesPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rmw_count_services');
+  late final _rmw_count_services = _rmw_count_servicesPtr.asFunction<
+      int Function(ffi.Pointer<rmw_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Get the globally unique identifier (GID) of a publisher.
   /// /**
   ///  * <hr>
   ///  * Attribute          | Adherence
@@ -18853,12 +29357,16 @@ class RcldartBindings {
   ///  *   Publishers are thread-safe objects, and so are all operations on them except for
   ///  *   finalization.
   ///  *   Therefore, it is safe to get the unique identifier from the same publisher concurrently.
-  ///  *   However, access to the gid is not synchronized.
+  ///  *   However, access to the GID is not synchronized.
   ///  *   It is not safe to read or write `gid` while rmw_get_gid_for_publisher() uses it.
   ///  *
   ///  * \pre Given `publisher` must be a valid publisher, as returned by rmw_create_publisher().
   ///  *
-  ///  * \param[in] publisher Publisher to get a gid from.
+  ///  * This is expected to be globally unique within a ROS domain.
+  ///  * The identifier should be the same when reported both locally (where the entity was created)
+  ///  * and on remote hosts or processes.
+  ///  *
+  ///  * \param[in] publisher Publisher to get a GID from.
   ///  * \param[out] gid Publisher's unique identifier, populated on success
   ///  *   but left unchanged on failure.
   ///  * \return `RMW_RET_OK` if successful, or
@@ -18886,7 +29394,58 @@ class RcldartBindings {
       _rmw_get_gid_for_publisherPtr.asFunction<
           int Function(ffi.Pointer<rmw_publisher_t>, ffi.Pointer<rmw_gid_t>)>();
 
-  /// Check if two unique identifiers (gids) are equal.
+  /// Get the globally unique identifier (GID) of a service client.
+  /// /**
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  *
+  ///  * <i>[1] implementation defined, check implementation documentation.</i>
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Service clients are thread-safe objects, and so are all operations on them except for
+  ///  *   finalization.
+  ///  *   Therefore, it is safe to get the unique identifier from the same client concurrently.
+  ///  *   However, access to the GID is not synchronized.
+  ///  *   It is not safe to read or write `gid` while rmw_get_gid_for_client() uses it.
+  ///  *
+  ///  * \pre Given `client` must be a valid service client, as returned by rmw_create_client().
+  ///  *
+  ///  * This is expected to be globally unique within a ROS domain.
+  ///  * The identifier should be the same when reported both locally (where the entity was created)
+  ///  * and on remote hosts or processes.
+  ///  * \param[in] client Service client to get a GID from.
+  ///  * \param[out] gid Service client's unique identifier, populated on success
+  ///  *   but left unchanged on failure.
+  ///  * \return `RMW_RET_OK` if successful, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `publisher` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `gid` is NULL, or
+  ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the `client` implementation
+  ///  *   identifier does not match this implementation, or
+  ///  * \return `RMW_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rmw_get_gid_for_client(
+    ffi.Pointer<rmw_client_t> client,
+    ffi.Pointer<rmw_gid_t> gid,
+  ) {
+    return _rmw_get_gid_for_client(
+      client,
+      gid,
+    );
+  }
+
+  late final _rmw_get_gid_for_clientPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_client_t>,
+              ffi.Pointer<rmw_gid_t>)>>('rmw_get_gid_for_client');
+  late final _rmw_get_gid_for_client = _rmw_get_gid_for_clientPtr.asFunction<
+      int Function(ffi.Pointer<rmw_client_t>, ffi.Pointer<rmw_gid_t>)>();
+
+  /// Check if two globally unique identifiers (GIDs) are equal.
   /// /**
   ///  * <hr>
   ///  * Attribute          | Adherence
@@ -18900,14 +29459,14 @@ class RcldartBindings {
   ///  *
   ///  * \par Thread-safety
   ///  *   Unique identifier comparison is a reentrant function, but:
-  ///  *   - Access to both gids is read-only but it is not synchronized.
+  ///  *   - Access to both GIDs is read-only but it is not synchronized.
   ///  *     Concurrent `gid1` and `gid2` reads are safe, but concurrent reads and writes are not.
   ///  *   - Access to primitive data-type arguments is not synchronized.
   ///  *     It is not safe to read or write `result` while rmw_compare_gids_equal() uses it.
   ///  *
   ///  * \param[in] gid1 First unique identifier to compare.
   ///  * \param[in] gid2 Second unique identifier to compare.
-  ///  * \param[out] result true if both gids are equal, false otherwise.
+  ///  * \param[out] result true if both GIDs are equal, false otherwise.
   ///  * \return `RMW_RET_OK` if successful, or
   ///  * \return `RMW_RET_INVALID_ARGUMENT` if `gid1` or `gid2` is NULL, or
   ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the implementation
@@ -19275,8 +29834,8 @@ class RcldartBindings {
   ///  * // ... error handling
   ///  *
   ///  * rcl_timer_t timer = rcl_get_zero_initialized_timer();
-  ///  * ret = rcl_timer_init(
-  ///  *   &timer, &clock, context, RCL_MS_TO_NS(100), my_timer_callback, allocator);
+  ///  * ret = rcl_timer_init2(
+  ///  *   &timer, &clock, context, RCL_MS_TO_NS(100), my_timer_callback, allocator, true);
   ///  * // ... error handling, use the timer with a wait set, or poll it manually, then cleanup
   ///  * ret = rcl_timer_fini(&timer);
   ///  * // ... error handling
@@ -19301,12 +29860,55 @@ class RcldartBindings {
   ///  * \param[in] period the duration between calls to the callback in nanoseconds
   ///  * \param[in] callback the user defined function to be called every period
   ///  * \param[in] allocator the allocator to use for allocations
+  ///  * \param[in] autostart the state of the timer at initialization
   ///  * \return #RCL_RET_OK if the timer was initialized successfully, or
   ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
   ///  * \return #RCL_RET_ALREADY_INIT if the timer was already initialized, or
   ///  * \return #RCL_RET_BAD_ALLOC if allocating memory failed, or
   ///  * \return #RCL_RET_ERROR an unspecified error occur.
   ///  */
+  int rcl_timer_init2(
+    ffi.Pointer<rcl_timer_t> timer,
+    ffi.Pointer<rcl_clock_t> clock,
+    ffi.Pointer<rcl_context_t> context,
+    int period,
+    rcl_timer_callback_t callback,
+    rcl_allocator_t allocator,
+    bool autostart,
+  ) {
+    return _rcl_timer_init2(
+      timer,
+      clock,
+      context,
+      period,
+      callback,
+      allocator,
+      autostart,
+    );
+  }
+
+  late final _rcl_timer_init2Ptr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_timer_t>,
+              ffi.Pointer<rcl_clock_t>,
+              ffi.Pointer<rcl_context_t>,
+              ffi.Int64,
+              rcl_timer_callback_t,
+              rcl_allocator_t,
+              ffi.Bool)>>('rcl_timer_init2');
+  late final _rcl_timer_init2 = _rcl_timer_init2Ptr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_timer_t>,
+          ffi.Pointer<rcl_clock_t>,
+          ffi.Pointer<rcl_context_t>,
+          int,
+          rcl_timer_callback_t,
+          rcl_allocator_t,
+          bool)>();
+
+  /// \deprecated `rcl_timer_init` implementation was removed.
+  /// Refer to `rcl_timer_init2`.
   int rcl_timer_init(
     ffi.Pointer<rcl_timer_t> timer,
     ffi.Pointer<rcl_clock_t> clock,
@@ -19436,6 +30038,48 @@ class RcldartBindings {
   late final _rcl_timer_call =
       _rcl_timer_callPtr.asFunction<int Function(ffi.Pointer<rcl_timer_t>)>();
 
+  /// Same as rcl_timer_call() except that it also retrieves the actual and expected call time.
+  /// /**
+  ///  * Same as rcl_timer_call() except that it also retrieves the actual and expected call time.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes [1]
+  ///  * Uses Atomics       | Yes
+  ///  * Lock-Free          | Yes [2]
+  ///  * <i>[1] user callback might not be thread-safe</i>
+  ///  *
+  ///  * <i>[2] if `atomic_is_lock_free()` returns true for `atomic_int_least64_t`</i>
+  ///  *
+  ///  * \param[inout] timer the handle to the timer to call
+  ///  * \param[out] call_info the struct in which the actual and expected call times are stored
+  ///  * \return #RCL_RET_OK if the timer was called successfully, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_TIMER_INVALID if the timer->impl is invalid, or
+  ///  * \return #RCL_RET_TIMER_CANCELED if the timer has been canceled, or
+  ///  * \return #RCL_RET_ERROR an unspecified error occur.
+  ///  */
+  int rcl_timer_call_with_info(
+    ffi.Pointer<rcl_timer_t> timer,
+    ffi.Pointer<rcl_timer_call_info_t> call_info,
+  ) {
+    return _rcl_timer_call_with_info(
+      timer,
+      call_info,
+    );
+  }
+
+  late final _rcl_timer_call_with_infoPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_timer_t>,
+              ffi.Pointer<rcl_timer_call_info_t>)>>('rcl_timer_call_with_info');
+  late final _rcl_timer_call_with_info =
+      _rcl_timer_call_with_infoPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_timer_t>, ffi.Pointer<rcl_timer_call_info_t>)>();
+
   /// Retrieve the clock of the timer.
   /// /**
   ///  * This function retrieves the clock pointer and copies it into the given variable.
@@ -19563,6 +30207,43 @@ class RcldartBindings {
               ffi.Pointer<ffi.Int64>)>>('rcl_timer_get_time_until_next_call');
   late final _rcl_timer_get_time_until_next_call =
       _rcl_timer_get_time_until_next_callPtr.asFunction<
+          int Function(ffi.Pointer<rcl_timer_t>, ffi.Pointer<ffi.Int64>)>();
+
+  /// Retrieve the time when the next call to rcl_timer_call() shall occur.
+  /// /**
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | Yes
+  ///  * Lock-Free          | Yes [1]
+  ///  * <i>[1] if `atomic_is_lock_free()` returns true for `atomic_int_least64_t`</i>
+  ///  *
+  ///  * \param[in] timer the handle to the timer that is being queried
+  ///  * \param[out] next_call_time the output variable for the result
+  ///  * \return #RCL_RET_OK if the timer until next call was successfully calculated, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_TIMER_INVALID if the timer->impl is invalid, or
+  ///  * \return #RCL_RET_TIMER_CANCELED if the timer is canceled, or
+  ///  * \return #RCL_RET_ERROR an unspecified error occur.
+  ///  */
+  int rcl_timer_get_next_call_time(
+    ffi.Pointer<rcl_timer_t> timer,
+    ffi.Pointer<ffi.Int64> next_call_time,
+  ) {
+    return _rcl_timer_get_next_call_time(
+      timer,
+      next_call_time,
+    );
+  }
+
+  late final _rcl_timer_get_next_call_timePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_timer_t>,
+              ffi.Pointer<ffi.Int64>)>>('rcl_timer_get_next_call_time');
+  late final _rcl_timer_get_next_call_time =
+      _rcl_timer_get_next_call_timePtr.asFunction<
           int Function(ffi.Pointer<rcl_timer_t>, ffi.Pointer<ffi.Int64>)>();
 
   /// Retrieve the time since the previous call to rcl_timer_call() occurred.
@@ -19946,6 +30627,47 @@ class RcldartBindings {
       _rcl_timer_get_guard_conditionPtr.asFunction<
           ffi.Pointer<rcl_guard_condition_t> Function(
               ffi.Pointer<rcl_timer_t>)>();
+
+  /// Set the on reset callback function for the timer.
+  /// /**
+  ///  * This API sets the callback function to be called whenever the
+  ///  * timer is reset.
+  ///  * If the timer has already been reset, the callback will be called.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | No
+  ///  *
+  ///  * \param[in] timer The handle to the timer on which to set the callback
+  ///  * \param[in] on_reset_callback The callback to be called when timer is reset
+  ///  * \param[in] user_data Given to the callback when called later, may be NULL
+  ///  * \return `RCL_RET_OK` if successful, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if `timer` is NULL
+  ///  */
+  int rcl_timer_set_on_reset_callback(
+    ffi.Pointer<rcl_timer_t> timer,
+    rcl_event_callback_t on_reset_callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_timer_set_on_reset_callback(
+      timer,
+      on_reset_callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_timer_set_on_reset_callbackPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_timer_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>>('rcl_timer_set_on_reset_callback');
+  late final _rcl_timer_set_on_reset_callback =
+      _rcl_timer_set_on_reset_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_timer_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
 
   /// Return a rcl_event_t struct with members set to `NULL`.
   /// /**
@@ -20820,9 +31542,8308 @@ class RcldartBindings {
       'rcl_wait_set_is_valid');
   late final _rcl_wait_set_is_valid = _rcl_wait_set_is_validPtr
       .asFunction<bool Function(ffi.Pointer<rcl_wait_set_t>)>();
-}
 
-final class max_align_t extends ffi.Opaque {}
+  /// Initialize msg/GoalInfo message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__msg__GoalInfo
+  ///  * )) before or use
+  ///  * action_msgs__msg__GoalInfo__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__msg__GoalInfo__init(
+    ffi.Pointer<action_msgs__msg__GoalInfo> msg,
+  ) {
+    return _action_msgs__msg__GoalInfo__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>>(
+      'action_msgs__msg__GoalInfo__init');
+  late final _action_msgs__msg__GoalInfo__init =
+      _action_msgs__msg__GoalInfo__initPtr
+          .asFunction<bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>();
+
+  /// Finalize msg/GoalInfo message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalInfo__fini(
+    ffi.Pointer<action_msgs__msg__GoalInfo> msg,
+  ) {
+    return _action_msgs__msg__GoalInfo__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>>(
+      'action_msgs__msg__GoalInfo__fini');
+  late final _action_msgs__msg__GoalInfo__fini =
+      _action_msgs__msg__GoalInfo__finiPtr
+          .asFunction<void Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>();
+
+  /// Create msg/GoalInfo message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__msg__GoalInfo__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalInfo> action_msgs__msg__GoalInfo__create() {
+    return _action_msgs__msg__GoalInfo__create();
+  }
+
+  late final _action_msgs__msg__GoalInfo__createPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Pointer<action_msgs__msg__GoalInfo> Function()>>(
+      'action_msgs__msg__GoalInfo__create');
+  late final _action_msgs__msg__GoalInfo__create =
+      _action_msgs__msg__GoalInfo__createPtr
+          .asFunction<ffi.Pointer<action_msgs__msg__GoalInfo> Function()>();
+
+  /// Destroy msg/GoalInfo message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalInfo__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalInfo__destroy(
+    ffi.Pointer<action_msgs__msg__GoalInfo> msg,
+  ) {
+    return _action_msgs__msg__GoalInfo__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>>(
+      'action_msgs__msg__GoalInfo__destroy');
+  late final _action_msgs__msg__GoalInfo__destroy =
+      _action_msgs__msg__GoalInfo__destroyPtr
+          .asFunction<void Function(ffi.Pointer<action_msgs__msg__GoalInfo>)>();
+
+  /// Check for msg/GoalInfo message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalInfo__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalInfo> lhs,
+    ffi.Pointer<action_msgs__msg__GoalInfo> rhs,
+  ) {
+    return _action_msgs__msg__GoalInfo__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>,
+                  ffi.Pointer<action_msgs__msg__GoalInfo>)>>(
+      'action_msgs__msg__GoalInfo__are_equal');
+  late final _action_msgs__msg__GoalInfo__are_equal =
+      _action_msgs__msg__GoalInfo__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>,
+              ffi.Pointer<action_msgs__msg__GoalInfo>)>();
+
+  /// Copy a msg/GoalInfo message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalInfo__copy(
+    ffi.Pointer<action_msgs__msg__GoalInfo> input,
+    ffi.Pointer<action_msgs__msg__GoalInfo> output,
+  ) {
+    return _action_msgs__msg__GoalInfo__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>,
+                  ffi.Pointer<action_msgs__msg__GoalInfo>)>>(
+      'action_msgs__msg__GoalInfo__copy');
+  late final _action_msgs__msg__GoalInfo__copy =
+      _action_msgs__msg__GoalInfo__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalInfo>,
+              ffi.Pointer<action_msgs__msg__GoalInfo>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t> action_msgs__msg__GoalInfo__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalInfo__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__msg__GoalInfo__get_type_hash');
+  late final _action_msgs__msg__GoalInfo__get_type_hash =
+      _action_msgs__msg__GoalInfo__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__msg__GoalInfo__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalInfo__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__get_type_descriptionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__msg__GoalInfo__get_type_description');
+  late final _action_msgs__msg__GoalInfo__get_type_description =
+      _action_msgs__msg__GoalInfo__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__msg__GoalInfo__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalInfo__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalInfo__get_individual_type_description_source');
+  late final _action_msgs__msg__GoalInfo__get_individual_type_description_source =
+      _action_msgs__msg__GoalInfo__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__msg__GoalInfo__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalInfo__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalInfo__get_type_description_sources');
+  late final _action_msgs__msg__GoalInfo__get_type_description_sources =
+      _action_msgs__msg__GoalInfo__get_type_description_sourcesPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of msg/GoalInfo messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__msg__GoalInfo__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__msg__GoalInfo__Sequence__init(
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__initPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>,
+              ffi.Size)>>('action_msgs__msg__GoalInfo__Sequence__init');
+  late final _action_msgs__msg__GoalInfo__Sequence__init =
+      _action_msgs__msg__GoalInfo__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>, int)>();
+
+  /// Finalize array of msg/GoalInfo messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalInfo__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalInfo__Sequence__fini(
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>>(
+      'action_msgs__msg__GoalInfo__Sequence__fini');
+  late final _action_msgs__msg__GoalInfo__Sequence__fini =
+      _action_msgs__msg__GoalInfo__Sequence__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>();
+
+  /// Create array of msg/GoalInfo messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__msg__GoalInfo__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>
+      action_msgs__msg__GoalInfo__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> Function(
+              ffi.Size)>>('action_msgs__msg__GoalInfo__Sequence__create');
+  late final _action_msgs__msg__GoalInfo__Sequence__create =
+      _action_msgs__msg__GoalInfo__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> Function(int)>();
+
+  /// Destroy array of msg/GoalInfo messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalInfo__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalInfo__Sequence__destroy(
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>>(
+      'action_msgs__msg__GoalInfo__Sequence__destroy');
+  late final _action_msgs__msg__GoalInfo__Sequence__destroy =
+      _action_msgs__msg__GoalInfo__Sequence__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>();
+
+  /// Check for msg/GoalInfo message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalInfo__Sequence__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> lhs,
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> rhs,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>,
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>>(
+      'action_msgs__msg__GoalInfo__Sequence__are_equal');
+  late final _action_msgs__msg__GoalInfo__Sequence__are_equal =
+      _action_msgs__msg__GoalInfo__Sequence__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>();
+
+  /// Copy an array of msg/GoalInfo messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalInfo__Sequence__copy(
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> input,
+    ffi.Pointer<action_msgs__msg__GoalInfo__Sequence> output,
+  ) {
+    return _action_msgs__msg__GoalInfo__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalInfo__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>,
+                  ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>>(
+      'action_msgs__msg__GoalInfo__Sequence__copy');
+  late final _action_msgs__msg__GoalInfo__Sequence__copy =
+      _action_msgs__msg__GoalInfo__Sequence__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalInfo__Sequence>)>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfoPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfoPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Initialize msg/GoalStatus message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__msg__GoalStatus
+  ///  * )) before or use
+  ///  * action_msgs__msg__GoalStatus__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__msg__GoalStatus__init(
+    ffi.Pointer<action_msgs__msg__GoalStatus> msg,
+  ) {
+    return _action_msgs__msg__GoalStatus__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>>(
+      'action_msgs__msg__GoalStatus__init');
+  late final _action_msgs__msg__GoalStatus__init =
+      _action_msgs__msg__GoalStatus__initPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>();
+
+  /// Finalize msg/GoalStatus message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalStatus__fini(
+    ffi.Pointer<action_msgs__msg__GoalStatus> msg,
+  ) {
+    return _action_msgs__msg__GoalStatus__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>>(
+      'action_msgs__msg__GoalStatus__fini');
+  late final _action_msgs__msg__GoalStatus__fini =
+      _action_msgs__msg__GoalStatus__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>();
+
+  /// Create msg/GoalStatus message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__msg__GoalStatus__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalStatus>
+      action_msgs__msg__GoalStatus__create() {
+    return _action_msgs__msg__GoalStatus__create();
+  }
+
+  late final _action_msgs__msg__GoalStatus__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatus>
+              Function()>>('action_msgs__msg__GoalStatus__create');
+  late final _action_msgs__msg__GoalStatus__create =
+      _action_msgs__msg__GoalStatus__createPtr
+          .asFunction<ffi.Pointer<action_msgs__msg__GoalStatus> Function()>();
+
+  /// Destroy msg/GoalStatus message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatus__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalStatus__destroy(
+    ffi.Pointer<action_msgs__msg__GoalStatus> msg,
+  ) {
+    return _action_msgs__msg__GoalStatus__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>>(
+      'action_msgs__msg__GoalStatus__destroy');
+  late final _action_msgs__msg__GoalStatus__destroy =
+      _action_msgs__msg__GoalStatus__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatus>)>();
+
+  /// Check for msg/GoalStatus message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalStatus__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalStatus> lhs,
+    ffi.Pointer<action_msgs__msg__GoalStatus> rhs,
+  ) {
+    return _action_msgs__msg__GoalStatus__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>,
+                  ffi.Pointer<action_msgs__msg__GoalStatus>)>>(
+      'action_msgs__msg__GoalStatus__are_equal');
+  late final _action_msgs__msg__GoalStatus__are_equal =
+      _action_msgs__msg__GoalStatus__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>,
+              ffi.Pointer<action_msgs__msg__GoalStatus>)>();
+
+  /// Copy a msg/GoalStatus message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalStatus__copy(
+    ffi.Pointer<action_msgs__msg__GoalStatus> input,
+    ffi.Pointer<action_msgs__msg__GoalStatus> output,
+  ) {
+    return _action_msgs__msg__GoalStatus__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>,
+                  ffi.Pointer<action_msgs__msg__GoalStatus>)>>(
+      'action_msgs__msg__GoalStatus__copy');
+  late final _action_msgs__msg__GoalStatus__copy =
+      _action_msgs__msg__GoalStatus__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatus>,
+              ffi.Pointer<action_msgs__msg__GoalStatus>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t> action_msgs__msg__GoalStatus__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatus__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__msg__GoalStatus__get_type_hash');
+  late final _action_msgs__msg__GoalStatus__get_type_hash =
+      _action_msgs__msg__GoalStatus__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__msg__GoalStatus__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatus__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__get_type_descriptionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__msg__GoalStatus__get_type_description');
+  late final _action_msgs__msg__GoalStatus__get_type_description =
+      _action_msgs__msg__GoalStatus__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__msg__GoalStatus__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatus__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalStatus__get_individual_type_description_source');
+  late final _action_msgs__msg__GoalStatus__get_individual_type_description_source =
+      _action_msgs__msg__GoalStatus__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__msg__GoalStatus__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatus__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalStatus__get_type_description_sources');
+  late final _action_msgs__msg__GoalStatus__get_type_description_sources =
+      _action_msgs__msg__GoalStatus__get_type_description_sourcesPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of msg/GoalStatus messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__msg__GoalStatus__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__msg__GoalStatus__Sequence__init(
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__initPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>,
+              ffi.Size)>>('action_msgs__msg__GoalStatus__Sequence__init');
+  late final _action_msgs__msg__GoalStatus__Sequence__init =
+      _action_msgs__msg__GoalStatus__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>, int)>();
+
+  /// Finalize array of msg/GoalStatus messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatus__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalStatus__Sequence__fini(
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>>(
+      'action_msgs__msg__GoalStatus__Sequence__fini');
+  late final _action_msgs__msg__GoalStatus__Sequence__fini =
+      _action_msgs__msg__GoalStatus__Sequence__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>();
+
+  /// Create array of msg/GoalStatus messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__msg__GoalStatus__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>
+      action_msgs__msg__GoalStatus__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> Function(
+              ffi.Size)>>('action_msgs__msg__GoalStatus__Sequence__create');
+  late final _action_msgs__msg__GoalStatus__Sequence__create =
+      _action_msgs__msg__GoalStatus__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> Function(int)>();
+
+  /// Destroy array of msg/GoalStatus messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatus__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalStatus__Sequence__destroy(
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>>(
+      'action_msgs__msg__GoalStatus__Sequence__destroy');
+  late final _action_msgs__msg__GoalStatus__Sequence__destroy =
+      _action_msgs__msg__GoalStatus__Sequence__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>();
+
+  /// Check for msg/GoalStatus message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalStatus__Sequence__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> lhs,
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> rhs,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>,
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>>(
+      'action_msgs__msg__GoalStatus__Sequence__are_equal');
+  late final _action_msgs__msg__GoalStatus__Sequence__are_equal =
+      _action_msgs__msg__GoalStatus__Sequence__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>();
+
+  /// Copy an array of msg/GoalStatus messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalStatus__Sequence__copy(
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> input,
+    ffi.Pointer<action_msgs__msg__GoalStatus__Sequence> output,
+  ) {
+    return _action_msgs__msg__GoalStatus__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatus__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>,
+                  ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>>(
+      'action_msgs__msg__GoalStatus__Sequence__copy');
+  late final _action_msgs__msg__GoalStatus__Sequence__copy =
+      _action_msgs__msg__GoalStatus__Sequence__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalStatus__Sequence>)>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Initialize msg/GoalStatusArray message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__msg__GoalStatusArray
+  ///  * )) before or use
+  ///  * action_msgs__msg__GoalStatusArray__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__init(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> msg,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray>)>>(
+      'action_msgs__msg__GoalStatusArray__init');
+  late final _action_msgs__msg__GoalStatusArray__init =
+      _action_msgs__msg__GoalStatusArray__initPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>)>();
+
+  /// Finalize msg/GoalStatusArray message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalStatusArray__fini(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> msg,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray>)>>(
+      'action_msgs__msg__GoalStatusArray__fini');
+  late final _action_msgs__msg__GoalStatusArray__fini =
+      _action_msgs__msg__GoalStatusArray__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>)>();
+
+  /// Create msg/GoalStatusArray message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__msg__GoalStatusArray__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalStatusArray>
+      action_msgs__msg__GoalStatusArray__create() {
+    return _action_msgs__msg__GoalStatusArray__create();
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatusArray>
+              Function()>>('action_msgs__msg__GoalStatusArray__create');
+  late final _action_msgs__msg__GoalStatusArray__create =
+      _action_msgs__msg__GoalStatusArray__createPtr.asFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatusArray> Function()>();
+
+  /// Destroy msg/GoalStatusArray message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatusArray__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__msg__GoalStatusArray__destroy(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> msg,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray>)>>(
+      'action_msgs__msg__GoalStatusArray__destroy');
+  late final _action_msgs__msg__GoalStatusArray__destroy =
+      _action_msgs__msg__GoalStatusArray__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>)>();
+
+  /// Check for msg/GoalStatusArray message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> lhs,
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> rhs,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>,
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray>)>>(
+      'action_msgs__msg__GoalStatusArray__are_equal');
+  late final _action_msgs__msg__GoalStatusArray__are_equal =
+      _action_msgs__msg__GoalStatusArray__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>,
+              ffi.Pointer<action_msgs__msg__GoalStatusArray>)>();
+
+  /// Copy a msg/GoalStatusArray message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__copy(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> input,
+    ffi.Pointer<action_msgs__msg__GoalStatusArray> output,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>,
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray>)>>(
+      'action_msgs__msg__GoalStatusArray__copy');
+  late final _action_msgs__msg__GoalStatusArray__copy =
+      _action_msgs__msg__GoalStatusArray__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__msg__GoalStatusArray>,
+              ffi.Pointer<action_msgs__msg__GoalStatusArray>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      action_msgs__msg__GoalStatusArray__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__msg__GoalStatusArray__get_type_hash');
+  late final _action_msgs__msg__GoalStatusArray__get_type_hash =
+      _action_msgs__msg__GoalStatusArray__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__msg__GoalStatusArray__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalStatusArray__get_type_description');
+  late final _action_msgs__msg__GoalStatusArray__get_type_description =
+      _action_msgs__msg__GoalStatusArray__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__msg__GoalStatusArray__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalStatusArray__get_individual_type_description_source');
+  late final _action_msgs__msg__GoalStatusArray__get_individual_type_description_source =
+      _action_msgs__msg__GoalStatusArray__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__msg__GoalStatusArray__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__msg__GoalStatusArray__get_type_description_sources');
+  late final _action_msgs__msg__GoalStatusArray__get_type_description_sources =
+      _action_msgs__msg__GoalStatusArray__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of msg/GoalStatusArray messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__msg__GoalStatusArray__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__Sequence__init(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__initPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>,
+              ffi.Size)>>('action_msgs__msg__GoalStatusArray__Sequence__init');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__init =
+      _action_msgs__msg__GoalStatusArray__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>, int)>();
+
+  /// Finalize array of msg/GoalStatusArray messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatusArray__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalStatusArray__Sequence__fini(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>>(
+      'action_msgs__msg__GoalStatusArray__Sequence__fini');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__fini =
+      _action_msgs__msg__GoalStatusArray__Sequence__finiPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>();
+
+  /// Create array of msg/GoalStatusArray messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__msg__GoalStatusArray__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>
+      action_msgs__msg__GoalStatusArray__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__createPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> Function(
+                  ffi.Size)>>(
+      'action_msgs__msg__GoalStatusArray__Sequence__create');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__create =
+      _action_msgs__msg__GoalStatusArray__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> Function(
+              int)>();
+
+  /// Destroy array of msg/GoalStatusArray messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__msg__GoalStatusArray__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__msg__GoalStatusArray__Sequence__destroy(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> array,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>>(
+      'action_msgs__msg__GoalStatusArray__Sequence__destroy');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__destroy =
+      _action_msgs__msg__GoalStatusArray__Sequence__destroyPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>();
+
+  /// Check for msg/GoalStatusArray message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__Sequence__are_equal(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> lhs,
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> rhs,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__are_equalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>,
+                      ffi.Pointer<
+                          action_msgs__msg__GoalStatusArray__Sequence>)>>(
+          'action_msgs__msg__GoalStatusArray__Sequence__are_equal');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__are_equal =
+      _action_msgs__msg__GoalStatusArray__Sequence__are_equalPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>();
+
+  /// Copy an array of msg/GoalStatusArray messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__msg__GoalStatusArray__Sequence__copy(
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> input,
+    ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence> output,
+  ) {
+    return _action_msgs__msg__GoalStatusArray__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__msg__GoalStatusArray__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>,
+                  ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>>(
+      'action_msgs__msg__GoalStatusArray__Sequence__copy');
+  late final _action_msgs__msg__GoalStatusArray__Sequence__copy =
+      _action_msgs__msg__GoalStatusArray__Sequence__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>,
+              ffi.Pointer<action_msgs__msg__GoalStatusArray__Sequence>)>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArrayPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArrayPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t> action_msgs__srv__CancelGoal__get_type_hash(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_service_type_support_t>)>>(
+      'action_msgs__srv__CancelGoal__get_type_hash');
+  late final _action_msgs__srv__CancelGoal__get_type_hash =
+      _action_msgs__srv__CancelGoal__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__srv__CancelGoal__get_type_description(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal__get_type_descriptionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+      'action_msgs__srv__CancelGoal__get_type_description');
+  late final _action_msgs__srv__CancelGoal__get_type_description =
+      _action_msgs__srv__CancelGoal__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__srv__CancelGoal__get_individual_type_description_source(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal__get_individual_type_description_source');
+  late final _action_msgs__srv__CancelGoal__get_individual_type_description_source =
+      _action_msgs__srv__CancelGoal__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__srv__CancelGoal__get_type_description_sources(
+    ffi.Pointer<rosidl_service_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_service_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal__get_type_description_sources');
+  late final _action_msgs__srv__CancelGoal__get_type_description_sources =
+      _action_msgs__srv__CancelGoal__get_type_description_sourcesPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+              Function(ffi.Pointer<rosidl_service_type_support_t>)>();
+
+  /// Initialize srv/CancelGoal message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__srv__CancelGoal_Request
+  ///  * )) before or use
+  ///  * action_msgs__srv__CancelGoal_Request__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>>(
+      'action_msgs__srv__CancelGoal_Request__init');
+  late final _action_msgs__srv__CancelGoal_Request__init =
+      _action_msgs__srv__CancelGoal_Request__initPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>();
+
+  /// Finalize srv/CancelGoal message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Request__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>>(
+      'action_msgs__srv__CancelGoal_Request__fini');
+  late final _action_msgs__srv__CancelGoal_Request__fini =
+      _action_msgs__srv__CancelGoal_Request__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>();
+
+  /// Create srv/CancelGoal message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__srv__CancelGoal_Request__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Request>
+      action_msgs__srv__CancelGoal_Request__create() {
+    return _action_msgs__srv__CancelGoal_Request__create();
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Request>
+              Function()>>('action_msgs__srv__CancelGoal_Request__create');
+  late final _action_msgs__srv__CancelGoal_Request__create =
+      _action_msgs__srv__CancelGoal_Request__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Request> Function()>();
+
+  /// Destroy srv/CancelGoal message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Request__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Request__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>>(
+      'action_msgs__srv__CancelGoal_Request__destroy');
+  late final _action_msgs__srv__CancelGoal_Request__destroy =
+      _action_msgs__srv__CancelGoal_Request__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>();
+
+  /// Check for srv/CancelGoal message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>>(
+      'action_msgs__srv__CancelGoal_Request__are_equal');
+  late final _action_msgs__srv__CancelGoal_Request__are_equal =
+      _action_msgs__srv__CancelGoal_Request__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Request>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>();
+
+  /// Copy a srv/CancelGoal message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>>(
+      'action_msgs__srv__CancelGoal_Request__copy');
+  late final _action_msgs__srv__CancelGoal_Request__copy =
+      _action_msgs__srv__CancelGoal_Request__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Request>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      action_msgs__srv__CancelGoal_Request__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__srv__CancelGoal_Request__get_type_hash');
+  late final _action_msgs__srv__CancelGoal_Request__get_type_hash =
+      _action_msgs__srv__CancelGoal_Request__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__srv__CancelGoal_Request__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Request__get_type_description');
+  late final _action_msgs__srv__CancelGoal_Request__get_type_description =
+      _action_msgs__srv__CancelGoal_Request__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__srv__CancelGoal_Request__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Request__get_individual_type_description_source');
+  late final _action_msgs__srv__CancelGoal_Request__get_individual_type_description_source =
+      _action_msgs__srv__CancelGoal_Request__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__srv__CancelGoal_Request__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Request__get_type_description_sources');
+  late final _action_msgs__srv__CancelGoal_Request__get_type_description_sources =
+      _action_msgs__srv__CancelGoal_Request__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__srv__CancelGoal_Request__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__Sequence__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+                  ffi.Size)>>(
+      'action_msgs__srv__CancelGoal_Request__Sequence__init');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__init =
+      _action_msgs__srv__CancelGoal_Request__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+              int)>();
+
+  /// Finalize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Request__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Request__Sequence__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<
+                      action_msgs__srv__CancelGoal_Request__Sequence>)>>(
+      'action_msgs__srv__CancelGoal_Request__Sequence__fini');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__fini =
+      _action_msgs__srv__CancelGoal_Request__Sequence__finiPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>)>();
+
+  /// Create array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__srv__CancelGoal_Request__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>
+      action_msgs__srv__CancelGoal_Request__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>
+                      Function(ffi.Size)>>(
+          'action_msgs__srv__CancelGoal_Request__Sequence__create');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__create =
+      _action_msgs__srv__CancelGoal_Request__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> Function(
+              int)>();
+
+  /// Destroy array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Request__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Request__Sequence__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Request__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Request__Sequence__destroy');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__destroy =
+      _action_msgs__srv__CancelGoal_Request__Sequence__destroyPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>)>();
+
+  /// Check for srv/CancelGoal message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__Sequence__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__are_equalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Request__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Request__Sequence__are_equal');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__are_equal =
+      _action_msgs__srv__CancelGoal_Request__Sequence__are_equalPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>)>();
+
+  /// Copy an array of srv/CancelGoal messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Request__Sequence__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Request__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+                  ffi.Pointer<
+                      action_msgs__srv__CancelGoal_Request__Sequence>)>>(
+      'action_msgs__srv__CancelGoal_Request__Sequence__copy');
+  late final _action_msgs__srv__CancelGoal_Request__Sequence__copy =
+      _action_msgs__srv__CancelGoal_Request__Sequence__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Request__Sequence>)>();
+
+  /// Initialize srv/CancelGoal message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__srv__CancelGoal_Response
+  ///  * )) before or use
+  ///  * action_msgs__srv__CancelGoal_Response__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>>(
+      'action_msgs__srv__CancelGoal_Response__init');
+  late final _action_msgs__srv__CancelGoal_Response__init =
+      _action_msgs__srv__CancelGoal_Response__initPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>();
+
+  /// Finalize srv/CancelGoal message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Response__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>>(
+      'action_msgs__srv__CancelGoal_Response__fini');
+  late final _action_msgs__srv__CancelGoal_Response__fini =
+      _action_msgs__srv__CancelGoal_Response__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>();
+
+  /// Create srv/CancelGoal message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__srv__CancelGoal_Response__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Response>
+      action_msgs__srv__CancelGoal_Response__create() {
+    return _action_msgs__srv__CancelGoal_Response__create();
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Response>
+              Function()>>('action_msgs__srv__CancelGoal_Response__create');
+  late final _action_msgs__srv__CancelGoal_Response__create =
+      _action_msgs__srv__CancelGoal_Response__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Response> Function()>();
+
+  /// Destroy srv/CancelGoal message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Response__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Response__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>>(
+      'action_msgs__srv__CancelGoal_Response__destroy');
+  late final _action_msgs__srv__CancelGoal_Response__destroy =
+      _action_msgs__srv__CancelGoal_Response__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>();
+
+  /// Check for srv/CancelGoal message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>>(
+      'action_msgs__srv__CancelGoal_Response__are_equal');
+  late final _action_msgs__srv__CancelGoal_Response__are_equal =
+      _action_msgs__srv__CancelGoal_Response__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Response>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>();
+
+  /// Copy a srv/CancelGoal message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>>(
+      'action_msgs__srv__CancelGoal_Response__copy');
+  late final _action_msgs__srv__CancelGoal_Response__copy =
+      _action_msgs__srv__CancelGoal_Response__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Response>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      action_msgs__srv__CancelGoal_Response__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__srv__CancelGoal_Response__get_type_hash');
+  late final _action_msgs__srv__CancelGoal_Response__get_type_hash =
+      _action_msgs__srv__CancelGoal_Response__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__srv__CancelGoal_Response__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Response__get_type_description');
+  late final _action_msgs__srv__CancelGoal_Response__get_type_description =
+      _action_msgs__srv__CancelGoal_Response__get_type_descriptionPtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__srv__CancelGoal_Response__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Response__get_individual_type_description_source');
+  late final _action_msgs__srv__CancelGoal_Response__get_individual_type_description_source =
+      _action_msgs__srv__CancelGoal_Response__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__srv__CancelGoal_Response__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Response__get_type_description_sources');
+  late final _action_msgs__srv__CancelGoal_Response__get_type_description_sources =
+      _action_msgs__srv__CancelGoal_Response__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__srv__CancelGoal_Response__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__Sequence__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+                  ffi.Size)>>(
+      'action_msgs__srv__CancelGoal_Response__Sequence__init');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__init =
+      _action_msgs__srv__CancelGoal_Response__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+              int)>();
+
+  /// Finalize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Response__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Response__Sequence__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__finiPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Response__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Response__Sequence__fini');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__fini =
+      _action_msgs__srv__CancelGoal_Response__Sequence__finiPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>)>();
+
+  /// Create array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__srv__CancelGoal_Response__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>
+      action_msgs__srv__CancelGoal_Response__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__createPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>
+                      Function(ffi.Size)>>(
+          'action_msgs__srv__CancelGoal_Response__Sequence__create');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__create =
+      _action_msgs__srv__CancelGoal_Response__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> Function(
+              int)>();
+
+  /// Destroy array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Response__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Response__Sequence__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Response__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Response__Sequence__destroy');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__destroy =
+      _action_msgs__srv__CancelGoal_Response__Sequence__destroyPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>)>();
+
+  /// Check for srv/CancelGoal message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__Sequence__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__are_equalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Response__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Response__Sequence__are_equal');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__are_equal =
+      _action_msgs__srv__CancelGoal_Response__Sequence__are_equalPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>)>();
+
+  /// Copy an array of srv/CancelGoal messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Response__Sequence__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Response__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+                  ffi.Pointer<
+                      action_msgs__srv__CancelGoal_Response__Sequence>)>>(
+      'action_msgs__srv__CancelGoal_Response__Sequence__copy');
+  late final _action_msgs__srv__CancelGoal_Response__Sequence__copy =
+      _action_msgs__srv__CancelGoal_Response__Sequence__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Response__Sequence>)>();
+
+  /// Initialize srv/CancelGoal message.
+  /// /**
+  ///  * If the init function is called twice for the same message without
+  ///  * calling fini inbetween previously allocated memory will be leaked.
+  ///  * \param[in,out] msg The previously allocated message pointer.
+  ///  * Fields without a default value will not be initialized by this function.
+  ///  * You might want to call memset(msg, 0, sizeof(
+  ///  * action_msgs__srv__CancelGoal_Event
+  ///  * )) before or use
+  ///  * action_msgs__srv__CancelGoal_Event__create()
+  ///  * to allocate and initialize the message.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__init(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__initPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>>(
+      'action_msgs__srv__CancelGoal_Event__init');
+  late final _action_msgs__srv__CancelGoal_Event__init =
+      _action_msgs__srv__CancelGoal_Event__initPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>();
+
+  /// Finalize srv/CancelGoal message.
+  /// /**
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Event__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__fini(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>>(
+      'action_msgs__srv__CancelGoal_Event__fini');
+  late final _action_msgs__srv__CancelGoal_Event__fini =
+      _action_msgs__srv__CancelGoal_Event__finiPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>();
+
+  /// Create srv/CancelGoal message.
+  /// /**
+  ///  * It allocates the memory for the message, sets the memory to zero, and
+  ///  * calls
+  ///  * action_msgs__srv__CancelGoal_Event__init().
+  ///  * \return The pointer to the initialized message if successful,
+  ///  * otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Event>
+      action_msgs__srv__CancelGoal_Event__create() {
+    return _action_msgs__srv__CancelGoal_Event__create();
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Event>
+              Function()>>('action_msgs__srv__CancelGoal_Event__create');
+  late final _action_msgs__srv__CancelGoal_Event__create =
+      _action_msgs__srv__CancelGoal_Event__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Event> Function()>();
+
+  /// Destroy srv/CancelGoal message.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Event__fini()
+  ///  * and frees the memory of the message.
+  ///  * \param[in,out] msg The allocated message pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Event__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> msg,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__destroy(
+      msg,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__destroyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>>(
+      'action_msgs__srv__CancelGoal_Event__destroy');
+  late final _action_msgs__srv__CancelGoal_Event__destroy =
+      _action_msgs__srv__CancelGoal_Event__destroyPtr.asFunction<
+          void Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>();
+
+  /// Check for srv/CancelGoal message equality.
+  /// /**
+  ///  * \param[in] lhs The message on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message on the right hand size of the equality operator.
+  ///  * \return true if messages are equal, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__are_equalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>>(
+      'action_msgs__srv__CancelGoal_Event__are_equal');
+  late final _action_msgs__srv__CancelGoal_Event__are_equal =
+      _action_msgs__srv__CancelGoal_Event__are_equalPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>();
+
+  /// Copy a srv/CancelGoal message.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source message pointer.
+  ///  * \param[out] output The target message pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer is null
+  ///  *   or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>>(
+      'action_msgs__srv__CancelGoal_Event__copy');
+  late final _action_msgs__srv__CancelGoal_Event__copy =
+      _action_msgs__srv__CancelGoal_Event__copyPtr.asFunction<
+          bool Function(ffi.Pointer<action_msgs__srv__CancelGoal_Event>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event>)>();
+
+  /// Retrieve pointer to the hash of the description of this type.
+  ffi.Pointer<rosidl_type_hash_t>
+      action_msgs__srv__CancelGoal_Event__get_type_hash(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__get_type_hash(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__get_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rosidl_type_hash_t> Function(
+                  ffi.Pointer<rosidl_message_type_support_t>)>>(
+      'action_msgs__srv__CancelGoal_Event__get_type_hash');
+  late final _action_msgs__srv__CancelGoal_Event__get_type_hash =
+      _action_msgs__srv__CancelGoal_Event__get_type_hashPtr.asFunction<
+          ffi.Pointer<rosidl_type_hash_t> Function(
+              ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      action_msgs__srv__CancelGoal_Event__get_type_description(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__get_type_description(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__get_type_descriptionPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeDescription>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Event__get_type_description');
+  late final _action_msgs__srv__CancelGoal_Event__get_type_description =
+      _action_msgs__srv__CancelGoal_Event__get_type_descriptionPtr.asFunction<
+          ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+              Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the single raw source text that defined this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+      action_msgs__srv__CancelGoal_Event__get_individual_type_description_source(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__get_individual_type_description_source(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__get_individual_type_description_sourcePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Event__get_individual_type_description_source');
+  late final _action_msgs__srv__CancelGoal_Event__get_individual_type_description_source =
+      _action_msgs__srv__CancelGoal_Event__get_individual_type_description_sourcePtr
+          .asFunction<
+              ffi.Pointer<rosidl_runtime_c__type_description__TypeSource>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Retrieve pointer to the recursive raw sources that defined the description of this type.
+  ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+      action_msgs__srv__CancelGoal_Event__get_type_description_sources(
+    ffi.Pointer<rosidl_message_type_support_t> type_support,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__get_type_description_sources(
+      type_support,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__get_type_description_sourcesPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<
+                          rosidl_runtime_c__type_description__TypeSource__Sequence>
+                      Function(ffi.Pointer<rosidl_message_type_support_t>)>>(
+          'action_msgs__srv__CancelGoal_Event__get_type_description_sources');
+  late final _action_msgs__srv__CancelGoal_Event__get_type_description_sources =
+      _action_msgs__srv__CancelGoal_Event__get_type_description_sourcesPtr
+          .asFunction<
+              ffi.Pointer<
+                      rosidl_runtime_c__type_description__TypeSource__Sequence>
+                  Function(ffi.Pointer<rosidl_message_type_support_t>)>();
+
+  /// Initialize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the number of elements and calls
+  ///  * action_msgs__srv__CancelGoal_Event__init()
+  ///  * for each element of the array.
+  ///  * \param[in,out] array The allocated array pointer.
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return true if initialization was successful, otherwise false
+  ///  * If the array pointer is valid and the size is zero it is guaranteed
+  ///  # to return true.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__Sequence__init(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> array,
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__init(
+      array,
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__initPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+              ffi.Size)>>('action_msgs__srv__CancelGoal_Event__Sequence__init');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__init =
+      _action_msgs__srv__CancelGoal_Event__Sequence__initPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+              int)>();
+
+  /// Finalize array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Event__fini()
+  ///  * for each element of the array and frees the memory for the number of
+  ///  * elements.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Event__Sequence__fini(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__fini(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__finiPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Void Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>>(
+      'action_msgs__srv__CancelGoal_Event__Sequence__fini');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__fini =
+      _action_msgs__srv__CancelGoal_Event__Sequence__finiPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>();
+
+  /// Create array of srv/CancelGoal messages.
+  /// /**
+  ///  * It allocates the memory for the array and calls
+  ///  * action_msgs__srv__CancelGoal_Event__Sequence__init().
+  ///  * \param[in] size The size / capacity of the array.
+  ///  * \return The pointer to the initialized array if successful, otherwise NULL
+  ///  */
+  ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>
+      action_msgs__srv__CancelGoal_Event__Sequence__create(
+    int size,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__create(
+      size,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__createPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>
+                  Function(ffi.Size)>>(
+      'action_msgs__srv__CancelGoal_Event__Sequence__create');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__create =
+      _action_msgs__srv__CancelGoal_Event__Sequence__createPtr.asFunction<
+          ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> Function(
+              int)>();
+
+  /// Destroy array of srv/CancelGoal messages.
+  /// /**
+  ///  * It calls
+  ///  * action_msgs__srv__CancelGoal_Event__Sequence__fini()
+  ///  * on the array,
+  ///  * and frees the memory of the array.
+  ///  * \param[in,out] array The initialized array pointer.
+  ///  */
+  void action_msgs__srv__CancelGoal_Event__Sequence__destroy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> array,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__destroy(
+      array,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__destroyPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Void Function(
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Event__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Event__Sequence__destroy');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__destroy =
+      _action_msgs__srv__CancelGoal_Event__Sequence__destroyPtr.asFunction<
+          void Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>();
+
+  /// Check for srv/CancelGoal message array equality.
+  /// /**
+  ///  * \param[in] lhs The message array on the left hand size of the equality operator.
+  ///  * \param[in] rhs The message array on the right hand size of the equality operator.
+  ///  * \return true if message arrays are equal in size and content, otherwise false.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__Sequence__are_equal(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> lhs,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> rhs,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__are_equal(
+      lhs,
+      rhs,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__are_equalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(
+                      ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+                      ffi.Pointer<
+                          action_msgs__srv__CancelGoal_Event__Sequence>)>>(
+          'action_msgs__srv__CancelGoal_Event__Sequence__are_equal');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__are_equal =
+      _action_msgs__srv__CancelGoal_Event__Sequence__are_equalPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>();
+
+  /// Copy an array of srv/CancelGoal messages.
+  /// /**
+  ///  * This functions performs a deep copy, as opposed to the shallow copy that
+  ///  * plain assignment yields.
+  ///  *
+  ///  * \param[in] input The source array pointer.
+  ///  * \param[out] output The target array pointer, which must
+  ///  *   have been initialized before calling this function.
+  ///  * \return true if successful, or false if either pointer
+  ///  *   is null or memory allocation fails.
+  ///  */
+  bool action_msgs__srv__CancelGoal_Event__Sequence__copy(
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> input,
+    ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence> output,
+  ) {
+    return _action_msgs__srv__CancelGoal_Event__Sequence__copy(
+      input,
+      output,
+    );
+  }
+
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__copyPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+                  ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>>(
+      'action_msgs__srv__CancelGoal_Event__Sequence__copy');
+  late final _action_msgs__srv__CancelGoal_Event__Sequence__copy =
+      _action_msgs__srv__CancelGoal_Event__Sequence__copyPtr.asFunction<
+          bool Function(
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>,
+              ffi.Pointer<action_msgs__srv__CancelGoal_Event__Sequence>)>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_RequestPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_RequestPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_ResponsePtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_ResponsePtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_message_type_support_t>
+      rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event() {
+    return _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event();
+  }
+
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_EventPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_message_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event');
+  late final _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event =
+      _rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_EventPtr
+          .asFunction<ffi.Pointer<rosidl_message_type_support_t> Function()>();
+
+  /// Forward declare the get type support functions for this type.
+  ffi.Pointer<rosidl_service_type_support_t>
+      rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal() {
+    return _rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal();
+  }
+
+  late final _rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<rosidl_service_type_support_t> Function()>>(
+          'rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal');
+  late final _rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal =
+      _rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoalPtr
+          .asFunction<ffi.Pointer<rosidl_service_type_support_t> Function()>();
+
+  /// Forward declare the function to create a service event message for this type.
+  ffi.Pointer<ffi.Void>
+      rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal(
+    ffi.Pointer<rosidl_service_introspection_info_t> info,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<ffi.Void> request_message,
+    ffi.Pointer<ffi.Void> response_message,
+  ) {
+    return _rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal(
+      info,
+      allocator,
+      request_message,
+      response_message,
+    );
+  }
+
+  late final _rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Pointer<ffi.Void> Function(
+                      ffi.Pointer<rosidl_service_introspection_info_t>,
+                      ffi.Pointer<rcutils_allocator_t>,
+                      ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<ffi.Void>)>>(
+          'rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal');
+  late final _rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal =
+      _rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoalPtr
+          .asFunction<
+              ffi.Pointer<ffi.Void> Function(
+                  ffi.Pointer<rosidl_service_introspection_info_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<ffi.Void>,
+                  ffi.Pointer<ffi.Void>)>();
+
+  /// Forward declare the function to destroy a service event message for this type.
+  bool
+      rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal(
+    ffi.Pointer<ffi.Void> event_msg,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal(
+      event_msg,
+      allocator,
+    );
+  }
+
+  late final _rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoalPtr =
+      _lookup<
+              ffi.NativeFunction<
+                  ffi.Bool Function(ffi.Pointer<ffi.Void>,
+                      ffi.Pointer<rcutils_allocator_t>)>>(
+          'rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal');
+  late final _rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal =
+      _rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoalPtr
+          .asFunction<
+              bool Function(
+                  ffi.Pointer<ffi.Void>, ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// User friendly error messages for invalid trasntions
+  /// Description variables in types.c should be changed if enum values change
+  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>
+      _goal_state_descriptions =
+      _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('goal_state_descriptions');
+
+  ffi.Pointer<ffi.Pointer<ffi.Char>> get goal_state_descriptions =>
+      _goal_state_descriptions.value;
+
+  set goal_state_descriptions(ffi.Pointer<ffi.Pointer<ffi.Char>> value) =>
+      _goal_state_descriptions.value = value;
+
+  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>
+      _goal_event_descriptions =
+      _lookup<ffi.Pointer<ffi.Pointer<ffi.Char>>>('goal_event_descriptions');
+
+  ffi.Pointer<ffi.Pointer<ffi.Char>> get goal_event_descriptions =>
+      _goal_event_descriptions.value;
+
+  set goal_event_descriptions(ffi.Pointer<ffi.Pointer<ffi.Char>> value) =>
+      _goal_event_descriptions.value = value;
+
+  /// Return a rcl_action_goal_info_t with members set to zero values.
+  rcl_action_goal_info_t rcl_action_get_zero_initialized_goal_info() {
+    return _rcl_action_get_zero_initialized_goal_info();
+  }
+
+  late final _rcl_action_get_zero_initialized_goal_infoPtr =
+      _lookup<ffi.NativeFunction<rcl_action_goal_info_t Function()>>(
+          'rcl_action_get_zero_initialized_goal_info');
+  late final _rcl_action_get_zero_initialized_goal_info =
+      _rcl_action_get_zero_initialized_goal_infoPtr
+          .asFunction<rcl_action_goal_info_t Function()>();
+
+  /// Return a rcl_action_goal_status_array_t with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_goal_status_array_t before passing to
+  ///  * rcl_action_server_get_goal_status_array().
+  ///  */
+  rcl_action_goal_status_array_t
+      rcl_action_get_zero_initialized_goal_status_array() {
+    return _rcl_action_get_zero_initialized_goal_status_array();
+  }
+
+  late final _rcl_action_get_zero_initialized_goal_status_arrayPtr =
+      _lookup<ffi.NativeFunction<rcl_action_goal_status_array_t Function()>>(
+          'rcl_action_get_zero_initialized_goal_status_array');
+  late final _rcl_action_get_zero_initialized_goal_status_array =
+      _rcl_action_get_zero_initialized_goal_status_arrayPtr
+          .asFunction<rcl_action_goal_status_array_t Function()>();
+
+  /// Return a rcl_action_cancel_request_t with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_cancel_request_t before passing to
+  ///  *
+  ///  * rcl_action_cancel_request_init().
+  ///  */
+  rcl_action_cancel_request_t rcl_action_get_zero_initialized_cancel_request() {
+    return _rcl_action_get_zero_initialized_cancel_request();
+  }
+
+  late final _rcl_action_get_zero_initialized_cancel_requestPtr =
+      _lookup<ffi.NativeFunction<rcl_action_cancel_request_t Function()>>(
+          'rcl_action_get_zero_initialized_cancel_request');
+  late final _rcl_action_get_zero_initialized_cancel_request =
+      _rcl_action_get_zero_initialized_cancel_requestPtr
+          .asFunction<rcl_action_cancel_request_t Function()>();
+
+  /// Return a rcl_action_cancel_response_t with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_cancel_response_t before passing to
+  ///  * rcl_action_cancel_response_init().
+  ///  */
+  rcl_action_cancel_response_t
+      rcl_action_get_zero_initialized_cancel_response() {
+    return _rcl_action_get_zero_initialized_cancel_response();
+  }
+
+  late final _rcl_action_get_zero_initialized_cancel_responsePtr =
+      _lookup<ffi.NativeFunction<rcl_action_cancel_response_t Function()>>(
+          'rcl_action_get_zero_initialized_cancel_response');
+  late final _rcl_action_get_zero_initialized_cancel_response =
+      _rcl_action_get_zero_initialized_cancel_responsePtr
+          .asFunction<rcl_action_cancel_response_t Function()>();
+
+  /// Initialize a rcl_action_goal_status_array_t.
+  /// /**
+  ///  * After calling this function on a rcl_action_goal_status_array_t, it can be populated
+  ///  * and used to get and send status array messages with an action server using
+  ///  * rcl_action_get_goal_status_array() and rcl_action_publish_status() respectively.
+  ///  *
+  ///  * Example usage:
+  ///  *
+  ///  * ```c
+  ///  * #include <rcl/rcl.h>
+  ///  * #include <rcl_action/rcl_action.h>
+  ///  *
+  ///  * rcl_action_goal_status_array_t goal_status_array =
+  ///  *   rcl_action_get_zero_initialized_goal_status_array();
+  ///  * size_t num_status = 42;
+  ///  * ret = rcl_action_goal_status_array_init(
+  ///  *   &goal_status_array,
+  ///  *   num_status,
+  ///  *   rcl_get_default_allocator());
+  ///  * // ... error handling, and when done with message, finalize
+  ///  * ret = rcl_action_goal_status_array_fini(&goal_status_array, rcl_get_default_allocator());
+  ///  * // ... error handling
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] status_array a preallocated, zero-initialized, goal status array message
+  ///  *   to be initialized.
+  ///  * \param[in] num_status the number of status messages to allocate space for.
+  ///  *   Must be greater than zero
+  ///  * \param[in] allocator a valid allocator
+  ///  * \return `RCL_RET_OK` if cancel response was initialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ALREADY_INIT` if the status array has already been initialized, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_goal_status_array_init(
+    ffi.Pointer<rcl_action_goal_status_array_t> status_array,
+    int num_status,
+    rcl_allocator_t allocator,
+  ) {
+    return _rcl_action_goal_status_array_init(
+      status_array,
+      num_status,
+      allocator,
+    );
+  }
+
+  late final _rcl_action_goal_status_array_initPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_goal_status_array_t>,
+              ffi.Size, rcl_allocator_t)>>('rcl_action_goal_status_array_init');
+  late final _rcl_action_goal_status_array_init =
+      _rcl_action_goal_status_array_initPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_status_array_t>, int,
+              rcl_allocator_t)>();
+
+  /// Finalize a rcl_action_goal_status_array_t.
+  /// /**
+  ///  * After calling, the goal status array message will no longer be valid.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] status_array the goal status array message to be deinitialized
+  ///  * \return `RCL_RET_OK` if the goal status array was deinitialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_goal_status_array_fini(
+    ffi.Pointer<rcl_action_goal_status_array_t> status_array,
+  ) {
+    return _rcl_action_goal_status_array_fini(
+      status_array,
+    );
+  }
+
+  late final _rcl_action_goal_status_array_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_goal_status_array_t>)>>(
+      'rcl_action_goal_status_array_fini');
+  late final _rcl_action_goal_status_array_fini =
+      _rcl_action_goal_status_array_finiPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_status_array_t>)>();
+
+  /// Initialize a rcl_action_cancel_response_t.
+  /// /**
+  ///  * After calling this function on a rcl_action_cancel_response_t, it can be populated
+  ///  * and used to process cancel requests with an action server using
+  ///  * rcl_action_process_cancel_request().
+  ///  *
+  ///  * Example usage:
+  ///  *
+  ///  * ```c
+  ///  * #include <rcl/rcl.h>
+  ///  * #include <rcl_action/rcl_action.h>
+  ///  *
+  ///  * rcl_action_cancel_response_t cancel_response =
+  ///  *   rcl_action_get_zero_initialized_cancel_response();
+  ///  * size_t num_goals_canceling = 10;
+  ///  * ret = rcl_action_cancel_response_init(
+  ///  *   &cancel_response,
+  ///  *   num_goals_canceling,
+  ///  *   rcl_get_default_allocator());
+  ///  * // ... error handling, and when done processing response, finalize
+  ///  * ret = rcl_action_cancel_response_fini(&cancel_response, rcl_get_default_allocator());
+  ///  * // ... error handling
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] cancel_response a preallocated, zero-initialized, cancel response message
+  ///  *   to be initialized.
+  ///  * \param[in] num_goals_canceling the number of goals that are canceling to add to the response
+  ///  *   Must be greater than zero
+  ///  * \param[in] allocator a valid allocator
+  ///  * \return `RCL_RET_OK` if cancel response was initialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ALREADY_INIT` if the cancel response has already been initialized, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_cancel_response_init(
+    ffi.Pointer<rcl_action_cancel_response_t> cancel_response,
+    int num_goals_canceling,
+    rcl_allocator_t allocator,
+  ) {
+    return _rcl_action_cancel_response_init(
+      cancel_response,
+      num_goals_canceling,
+      allocator,
+    );
+  }
+
+  late final _rcl_action_cancel_response_initPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_cancel_response_t>,
+              ffi.Size, rcl_allocator_t)>>('rcl_action_cancel_response_init');
+  late final _rcl_action_cancel_response_init =
+      _rcl_action_cancel_response_initPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_cancel_response_t>, int,
+              rcl_allocator_t)>();
+
+  /// Finalize a rcl_action_cancel_response_t.
+  /// /**
+  ///  * After calling, the cancel response message will no longer be valid.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] cancel_response the cancel response message to be deinitialized
+  ///  * \return `RCL_RET_OK` if the cancel response was deinitialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_cancel_response_fini(
+    ffi.Pointer<rcl_action_cancel_response_t> cancel_response,
+  ) {
+    return _rcl_action_cancel_response_fini(
+      cancel_response,
+    );
+  }
+
+  late final _rcl_action_cancel_response_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_cancel_response_t>)>>(
+      'rcl_action_cancel_response_fini');
+  late final _rcl_action_cancel_response_fini =
+      _rcl_action_cancel_response_finiPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_cancel_response_t>)>();
+
+  /// Return a rcl_action_client_t struct with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_client_t before passing to
+  ///  * rcl_action_client_init().
+  ///  */
+  rcl_action_client_t rcl_action_get_zero_initialized_client() {
+    return _rcl_action_get_zero_initialized_client();
+  }
+
+  late final _rcl_action_get_zero_initialized_clientPtr =
+      _lookup<ffi.NativeFunction<rcl_action_client_t Function()>>(
+          'rcl_action_get_zero_initialized_client');
+  late final _rcl_action_get_zero_initialized_client =
+      _rcl_action_get_zero_initialized_clientPtr
+          .asFunction<rcl_action_client_t Function()>();
+
+  /// Initialize a rcl_action_client_t.
+  /// /**
+  ///  * After calling this function on a rcl_action_client_t, it can be used to send
+  ///  * goals of the given type to the given topic using rcl_action_send_goal_request().
+  ///  * If a goal request is sent to a (possibly remote) server and if the server
+  ///  * sends a response, the client can access the response with
+  ///  * rcl_take_goal_response() once the response is available.
+  ///  *
+  ///  * After a goal request has been accepted, the rcl_action_client_t associated with the
+  ///  * goal can perform the following operations:
+  ///  *
+  ///  * - Send a request for the result with rcl_action_send_result_request().
+  ///  * If the server sends a response when the goal terminates, the result can be accessed
+  ///  * with rcl_action_take_result_response(), once the response is available.
+  ///  * - Send a cancel request for the goal with rcl_action_send_cancel_request().
+  ///  * If the server sends a response to a cancel request, the client can access the
+  ///  * response with rcl_action_take_cancel_response() once the response is available.
+  ///  * - Take feedback about the goal with rcl_action_take_feedback().
+  ///  *
+  ///  * A rcl_action_client_t can be used to access the current status of all accepted goals
+  ///  * communicated by the action server with rcl_action_take_status().
+  ///  *
+  ///  * The given rcl_node_t must be valid and the resulting rcl_action_client_t is
+  ///  * only valid as long as the given rcl_node_t remains valid.
+  ///  *
+  ///  * The rosidl_action_type_support_t is obtained on a per .action type basis.
+  ///  * When the user defines a ROS action, code is generated which provides the
+  ///  * required rosidl_action_type_support_t object.
+  ///  * This object can be obtained using a language appropriate mechanism.
+  ///  *
+  ///  * \todo TODO(jacobperron) write these instructions once and link to it instead
+  ///  *
+  ///  * For C, a macro can be used (for example `example_interfaces/Fibonacci`):
+  ///  *
+  ///  * ```c
+  ///  * #include <rosidl_runtime_c/action_type_support_struct.h>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   ROSIDL_GET_ACTION_TYPE_SUPPORT(example_interfaces, Fibonacci);
+  ///  * ```
+  ///  *
+  ///  * For C++, a template function is used:
+  ///  *
+  ///  * ```cpp
+  ///  * #include <rosidl_runtime_cpp/action_type_support.hpp>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  * using rosidl_typesupport_cpp::get_action_type_support_handle;
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   get_action_type_support_handle<example_interfaces::action::Fibonacci>();
+  ///  * ```
+  ///  *
+  ///  * The rosidl_action_type_support_t object contains action type specific
+  ///  * information used to send or take goals, results, and feedback.
+  ///  *
+  ///  * The topic name must be a c string that follows the topic and service name
+  ///  * format rules for unexpanded names, also known as non-fully qualified names:
+  ///  *
+  ///  * \see rcl_expand_topic_name
+  ///  *
+  ///  * The options struct allows the user to set the quality of service settings as
+  ///  * well as a custom allocator that is used when initializing/finalizing the
+  ///  * client to allocate space for incidentals, e.g. the action client name string.
+  ///  *
+  ///  * Expected usage (for C action clients):
+  ///  *
+  ///  * ```c
+  ///  * #include <rcl/rcl.h>
+  ///  * #include <rcl_action/action_client.h>
+  ///  * #include <rosidl_runtime_c/action_type_support_struct.h>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  *
+  ///  * rcl_node_t node = rcl_get_zero_initialized_node();
+  ///  * rcl_node_options_t node_ops = rcl_node_get_default_options();
+  ///  * rcl_ret_t ret = rcl_node_init(&node, "node_name", "/my_namespace", &node_ops);
+  ///  * // ... error handling
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   ROSIDL_GET_ACTION_TYPE_SUPPORT(example_interfaces, Fibonacci);
+  ///  * rcl_action_client_t action_client = rcl_action_get_zero_initialized_client();
+  ///  * rcl_action_client_options_t action_client_ops = rcl_action_client_get_default_options();
+  ///  * ret = rcl_action_client_init(&action_client, &node, ts, "fibonacci", &action_client_ops);
+  ///  * // ... error handling, and on shutdown do finalization:
+  ///  * ret = rcl_action_client_fini(&action_client, &node);
+  ///  * // ... error handling for rcl_action_client_fini()
+  ///  * ret = rcl_node_fini(&node);
+  ///  * // ... error handling for rcl_node_fini()
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] action_client a preallocated, zero-initialized action client structure
+  ///  *   to be initialized
+  ///  * \param[in] node valid rcl node handle
+  ///  * \param[in] type_support type support object for the action's type
+  ///  * \param[in] action_name the name of the action
+  ///  * \param[in] options action_client options, including quality of service settings
+  ///  * \return `RCL_RET_OK` if action_client was initialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_ALREADY_INIT` if the action client is already initialized, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_NAME_INVALID` if the given action name is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_client_init(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rosidl_action_type_support_t> type_support,
+    ffi.Pointer<ffi.Char> action_name,
+    ffi.Pointer<rcl_action_client_options_t> options,
+  ) {
+    return _rcl_action_client_init(
+      action_client,
+      node,
+      type_support,
+      action_name,
+      options,
+    );
+  }
+
+  late final _rcl_action_client_initPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_action_client_t>,
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rosidl_action_type_support_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_action_client_options_t>)>>(
+      'rcl_action_client_init');
+  late final _rcl_action_client_init = _rcl_action_client_initPtr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_action_client_t>,
+          ffi.Pointer<rcl_node_t>,
+          ffi.Pointer<rosidl_action_type_support_t>,
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<rcl_action_client_options_t>)>();
+
+  /// Finalize a rcl_action_client_t.
+  /// /**
+  ///  * After calling, the node will no longer listen for goals for this action client
+  ///  * (assuming this is the only action client of this type in this node).
+  ///  *
+  ///  * After calling, calls to rcl_wait(), rcl_action_send_goal_request(),
+  ///  * rcl_action_take_goal_response(), rcl_action_send_cancel_request(),
+  ///  * rcl_action_take_cancel_response(), rcl_action_send_result_request(),
+  ///  * rcl_action_take_result_response(), rcl_action_take_feedback(), and
+  ///  * rcl_action_take_status(), will fail when using this action client.
+  ///  *
+  ///  * Additionally, rcl_wait() will be interrupted if currently blocking.
+  ///  *
+  ///  * The given node handle is still valid.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] action_client handle to the action_client to be deinitialized
+  ///  * \param[in] node handle to the node used to create the action client
+  ///  * \return `RCL_RET_OK` if the action client was deinitialized successfully, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_client_fini(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<rcl_node_t> node,
+  ) {
+    return _rcl_action_client_fini(
+      action_client,
+      node,
+    );
+  }
+
+  late final _rcl_action_client_finiPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rcl_node_t>)>>('rcl_action_client_fini');
+  late final _rcl_action_client_fini = _rcl_action_client_finiPtr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_action_client_t>, ffi.Pointer<rcl_node_t>)>();
+
+  /// Return the default action client options in a rcl_action_client_options_t.
+  /// /**
+  ///  * The defaults are:
+  ///  *
+  ///  * - goal_service_qos = rmw_qos_profile_services_default;
+  ///  * - result_service_qos = rmw_qos_profile_services_default;
+  ///  * - cancel_service_qos = rmw_qos_profile_services_default;
+  ///  * - feedback_topic_qos = rmw_qos_profile_default;
+  ///  * - status_topic_qos = rcl_action_qos_profile_status_default;
+  ///  * - allocator = rcl_get_default_allocator()
+  ///  */
+  rcl_action_client_options_t rcl_action_client_get_default_options() {
+    return _rcl_action_client_get_default_options();
+  }
+
+  late final _rcl_action_client_get_default_optionsPtr =
+      _lookup<ffi.NativeFunction<rcl_action_client_options_t Function()>>(
+          'rcl_action_client_get_default_options');
+  late final _rcl_action_client_get_default_options =
+      _rcl_action_client_get_default_optionsPtr
+          .asFunction<rcl_action_client_options_t Function()>();
+
+  /// Check if an action server is available for the given action client.
+  /// /**
+  ///  * This function will return true for is_available if there is an action server
+  ///  * available for the given action client.
+  ///  *
+  ///  * The node parameter must not be `NULL`, and must point to a valid node.
+  ///  *
+  ///  * The client parameter must not be `NULL`, and must point to a valid client.
+  ///  *
+  ///  * The given client and node must match, i.e. the client must have been created
+  ///  * using the given node.
+  ///  *
+  ///  * The is_available parameter must not be `NULL`, and must point a bool variable.
+  ///  * The result of the check will be stored in the is_available parameter.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] client the handle to the action client being queried
+  ///  * \param[out] is_available set to true if there is an action server available, else false
+  ///  * \return `RCL_RET_OK` if successful (regardless of the action server availability), or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_server_is_available(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_action_client_t> client,
+    ffi.Pointer<ffi.Bool> is_available,
+  ) {
+    return _rcl_action_server_is_available(
+      node,
+      client,
+      is_available,
+    );
+  }
+
+  late final _rcl_action_server_is_availablePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Bool>)>>('rcl_action_server_is_available');
+  late final _rcl_action_server_is_available =
+      _rcl_action_server_is_availablePtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Bool>)>();
+
+  /// Send a ROS goal using a rcl_action_client_t.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_goal_request`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * The ROS goal message given by the `ros_goal_request` void pointer is always
+  ///  * owned by the calling code, but should remain constant during execution of this
+  ///  * function. i.e. The message cannot change during the rcl_action_send_goal_request() call.
+  ///  * Before calling rcl_action_send_goal_request() the message can change but after calling
+  ///  * rcl_action_send_goal_request() it depends on RMW implementation behavior.
+  ///  * The same `ros_goal_request` can be passed to multiple calls of this function
+  ///  * simultaneously, even if the action clients differ.
+  ///  *
+  ///  * This function is thread safe so long as access to both the rcl_action_client_t
+  ///  * and the `ros_goal_request` are synchronized.
+  ///  * That means that calling rcl_action_send_goal_request() from multiple threads is allowed,
+  ///  * but calling rcl_action_send_goal_request() at the same time as non-thread safe action
+  ///  * client functions is not, e.g. calling rcl_action_send_goal_request() and
+  ///  * rcl_action_client_fini() concurrently is not allowed.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes [1]
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] for unique pairs of clients and goals, see above for more</i>
+  ///  *
+  ///  * \param[in] action_client handle to the client that will make the goal request
+  ///  * \param[in] ros_goal_request pointer to the ROS goal message
+  ///  * \param[out] sequence_number pointer to the goal request sequence number
+  ///  * \return `RCL_RET_OK` if the request was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_goal_request(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Void> ros_goal_request,
+    ffi.Pointer<ffi.Int64> sequence_number,
+  ) {
+    return _rcl_action_send_goal_request(
+      action_client,
+      ros_goal_request,
+      sequence_number,
+    );
+  }
+
+  late final _rcl_action_send_goal_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>>('rcl_action_send_goal_request');
+  late final _rcl_action_send_goal_request =
+      _rcl_action_send_goal_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>();
+
+  /// Take a response for a goal request from an action server using a rcl_action_client_t.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_goal_response`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * The caller must provide a pointer to an allocated message for the `ros_goal_response`.
+  ///  * If the take is successful, this function will populate the fields of `ros_goal_response`.
+  ///  * The ROS message given by the `ros_goal_response` void pointer is always
+  ///  * owned by the calling code, but should remain constant during execution of this
+  ///  * function. i.e. The message cannot change during the rcl_action_send_goal_response() call.
+  ///  * Before calling rcl_action_send_goal_response() the message can change but after calling
+  ///  * rcl_action_send_goal_response() it depends on RMW implementation behavior.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client handle to the client that will take the goal response
+  ///  * \param[out] response_header pointer to the goal response header
+  ///  * \param[out] ros_goal_response pointer to the response of a goal request
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_goal_response(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_goal_response,
+  ) {
+    return _rcl_action_take_goal_response(
+      action_client,
+      response_header,
+      ros_goal_response,
+    );
+  }
+
+  late final _rcl_action_take_goal_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_goal_response');
+  late final _rcl_action_take_goal_response =
+      _rcl_action_take_goal_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Take a ROS feedback message for an active goal associated with a rcl_action_client_t.
+  /// /**
+  ///  * The caller is responsible for ensuring that the type of `ros_feedback`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * `ros_feedback` should point to a preallocated ROS message struct of the
+  ///  * correct type.
+  ///  * If feedback is successfully taken, the feedback message is copied to into the
+  ///  * `ros_feedback` struct.
+  ///  *
+  ///  * If allocation is required when taking the feedback, e.g. if space needs to
+  ///  * be allocated for a dynamically sized array in the target message, then the
+  ///  * allocator given in the action client options is used.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Maybe [1]
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] only if required when filling the feedback message, avoided for fixed sizes</i>
+  ///  *
+  ///  * \param[in] action_client handle to the client that will take action feedback
+  ///  * \param[out] ros_feedback pointer to the ROS feedback message.
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_feedback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Void> ros_feedback,
+  ) {
+    return _rcl_action_take_feedback(
+      action_client,
+      ros_feedback,
+    );
+  }
+
+  late final _rcl_action_take_feedbackPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_feedback');
+  late final _rcl_action_take_feedback =
+      _rcl_action_take_feedbackPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Take a ROS status message using a rcl_action_client_t.
+  /// /**
+  ///  * The caller is responsible for ensuring that the type of `ros_status_array`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for allocating the `ros_status_array` struct with a
+  ///  * zero-initialization (the internal array should not be allocated).
+  ///  * If there is a successful take, then `ros_status_array` is populated
+  ///  * with the allocator given in the action client options.
+  ///  * It is the callers responsibility to deallocate the `ros_status_array` struct using
+  ///  * the allocator given in the action client options.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client handle to the client that will take status message
+  ///  * \param[out] ros_status_array pointer to ROS aciton_msgs/StatusArray message that
+  ///  *   will be populated with information about goals that have accepted the cancel request.
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_status(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Void> ros_status_array,
+  ) {
+    return _rcl_action_take_status(
+      action_client,
+      ros_status_array,
+    );
+  }
+
+  late final _rcl_action_take_statusPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_status');
+  late final _rcl_action_take_status = _rcl_action_take_statusPtr.asFunction<
+      int Function(ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Send a request for the result of a completed goal associated with a rcl_action_client_t.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_result_request`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * The ROS message given by the `ros_result_request` void pointer is always
+  ///  * owned by the calling code, but should remain constant during execution of this
+  ///  * function. i.e. The message cannot change during the rcl_action_send_result_request() call.
+  ///  * Before calling rcl_action_send_result_request() the message can change but after calling
+  ///  * rcl_action_send_result_request() it depends on RMW implementation behavior.
+  ///  * The same `ros_result_request` can be passed to multiple calls of this function
+  ///  * simultaneously, even if the action clients differ.
+  ///  *
+  ///  * This function is thread safe so long as access to both the rcl_action_client_t
+  ///  * and the `ros_result_request` are synchronized.
+  ///  * That means that calling rcl_action_send_result_request() from multiple threads is allowed,
+  ///  * but calling rcl_action_send_result_request() at the same time as non-thread safe action
+  ///  * client functions is not, e.g. calling rcl_action_send_result_request() and
+  ///  * rcl_action_client_fini() concurrently is not allowed.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes [1]
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] for unique pairs of clients and result requests, see above for more</i>
+  ///
+  ///  * \param[in] action_client handle to the client that will send the result request
+  ///  * \param[in] ros_result_request pointer to a ROS result request message
+  ///  * \param[out] sequence_number pointer to the result request sequence number
+  ///  * \return `RCL_RET_OK` if the request was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_result_request(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Void> ros_result_request,
+    ffi.Pointer<ffi.Int64> sequence_number,
+  ) {
+    return _rcl_action_send_result_request(
+      action_client,
+      ros_result_request,
+      sequence_number,
+    );
+  }
+
+  late final _rcl_action_send_result_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>>('rcl_action_send_result_request');
+  late final _rcl_action_send_result_request =
+      _rcl_action_send_result_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>();
+
+  /// Take a ROS result message for a completed goal associated with a rcl_action_client_t.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_result_response`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * The caller must provide a pointer to an allocated message for the `ros_result_response`.
+  ///  * If the take is successful, this function will populate the fields of `ros_result_response`.
+  ///  * The ROS message given by the `ros_result_response` void pointer is always
+  ///  * owned by the calling code, but should remain constant during execution of this
+  ///  * function. i.e. The message cannot change during the rcl_action_take_result_response() call.
+  ///  * Before calling rcl_action_take_result_response() the message can change but after calling
+  ///  * rcl_action_take_result_response() it depends on RMW implementation behavior.
+  ///  *
+  ///  * If allocation is required when taking the result, e.g. if space needs to
+  ///  * be allocated for a dynamically sized array in the target message, then the
+  ///  * allocator given in the action client options is used.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Maybe [1]
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] only if required when filling the result response message, avoided for fixed sizes</i>
+  ///  *
+  ///  * \param[in] action_client handle to the client that will take the result response
+  ///  * \param[out] response_header pointer to the result response header
+  ///  * \param[out] ros_result preallocated, zero-initialized, struct where the ROS
+  ///  *   result message is copied.
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_result_response(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_result,
+  ) {
+    return _rcl_action_take_result_response(
+      action_client,
+      response_header,
+      ros_result,
+    );
+  }
+
+  late final _rcl_action_take_result_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_result_response');
+  late final _rcl_action_take_result_response =
+      _rcl_action_take_result_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Send a cancel request for a goal using a rcl_action_client_t.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_cancel_request`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * The following cancel policy applies based on the goal ID and the timestamp provided
+  ///  * by the `ros_cancel_request` message:
+  ///  *
+  ///  * - If the goal ID is zero and timestamp is zero, cancel all goals.
+  ///  * - If the goal ID is zero and timestamp is not zero, cancel all goals accepted
+  ///  *   at or before the timestamp.
+  ///  * - If the goal ID is not zero and timestamp is zero, cancel the goal with the
+  ///  *   given ID regardless of the time it was accepted.
+  ///  * - If the goal ID is not zero and timestamp is not zero, cancel the goal with the
+  ///  *   given ID and all goals accepted at or before the timestamp.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client handle to the client that will make the cancel request
+  ///  * \param[in] ros_cancel_request pointer the ROS cancel request message
+  ///  * \param[out] sequence_number pointer to the cancel request sequence number
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_cancel_request(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Void> ros_cancel_request,
+    ffi.Pointer<ffi.Int64> sequence_number,
+  ) {
+    return _rcl_action_send_cancel_request(
+      action_client,
+      ros_cancel_request,
+      sequence_number,
+    );
+  }
+
+  late final _rcl_action_send_cancel_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>>('rcl_action_send_cancel_request');
+  late final _rcl_action_send_cancel_request =
+      _rcl_action_send_cancel_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, ffi.Pointer<ffi.Void>,
+              ffi.Pointer<ffi.Int64>)>();
+
+  /// Take a cancel response using a rcl_action_client_t.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_cancel_response`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///
+  ///  * The caller is responsible for allocating the `ros_cancel_response` message
+  ///  * with a zero-initialization (the internal array should not be allocated).
+  ///  * If a successful response is taken, then `ros_cancel_response` is populated
+  ///  * using the allocator given in the action client options.
+  ///  * It is the callers responsibility to deallocate `ros_cancel_response` using
+  ///  * the allocator given in the action client options.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client handle to the client that will take the cancel response
+  ///  * \param[out] response_header pointer to the cancel response header
+  ///  * \param[out] ros_cancel_response a zero-initialized ROS cancel response message where
+  ///  *   the cancel response is copied.
+  ///  * \return `RCL_RET_OK` if the response was taken successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_cancel_response(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_cancel_response,
+  ) {
+    return _rcl_action_take_cancel_response(
+      action_client,
+      response_header,
+      ros_cancel_response,
+    );
+  }
+
+  late final _rcl_action_take_cancel_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_cancel_response');
+  late final _rcl_action_take_cancel_response =
+      _rcl_action_take_cancel_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Get the name of the action for a rcl_action_client_t.
+  /// /**
+  ///  * This function returns the action client's name string.
+  ///  * This function can fail, and therefore return `NULL`, if the:
+  ///  *   - action client is `NULL`
+  ///  *   - action client is invalid (never called init, called fini, or invalid)
+  ///  *
+  ///  * The returned string is only valid as long as the action client is valid.
+  ///  * The value of the string may change if the topic name changes, and therefore
+  ///  * copying the string is recommended if this is a concern.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client the pointer to the action client
+  ///  * \return name string if successful, otherwise `NULL`
+  ///  */
+  ffi.Pointer<ffi.Char> rcl_action_client_get_action_name(
+    ffi.Pointer<rcl_action_client_t> action_client,
+  ) {
+    return _rcl_action_client_get_action_name(
+      action_client,
+    );
+  }
+
+  late final _rcl_action_client_get_action_namePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Pointer<rcl_action_client_t>)>>(
+      'rcl_action_client_get_action_name');
+  late final _rcl_action_client_get_action_name =
+      _rcl_action_client_get_action_namePtr.asFunction<
+          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rcl_action_client_t>)>();
+
+  /// Return the options for a rcl_action_client_t.
+  /// /**
+  ///  * This function returns the action client's internal options struct.
+  ///  * This function can fail, and therefore return `NULL`, if the:
+  ///  *   - action client is `NULL`
+  ///  *   - action client is invalid (never called init, called fini, or invalid)
+  ///  *
+  ///  * The returned struct is only valid as long as the action client is valid.
+  ///  * The values in the struct may change if the action client's options change,
+  ///  * and therefore copying the struct is recommended if this is a concern.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client pointer to the action client
+  ///  * \return options struct if successful, otherwise `NULL`
+  ///  */
+  ffi.Pointer<rcl_action_client_options_t> rcl_action_client_get_options(
+    ffi.Pointer<rcl_action_client_t> action_client,
+  ) {
+    return _rcl_action_client_get_options(
+      action_client,
+    );
+  }
+
+  late final _rcl_action_client_get_optionsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rcl_action_client_options_t> Function(
+                  ffi.Pointer<rcl_action_client_t>)>>(
+      'rcl_action_client_get_options');
+  late final _rcl_action_client_get_options =
+      _rcl_action_client_get_optionsPtr.asFunction<
+          ffi.Pointer<rcl_action_client_options_t> Function(
+              ffi.Pointer<rcl_action_client_t>)>();
+
+  /// Check that a rcl_action_client_t is valid.
+  /// /**
+  ///  * The bool returned is `false` if `action_client` is invalid.
+  ///  * The bool returned is `true` otherwise.
+  ///  * In the case where `false` is to be returned, an error message is set.
+  ///  * This function cannot fail.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client pointer to the rcl action client
+  ///  * \return `true` if `action_client` is valid, otherwise `false`
+  ///  */
+  bool rcl_action_client_is_valid(
+    ffi.Pointer<rcl_action_client_t> action_client,
+  ) {
+    return _rcl_action_client_is_valid(
+      action_client,
+    );
+  }
+
+  late final _rcl_action_client_is_validPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Bool Function(ffi.Pointer<rcl_action_client_t>)>>(
+      'rcl_action_client_is_valid');
+  late final _rcl_action_client_is_valid = _rcl_action_client_is_validPtr
+      .asFunction<bool Function(ffi.Pointer<rcl_action_client_t>)>();
+
+  int rcl_action_client_set_goal_client_callback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_client_set_goal_client_callback(
+      action_client,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_client_set_goal_client_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_client_set_goal_client_callback');
+  late final _rcl_action_client_set_goal_client_callback =
+      _rcl_action_client_set_goal_client_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_client_set_cancel_client_callback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_client_set_cancel_client_callback(
+      action_client,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_client_set_cancel_client_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_client_set_cancel_client_callback');
+  late final _rcl_action_client_set_cancel_client_callback =
+      _rcl_action_client_set_cancel_client_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_client_set_result_client_callback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_client_set_result_client_callback(
+      action_client,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_client_set_result_client_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_client_set_result_client_callback');
+  late final _rcl_action_client_set_result_client_callback =
+      _rcl_action_client_set_result_client_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_client_set_feedback_subscription_callback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_client_set_feedback_subscription_callback(
+      action_client,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_client_set_feedback_subscription_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_client_set_feedback_subscription_callback');
+  late final _rcl_action_client_set_feedback_subscription_callback =
+      _rcl_action_client_set_feedback_subscription_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_client_set_status_subscription_callback(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_client_set_status_subscription_callback(
+      action_client,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_client_set_status_subscription_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_client_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_client_set_status_subscription_callback');
+  late final _rcl_action_client_set_status_subscription_callback =
+      _rcl_action_client_set_status_subscription_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_client_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// Transition a goal from one state to the next.
+  /// /**
+  ///  * Given a goal state and a goal event, return the next state.
+  ///  *
+  ///  * \param[in] state the state to transition from
+  ///  * \param[in] event the event triggering a transition
+  ///  * \return the next goal state if the transition is valid, or
+  ///  * \return `GOAL_STATE_UNKNOWN` if the transition is invalid or an error occured
+  ///  */
+  int rcl_action_transition_goal_state(
+    int state,
+    int event,
+  ) {
+    return _rcl_action_transition_goal_state(
+      state,
+      event,
+    );
+  }
+
+  late final _rcl_action_transition_goal_statePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_action_goal_state_t Function(rcl_action_goal_state_t,
+              ffi.Int32)>>('rcl_action_transition_goal_state');
+  late final _rcl_action_transition_goal_state =
+      _rcl_action_transition_goal_statePtr.asFunction<int Function(int, int)>();
+
+  /// Return a rcl_action_goal_handle_t struct with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_goal_handle_t before passing to
+  ///  * rcl_action_goal_handle_init().
+  ///  */
+  rcl_action_goal_handle_t rcl_action_get_zero_initialized_goal_handle() {
+    return _rcl_action_get_zero_initialized_goal_handle();
+  }
+
+  late final _rcl_action_get_zero_initialized_goal_handlePtr =
+      _lookup<ffi.NativeFunction<rcl_action_goal_handle_t Function()>>(
+          'rcl_action_get_zero_initialized_goal_handle');
+  late final _rcl_action_get_zero_initialized_goal_handle =
+      _rcl_action_get_zero_initialized_goal_handlePtr
+          .asFunction<rcl_action_goal_handle_t Function()>();
+
+  /// Initialize a rcl_action_goal_handle_t.
+  /// /**
+  ///  * After calling this function on a rcl_action_goal_handle_t, it can be used to update the
+  ///  * goals state with rcl_action_update_goal_state().
+  ///  * It can also be used to query the state of the goal with
+  ///  * rcl_action_goal_handle_get_message() and rcl_action_goal_handle_is_active().
+  ///  * Goal information can be accessed with rcl_action_goal_handle_get_message() and
+  ///  * rcl_action_goal_handle_get_info().
+  ///  *
+  ///  * Goal handles are typically initialized and finalized by action servers.
+  ///  * I.e. The allocator should be provided by the action server.
+  ///  * Goal handles are created with rcl_action_accept_new_goal() and destroyed with
+  ///  * rcl_action_clear_expired_goals() or rcl_action_server_fini().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] goal_handle preallocated, zero-initialized, goal handle structure
+  ///  *   to be initialized
+  ///  * \param[in] goal_info information about the goal to be copied to the goal handle
+  ///  * \param[in] allocator a valid allocator used to initialized the goal handle
+  ///  * \return `RCL_RET_OK` if goal_handle was initialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if the allocator is invalid, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  * \return `RCL_RET_ALREADY_INIT` if the goal handle has already been initialized, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed
+  ///  */
+  int rcl_action_goal_handle_init(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+    ffi.Pointer<rcl_action_goal_info_t> goal_info,
+    rcl_allocator_t allocator,
+  ) {
+    return _rcl_action_goal_handle_init(
+      goal_handle,
+      goal_info,
+      allocator,
+    );
+  }
+
+  late final _rcl_action_goal_handle_initPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Pointer<rcl_action_goal_info_t>,
+              rcl_allocator_t)>>('rcl_action_goal_handle_init');
+  late final _rcl_action_goal_handle_init =
+      _rcl_action_goal_handle_initPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Pointer<rcl_action_goal_info_t>, rcl_allocator_t)>();
+
+  /// Finalize a rcl_action_goal_handle_t.
+  /// /**
+  ///  * After calling, rcl_action_goal_handle_t will no longer be valid and
+  ///  * rcl_action_server_t will no longer track the goal associated with the goal handle.
+  ///  *
+  ///  * After calling, calls to rcl_action_publish_feedback(), rcl_action_publish_status(),
+  ///  * rcl_action_update_goal_state(), rcl_action_goal_handle_get_status(),
+  ///  * rcl_action_goal_handle_is_active(), rcl_action_goal_handle_get_message(), and
+  ///  * rcl_action_goal_handle_get_info() will fail when using this goal handle.
+  ///  *
+  ///  * However, the given action server is still valid.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] goal_handle struct to be deinitialized
+  ///  * \return `RCL_RET_OK` if the goal handle was deinitialized successfully, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  */
+  int rcl_action_goal_handle_fini(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+  ) {
+    return _rcl_action_goal_handle_fini(
+      goal_handle,
+    );
+  }
+
+  late final _rcl_action_goal_handle_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_goal_handle_t>)>>(
+      'rcl_action_goal_handle_fini');
+  late final _rcl_action_goal_handle_fini = _rcl_action_goal_handle_finiPtr
+      .asFunction<int Function(ffi.Pointer<rcl_action_goal_handle_t>)>();
+
+  /// Update a goal state with a rcl_action_goal_handle_t and an event.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] goal_handle struct containing goal state to transition
+  ///  * \param[in] goal_event the event used to transition the goal state
+  ///  * \return `RCL_RET_OK` if the goal state was updated successfully, or
+  ///  * \return `RCL_RET_ACTION_GOAL_EVENT_INVALID` if the goal event is invalid, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  */
+  int rcl_action_update_goal_state(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+    int goal_event,
+  ) {
+    return _rcl_action_update_goal_state(
+      goal_handle,
+      goal_event,
+    );
+  }
+
+  late final _rcl_action_update_goal_statePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Int32)>>('rcl_action_update_goal_state');
+  late final _rcl_action_update_goal_state = _rcl_action_update_goal_statePtr
+      .asFunction<int Function(ffi.Pointer<rcl_action_goal_handle_t>, int)>();
+
+  /// Get the ID of a goal using a rcl_action_goal_handle_t.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct containing the goal and meta
+  ///  * \param[out] goal_info a preallocated struct where the goal info is copied
+  ///  * \return `RCL_RET_OK` if the goal ID was accessed successfully, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if the goal_info argument is invalid
+  ///  */
+  int rcl_action_goal_handle_get_info(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+    ffi.Pointer<rcl_action_goal_info_t> goal_info,
+  ) {
+    return _rcl_action_goal_handle_get_info(
+      goal_handle,
+      goal_info,
+    );
+  }
+
+  late final _rcl_action_goal_handle_get_infoPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_goal_handle_t>,
+                  ffi.Pointer<rcl_action_goal_info_t>)>>(
+      'rcl_action_goal_handle_get_info');
+  late final _rcl_action_goal_handle_get_info =
+      _rcl_action_goal_handle_get_infoPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Pointer<rcl_action_goal_info_t>)>();
+
+  /// Get the status of a goal.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct containing the goal and metadata
+  ///  * \param[out] status a preallocated struct where the goal status is copied
+  ///  * \return `RCL_RET_OK` if the goal ID was accessed successfully, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if the status argument is invalid
+  ///  */
+  int rcl_action_goal_handle_get_status(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+    ffi.Pointer<rcl_action_goal_state_t> status,
+  ) {
+    return _rcl_action_goal_handle_get_status(
+      goal_handle,
+      status,
+    );
+  }
+
+  late final _rcl_action_goal_handle_get_statusPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_goal_handle_t>,
+                  ffi.Pointer<rcl_action_goal_state_t>)>>(
+      'rcl_action_goal_handle_get_status');
+  late final _rcl_action_goal_handle_get_status =
+      _rcl_action_goal_handle_get_statusPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Pointer<rcl_action_goal_state_t>)>();
+
+  /// Get the goal terminal timestamp.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct containing the goal and metadata
+  ///  * \param[out] timestamp a preallocated struct where goal terminal timestamp is copied.
+  ///  * \return `RCL_RET_OK` if the goal ID was accessed successfully, or
+  ///  * \return `RCL_RET_ACTION_GOAL_HANDLE_INVALID` if the goal handle is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if the timestamp argument is invalid or
+  ///  * \return `RCL_ACTION_RET_NOT_TERMINATED_YET` if the goal has not reached terminal state
+  ///  */
+  int rcl_action_goal_handle_get_goal_terminal_timestamp(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+    ffi.Pointer<rcl_time_point_value_t> timestamp,
+  ) {
+    return _rcl_action_goal_handle_get_goal_terminal_timestamp(
+      goal_handle,
+      timestamp,
+    );
+  }
+
+  late final _rcl_action_goal_handle_get_goal_terminal_timestampPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_goal_handle_t>,
+                  ffi.Pointer<rcl_time_point_value_t>)>>(
+      'rcl_action_goal_handle_get_goal_terminal_timestamp');
+  late final _rcl_action_goal_handle_get_goal_terminal_timestamp =
+      _rcl_action_goal_handle_get_goal_terminal_timestampPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_goal_handle_t>,
+              ffi.Pointer<rcl_time_point_value_t>)>();
+
+  /// Check if a goal is active using a rcl_action_goal_handle_t.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct containing the goal and metadata
+  ///  * \return `true` if the goal is in one of the following states: ACCEPTED, EXECUTING, or CANCELING, or
+  ///  * \return `false` if the goal handle pointer is invalid, or
+  ///  * \return `false` otherwise
+  /// */
+  bool rcl_action_goal_handle_is_active(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+  ) {
+    return _rcl_action_goal_handle_is_active(
+      goal_handle,
+    );
+  }
+
+  late final _rcl_action_goal_handle_is_activePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>>(
+      'rcl_action_goal_handle_is_active');
+  late final _rcl_action_goal_handle_is_active =
+      _rcl_action_goal_handle_is_activePtr
+          .asFunction<bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>();
+
+  /// Check if a goal can be transitioned to CANCELING in its current state.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct containing the goal and metadata
+  ///  * \return `true` if the goal can be transitioned to CANCELING from its current state, or
+  ///  * \return `false` if the goal handle pointer is invalid, or
+  ///  * \return `false` otherwise
+  /// */
+  bool rcl_action_goal_handle_is_cancelable(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+  ) {
+    return _rcl_action_goal_handle_is_cancelable(
+      goal_handle,
+    );
+  }
+
+  late final _rcl_action_goal_handle_is_cancelablePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>>(
+      'rcl_action_goal_handle_is_cancelable');
+  late final _rcl_action_goal_handle_is_cancelable =
+      _rcl_action_goal_handle_is_cancelablePtr
+          .asFunction<bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>();
+
+  /// Check if a rcl_action_goal_handle_t is valid.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * A goal handle is invalid if:
+  ///  *   - the implementation is `NULL` (rcl_action_goal_handle_init() not called or failed)
+  ///  *   - rcl_shutdown() has been called since the goal handle has been initialized
+  ///  *   - the goal handle has been finalized with rcl_action_goal_handle_fini()
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] goal_handle struct to evaluate as valid or not
+  ///  * \return `true` if the goal handle is valid, or
+  ///  * \return `false` if the goal handle pointer is null, or
+  ///  * \return `false` otherwise
+  ///  */
+  bool rcl_action_goal_handle_is_valid(
+    ffi.Pointer<rcl_action_goal_handle_t> goal_handle,
+  ) {
+    return _rcl_action_goal_handle_is_valid(
+      goal_handle,
+    );
+  }
+
+  late final _rcl_action_goal_handle_is_validPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>>(
+      'rcl_action_goal_handle_is_valid');
+  late final _rcl_action_goal_handle_is_valid =
+      _rcl_action_goal_handle_is_validPtr
+          .asFunction<bool Function(ffi.Pointer<rcl_action_goal_handle_t>)>();
+
+  /// Return a rcl_action_server_t struct with members set to `NULL`.
+  /// /**
+  ///  * Should be called to get a null rcl_action_server_t before passing to
+  ///  * rcl_action_server_init().
+  ///  */
+  rcl_action_server_t rcl_action_get_zero_initialized_server() {
+    return _rcl_action_get_zero_initialized_server();
+  }
+
+  late final _rcl_action_get_zero_initialized_serverPtr =
+      _lookup<ffi.NativeFunction<rcl_action_server_t Function()>>(
+          'rcl_action_get_zero_initialized_server');
+  late final _rcl_action_get_zero_initialized_server =
+      _rcl_action_get_zero_initialized_serverPtr
+          .asFunction<rcl_action_server_t Function()>();
+
+  /// Initialize an action server.
+  /// /**
+  ///  * After calling this function on a rcl_action_server_t, it can be used to take
+  ///  * goals of the given type for the given action name using rcl_action_take_goal_request()
+  ///  * and take cancel requests with rcl_action_take_cancel_request().
+  ///  * It can also send a result for a request using rcl_action_send_result() or
+  ///  * rcl_action_send_cancel_response().
+  ///  *
+  ///  * After accepting a goal with rcl_action_take_goal_request(), the action server can
+  ///  * be used to send feedback with rcl_action_publish_feedback() and send status
+  ///  * messages with rcl_action_publish_status().
+  ///  *
+  ///  * The given rcl_node_t must be valid and the resulting rcl_action_server_t is
+  ///  * only valid as long as the given rcl_node_t remains valid.
+  ///  *
+  ///  * The give rcl_clock_t must be valid and the resulting rcl_ction_server_t is
+  ///  * only valid as long ast he given rcl_clock_t remains valid.
+  ///  *
+  ///  * The rosidl_action_type_support_t is obtained on a per .action type basis.
+  ///  * When the user defines a ROS action, code is generated which provides the
+  ///  * required rosidl_action_type_support_t object.
+  ///  * This object can be obtained using a language appropriate mechanism.
+  ///  * \todo TODO(jacobperron) write these instructions once and link to it instead
+  ///  *
+  ///  * For C, a macro can be used (for example `example_interfaces/Fibonacci`):
+  ///  *
+  ///  * ```c
+  ///  * #include <rosidl_runtime_c/action_type_support_struct.h>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   ROSIDL_GET_ACTION_TYPE_SUPPORT(example_interfaces, Fibonacci);
+  ///  * ```
+  ///  *
+  ///  * For C++, a template function is used:
+  ///  *
+  ///  * ```cpp
+  ///  * #include <rosidl_runtime_cpp/action_type_support.hpp>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  * using rosidl_typesupport_cpp::get_action_type_support_handle;
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   get_action_type_support_handle<example_interfaces::action::Fibonacci>();
+  ///  * ```
+  ///  *
+  ///  * The rosidl_action_type_support_t object contains action type specific
+  ///  * information used to send or take goals, results, and feedback.
+  ///  *
+  ///  * The topic name must be a c string that follows the topic and service name
+  ///  * format rules for unexpanded names, also known as non-fully qualified names:
+  ///  *
+  ///  * \see rcl_expand_topic_name
+  ///  *
+  ///  * The options struct allows the user to set the quality of service settings as
+  ///  * well as a custom allocator that is used when initializing/finalizing the
+  ///  * client to allocate space for incidentals, e.g. the action server name string.
+  ///  *
+  ///  * Expected usage (for C action servers):
+  ///  *
+  ///  * ```c
+  ///  * #include <rcl/rcl.h>
+  ///  * #include <rcl_action/rcl_action.h>
+  ///  * #include <rosidl_runtime_c/action_type_support_struct.h>
+  ///  * #include <example_interfaces/action/fibonacci.h>
+  ///  *
+  ///  * rcl_node_t node = rcl_get_zero_initialized_node();
+  ///  * rcl_node_options_t node_ops = rcl_node_get_default_options();
+  ///  * rcl_ret_t ret = rcl_node_init(&node, "node_name", "/my_namespace", &node_ops);
+  ///  * // ... error handling
+  ///  * const rosidl_action_type_support_t * ts =
+  ///  *   ROSIDL_GET_ACTION_TYPE_SUPPORT(example_interfaces, Fibonacci);
+  ///  * rcl_action_server_t action_server = rcl_action_get_zero_initialized_server();
+  ///  * rcl_action_server_options_t action_server_ops = rcl_action_server_get_default_options();
+  ///  * ret = rcl_action_server_init(&action_server, &node, ts, "fibonacci", &action_server_ops);
+  ///  * // ... error handling, and on shutdown do finalization:
+  ///  * ret = rcl_action_server_fini(&action_server, &node);
+  ///  * // ... error handling for rcl_action_server_fini()
+  ///  * ret = rcl_node_fini(&node);
+  ///  * // ... error handling for rcl_node_fini()
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[out] action_server handle to a preallocated, zero-initialized action server structure
+  ///  *   to be initialized.
+  ///  * \param[in] node valid node handle
+  ///  * \param[in] clock valid clock handle
+  ///  * \param[in] type_support type support object for the action's type
+  ///  * \param[in] action_name the name of the action
+  ///  * \param[in] options action_server options, including quality of service settings
+  ///  * \return `RCL_RET_OK` if action_server was initialized successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_NAME_INVALID` if the given action name is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_server_init(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_clock_t> clock,
+    ffi.Pointer<rosidl_action_type_support_t> type_support,
+    ffi.Pointer<ffi.Char> action_name,
+    ffi.Pointer<rcl_action_server_options_t> options,
+  ) {
+    return _rcl_action_server_init(
+      action_server,
+      node,
+      clock,
+      type_support,
+      action_name,
+      options,
+    );
+  }
+
+  late final _rcl_action_server_initPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_clock_t>,
+                  ffi.Pointer<rosidl_action_type_support_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_action_server_options_t>)>>(
+      'rcl_action_server_init');
+  late final _rcl_action_server_init = _rcl_action_server_initPtr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_action_server_t>,
+          ffi.Pointer<rcl_node_t>,
+          ffi.Pointer<rcl_clock_t>,
+          ffi.Pointer<rosidl_action_type_support_t>,
+          ffi.Pointer<ffi.Char>,
+          ffi.Pointer<rcl_action_server_options_t>)>();
+
+  /// Finalize an action server.
+  /// /**
+  ///  * After calling, the node will no longer listen to services and topics for this action server.
+  ///  * (assuming this is the only action server of this type in this node).
+  ///  *
+  ///  * After calling, calls to rcl_wait(), rcl_action_take_goal_request(),
+  ///  * rcl_action_take_cancel_request(), rcl_action_publish_feedback(),
+  ///  * rcl_action_publish_status(), rcl_action_send_result(), and
+  ///  * rcl_action_send_cancel_response() will fail when using this action server.
+  ///  * Additionally, rcl_wait() will be interrupted if currently blocking.
+  ///  * However, the given node handle is still valid.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] action_server handle to the action_server to be deinitialized
+  ///  * \param[in] node handle to the node used to create the action server
+  ///  * \return `RCL_RET_OK` if the action server was deinitialized successfully, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server pointer is null, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_server_fini(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_node_t> node,
+  ) {
+    return _rcl_action_server_fini(
+      action_server,
+      node,
+    );
+  }
+
+  late final _rcl_action_server_finiPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_node_t>)>>('rcl_action_server_fini');
+  late final _rcl_action_server_fini = _rcl_action_server_finiPtr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_action_server_t>, ffi.Pointer<rcl_node_t>)>();
+
+  /// Return the default action server options in a rcl_action_server_options_t.
+  /// /**
+  ///  * The defaults are:
+  ///  *
+  ///  * - goal_service_qos = rmw_qos_profile_services_default;
+  ///  * - cancel_service_qos = rmw_qos_profile_services_default;
+  ///  * - result_service_qos = rmw_qos_profile_services_default;
+  ///  * - feedback_topic_qos = rmw_qos_profile_default;
+  ///  * - status_topic_qos = rcl_action_qos_profile_status_default;
+  ///  * - allocator = rcl_get_default_allocator();
+  ///  * - result_timeout = RCUTILS_S_TO_NS(10);  // 10 seconds
+  ///  */
+  rcl_action_server_options_t rcl_action_server_get_default_options() {
+    return _rcl_action_server_get_default_options();
+  }
+
+  late final _rcl_action_server_get_default_optionsPtr =
+      _lookup<ffi.NativeFunction<rcl_action_server_options_t Function()>>(
+          'rcl_action_server_get_default_options');
+  late final _rcl_action_server_get_default_options =
+      _rcl_action_server_get_default_optionsPtr
+          .asFunction<rcl_action_server_options_t Function()>();
+
+  /// Take a pending ROS goal using an action server.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_goal_request`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * `ros_goal_request` should point to a preallocated, zero-initialized,
+  ///  * ROS goal message.
+  ///  * If a goal request is taken successfully, it will be copied into `ros_goal_request`.
+  ///  *
+  ///  * If allocation is required when taking the request, e.g. if space needs to
+  ///  * be allocated for a dynamically sized array in the target message, then the
+  ///  * allocator given in the action server options is used.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Maybe [1]
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] only if required when filling the request, avoided for fixed sizes</i>
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will take the request
+  ///  * \param[out] request_header pointer to the goal request header
+  ///  * \param[out] ros_goal_request a preallocated, zero-initialized, ROS goal request message
+  ///  *   where the request is copied
+  ///  * \return `RCL_RET_OK` if the request was taken, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ACTION_SERVER_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_goal_request(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> request_header,
+    ffi.Pointer<ffi.Void> ros_goal_request,
+  ) {
+    return _rcl_action_take_goal_request(
+      action_server,
+      request_header,
+      ros_goal_request,
+    );
+  }
+
+  late final _rcl_action_take_goal_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_goal_request');
+  late final _rcl_action_take_goal_request =
+      _rcl_action_take_goal_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Send a response for a goal request to an action client using an action server.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_goal_response`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * If the caller intends to send an 'accepted' response, before calling this function
+  ///  * the caller should use rcl_action_accept_new_goal() to get a rcl_action_goal_handle_t
+  ///  * for future interaction with the goal (e.g. publishing feedback and canceling the goal).
+  ///  *
+  ///  * This function is thread safe so long as access to both the action server and the
+  ///  * `ros_goal_response` are synchronized.
+  ///  * That means that calling rcl_action_send_goal_response() from multiple threads is
+  ///  * allowed, but calling rcl_action_send_goal_response() at the same time as non-thread safe
+  ///  * action server functions is not, e.g. calling rcl_action_send_goal_response() and
+  ///  * rcl_action_server_fini() concurrently is not allowed.
+  ///  * Before calling rcl_action_send_goal_response() the `ros_goal_request` can change and
+  ///  * after calling rcl_action_send_goal_response() the `ros_goal_request` can change, but it
+  ///  * cannot be changed during the rcl_action_send_goal_response() call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes [1]
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] for unique pairs of action servers and responses, see above for more</i>
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will make the goal response
+  ///  * \param[in] response_header pointer to the goal response header
+  ///  * \param[in] ros_goal_response a ROS goal response message to send
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_TIMEOUT` if a goal response reader is not ready yet, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_goal_response(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_goal_response,
+  ) {
+    return _rcl_action_send_goal_response(
+      action_server,
+      response_header,
+      ros_goal_response,
+    );
+  }
+
+  late final _rcl_action_send_goal_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_send_goal_response');
+  late final _rcl_action_send_goal_response =
+      _rcl_action_send_goal_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Accept a new goal using an action server.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * Creates and returns a new goal handle.
+  ///  * The action server starts tracking it internally.
+  ///  * If a failure occurs, `NULL` is returned and an error message is set.
+  ///  * Possible reasons for failure:
+  ///  *   - action server is invalid
+  ///  *   - goal info is invalid
+  ///  *   - goal ID is already being tracked by the action server
+  ///  *   - memory allocation failure
+  ///  *
+  ///  * This function should be called after receiving a new goal request with
+  ///  * rcl_action_take_goal_request() and before sending a response with
+  ///  * rcl_action_send_goal_response().
+  ///  *
+  ///  * After calling this function, the action server will start tracking the goal.
+  ///  * The pointer to the goal handle becomes invalid after `rcl_action_server_fini()` is called.
+  ///  * The caller becomes responsible for finalizing the goal handle later.
+  ///  *
+  ///  * Example usage:
+  ///  *
+  ///  * ```c
+  ///  * #include <rcl/rcl_action.h>
+  ///  *
+  ///  * // ... init an action server
+  ///  * // Take a goal request (client library type)
+  ///  * rcl_ret_t ret = rcl_action_take_goal_request(&action_server, &goal_request);
+  ///  * // ... error handling
+  ///  * // If the goal is accepted, then tell the action server
+  ///  * // First, create a goal info message
+  ///  * rcl_action_goal_info_t goal_info = rcl_action_get_zero_initialized_goal_info();
+  ///  * // ... populate goal_info.uuid (unique_identifier_msgs/UUID)
+  ///  * // ... populate goal_info.stamp (builtin_interfaces/Time)
+  ///  * rcl_action_goal_handle_t * goal_handle = rcl_action_accept_new_goal(&action_server, &goal_info);
+  ///  * // ... error_handling
+  ///  * // ... Populate goal response (client library type)
+  ///  * ret = rcl_action_send_goal_response(&action_server, &goal_response);
+  ///  * // ... error handling, and sometime before shutdown finalize goal info message
+  ///  * ret = rcl_action_goal_info_fini(&goal_info, &action_server);
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that is accepting the goal
+  ///  * \param[in] goal_info a message containing info about the goal being accepted
+  ///  * \return a pointer to a new goal handle representing the accepted goal, or
+  ///  * \return `NULL` if a failure occured.
+  ///  */
+  ffi.Pointer<rcl_action_goal_handle_t> rcl_action_accept_new_goal(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_action_goal_info_t> goal_info,
+  ) {
+    return _rcl_action_accept_new_goal(
+      action_server,
+      goal_info,
+    );
+  }
+
+  late final _rcl_action_accept_new_goalPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rcl_action_goal_handle_t> Function(
+                  ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<rcl_action_goal_info_t>)>>(
+      'rcl_action_accept_new_goal');
+  late final _rcl_action_accept_new_goal =
+      _rcl_action_accept_new_goalPtr.asFunction<
+          ffi.Pointer<rcl_action_goal_handle_t> Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_action_goal_info_t>)>();
+
+  /// Publish a ROS feedback message for an active goal using an action server.
+  /// /**
+  ///  * The caller is responsible for ensuring that the type of `ros_feedback`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * This function acts like a ROS publisher and is potentially a blocking call.
+  ///  * \see rcl_publish()
+  ///  *
+  ///  * This function is thread safe so long as access to both the action server and
+  ///  * `ros_feedback` is synchronized.
+  ///  * That means that calling rcl_action_publish_feedback() from multiple threads
+  ///  * is allowed, but calling rcl_action_publish_feedback() at the same time as
+  ///  * non-thread safe action server functions is not, e.g. calling
+  ///  * rcl_action_publish_feedback() and rcl_action_server_fini() concurrently is not
+  ///  * allowed.
+  ///  *
+  ///  * Before calling rcl_action_publish_feedback() the `ros_feedback` message ca
+  ///  * change and after calling rcl_action_publish_feedback() the `ros_feedback` message
+  ///  * can change, but it cannot be changed during the publish call.
+  ///  * The same `ros_feedback` can be passed to multiple calls of
+  ///  * rcl_action_publish_feedback() simultaneously, even if the action servers differ.
+  ///  * `ros_feedback` is unmodified by rcl_action_publish_feedback().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes [1]
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] for unique pairs of action servers and feedback, see above for more</i>
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will publish the feedback
+  ///  * \param[in] ros_feedback a ROS message containing the goal feedback
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs. *
+  ///  */
+  int rcl_action_publish_feedback(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Void> ros_feedback,
+  ) {
+    return _rcl_action_publish_feedback(
+      action_server,
+      ros_feedback,
+    );
+  }
+
+  late final _rcl_action_publish_feedbackPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_publish_feedback');
+  late final _rcl_action_publish_feedback =
+      _rcl_action_publish_feedbackPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_server_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Get a status array message for accepted goals associated with an action server.
+  /// /**
+  ///  * The provided `status_message` should be zero-initialized with
+  ///  * rcl_action_get_zero_initialized_goal_status_array() before calling this function.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will publish the status message
+  ///  * \param[out] status_message an action_msgs/StatusArray ROS message
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_get_goal_status_array(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_action_goal_status_array_t> status_message,
+  ) {
+    return _rcl_action_get_goal_status_array(
+      action_server,
+      status_message,
+    );
+  }
+
+  late final _rcl_action_get_goal_status_arrayPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<rcl_action_goal_status_array_t>)>>(
+      'rcl_action_get_goal_status_array');
+  late final _rcl_action_get_goal_status_array =
+      _rcl_action_get_goal_status_arrayPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_action_goal_status_array_t>)>();
+
+  /// Publish a status array message for accepted goals associated with an action server.
+  /// /**
+  ///  * This function acts like a ROS publisher and is potentially a blocking call.
+  ///  * \see rcl_publish()
+  ///  *
+  ///  * A status array message associated with the action server can be created with
+  ///  * rcl_action_get_goal_status_array().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will publish the status message
+  ///  * \param[in] status_message an action_msgs/StatusArray ROS message to publish
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_publish_status(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Void> status_message,
+  ) {
+    return _rcl_action_publish_status(
+      action_server,
+      status_message,
+    );
+  }
+
+  late final _rcl_action_publish_statusPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_publish_status');
+  late final _rcl_action_publish_status =
+      _rcl_action_publish_statusPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_server_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Take a pending result request using an action server.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_result_request`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will take the result request
+  ///  * \param[out] request_header pointer to the result request header
+  ///  * \param[out] ros_result_request a preallocated ROS result request message where the
+  ///  *   request is copied.
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_result_request(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> request_header,
+    ffi.Pointer<ffi.Void> ros_result_request,
+  ) {
+    return _rcl_action_take_result_request(
+      action_server,
+      request_header,
+      ros_result_request,
+    );
+  }
+
+  late final _rcl_action_take_result_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_result_request');
+  late final _rcl_action_take_result_request =
+      _rcl_action_take_result_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Send a result response using an action server.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_result_response`
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * Before calling this function, the caller should use rcl_action_update_goal_state()
+  ///  * to update the goals state to the appropriate terminal state.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will send the result response
+  ///  * \param[in] response_header pointer to the result response header
+  ///  * \param[in] ros_result_response a ROS result response message to send
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_TIMEOUT` if a result response reader is not ready yet, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_result_response(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_result_response,
+  ) {
+    return _rcl_action_send_result_response(
+      action_server,
+      response_header,
+      ros_result_response,
+    );
+  }
+
+  late final _rcl_action_send_result_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_send_result_response');
+  late final _rcl_action_send_result_response =
+      _rcl_action_send_result_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Expires goals associated with an action server.
+  /// /**
+  ///  * A goal is 'expired' if it has been in a terminal state (has a result) for longer
+  ///  * than some duration.
+  ///  * The timeout duration is set as part of the action server options.
+  ///  *
+  ///  * If a negative timeout value if provided, then goal results never expire (kept forever).
+  ///  * If a timeout of zero is set, then goal results are discarded immediately (ie. goal
+  ///  * results are discarded whenever this function is called).
+  ///  *
+  ///  * Expired goals are removed from the internal array of goal handles.
+  ///  * rcl_action_server_goal_exists() will return false for any goals that have expired.
+  ///  *
+  ///  * \attention If one or more goals are expired then a previously returned goal handle
+  ///  * array from rcl_action_server_get_goal_handles() becomes invalid.
+  ///  *
+  ///  * `expired_goals`, `expired_goals_capacity` and `num_expired` are optional arguments.
+  ///  * If set to (`NULL`, 0u, `NULL`) then they are not used.
+  ///  * To use them allocate an array with size equal to the maximum number of goals that you want to
+  ///  * expire.
+  ///  * Pass the number of goals the array can hold in as `expired_goals_capacity`.
+  ///  * This function will set `num_expired` to the number of goals that were expired.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Maybe[1]
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  * <i>[1] if one or more goals expires, then the internal goal handle array may be
+  ///  * resized or deallocated</i>
+  ///  *
+  ///  * \param[in] action_server handle to the action server from which expired goals
+  ///  *   will be cleared.
+  ///  * \param[inout] expired_goals the identifiers of goals that expired, or set to `NULL` if unused
+  ///  * \param[inout] expired_goals_capacity the allocated size of `expired_goals`, or 0 if unused
+  ///  * \param[out] num_expired the number of expired goals, or set to `NULL` if unused
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_expire_goals(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_action_goal_info_t> expired_goals,
+    int expired_goals_capacity,
+    ffi.Pointer<ffi.Size> num_expired,
+  ) {
+    return _rcl_action_expire_goals(
+      action_server,
+      expired_goals,
+      expired_goals_capacity,
+      num_expired,
+    );
+  }
+
+  late final _rcl_action_expire_goalsPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_action_goal_info_t>,
+              ffi.Size,
+              ffi.Pointer<ffi.Size>)>>('rcl_action_expire_goals');
+  late final _rcl_action_expire_goals = _rcl_action_expire_goalsPtr.asFunction<
+      int Function(ffi.Pointer<rcl_action_server_t>,
+          ffi.Pointer<rcl_action_goal_info_t>, int, ffi.Pointer<ffi.Size>)>();
+
+  /// Notifies action server that a goal handle reached a terminal state.
+  /// /**
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \return `RCL_RET_OK` if everything is ok, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_notify_goal_done(
+    ffi.Pointer<rcl_action_server_t> action_server,
+  ) {
+    return _rcl_action_notify_goal_done(
+      action_server,
+    );
+  }
+
+  late final _rcl_action_notify_goal_donePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>)>>(
+      'rcl_action_notify_goal_done');
+  late final _rcl_action_notify_goal_done = _rcl_action_notify_goal_donePtr
+      .asFunction<int Function(ffi.Pointer<rcl_action_server_t>)>();
+
+  /// Take a pending cancel request using an action server.
+  /// /**
+  ///  * \todo TODO(jacobperron) blocking of take?
+  ///  *
+  ///  * \todo TODO(jacobperron) pre-, during-, and post-conditions for message ownership?
+  ///  *
+  ///  * \todo TODO(jacobperron) is this thread-safe?
+  ///  *
+  ///  * The caller is responsible for ensuring that the type of `ros_cancel_request`_
+  ///  * and the type associate with the client (via the type support) match.
+  ///  * Passing a different type produces undefined behavior and cannot be checked
+  ///  * by this function and therefore no deliberate error will occur.
+  ///  *
+  ///  * After receiving a successful cancel request, the appropriate goals can be
+  ///  * transitioned to the state CANCELING using rcl_action_process_cancel_request().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will take the cancel request
+  ///  * \param[out] request_header pointer to the cancel request header
+  ///  * \param[out] ros_cancel_request a preallocated ROS cancel request where the request
+  ///  *   message is copied
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_TAKE_FAILED` if take failed but no error occurred
+  ///  *         in the middleware, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_take_cancel_request(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> request_header,
+    ffi.Pointer<ffi.Void> ros_cancel_request,
+  ) {
+    return _rcl_action_take_cancel_request(
+      action_server,
+      request_header,
+      ros_cancel_request,
+    );
+  }
+
+  late final _rcl_action_take_cancel_requestPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_take_cancel_request');
+  late final _rcl_action_take_cancel_request =
+      _rcl_action_take_cancel_requestPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Process a cancel request using an action server.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * This function will compute a list of goals that a cancelation request is attempting to cancel.
+  ///  * It does not change the state of any goal.
+  ///  * The following cancel policy applies based on the goal ID and the timestamp
+  ///  * contained in the cancel request:
+  ///  *
+  ///  * - If the goal ID is zero and timestamp is zero, cancel all goals.
+  ///  * - If the goal ID is zero and timestamp is not zero, cancel all goals accepted
+  ///  *   at or before the timestamp.
+  ///  * - If the goal ID is not zero and timestamp is zero, cancel the goal with the
+  ///  *   given ID regardless of the time it was accepted.
+  ///  * - If the goal ID is not zero and timestamp is not zero, cancel the goal with the
+  ///  *   given ID and all goals accepted at or before the timestamp.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will process the cancel request
+  ///  * \param[in] cancel_request a C-typed ROS cancel request to process
+  ///  * \param[out] cancel_response a zero-initialized cancel response struct
+  ///  *   where the goal info of goals which should be cancelled are copied
+  ///  * \return `RCL_RET_OK` if the response was sent successfully, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_BAD_ALLOC` if allocating memory failed, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_process_cancel_request(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_action_cancel_request_t> cancel_request,
+    ffi.Pointer<rcl_action_cancel_response_t> cancel_response,
+  ) {
+    return _rcl_action_process_cancel_request(
+      action_server,
+      cancel_request,
+      cancel_response,
+    );
+  }
+
+  late final _rcl_action_process_cancel_requestPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<rcl_action_cancel_request_t>,
+                  ffi.Pointer<rcl_action_cancel_response_t>)>>(
+      'rcl_action_process_cancel_request');
+  late final _rcl_action_process_cancel_request =
+      _rcl_action_process_cancel_requestPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_action_cancel_request_t>,
+              ffi.Pointer<rcl_action_cancel_response_t>)>();
+
+  /// Send a cancel response using an action server.
+  /// /**
+  ///  * This is a non-blocking call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server that will send the cancel response
+  ///  * \param[in] response_header pointer to the cancel response header
+  ///  * \param[in] ros_cancel_response a ROS cancel response to send
+  ///  * \return `RCL_RET_OK` if the request was taken, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_TIMEOUT` if a cancel response reader is not ready yet, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_send_cancel_response(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rmw_request_id_t> response_header,
+    ffi.Pointer<ffi.Void> ros_cancel_response,
+  ) {
+    return _rcl_action_send_cancel_response(
+      action_server,
+      response_header,
+      ros_cancel_response,
+    );
+  }
+
+  late final _rcl_action_send_cancel_responsePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>,
+              ffi.Pointer<ffi.Void>)>>('rcl_action_send_cancel_response');
+  late final _rcl_action_send_cancel_response =
+      _rcl_action_send_cancel_responsePtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rmw_request_id_t>, ffi.Pointer<ffi.Void>)>();
+
+  /// Get the action name for an action server.
+  /// /**
+  ///  * This function returns the action server's internal topic name string.
+  ///  * This function can fail, and therefore return `NULL`, if the:
+  ///  *   - action server is `NULL`
+  ///  *   - action server is invalid (e.g. never called init or called fini)
+  ///  *
+  ///  * The returned string is only valid as long as the action server is valid.
+  ///  * The value of the string may change if the topic name changes, and therefore
+  ///  * copying the string is recommended if this is a concern.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server pointer to the action server
+  ///  * \return name string if successful, or
+  ///  * \return `NULL` otherwise.
+  ///  */
+  ffi.Pointer<ffi.Char> rcl_action_server_get_action_name(
+    ffi.Pointer<rcl_action_server_t> action_server,
+  ) {
+    return _rcl_action_server_get_action_name(
+      action_server,
+    );
+  }
+
+  late final _rcl_action_server_get_action_namePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<ffi.Char> Function(
+                  ffi.Pointer<rcl_action_server_t>)>>(
+      'rcl_action_server_get_action_name');
+  late final _rcl_action_server_get_action_name =
+      _rcl_action_server_get_action_namePtr.asFunction<
+          ffi.Pointer<ffi.Char> Function(ffi.Pointer<rcl_action_server_t>)>();
+
+  /// Return the rcl_action_server_options_t for an action server.
+  /// /**
+  ///  * This function returns the action server's internal options struct.
+  ///  * This function can fail, and therefore return `NULL`, if the:
+  ///  *   - action server is `NULL`
+  ///  *   - action server is invalid (e.g. never called init or called fini)
+  ///  *
+  ///  * The returned struct is only valid as long as the action server is valid.
+  ///  * The values in the struct may change if the action server's options change,
+  ///  * and therefore copying the struct is recommended if this is a concern.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \return options struct if successful, or
+  ///  * \return `NULL` otherwise.
+  ///  */
+  ffi.Pointer<rcl_action_server_options_t> rcl_action_server_get_options(
+    ffi.Pointer<rcl_action_server_t> action_server,
+  ) {
+    return _rcl_action_server_get_options(
+      action_server,
+    );
+  }
+
+  late final _rcl_action_server_get_optionsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Pointer<rcl_action_server_options_t> Function(
+                  ffi.Pointer<rcl_action_server_t>)>>(
+      'rcl_action_server_get_options');
+  late final _rcl_action_server_get_options =
+      _rcl_action_server_get_optionsPtr.asFunction<
+          ffi.Pointer<rcl_action_server_options_t> Function(
+              ffi.Pointer<rcl_action_server_t>)>();
+
+  /// Get the goal handles for all goals an action server is tracking.
+  /// /**
+  ///  * A pointer to the internally held array of pointers to goal handle structs is returned
+  ///  * along with the number of items in the array.
+  ///  *
+  ///  * The returned handle is made invalid if the action server is finalized, if
+  ///  * rcl_shutdown() is called, or if rcl_action_expire_goals() is called and one or more
+  ///  * goals are expired.
+  ///  * The returned handle is not guaranteed to be valid for the life time of the
+  ///  * action server as it may be finalized and recreated itself.
+  ///  * Therefore, it is recommended to get the handle from the action server using
+  ///  * this function each time it is needed and avoid use of the handle
+  ///  * concurrently with functions that might change it.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \param[out] goal_handles is set to the array of pointers to goal handles if successful.
+  ///  * \param[out] num_goals is set to the number of goals in the returned array if successful,
+  ///  *   not set otherwise.
+  ///  * \return `RCL_RET_OK` if successful, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_server_get_goal_handles(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Pointer<ffi.Pointer<rcl_action_goal_handle_t>>>
+        goal_handles,
+    ffi.Pointer<ffi.Size> num_goals,
+  ) {
+    return _rcl_action_server_get_goal_handles(
+      action_server,
+      goal_handles,
+      num_goals,
+    );
+  }
+
+  late final _rcl_action_server_get_goal_handlesPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Pointer<ffi.Pointer<rcl_action_goal_handle_t>>>,
+              ffi.Pointer<ffi.Size>)>>('rcl_action_server_get_goal_handles');
+  late final _rcl_action_server_get_goal_handles =
+      _rcl_action_server_get_goal_handlesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Pointer<ffi.Pointer<rcl_action_goal_handle_t>>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// Check if a goal is already being tracked by an action server.
+  /// /**
+  ///  * Checks whether or not a goal is being tracked in the internal goal array.
+  ///  * The goal state has no effect on the return value.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \param[in] goal_info handle to a struct containing the goal ID to check for
+  ///  * \return `true` if `action_server` is currently tracking a goal with the provided goal ID, or
+  ///  * \return `false` otherwise.
+  ///  */
+  bool rcl_action_server_goal_exists(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<rcl_action_goal_info_t> goal_info,
+  ) {
+    return _rcl_action_server_goal_exists(
+      action_server,
+      goal_info,
+    );
+  }
+
+  late final _rcl_action_server_goal_existsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<rcl_action_goal_info_t>)>>(
+      'rcl_action_server_goal_exists');
+  late final _rcl_action_server_goal_exists =
+      _rcl_action_server_goal_existsPtr.asFunction<
+          bool Function(ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<rcl_action_goal_info_t>)>();
+
+  /// Check if an action server is valid.
+  /// /**
+  ///  * In the case where `false` is returned (ie. the action server is invalid),
+  ///  * an error message is set.
+  ///  *
+  ///  * This function cannot fail.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \return `true` if `action_server` is valid, or
+  ///  * \return `false` otherwise.
+  ///  */
+  bool rcl_action_server_is_valid(
+    ffi.Pointer<rcl_action_server_t> action_server,
+  ) {
+    return _rcl_action_server_is_valid(
+      action_server,
+    );
+  }
+
+  late final _rcl_action_server_is_validPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Bool Function(ffi.Pointer<rcl_action_server_t>)>>(
+      'rcl_action_server_is_valid');
+  late final _rcl_action_server_is_valid = _rcl_action_server_is_validPtr
+      .asFunction<bool Function(ffi.Pointer<rcl_action_server_t>)>();
+
+  /// Check if an action server is valid without erroring if the library is shutting down.
+  /// /**
+  ///  * In the case where `false` is returned (ie. the action server is invalid),
+  ///  * an error message is set.
+  ///  *
+  ///  * This function cannot fail.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server handle to the action server
+  ///  * \return `true` if `action_server` is valid, or
+  ///  * \return `false` otherwise.
+  ///  */
+  bool rcl_action_server_is_valid_except_context(
+    ffi.Pointer<rcl_action_server_t> action_server,
+  ) {
+    return _rcl_action_server_is_valid_except_context(
+      action_server,
+    );
+  }
+
+  late final _rcl_action_server_is_valid_except_contextPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Bool Function(ffi.Pointer<rcl_action_server_t>)>>(
+      'rcl_action_server_is_valid_except_context');
+  late final _rcl_action_server_is_valid_except_context =
+      _rcl_action_server_is_valid_except_contextPtr
+          .asFunction<bool Function(ffi.Pointer<rcl_action_server_t>)>();
+
+  int rcl_action_server_set_goal_service_callback(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_server_set_goal_service_callback(
+      action_server,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_server_set_goal_service_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_server_set_goal_service_callback');
+  late final _rcl_action_server_set_goal_service_callback =
+      _rcl_action_server_set_goal_service_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_server_set_cancel_service_callback(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_server_set_cancel_service_callback(
+      action_server,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_server_set_cancel_service_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_server_set_cancel_service_callback');
+  late final _rcl_action_server_set_cancel_service_callback =
+      _rcl_action_server_set_cancel_service_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  int rcl_action_server_set_result_service_callback(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    rcl_event_callback_t callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _rcl_action_server_set_result_service_callback(
+      action_server,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _rcl_action_server_set_result_service_callbackPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(ffi.Pointer<rcl_action_server_t>,
+                  rcl_event_callback_t, ffi.Pointer<ffi.Void>)>>(
+      'rcl_action_server_set_result_service_callback');
+  late final _rcl_action_server_set_result_service_callback =
+      _rcl_action_server_set_result_service_callbackPtr.asFunction<
+          int Function(ffi.Pointer<rcl_action_server_t>, rcl_event_callback_t,
+              ffi.Pointer<ffi.Void>)>();
+
+  late final ffi.Pointer<rmw_qos_profile_t>
+      _rcl_action_qos_profile_status_default =
+      _lookup<rmw_qos_profile_t>('rcl_action_qos_profile_status_default');
+
+  rmw_qos_profile_t get rcl_action_qos_profile_status_default =>
+      _rcl_action_qos_profile_status_default.ref;
+
+  /// Return a zero initialized array of names and types.
+  rmw_names_and_types_t rmw_get_zero_initialized_names_and_types() {
+    return _rmw_get_zero_initialized_names_and_types();
+  }
+
+  late final _rmw_get_zero_initialized_names_and_typesPtr =
+      _lookup<ffi.NativeFunction<rmw_names_and_types_t Function()>>(
+          'rmw_get_zero_initialized_names_and_types');
+  late final _rmw_get_zero_initialized_names_and_types =
+      _rmw_get_zero_initialized_names_and_typesPtr
+          .asFunction<rmw_names_and_types_t Function()>();
+
+  /// Check that the given `names_and_types` array is zero initialized.
+  /// /**
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Access to the array of names and types is read-only, but it is not synchronized.
+  ///  *   Concurrent `names_and_types` reads are safe, but concurrent reads and writes are not.
+  ///  *
+  ///  * \param[in] names_and_types Array to be checked.
+  ///  * \return RMW_RET_OK if array is zero initialized, RMW_RET_INVALID_ARGUMENT otherwise.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_names_and_types_check_zero(
+    ffi.Pointer<rmw_names_and_types_t> names_and_types,
+  ) {
+    return _rmw_names_and_types_check_zero(
+      names_and_types,
+    );
+  }
+
+  late final _rmw_names_and_types_check_zeroPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_names_and_types_t>)>>(
+      'rmw_names_and_types_check_zero');
+  late final _rmw_names_and_types_check_zero =
+      _rmw_names_and_types_check_zeroPtr
+          .asFunction<int Function(ffi.Pointer<rmw_names_and_types_t>)>();
+
+  /// Initialize an array of names and types.
+  /// /**
+  ///  * This function initializes the string array for the names and allocates space
+  ///  * for all the string arrays for the types according to the given size, but
+  ///  * it does not initialize the string array for each setup of types.
+  ///  * However, the string arrays for each set of types is zero initialized.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Initialization is a reentrant procedure, but:
+  ///  *   - Access to arrays of names and types is not synchronized.
+  ///  *     It is not safe to read or write `names_and_types` during initialization.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \param[inout] names_and_types Array to be initialized on success,
+  ///  *   but left unchanged on failure.
+  ///  * \param[in] size Size of the array.
+  ///  * \param[in] allocator Allocator to be used to populate `names_and_types`.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `names_and_types` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `names_and_types` is not
+  ///  *   a zero initialized array, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `allocator` is invalid,
+  ///  *   by rcutils_allocator_is_valid() definition, or
+  ///  * \returns `RMW_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_names_and_types_init(
+    ffi.Pointer<rmw_names_and_types_t> names_and_types,
+    int size,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_names_and_types_init(
+      names_and_types,
+      size,
+      allocator,
+    );
+  }
+
+  late final _rmw_names_and_types_initPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_names_and_types_t>, ffi.Size,
+              ffi.Pointer<rcutils_allocator_t>)>>('rmw_names_and_types_init');
+  late final _rmw_names_and_types_init =
+      _rmw_names_and_types_initPtr.asFunction<
+          int Function(ffi.Pointer<rmw_names_and_types_t>, int,
+              ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Finalize an array of names and types.
+  /// /**
+  ///  * This function deallocates the string array of names and the array of string arrays of types,
+  ///  * and zero initializes the given array.
+  ///  * If a logical error, such as `RMW_RET_INVALID_ARGUMENT`, ensues, this function will return
+  ///  * early, leaving the given array unchanged.
+  ///  * Otherwise, it will proceed despite errors.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Finalization is a reentrant procedure, but access to arrays of names and types
+  ///  *   is not synchronized.
+  ///  *   It is not safe to read or write `names_and_types` during initialization.
+  ///  *
+  ///  * \param[inout] names_and_types Array to be finalized.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `names_and_types` is NULL, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_names_and_types_fini(
+    ffi.Pointer<rmw_names_and_types_t> names_and_types,
+  ) {
+    return _rmw_names_and_types_fini(
+      names_and_types,
+    );
+  }
+
+  late final _rmw_names_and_types_finiPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(
+              ffi.Pointer<rmw_names_and_types_t>)>>('rmw_names_and_types_fini');
+  late final _rmw_names_and_types_fini = _rmw_names_and_types_finiPtr
+      .asFunction<int Function(ffi.Pointer<rmw_names_and_types_t>)>();
+
+  /// Return all topic names and types in the ROS graph.
+  /// /**
+  ///  * This function returns an array of all topic names and types in the ROS graph
+  ///  * i.e. for which a publisher and/or a subscription exists, as discovered so far
+  ///  * by the given local node.
+  ///  *
+  ///  * Unless `no_demangle` is true, some demangling and filtering may take place when
+  ///  * listing topics as implemented by the middleware.
+  ///  * Whether demangling applies or not, and how it applies, depends on the underlying
+  ///  * implementation.
+  ///  * See http://design.ros2.org/articles/topic_and_service_names.html for an example
+  ///  * on how it is used in DDS and RTPS based implementations.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | Maybe [1]
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] rmw implementation defined, check the implementation documentation</i>
+  ///  *
+  ///  * \par Runtime behavior
+  ///  *   To query the ROS graph is a synchronous operation.
+  ///  *   It is also non-blocking, but it is not guaranteed to be lock-free.
+  ///  *   Generally speaking, implementations may synchronize access to internal resources using
+  ///  *   locks but are not allowed to wait for events with no guaranteed time bound (barring
+  ///  *   the effects of starvation due to OS scheduling).
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Nodes are thread-safe objects, and so are all operations on them except for finalization.
+  ///  *   Therefore, it is safe to query the ROS graph using the same node concurrently.
+  ///  *   However, when querying topic names and types:
+  ///  *   - Access to the array of names and types is not synchronized.
+  ///  *     It is not safe to read or write `topic_names_and_types`
+  ///  *     while rmw_get_topic_names_and_types() uses it.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \pre Given `node` must be a valid node handle, as returned by rmw_create_node().
+  ///  * \pre Given `topic_names_and_types` must be a zero-initialized array of names and types,
+  ///  *   as returned by rmw_get_zero_initialized_names_and_types().
+  ///  *
+  ///  * \param[in] node Node to query the ROS graph.
+  ///  * \param[in] allocator Allocator to be used when populating the `topic_names_and_types` array.
+  ///  * \param[in] no_demangle Whether to demangle all topic names following ROS conventions or not.
+  ///  * \param[out] topic_names_and_types Array of topic names and their types,
+  ///  *   populated on success but left unchanged on failure.
+  ///  *   If populated, it is up to the caller to finalize this array later on
+  ///  *   using rmw_names_and_types_fini().
+  ///  * \return `RMW_RET_OK` if the query was successful, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `node` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `allocator` is not valid, by rcutils_allocator_is_valid()
+  ///  *   definition, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `topic_names_and_types` is NULL, or
+  ///  * \return `RMW_RET_INVALID_ARGUMENT` if `topic_names_and_types` is not a
+  ///  *   zero-initialized array, or
+  ///  * \return `RMW_RET_INCORRECT_RMW_IMPLEMENTATION` if the `node` implementation
+  ///  *   identifier does not match this implementation, or
+  ///  * \return `RMW_RET_BAD_ALLOC` if memory allocation fails, or
+  ///  * \return `RMW_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rmw_get_topic_names_and_types(
+    ffi.Pointer<rmw_node_t> node,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    bool no_demangle,
+    ffi.Pointer<rmw_names_and_types_t> topic_names_and_types,
+  ) {
+    return _rmw_get_topic_names_and_types(
+      node,
+      allocator,
+      no_demangle,
+      topic_names_and_types,
+    );
+  }
+
+  late final _rmw_get_topic_names_and_typesPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<rmw_node_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Bool,
+                  ffi.Pointer<rmw_names_and_types_t>)>>(
+      'rmw_get_topic_names_and_types');
+  late final _rmw_get_topic_names_and_types =
+      _rmw_get_topic_names_and_typesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rmw_node_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              bool,
+              ffi.Pointer<rmw_names_and_types_t>)>();
+
+  /// Return zero initialized topic endpoint info data structure.
+  /// /**
+  ///  * Endpoint type will be invalid.
+  ///  * Endpoint QoS profile will be the system default.
+  ///  */
+  rmw_topic_endpoint_info_t rmw_get_zero_initialized_topic_endpoint_info() {
+    return _rmw_get_zero_initialized_topic_endpoint_info();
+  }
+
+  late final _rmw_get_zero_initialized_topic_endpoint_infoPtr =
+      _lookup<ffi.NativeFunction<rmw_topic_endpoint_info_t Function()>>(
+          'rmw_get_zero_initialized_topic_endpoint_info');
+  late final _rmw_get_zero_initialized_topic_endpoint_info =
+      _rmw_get_zero_initialized_topic_endpoint_infoPtr
+          .asFunction<rmw_topic_endpoint_info_t Function()>();
+
+  /// Finalize a topic endpoint info data structure.
+  /// /**
+  ///  * Deallocates all allocated members of the given data structure,
+  ///  * and then zero initializes it.
+  ///  * If a logical error, such as `RMW_RET_INVALID_ARGUMENT`, ensues, this function
+  ///  * will return early, leaving the given data structure unchanged.
+  ///  * Otherwise, it will proceed despite errors.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Finalization is a reentrant procedure, but:
+  ///  *   - Access to the topic endpoint info data structure is not synchronized.
+  ///  *     It is not safe to read or write `topic_endpoint` during finalization.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be finalized.
+  ///  * \param[in] allocator Allocator used to populate the given `topic_endpoint_info`.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `allocator` is invalid,
+  ///  *   by rcutils_allocator_is_valid() definition, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_fini(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_fini(
+      topic_endpoint_info,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_fini');
+  late final _rmw_topic_endpoint_info_fini =
+      _rmw_topic_endpoint_info_finiPtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Set the topic type in the given topic endpoint info data structure.
+  /// /**
+  ///  * Allocates memory and copies the value of the `topic_type`
+  ///  * argument to set the data structure's `topic_type` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but:
+  ///  *   - Access to the topic endpoint info data structure is not synchronized.
+  ///  *     It is not safe to read or write the `topic_type` member of the given `topic_endpoint`
+  ///  *     while setting it.
+  ///  *   - Access to C-style string arguments is read-only but it is not synchronized.
+  ///  *     Concurrent `topic_type` reads are safe, but concurrent reads and writes are not.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \pre Given `topic_type` is a valid C-style string i.e. NULL terminated.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] topic_type Type name to be set.
+  ///  * \param[in] allocator Allocator to be used.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_type` is NULL, or
+  ///  * \returns `RMW_RET_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_topic_type(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<ffi.Char> topic_type,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_set_topic_type(
+      topic_endpoint_info,
+      topic_type,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_topic_typePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_set_topic_type');
+  late final _rmw_topic_endpoint_info_set_topic_type =
+      _rmw_topic_endpoint_info_set_topic_typePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Set the topic type hash in the given topic endpoint info data structure.
+  /// /**
+  ///  * Assigns the value of the `topic_type_hash` argument to the data structure's
+  ///  * `topic_type_hash` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but:
+  ///  *   - Access to the topic endpoint info data structure is not synchronized.
+  ///  *     It is not safe to read or write the `topic_type_hash` member of the given `topic_endpoint`
+  ///  *     while setting it.
+  ///  *     Concurrent `topic_type_hash` reads are safe, but concurrent reads and writes are not.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] topic_type_hash Topic type hash to be copied.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_type_hash` is NULL, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_topic_type_hash(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<rosidl_type_hash_t> type_hash,
+  ) {
+    return _rmw_topic_endpoint_info_set_topic_type_hash(
+      topic_endpoint_info,
+      type_hash,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_topic_type_hashPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<rosidl_type_hash_t>)>>(
+      'rmw_topic_endpoint_info_set_topic_type_hash');
+  late final _rmw_topic_endpoint_info_set_topic_type_hash =
+      _rmw_topic_endpoint_info_set_topic_type_hashPtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<rosidl_type_hash_t>)>();
+
+  /// Set the node name in the given topic endpoint info data structure.
+  /// /**
+  ///  * Allocates memory and copies the value of the `node_name`
+  ///  * argument to set the data structure's `node_name` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but:
+  ///  *   - Access to the topic endpoint info data structure is not synchronized.
+  ///  *     It is not safe to read or write the `node_name` member of the given `topic_endpoint`
+  ///  *     while setting it.
+  ///  *   - Access to C-style string arguments is read-only but it is not synchronized.
+  ///  *     Concurrent `node_name` reads are safe, but concurrent reads and writes are not.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \pre Given `node_name` is a valid C-style string i.e. NULL terminated.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] node_name Node name to be set.
+  ///  * \param[in] allocator Allocator to be used.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `node_name` is NULL, or
+  ///  * \returns `RMW_RET_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_node_name(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_set_node_name(
+      topic_endpoint_info,
+      node_name,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_node_namePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_set_node_name');
+  late final _rmw_topic_endpoint_info_set_node_name =
+      _rmw_topic_endpoint_info_set_node_namePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Set the node namespace in the given topic endpoint info data structure.
+  /// /**
+  ///  * Allocates memory and copies the value of the `node_namespace`
+  ///  * argument to set the data structure's `node_namespace` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but:
+  ///  *   - Access to the topic endpoint info data structure is not synchronized.
+  ///  *     It is not safe to read or write the `node_namespace` member of the given `topic_endpoint`
+  ///  *     while setting it.
+  ///  *   - Access to C-style string arguments is read-only but it is not synchronized.
+  ///  *     Concurrent `node_namespace` reads are safe, but concurrent reads and writes are not.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \pre Given `node_namespace` is a valid C-style string i.e. NULL terminated.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] node_namespace Node namespace to be set.
+  ///  * \param[in] allocator Allocator to be used.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `node_namespace` is NULL, or
+  ///  * \returns `RMW_RET_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_node_namespace(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_set_node_namespace(
+      topic_endpoint_info,
+      node_namespace,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_node_namespacePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_set_node_namespace');
+  late final _rmw_topic_endpoint_info_set_node_namespace =
+      _rmw_topic_endpoint_info_set_node_namespacePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<ffi.Char>, ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Set the endpoint type in the given topic endpoint info data structure.
+  /// /**
+  ///  * Assigns the value of the `type` argument to the data structure's
+  ///  * `endpoint_type` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but access to the
+  ///  *   topic endpoint info data structure is not synchronized.
+  ///  *   It is not safe to read or write the `endpoint_type` member of the
+  ///  *   given `topic_endpoint` while setting it.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] type Endpoint type to be set.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_endpoint_type(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    int type,
+  ) {
+    return _rmw_topic_endpoint_info_set_endpoint_type(
+      topic_endpoint_info,
+      type,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_endpoint_typePtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Int32)>>('rmw_topic_endpoint_info_set_endpoint_type');
+  late final _rmw_topic_endpoint_info_set_endpoint_type =
+      _rmw_topic_endpoint_info_set_endpoint_typePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>, int)>();
+
+  /// Set the endpoint gid in the given topic endpoint info data structure.
+  /// /**
+  ///  * Copies the value of the `gid` argument to the data structure's
+  ///  * `endpoint_gid` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but access to the
+  ///  *   topic endpoint info data structure is not synchronized.
+  ///  *   It is not safe to read or write the `gid` member of the
+  ///  *   given `topic_endpoint` while setting it.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] gid Endpoint gid to be set.
+  ///  * \param[in] size Size of the given `gid`.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `gid` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `size` is greater than RMW_GID_STORAGE_SIZE, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_gid(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<ffi.Uint8> gid,
+    int size,
+  ) {
+    return _rmw_topic_endpoint_info_set_gid(
+      topic_endpoint_info,
+      gid,
+      size,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_gidPtr = _lookup<
+      ffi.NativeFunction<
+          rmw_ret_t Function(
+              ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Size)>>('rmw_topic_endpoint_info_set_gid');
+  late final _rmw_topic_endpoint_info_set_gid =
+      _rmw_topic_endpoint_info_set_gidPtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<ffi.Uint8>, int)>();
+
+  /// Set the endpoint QoS profile in the given topic endpoint info data structure.
+  /// /**
+  ///  * Assigns the value of the `qos_profile` argument to the data structure's
+  ///  * `qos_profile` member.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Setting a member is a reentrant procedure, but access to the
+  ///  *   topic endpoint info data structure is not synchronized.
+  ///  *   It is not safe to read or write the `qos_profile` member of the
+  ///  *   given `topic_endpoint` while setting it.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info Data structure to be populated.
+  ///  * \param[in] qos_profile QoS profile to be set.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `qos_profile` is NULL, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_set_qos_profile(
+    ffi.Pointer<rmw_topic_endpoint_info_t> topic_endpoint_info,
+    ffi.Pointer<rmw_qos_profile_t> qos_profile,
+  ) {
+    return _rmw_topic_endpoint_info_set_qos_profile(
+      topic_endpoint_info,
+      qos_profile,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_set_qos_profilePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+                  ffi.Pointer<rmw_qos_profile_t>)>>(
+      'rmw_topic_endpoint_info_set_qos_profile');
+  late final _rmw_topic_endpoint_info_set_qos_profile =
+      _rmw_topic_endpoint_info_set_qos_profilePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_t>,
+              ffi.Pointer<rmw_qos_profile_t>)>();
+
+  /// Return a zero initialized array of topic endpoint information.
+  rmw_topic_endpoint_info_array_t
+      rmw_get_zero_initialized_topic_endpoint_info_array() {
+    return _rmw_get_zero_initialized_topic_endpoint_info_array();
+  }
+
+  late final _rmw_get_zero_initialized_topic_endpoint_info_arrayPtr =
+      _lookup<ffi.NativeFunction<rmw_topic_endpoint_info_array_t Function()>>(
+          'rmw_get_zero_initialized_topic_endpoint_info_array');
+  late final _rmw_get_zero_initialized_topic_endpoint_info_array =
+      _rmw_get_zero_initialized_topic_endpoint_info_arrayPtr
+          .asFunction<rmw_topic_endpoint_info_array_t Function()>();
+
+  /// Check that the given `topic_endpoint_info_array` is zero initialized.
+  /// /**
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Access to the array of topic endpoint information is read-only, but it is not synchronized.
+  ///  *   Concurrent `topic_endpoint_info_array` reads are safe, but concurrent reads
+  ///  *   and writes are not.
+  ///  *
+  ///  * \param[in] topic_endpoint_info_array Array to be checked.
+  ///  * \returns `RMW_RET_OK` if array is zero initialized, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info_array` is NULL, or
+  ///  * \returns `RMW_RET_ERROR` if `topic_endpoint_info_array` is not zero initialized.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_array_check_zero(
+    ffi.Pointer<rmw_topic_endpoint_info_array_t> topic_endpoint_info_array,
+  ) {
+    return _rmw_topic_endpoint_info_array_check_zero(
+      topic_endpoint_info_array,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_array_check_zeroPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(
+                  ffi.Pointer<rmw_topic_endpoint_info_array_t>)>>(
+      'rmw_topic_endpoint_info_array_check_zero');
+  late final _rmw_topic_endpoint_info_array_check_zero =
+      _rmw_topic_endpoint_info_array_check_zeroPtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_array_t>)>();
+
+  /// Initialize an array of topic endpoint information.
+  /// /**
+  ///  * This function allocates space to hold `size` topic endpoint information elements.
+  ///  * Both `info_array` and `size` members are updated accordingly.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Initialization is a reentrant procedure, but:
+  ///  *   - Access to the array of topic endpoint information is not synchronized.
+  ///  *     It is not safe to read or write `topic_endpoint_info_array` during initialization.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info_array Array to be initialized on success,
+  ///  *   but left unchanged on failure.
+  ///  * \param[in] size Size of the array.
+  ///  * \param[in] allocator Allocator to be used to populate `names_and_types`.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info_array` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info_array` is not
+  ///  *   a zero initialized array, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `allocator` is invalid,
+  ///  *   by rcutils_allocator_is_valid() definition, or
+  ///  * \returns `RMW_BAD_ALLOC` if memory allocation fails, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_array_init_with_size(
+    ffi.Pointer<rmw_topic_endpoint_info_array_t> topic_endpoint_info_array,
+    int size,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_array_init_with_size(
+      topic_endpoint_info_array,
+      size,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_array_init_with_sizePtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_array_t>,
+                  ffi.Size, ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_array_init_with_size');
+  late final _rmw_topic_endpoint_info_array_init_with_size =
+      _rmw_topic_endpoint_info_array_init_with_sizePtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_array_t>, int,
+              ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Finalize an array of topic endpoint information.
+  /// /**
+  ///  * This function deallocates the given array storage, and then zero initializes it.
+  ///  * If a logical error, such as `RMW_RET_INVALID_ARGUMENT`, ensues, this function will
+  ///  * return early, leaving the given array unchanged.
+  ///  * Otherwise, it will proceed despite errors.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \par Thread-safety
+  ///  *   Finalization is a reentrant procedure, but:
+  ///  *   - Access to the array of topic endpoint information is not synchronized.
+  ///  *     It is not safe to read or write `topic_endpoint_info_array` during finalization.
+  ///  *   - The default allocators are thread-safe objects, but any custom `allocator` may not be.
+  ///  *     Check your allocator documentation for further reference.
+  ///  *
+  ///  * \pre Given `allocator` must be the same used to initialize the given `topic_endpoint_info_array`.
+  ///  *
+  ///  * \param[inout] topic_endpoint_info_array object to be finalized.
+  ///  * \param[in] allocator Allocator used to populate the given `topic_endpoint_info_array`.
+  ///  * \returns `RMW_RET_OK` if successful, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `topic_endpoint_info_array` is NULL, or
+  ///  * \returns `RMW_RET_INVALID_ARGUMENT` if `allocator` is invalid,
+  ///  *   by rcutils_allocator_is_valid() definition, or
+  ///  * \returns `RMW_RET_ERROR` when an unspecified error occurs.
+  ///  * \remark This function sets the RMW error state on failure.
+  ///  */
+  int rmw_topic_endpoint_info_array_fini(
+    ffi.Pointer<rmw_topic_endpoint_info_array_t> topic_endpoint_info_array,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+  ) {
+    return _rmw_topic_endpoint_info_array_fini(
+      topic_endpoint_info_array,
+      allocator,
+    );
+  }
+
+  late final _rmw_topic_endpoint_info_array_finiPtr = _lookup<
+          ffi.NativeFunction<
+              rmw_ret_t Function(ffi.Pointer<rmw_topic_endpoint_info_array_t>,
+                  ffi.Pointer<rcutils_allocator_t>)>>(
+      'rmw_topic_endpoint_info_array_fini');
+  late final _rmw_topic_endpoint_info_array_fini =
+      _rmw_topic_endpoint_info_array_finiPtr.asFunction<
+          int Function(ffi.Pointer<rmw_topic_endpoint_info_array_t>,
+              ffi.Pointer<rcutils_allocator_t>)>();
+
+  /// Return a list of topic names and types for publishers associated with a node.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `topic_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * There may be some demangling that occurs when listing the names from the middleware
+  ///  * implementation.
+  ///  * If the `no_demangle` argument is set to `true`, then this will be avoided and the names will be
+  ///  * returned as they appear to the middleware.
+  ///  *
+  ///  * \see rmw_get_topic_names_and_types for more details on no_demangle
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create publishers or subscribers using names returned by this function may not
+  ///  * result in the desired topic name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[in] no_demangle if true, list all topics without any demangling
+  ///  * \param[in] node_name the node name of the topics to return
+  ///  * \param[in] node_namespace the node namespace of the topics to return
+  ///  * \param[out] topic_names_and_types list of topic names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if the node name is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the node namespace is invalid, or
+  ///  * \return #RCL_RET_NODE_NAME_NON_EXISTENT if the node name wasn't found, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_publisher_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    bool no_demangle,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> topic_names_and_types,
+  ) {
+    return _rcl_get_publisher_names_and_types_by_node(
+      node,
+      allocator,
+      no_demangle,
+      node_name,
+      node_namespace,
+      topic_names_and_types,
+    );
+  }
+
+  late final _rcl_get_publisher_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Bool,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_publisher_names_and_types_by_node');
+  late final _rcl_get_publisher_names_and_types_by_node =
+      _rcl_get_publisher_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              bool,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of topic names and types for subscriptions associated with a node.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `topic_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * \see rcl_get_publisher_names_and_types_by_node for details on the `no_demangle` parameter.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create publishers or subscribers using names returned by this function may not
+  ///  * result in the desired topic name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[in] no_demangle if true, list all topics without any demangling
+  ///  * \param[in] node_name the node name of the topics to return
+  ///  * \param[in] node_namespace the node namespace of the topics to return
+  ///  * \param[out] topic_names_and_types list of topic names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if the node name is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the node namespace is invalid, or
+  ///  * \return #RCL_RET_NODE_NAME_NON_EXISTENT if the node name wasn't found, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_subscriber_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    bool no_demangle,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> topic_names_and_types,
+  ) {
+    return _rcl_get_subscriber_names_and_types_by_node(
+      node,
+      allocator,
+      no_demangle,
+      node_name,
+      node_namespace,
+      topic_names_and_types,
+    );
+  }
+
+  late final _rcl_get_subscriber_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Bool,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_subscriber_names_and_types_by_node');
+  late final _rcl_get_subscriber_names_and_types_by_node =
+      _rcl_get_subscriber_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              bool,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of service names and types associated with a node.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `service_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `service_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * \see rcl_get_publisher_names_and_types_by_node for details on the `no_demangle` parameter.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create service clients using names returned by this function may not
+  ///  * result in the desired service name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[in] node_name the node name of the services to return
+  ///  * \param[in] node_namespace the node namespace of the services to return
+  ///  * \param[out] service_names_and_types list of service names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if the node name is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the node namespace is invalid, or
+  ///  * \return #RCL_RET_NODE_NAME_NON_EXISTENT if the node name wasn't found, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_service_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> service_names_and_types,
+  ) {
+    return _rcl_get_service_names_and_types_by_node(
+      node,
+      allocator,
+      node_name,
+      node_namespace,
+      service_names_and_types,
+    );
+  }
+
+  late final _rcl_get_service_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_service_names_and_types_by_node');
+  late final _rcl_get_service_names_and_types_by_node =
+      _rcl_get_service_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of service client names and types associated with a node.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `service_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `service_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * \see rcl_get_publisher_names_and_types_by_node for details on the `no_demangle` parameter.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create service servers using names returned by this function may not
+  ///  * result in the desired service name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[in] node_name the node name of the services to return
+  ///  * \param[in] node_namespace the node namespace of the services to return
+  ///  * \param[out] service_names_and_types list of service client names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if the node name is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the node namespace is invalid, or
+  ///  * \return #RCL_RET_NODE_NAME_NON_EXISTENT if the node name wasn't found, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_client_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> service_names_and_types,
+  ) {
+    return _rcl_get_client_names_and_types_by_node(
+      node,
+      allocator,
+      node_name,
+      node_namespace,
+      service_names_and_types,
+    );
+  }
+
+  late final _rcl_get_client_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_client_names_and_types_by_node');
+  late final _rcl_get_client_names_and_types_by_node =
+      _rcl_get_client_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of topic names and their types.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `topic_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * \see rcl_get_publisher_names_and_types_by_node for details on the `no_demangle` parameter.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create publishers or subscribers using names returned by this function may not
+  ///  * result in the desired topic name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[in] no_demangle if true, list all topics without any demangling
+  ///  * \param[out] topic_names_and_types list of topic names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if the node name is invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if the node namespace is invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_topic_names_and_types(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    bool no_demangle,
+    ffi.Pointer<rcl_names_and_types_t> topic_names_and_types,
+  ) {
+    return _rcl_get_topic_names_and_types(
+      node,
+      allocator,
+      no_demangle,
+      topic_names_and_types,
+    );
+  }
+
+  late final _rcl_get_topic_names_and_typesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Bool,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_topic_names_and_types');
+  late final _rcl_get_topic_names_and_types =
+      _rcl_get_topic_names_and_typesPtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_allocator_t>,
+              bool, ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of service names and their types.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `service_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `service_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create clients or services using names returned by this function may not result in
+  ///  * the desired service name being used depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for strings
+  ///  * \param[out] service_names_and_types list of service names and their types
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_service_names_and_types(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<rcl_names_and_types_t> service_names_and_types,
+  ) {
+    return _rcl_get_service_names_and_types(
+      node,
+      allocator,
+      service_names_and_types,
+    );
+  }
+
+  late final _rcl_get_service_names_and_typesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_get_service_names_and_types');
+  late final _rcl_get_service_names_and_types =
+      _rcl_get_service_names_and_typesPtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Initialize a rcl_names_and_types_t object.
+  /// /**
+  ///  * This function initializes the string array for the names and allocates space
+  ///  * for all the string arrays for the types according to the given size, but
+  ///  * it does not initialize the string array for each set of types.
+  ///  * However, the string arrays for each set of types is zero initialized.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] names_and_types object to be initialized
+  ///  * \param[in] size the number of names and sets of types to be stored
+  ///  * \param[in] allocator to be used to allocate and deallocate memory
+  ///  * \return #RCL_RET_OK on success, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_BAD_ALLOC if memory allocation fails, or
+  ///  * \return #RCL_RET_ERROR when an unspecified error occurs.
+  ///  */
+  int rcl_names_and_types_init(
+    ffi.Pointer<rcl_names_and_types_t> names_and_types,
+    int size,
+    ffi.Pointer<rcl_allocator_t> allocator,
+  ) {
+    return _rcl_names_and_types_init(
+      names_and_types,
+      size,
+      allocator,
+    );
+  }
+
+  late final _rcl_names_and_types_initPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_names_and_types_t>, ffi.Size,
+              ffi.Pointer<rcl_allocator_t>)>>('rcl_names_and_types_init');
+  late final _rcl_names_and_types_init =
+      _rcl_names_and_types_initPtr.asFunction<
+          int Function(ffi.Pointer<rcl_names_and_types_t>, int,
+              ffi.Pointer<rcl_allocator_t>)>();
+
+  /// Finalize a rcl_names_and_types_t object.
+  /// /**
+  ///  * The object is populated when given to one of the rcl_get_*_names_and_types()
+  ///  * functions.
+  ///  * This function reclaims any resources allocated during population.
+  ///  *
+  ///  * The `names_and_types` parameter must not be `NULL`, and must point to an
+  ///  * already allocated rcl_names_and_types_t struct that was previously
+  ///  * passed to a successful rcl_get_*_names_and_types() function call.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] names_and_types struct to be finalized
+  ///  * \return #RCL_RET_OK if successful, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_names_and_types_fini(
+    ffi.Pointer<rcl_names_and_types_t> names_and_types,
+  ) {
+    return _rcl_names_and_types_fini(
+      names_and_types,
+    );
+  }
+
+  late final _rcl_names_and_types_finiPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_names_and_types_t>)>>('rcl_names_and_types_fini');
+  late final _rcl_names_and_types_fini = _rcl_names_and_types_finiPtr
+      .asFunction<int Function(ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of node names and their associated namespaces in the ROS graph.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `node_names` and `node_namespaces` parameters must be allocated and zero initialized.
+  ///  * `node_names` and `node_namespaces` are the output for this function,
+  ///  * and contain allocated memory.
+  ///  * Use rcutils_get_zero_initialized_string_array() for initializing an empty
+  ///  * rcutils_string_array_t struct.
+  ///  * These `node_names` and `node_namespaces` structs should therefore be passed
+  ///  * to rcutils_string_array_fini() when they are no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * Example:
+  ///  *
+  ///  * ```c
+  ///  * rcutils_string_array_t node_names =
+  ///  *   rcutils_get_zero_initialized_string_array();
+  ///  * rcutils_string_array_t node_namespaces =
+  ///  *   rcutils_get_zero_initialized_string_array();
+  ///  * rcl_ret_t ret = rcl_get_node_names(node, &node_names, &node_namespaces);
+  ///  * if (ret != RCL_RET_OK) {
+  ///  *   // ... error handling
+  ///  * }
+  ///  * // ... use the node_names struct, and when done:
+  ///  * rcutils_ret_t rcutils_ret = rcutils_string_array_fini(&node_names);
+  ///  * if (rcutils_ret != RCUTILS_RET_OK) {
+  ///  *   // ... error handling
+  ///  * }
+  ///  * rcutils_ret_t rcutils_ret = rcutils_string_array_fini(&node_namespaces);
+  ///  * if (rcutils_ret != RCUTILS_RET_OK) {
+  ///  *   // ... error handling
+  ///  * }
+  ///  * ```
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator used to control allocation and deallocation of names
+  ///  * \param[out] node_names struct storing discovered node names
+  ///  * \param[out] node_namespaces struct storing discovered node namespaces
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_BAD_ALLOC if an error occurred while allocating memory, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAME if a node with an invalid name is detected, or
+  ///  * \return #RCL_RET_NODE_INVALID_NAMESPACE if a node with an invalid namespace is detected, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_node_names(
+    ffi.Pointer<rcl_node_t> node,
+    rcl_allocator_t allocator,
+    ffi.Pointer<rcutils_string_array_t> node_names,
+    ffi.Pointer<rcutils_string_array_t> node_namespaces,
+  ) {
+    return _rcl_get_node_names(
+      node,
+      allocator,
+      node_names,
+      node_namespaces,
+    );
+  }
+
+  late final _rcl_get_node_namesPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_node_t>,
+              rcl_allocator_t,
+              ffi.Pointer<rcutils_string_array_t>,
+              ffi.Pointer<rcutils_string_array_t>)>>('rcl_get_node_names');
+  late final _rcl_get_node_names = _rcl_get_node_namesPtr.asFunction<
+      int Function(
+          ffi.Pointer<rcl_node_t>,
+          rcl_allocator_t,
+          ffi.Pointer<rcutils_string_array_t>,
+          ffi.Pointer<rcutils_string_array_t>)>();
+
+  /// Return a list of node names and their associated namespaces and enclaves in the ROS graph.
+  /// /**
+  ///  * An rcl_get_node_names() equivalent, but including in its output the enclave
+  ///  * name the node is using.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] RMW implementation in use may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator used to control allocation and deallocation of names
+  ///  * \param[out] node_names struct storing discovered node names
+  ///  * \param[out] node_namespaces struct storing discovered node namespaces
+  ///  * \param[out] enclaves struct storing discovered node enclaves
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_BAD_ALLOC if an error occurred while allocating memory, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_node_names_with_enclaves(
+    ffi.Pointer<rcl_node_t> node,
+    rcl_allocator_t allocator,
+    ffi.Pointer<rcutils_string_array_t> node_names,
+    ffi.Pointer<rcutils_string_array_t> node_namespaces,
+    ffi.Pointer<rcutils_string_array_t> enclaves,
+  ) {
+    return _rcl_get_node_names_with_enclaves(
+      node,
+      allocator,
+      node_names,
+      node_namespaces,
+      enclaves,
+    );
+  }
+
+  late final _rcl_get_node_names_with_enclavesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  rcl_allocator_t,
+                  ffi.Pointer<rcutils_string_array_t>,
+                  ffi.Pointer<rcutils_string_array_t>,
+                  ffi.Pointer<rcutils_string_array_t>)>>(
+      'rcl_get_node_names_with_enclaves');
+  late final _rcl_get_node_names_with_enclaves =
+      _rcl_get_node_names_with_enclavesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              rcl_allocator_t,
+              ffi.Pointer<rcutils_string_array_t>,
+              ffi.Pointer<rcutils_string_array_t>,
+              ffi.Pointer<rcutils_string_array_t>)>();
+
+  /// Return the number of publishers on a given topic.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_name` parameter must not be `NULL`, and must not be an empty string.
+  ///  * It should also follow the topic name rules.
+  ///  *
+  ///  * See: https://design.ros2.org/articles/topic_and_service_names.html
+  ///  *
+  ///  * The `count` parameter must point to a valid bool.
+  ///  * The `count` parameter is the output for this function and will be set.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * The topic name is not automatically remapped by this function.
+  ///  * If there is a publisher created with topic name `foo` and remap rule `foo:=bar` then calling
+  ///  * this with `topic_name` set to `bar` will return a count of 1, and with `topic_name` set to `foo`
+  ///  * will return a count of 0.
+  ///  * /sa rcl_remap_topic_name()
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[out] count number of publishers on the given topic
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_count_publishers(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<ffi.Char> topic_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rcl_count_publishers(
+      node,
+      topic_name,
+      count,
+    );
+  }
+
+  late final _rcl_count_publishersPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rcl_count_publishers');
+  late final _rcl_count_publishers = _rcl_count_publishersPtr.asFunction<
+      int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Return the number of subscriptions on a given topic.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_name` parameter must not be `NULL`, and must not be an empty string.
+  ///  * It should also follow the topic name rules.
+  ///  *
+  ///  * See: https://design.ros2.org/articles/topic_and_service_names.html
+  ///  *
+  ///  * The `count` parameter must point to a valid bool.
+  ///  * The `count` parameter is the output for this function and will be set.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * The topic name is not automatically remapped by this function.
+  ///  * If there is a subscriber created with topic name `foo` and remap rule `foo:=bar` then calling
+  ///  * this with `topic_name` set to `bar` will return a count of 1, and with `topic_name` set to `foo`
+  ///  * will return a count of 0.
+  ///  * /sa rcl_remap_topic_name()
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[out] count number of subscriptions on the given topic
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_count_subscribers(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<ffi.Char> topic_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rcl_count_subscribers(
+      node,
+      topic_name,
+      count,
+    );
+  }
+
+  late final _rcl_count_subscribersPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rcl_count_subscribers');
+  late final _rcl_count_subscribers = _rcl_count_subscribersPtr.asFunction<
+      int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Return the number of clients on a given service.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `service_name` parameter must not be `NULL`, and must not be an empty string.
+  ///  * It should also follow the service name rules.
+  ///  *
+  ///  * See: https://design.ros2.org/articles/topic_and_service_names.html
+  ///  *
+  ///  * The `count` parameter must point to a valid size_t.
+  ///  * The `count` parameter is the output for this function and will be set.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * The service name is not automatically remapped by this function.
+  ///  * If there is a client created with service name `foo` and remap rule `foo:=bar` then calling
+  ///  * this with `service_name` set to `bar` will return a count of 1, and with `service_name` set to `foo`
+  ///  * will return a count of 0.
+  ///  * /sa rcl_remap_service_name()
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] service_name the name of the service in question
+  ///  * \param[out] count number of clients on the given service
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_count_clients(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<ffi.Char> service_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rcl_count_clients(
+      node,
+      service_name,
+      count,
+    );
+  }
+
+  late final _rcl_count_clientsPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rcl_count_clients');
+  late final _rcl_count_clients = _rcl_count_clientsPtr.asFunction<
+      int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Return the number of servers on a given service.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `service_name` parameter must not be `NULL`, and must not be an empty string.
+  ///  * It should also follow the service name rules.
+  ///  *
+  ///  * See: https://design.ros2.org/articles/topic_and_service_names.html
+  ///  *
+  ///  * The `count` parameter must point to a valid size_t.
+  ///  * The `count` parameter is the output for this function and will be set.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * The service name is not automatically remapped by this function.
+  ///  * If there is a server created with service name `foo` and remap rule `foo:=bar` then calling
+  ///  * this with `service_name` set to `bar` will return a count of 1, and with `service_name` set to `foo`
+  ///  * will return a count of 0.
+  ///  * /sa rcl_remap_service_name()
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] service_name the name of the service in question
+  ///  * \param[out] count number of services on the given service
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_count_services(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<ffi.Char> service_name,
+    ffi.Pointer<ffi.Size> count,
+  ) {
+    return _rcl_count_services(
+      node,
+      service_name,
+      count,
+    );
+  }
+
+  late final _rcl_count_servicesPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('rcl_count_services');
+  late final _rcl_count_services = _rcl_count_servicesPtr.asFunction<
+      int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Size>)>();
+
+  /// Wait for there to be a specified number of publishers on a given topic.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  * The nodes graph guard condition is used by this function, and therefore the caller should
+  ///  * take care not to use the guard condition concurrently in any other wait sets.
+  ///  *
+  ///  * The `allocator` parameter must point to a valid allocator.
+  ///  *
+  ///  * The `topic_name` parameter must not be `NULL`, and must not be an empty string.
+  ///  * It should also follow the topic name rules.
+  ///  *
+  ///  * This function blocks and will return when the number of publishers for `topic_name`
+  ///  * is greater than or equal to the `count` parameter, or the specified `timeout` is reached.
+  ///  *
+  ///  * The `timeout` parameter is in nanoseconds.
+  ///  * The timeout is based on system time elapsed.
+  ///  * A negative value disables the timeout (i.e. this function blocks until the number of
+  ///  * publishers is greater than or equals to `count`).
+  ///  *
+  ///  * The `success` parameter must point to a valid bool.
+  ///  * The `success` parameter is the output for this function and will be set.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator to allocate space for the rcl_wait_set_t used to wait for graph events
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[in] count number of publishers to wait for
+  ///  * \param[in] timeout maximum duration to wait for publishers
+  ///  * \param[out] success `true` if the number of publishers is equal to or greater than count, or
+  ///  *   `false` if a timeout occurred waiting for publishers.
+  ///  * \return #RCL_RET_OK if there was no errors, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_TIMEOUT if a timeout occurs before the number of publishers is detected, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurred.
+  ///  */
+  int rcl_wait_for_publishers(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> topic_name,
+    int count,
+    int timeout,
+    ffi.Pointer<ffi.Bool> success,
+  ) {
+    return _rcl_wait_for_publishers(
+      node,
+      allocator,
+      topic_name,
+      count,
+      timeout,
+      success,
+    );
+  }
+
+  late final _rcl_wait_for_publishersPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              rcutils_duration_value_t,
+              ffi.Pointer<ffi.Bool>)>>('rcl_wait_for_publishers');
+  late final _rcl_wait_for_publishers = _rcl_wait_for_publishersPtr.asFunction<
+      int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_allocator_t>,
+          ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Bool>)>();
+
+  /// Wait for there to be a specified number of subscribers on a given topic.
+  /// /**
+  ///  * \see rcl_wait_for_publishers
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator to allocate space for the rcl_wait_set_t used to wait for graph events
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[in] count number of subscribers to wait for
+  ///  * \param[in] timeout maximum duration to wait for subscribers
+  ///  * \param[out] success `true` if the number of subscribers is equal to or greater than count, or
+  ///  *   `false` if a timeout occurred waiting for subscribers.
+  ///  * \return #RCL_RET_OK if there was no errors, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_TIMEOUT if a timeout occurs before the number of subscribers is detected, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurred.
+  ///  */
+  int rcl_wait_for_subscribers(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> topic_name,
+    int count,
+    int timeout,
+    ffi.Pointer<ffi.Bool> success,
+  ) {
+    return _rcl_wait_for_subscribers(
+      node,
+      allocator,
+      topic_name,
+      count,
+      timeout,
+      success,
+    );
+  }
+
+  late final _rcl_wait_for_subscribersPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              rcutils_duration_value_t,
+              ffi.Pointer<ffi.Bool>)>>('rcl_wait_for_subscribers');
+  late final _rcl_wait_for_subscribers =
+      _rcl_wait_for_subscribersPtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Bool>)>();
+
+  /// Return a list of all publishers to a topic.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_name` parameter must not be `NULL`.
+  ///  *
+  ///  * When the `no_mangle` parameter is `true`, the provided `topic_name` should be a valid topic name
+  ///  * for the middleware (useful when combining ROS with native middleware (e.g. DDS) apps).
+  ///  * When the `no_mangle` parameter is `false`, the provided `topic_name` should follow
+  ///  * ROS topic name conventions.
+  ///  * In either case, the topic name should always be fully qualified.
+  ///  *
+  ///  * Each element in the `publishers_info` array will contain the node name, node namespace,
+  ///  * topic type, gid and the qos profile of the publisher.
+  ///  * It is the responsibility of the caller to ensure that `publishers_info` parameter points
+  ///  * to a valid struct of type rcl_topic_endpoint_info_array_t.
+  ///  * The `count` field inside the struct must be set to 0 and the `info_array` field inside
+  ///  * the struct must be set to null.
+  ///  * \see rmw_get_zero_initialized_topic_endpoint_info_array
+  ///  *
+  ///  * The `allocator` will be used to allocate memory to the `info_array` member
+  ///  * inside of `publishers_info`.
+  ///  * Moreover, every const char * member inside of
+  ///  * rmw_topic_endpoint_info_t will be assigned a copied value on allocated memory.
+  ///  * \see rmw_topic_endpoint_info_set_node_name and the likes.
+  ///  * However, it is the responsibility of the caller to
+  ///  * reclaim any allocated resources to `publishers_info` to avoid leaking memory.
+  ///  * \see rmw_topic_endpoint_info_array_fini
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for
+  ///  *            the array inside publishers_info
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[in] no_mangle if `true`, `topic_name` needs to be a valid middleware topic name,
+  ///  *            otherwise it should be a valid ROS topic name
+  ///  * \param[out] publishers_info a struct representing a list of publisher information
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_BAD_ALLOC if memory allocation fails, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_publishers_info_by_topic(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> topic_name,
+    bool no_mangle,
+    ffi.Pointer<rcl_topic_endpoint_info_array_t> publishers_info,
+  ) {
+    return _rcl_get_publishers_info_by_topic(
+      node,
+      allocator,
+      topic_name,
+      no_mangle,
+      publishers_info,
+    );
+  }
+
+  late final _rcl_get_publishers_info_by_topicPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Bool,
+                  ffi.Pointer<rcl_topic_endpoint_info_array_t>)>>(
+      'rcl_get_publishers_info_by_topic');
+  late final _rcl_get_publishers_info_by_topic =
+      _rcl_get_publishers_info_by_topicPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              bool,
+              ffi.Pointer<rcl_topic_endpoint_info_array_t>)>();
+
+  /// Return a list of all subscriptions to a topic.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `topic_name` parameter must not be `NULL`.
+  ///  *
+  ///  * When the `no_mangle` parameter is `true`, the provided `topic_name` should be a valid topic name
+  ///  * for the middleware (useful when combining ROS with native middleware (e.g. DDS) apps).
+  ///  * When the `no_mangle` parameter is `false`, the provided `topic_name` should follow
+  ///  * ROS topic name conventions.
+  ///  * In either case, the topic name should always be fully qualified.
+  ///  *
+  ///  * Each element in the `subscriptions_info` array will contain the node name, node namespace,
+  ///  * topic type, gid and the qos profile of the subscription.
+  ///  * It is the responsibility of the caller to ensure that `subscriptions_info` parameter points
+  ///  * to a valid struct of type rcl_topic_endpoint_info_array_t.
+  ///  * The `count` field inside the struct must be set to 0 and the `info_array` field inside
+  ///  * the struct must be set to null.
+  ///  * \see rmw_get_zero_initialized_topic_endpoint_info_array
+  ///  *
+  ///  * The `allocator` will be used to allocate memory to the `info_array` member
+  ///  * inside of `subscriptions_info`.
+  ///  * Moreover, every const char * member inside of
+  ///  * rmw_topic_endpoint_info_t will be assigned a copied value on allocated memory.
+  ///  * \see rmw_topic_endpoint_info_set_node_name and the likes.
+  ///  * However, it is the responsibility of the caller to
+  ///  * reclaim any allocated resources to `subscriptions_info` to avoid leaking memory.
+  ///  * \see rmw_topic_endpoint_info_array_fini
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator to be used when allocating space for
+  ///  *            the array inside publishers_info
+  ///  * \param[in] topic_name the name of the topic in question
+  ///  * \param[in] no_mangle if `true`, `topic_name` needs to be a valid middleware topic name,
+  ///  *            otherwise it should be a valid ROS topic name
+  ///  * \param[out] subscriptions_info a struct representing a list of subscriptions information
+  ///  * \return #RCL_RET_OK if the query was successful, or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_BAD_ALLOC if memory allocation fails, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_get_subscriptions_info_by_topic(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcutils_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> topic_name,
+    bool no_mangle,
+    ffi.Pointer<rcl_topic_endpoint_info_array_t> subscriptions_info,
+  ) {
+    return _rcl_get_subscriptions_info_by_topic(
+      node,
+      allocator,
+      topic_name,
+      no_mangle,
+      subscriptions_info,
+    );
+  }
+
+  late final _rcl_get_subscriptions_info_by_topicPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcutils_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Bool,
+                  ffi.Pointer<rcl_topic_endpoint_info_array_t>)>>(
+      'rcl_get_subscriptions_info_by_topic');
+  late final _rcl_get_subscriptions_info_by_topic =
+      _rcl_get_subscriptions_info_by_topicPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcutils_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              bool,
+              ffi.Pointer<rcl_topic_endpoint_info_array_t>)>();
+
+  /// Check if a service server is available for the given service client.
+  /// /**
+  ///  * This function will return true for `is_available` if there is a service server
+  ///  * available for the given client.
+  ///  *
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `client` parameter must point to a valid client.
+  ///  *
+  ///  * The given client and node must match, i.e. the client must have been created
+  ///  * using the given node.
+  ///  *
+  ///  * The `is_available` parameter must not be `NULL`, and must point a bool variable.
+  ///  * The result of the check will be stored in the `is_available` parameter.
+  ///  *
+  ///  * In the event that error handling needs to allocate memory, this function
+  ///  * will try to use the node's allocator.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] client the handle to the service client being queried
+  ///  * \param[out] is_available set to true if there is a service server available, else false
+  ///  * \return #RCL_RET_OK if the check was made successfully (regardless of the service readiness), or
+  ///  * \return #RCL_RET_NODE_INVALID if the node is invalid, or
+  ///  * \return #RCL_RET_INVALID_ARGUMENT if any arguments are invalid, or
+  ///  * \return #RCL_RET_ERROR if an unspecified error occurs.
+  ///  */
+  int rcl_service_server_is_available(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_client_t> client,
+    ffi.Pointer<ffi.Bool> is_available,
+  ) {
+    return _rcl_service_server_is_available(
+      node,
+      client,
+      is_available,
+    );
+  }
+
+  late final _rcl_service_server_is_availablePtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_client_t>,
+              ffi.Pointer<ffi.Bool>)>>('rcl_service_server_is_available');
+  late final _rcl_service_server_is_available =
+      _rcl_service_server_is_availablePtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_client_t>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  /// Get a list of action names and types for action clients associated with a node.
+  /// /**
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `action_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `action_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create action clients or action servers with names returned by this function may
+  ///  * not result in the desired action name depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator for allocating space for strings
+  ///  * \param[in] node_name the node name of the actions to return
+  ///  * \param[in] node_namespace the node namespace of the actions to return
+  ///  * \param[out] action_names_and_types list of action names and their types
+  ///  * \return `RCL_RET_OK` if the query was successful, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_get_client_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> action_names_and_types,
+  ) {
+    return _rcl_action_get_client_names_and_types_by_node(
+      node,
+      allocator,
+      node_name,
+      node_namespace,
+      action_names_and_types,
+    );
+  }
+
+  late final _rcl_action_get_client_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_action_get_client_names_and_types_by_node');
+  late final _rcl_action_get_client_names_and_types_by_node =
+      _rcl_action_get_client_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Get a list of action names and types for action servers associated with a node.
+  /// /**
+  ///  * This function returns a list of action names and types for action servers associated with
+  ///  * the provided node name.
+  ///  *
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `action_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `action_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create action clients or action servers with names returned by this function may
+  ///  * not result in the desired action name depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator for allocating space for strings
+  ///  * \param[in] node_name the node name of the actions to return
+  ///  * \param[in] node_namespace the node namespace of the actions to return
+  ///  * \param[out] action_names_and_types list of action names and their types
+  ///  * \return `RCL_RET_OK` if the query was successful, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_get_server_names_and_types_by_node(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<ffi.Char> node_name,
+    ffi.Pointer<ffi.Char> node_namespace,
+    ffi.Pointer<rcl_names_and_types_t> action_names_and_types,
+  ) {
+    return _rcl_action_get_server_names_and_types_by_node(
+      node,
+      allocator,
+      node_name,
+      node_namespace,
+      action_names_and_types,
+    );
+  }
+
+  late final _rcl_action_get_server_names_and_types_by_nodePtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_action_get_server_names_and_types_by_node');
+  late final _rcl_action_get_server_names_and_types_by_node =
+      _rcl_action_get_server_names_and_types_by_nodePtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_node_t>,
+              ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Return a list of action names and their types.
+  /// /**
+  ///  * This function returns a list of action names and types in the ROS graph.
+  ///  *
+  ///  * The `node` parameter must point to a valid node.
+  ///  *
+  ///  * The `action_names_and_types` parameter must be allocated and zero initialized.
+  ///  * This function allocates memory for the returned list of names and types and so it is the
+  ///  * callers responsibility to pass `action_names_and_types` to rcl_names_and_types_fini()
+  ///  * when it is no longer needed.
+  ///  * Failing to do so will result in leaked memory.
+  ///  *
+  ///  * The returned names are not automatically remapped by this function.
+  ///  * Attempting to create action clients or action servers with names returned by this function may
+  ///  * not result in the desired action name depending on the remap rules in use.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Maybe [1]
+  ///  * <i>[1] implementation may need to protect the data structure with a lock</i>
+  ///  *
+  ///  * \param[in] node the handle to the node being used to query the ROS graph
+  ///  * \param[in] allocator allocator for allocating space for strings
+  ///  * \param[out] action_names_and_types list of action names and types
+  ///  * \return `RCL_RET_OK` if the query was successful, or
+  ///  * \return `RCL_RET_NODE_INVALID` if the node is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  ///  */
+  int rcl_action_get_names_and_types(
+    ffi.Pointer<rcl_node_t> node,
+    ffi.Pointer<rcl_allocator_t> allocator,
+    ffi.Pointer<rcl_names_and_types_t> action_names_and_types,
+  ) {
+    return _rcl_action_get_names_and_types(
+      node,
+      allocator,
+      action_names_and_types,
+    );
+  }
+
+  late final _rcl_action_get_names_and_typesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_node_t>,
+                  ffi.Pointer<rcl_allocator_t>,
+                  ffi.Pointer<rcl_names_and_types_t>)>>(
+      'rcl_action_get_names_and_types');
+  late final _rcl_action_get_names_and_types =
+      _rcl_action_get_names_and_typesPtr.asFunction<
+          int Function(ffi.Pointer<rcl_node_t>, ffi.Pointer<rcl_allocator_t>,
+              ffi.Pointer<rcl_names_and_types_t>)>();
+
+  /// Add a rcl_action_client_t to a wait set.
+  /// /**
+  ///  * This function will add the underlying service clients and subscribers to the wait set.
+  ///  *
+  ///  * This function behaves similar to adding subscriptions to the wait set, but will add
+  ///  * five entities:
+  ///  *
+  ///  * - Three service clients
+  ///  * - Two subscriptions
+  ///  *
+  ///  * \see rcl_wait_set_add_subscription
+  ///  *
+  ///  * If this function fails for any reason, `client_index` and `subscription_index` are not set.
+  ///  * It is also possible the provided wait set is left in an inconsistent state (e.g. some
+  ///  * of the clients and subscriptions were added to the wait set, but not all).
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] wait_set struct where action client service client and subscription
+  ///  *   are to be stored
+  ///  * \param[in] action_client the action client to be added to the wait set
+  ///  * \param[out] client_index the starting index in the wait set's client container where
+  ///  *   the action clients underlying service clients were added. Optionally, set to `NULL`
+  ///  *   if ignored.
+  ///  * \param[out] subscription_index the starting index in the wait set's subscription container
+  ///  *   where the action clients underlying subscriptions were added. Optionally, set to `NULL`
+  ///  *   if ignored.
+  ///  * \return `RCL_RET_OK` if added successfully, or
+  ///  * \return `RCL_RET_WAIT_SET_INVALID` if the wait set is zero initialized, or
+  ///  * \return `RCL_RET_WAIT_SET_FULL` if the subscription set is full, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_wait_set_add_action_client(
+    ffi.Pointer<rcl_wait_set_t> wait_set,
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Size> client_index,
+    ffi.Pointer<ffi.Size> subscription_index,
+  ) {
+    return _rcl_action_wait_set_add_action_client(
+      wait_set,
+      action_client,
+      client_index,
+      subscription_index,
+    );
+  }
+
+  late final _rcl_action_wait_set_add_action_clientPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>)>>('rcl_action_wait_set_add_action_client');
+  late final _rcl_action_wait_set_add_action_client =
+      _rcl_action_wait_set_add_action_clientPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// Add a rcl_action_server_t to a wait set.
+  /// /**
+  ///  * This function will add the underlying services to the wait set.
+  ///  *
+  ///  * This function behaves similar to adding services to the wait set, but will add
+  ///  * three services.
+  ///  *
+  ///  * \see rcl_wait_set_add_service
+  ///  *
+  ///  * * If this function fails for any reason, `service_index` is not set.
+  ///  * It is also possible the provided wait set is left in an inconsistent state (e.g. some
+  ///  * of the clients and subscribers were added to the wait set, but not all).
+  ///
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | Yes
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[inout] wait_set struct where action server services are to be stored
+  ///  * \param[in] action_server the action server to be added to the wait set
+  ///  * \param[out] service_index the starting index in the wait set's service container where
+  ///  *   the action servers underlying services were added. Optionally, set to `NULL`
+  ///  *   if ignored.
+  ///  * \return `RCL_RET_OK` if added successfully, or
+  ///  * \return `RCL_RET_WAIT_SET_INVALID` if the wait set is zero initialized, or
+  ///  * \return `RCL_RET_WAIT_SET_FULL` if the subscription set is full, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_wait_set_add_action_server(
+    ffi.Pointer<rcl_wait_set_t> wait_set,
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Size> service_index,
+  ) {
+    return _rcl_action_wait_set_add_action_server(
+      wait_set,
+      action_server,
+      service_index,
+    );
+  }
+
+  late final _rcl_action_wait_set_add_action_serverPtr = _lookup<
+      ffi.NativeFunction<
+          rcl_ret_t Function(
+              ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Size>)>>('rcl_action_wait_set_add_action_server');
+  late final _rcl_action_wait_set_add_action_server =
+      _rcl_action_wait_set_add_action_serverPtr.asFunction<
+          int Function(ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_server_t>, ffi.Pointer<ffi.Size>)>();
+
+  /// Get the number of wait set entities associated with a rcl_action_client_t.
+  /// /**
+  ///  * Returns the number of entities that are added to the wait set if
+  ///  * rcl_action_wait_set_add_action_client() is called.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_client an action client to query
+  ///  * \param[out] num_subscriptions the number of subscriptions added when the action client
+  ///  *   is added to the wait set
+  ///  * \param[out] num_guard_conditions the number of guard conditions added when the action client
+  ///  *   is added to the wait set
+  ///  * \param[out] num_timers the number of timers added when the action client
+  ///  *   is added to the wait set
+  ///  * \param[out] num_clients the number of clients added when the action client
+  ///  *   is added to the wait set
+  ///  * \param[out] num_services the number of services added when the action client
+  ///  *   is added to the wait set
+  ///  * \return `RCL_RET_OK` if call is successful, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_client_wait_set_get_num_entities(
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Size> num_subscriptions,
+    ffi.Pointer<ffi.Size> num_guard_conditions,
+    ffi.Pointer<ffi.Size> num_timers,
+    ffi.Pointer<ffi.Size> num_clients,
+    ffi.Pointer<ffi.Size> num_services,
+  ) {
+    return _rcl_action_client_wait_set_get_num_entities(
+      action_client,
+      num_subscriptions,
+      num_guard_conditions,
+      num_timers,
+      num_clients,
+      num_services,
+    );
+  }
+
+  late final _rcl_action_client_wait_set_get_num_entitiesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_action_client_t>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>)>>(
+      'rcl_action_client_wait_set_get_num_entities');
+  late final _rcl_action_client_wait_set_get_num_entities =
+      _rcl_action_client_wait_set_get_num_entitiesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// Get the number of wait set entities associated with a rcl_action_server_t.
+  /// /**
+  ///  * Returns the number of entities that are added to the wait set if
+  ///  * rcl_action_wait_set_add_action_server() is called.
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | Yes
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] action_server an action server to query
+  ///  * \param[out] num_subscriptions the number of subscriptions added when the action server
+  ///  *   is added to the wait set
+  ///  * \param[out] num_guard_conditions the number of guard conditions added when the action server
+  ///  *   is added to the wait set
+  ///  * \param[out] num_timers the number of timers added when the action server
+  ///  *   is added to the wait set
+  ///  * \param[out] num_clients the number of clients added when the action server
+  ///  *   is added to the wait set
+  ///  * \param[out] num_services the number of services added when the action server
+  ///  *   is added to the wait set
+  ///  * \return `RCL_RET_OK` if call is successful, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_SERVER_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_server_wait_set_get_num_entities(
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Size> num_subscriptions,
+    ffi.Pointer<ffi.Size> num_guard_conditions,
+    ffi.Pointer<ffi.Size> num_timers,
+    ffi.Pointer<ffi.Size> num_clients,
+    ffi.Pointer<ffi.Size> num_services,
+  ) {
+    return _rcl_action_server_wait_set_get_num_entities(
+      action_server,
+      num_subscriptions,
+      num_guard_conditions,
+      num_timers,
+      num_clients,
+      num_services,
+    );
+  }
+
+  late final _rcl_action_server_wait_set_get_num_entitiesPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>,
+                  ffi.Pointer<ffi.Size>)>>(
+      'rcl_action_server_wait_set_get_num_entities');
+  late final _rcl_action_server_wait_set_get_num_entities =
+      _rcl_action_server_wait_set_get_num_entitiesPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// Get the wait set entities that are ready for a rcl_action_client_t.
+  /// /**
+  ///  * The caller can use this function to determine the relevant action client functions
+  ///  * to call: rcl_action_take_feedback(), rcl_action_take_status(),
+  ///  * rcl_action_take_goal_response(), rcl_action_take_cancel_response(), or
+  ///  * rcl_action_take_result_response().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] wait_set struct where action server services are to be stored
+  ///  * \param[in] action_client an action client to query
+  ///  * \param[out] is_feedback_ready `true` if there is a feedback message ready to take,
+  ///  *   `false` otherwise
+  ///  * \param[out] is_status_ready `true` if there is a status message ready to take,
+  ///  *   `false` otherwise
+  ///  * \param[out] is_goal_response_ready `true` if there is a goal response message ready
+  ///  *   to take, `false` otherwise
+  ///  * \param[out] is_cancel_response_ready `true` if there is a cancel response message ready
+  ///  *   to take, `false` otherwise
+  ///  * \param[out] is_result_response_ready `true` if there is a result response message ready
+  ///  *   to take, `false` otherwise
+  ///  * \return `RCL_RET_OK` if call is successful, or
+  ///  * \return `RCL_RET_WAIT_SET_INVALID` if the wait set is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action client is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_client_wait_set_get_entities_ready(
+    ffi.Pointer<rcl_wait_set_t> wait_set,
+    ffi.Pointer<rcl_action_client_t> action_client,
+    ffi.Pointer<ffi.Bool> is_feedback_ready,
+    ffi.Pointer<ffi.Bool> is_status_ready,
+    ffi.Pointer<ffi.Bool> is_goal_response_ready,
+    ffi.Pointer<ffi.Bool> is_cancel_response_ready,
+    ffi.Pointer<ffi.Bool> is_result_response_ready,
+  ) {
+    return _rcl_action_client_wait_set_get_entities_ready(
+      wait_set,
+      action_client,
+      is_feedback_ready,
+      is_status_ready,
+      is_goal_response_ready,
+      is_cancel_response_ready,
+      is_result_response_ready,
+    );
+  }
+
+  late final _rcl_action_client_wait_set_get_entities_readyPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_wait_set_t>,
+                  ffi.Pointer<rcl_action_client_t>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'rcl_action_client_wait_set_get_entities_ready');
+  late final _rcl_action_client_wait_set_get_entities_ready =
+      _rcl_action_client_wait_set_get_entities_readyPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_client_t>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>)>();
+
+  /// Get the wait set entities that are ready for a rcl_action_server_t.
+  /// /**
+  ///  * The caller can use this function to determine the relevant action server functions
+  ///  * to call: rcl_action_take_goal_request(), rcl_action_take_cancel_request(), or
+  ///  * rcl_action_take_result_request().
+  ///  *
+  ///  * <hr>
+  ///  * Attribute          | Adherence
+  ///  * ------------------ | -------------
+  ///  * Allocates Memory   | No
+  ///  * Thread-Safe        | No
+  ///  * Uses Atomics       | No
+  ///  * Lock-Free          | Yes
+  ///  *
+  ///  * \param[in] wait_set struct where action server services are to be stored
+  ///  * \param[in] action_server an action server to query
+  ///  * \param[out] is_goal_request_ready `true` if there is a goal request message ready
+  ///  *   to take, `false` otherwise
+  ///  * \param[out] is_cancel_request_ready `true` if there is a cancel request message ready
+  ///  *   to take, `false` otherwise
+  ///  * \param[out] is_result_request_ready `true` if there is a result request message ready
+  ///  *   to take, `false` otherwise
+  ///  * \param[out] is_goal_expired `true` if there is a goal that expired, `false` otherwise
+  ///  * \return `RCL_RET_OK` if call is successful, or
+  ///  * \return `RCL_RET_WAIT_SET_INVALID` if the wait set is invalid, or
+  ///  * \return `RCL_RET_INVALID_ARGUMENT` if any arguments are invalid, or
+  ///  * \return `RCL_RET_ACTION_CLIENT_INVALID` if the action server is invalid, or
+  ///  * \return `RCL_RET_ERROR` if an unspecified error occurs.
+  /// */
+  int rcl_action_server_wait_set_get_entities_ready(
+    ffi.Pointer<rcl_wait_set_t> wait_set,
+    ffi.Pointer<rcl_action_server_t> action_server,
+    ffi.Pointer<ffi.Bool> is_goal_request_ready,
+    ffi.Pointer<ffi.Bool> is_cancel_request_ready,
+    ffi.Pointer<ffi.Bool> is_result_request_ready,
+    ffi.Pointer<ffi.Bool> is_goal_expired,
+  ) {
+    return _rcl_action_server_wait_set_get_entities_ready(
+      wait_set,
+      action_server,
+      is_goal_request_ready,
+      is_cancel_request_ready,
+      is_result_request_ready,
+      is_goal_expired,
+    );
+  }
+
+  late final _rcl_action_server_wait_set_get_entities_readyPtr = _lookup<
+          ffi.NativeFunction<
+              rcl_ret_t Function(
+                  ffi.Pointer<rcl_wait_set_t>,
+                  ffi.Pointer<rcl_action_server_t>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>,
+                  ffi.Pointer<ffi.Bool>)>>(
+      'rcl_action_server_wait_set_get_entities_ready');
+  late final _rcl_action_server_wait_set_get_entities_ready =
+      _rcl_action_server_wait_set_get_entities_readyPtr.asFunction<
+          int Function(
+              ffi.Pointer<rcl_wait_set_t>,
+              ffi.Pointer<rcl_action_server_t>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>,
+              ffi.Pointer<ffi.Bool>)>();
+}
 
 /// Encapsulation of an allocator.
 /// /**
@@ -20906,10 +39927,64 @@ final class rcutils_allocator_s extends ffi.Struct {
 ///  */
 typedef rcutils_allocator_t = rcutils_allocator_s;
 
-final class __fsid_t extends ffi.Struct {
-  @ffi.Array.multi([2])
-  external ffi.Array<ffi.Int> __val;
+/// Used to control the range that nodes will be discovered
+abstract class rmw_automatic_discovery_range_e {
+  /// The discovery range has not been set
+  static const int RMW_AUTOMATIC_DISCOVERY_RANGE_NOT_SET = 0;
+
+  /// Force discovery off
+  static const int RMW_AUTOMATIC_DISCOVERY_RANGE_OFF = 1;
+
+  /// Allows discovering nodes on the same host
+  static const int RMW_AUTOMATIC_DISCOVERY_RANGE_LOCALHOST = 2;
+
+  /// Allows discovering nodes on the same subnet
+  static const int RMW_AUTOMATIC_DISCOVERY_RANGE_SUBNET = 3;
+
+  /// Use discovery settings configured directly with the middleware
+  static const int RMW_AUTOMATIC_DISCOVERY_RANGE_SYSTEM_DEFAULT = 4;
 }
+
+/// Struct to typedef some of the peer addresses
+final class rmw_peer_address_s extends ffi.Struct {
+  @ffi.Array.multi([256])
+  external ffi.Array<ffi.Char> peer_address;
+}
+
+/// Used to specify the options that control how discovery is performed
+final class rmw_discovery_options_s extends ffi.Struct {
+  /// How far to allow discovering nodes
+  ///   /**
+  ///    * This needs to be set to something other than RMW_AUTOMATIC_DISCOVERY_RANGE_NOT_SET,
+  ///    * because that is just a sentinel value to see if this was set, but rmw
+  ///    * implementations should error if this is what is given during context init.
+  ///    */
+  @ffi.Int32()
+  external int automatic_discovery_range;
+
+  /// The list of manually-specified peers to perform static discovery with
+  ///   /**
+  ///    * Each peer is specified as a hostname or an IP address (IPv4 and IPv6 are both acceptable), or
+  ///    * a subnet, e.g. 192.168.0.0/24.
+  ///    */
+  external ffi.Pointer<rmw_peer_address_t> static_peers;
+
+  /// The number of manually-specified peers
+  @ffi.Size()
+  external int static_peers_count;
+
+  /// The allocator used to allocate static_peers
+  external rcutils_allocator_t allocator;
+}
+
+/// Struct to typedef some of the peer addresses
+typedef rmw_peer_address_t = rmw_peer_address_s;
+
+/// Used to specify the options that control how discovery is performed
+typedef rmw_discovery_options_t = rmw_discovery_options_s;
+
+/// Return code for rmw functions
+typedef rmw_ret_t = ffi.Int32;
 
 /// Used to specify if the context can only communicate through localhost.
 abstract class rmw_localhost_only_e {
@@ -20937,9 +40012,6 @@ final class rmw_security_options_s extends ffi.Struct {
 
 typedef rmw_security_options_t = rmw_security_options_s;
 
-/// Return code for rmw functions
-typedef rmw_ret_t = ffi.Int32;
-
 final class rmw_init_options_impl_s extends ffi.Opaque {}
 
 /// Options structure used during rmw_init().
@@ -20966,6 +40038,9 @@ final class rmw_init_options_s extends ffi.Struct {
   /// Enable localhost only
   @ffi.Int32()
   external int localhost_only;
+
+  /// Configure discovery
+  external rmw_discovery_options_t discovery_options;
 
   /// Enclave, name used to find security artifacts in a sros2 keystore.
   external ffi.Pointer<ffi.Char> enclave;
@@ -21019,39 +40094,7 @@ typedef rmw_context_impl_t = rmw_context_impl_s;
 
 /// Initialization context structure which is used to store init specific information.
 typedef rmw_context_t = rmw_context_s;
-
-final class __mbstate_t extends ffi.Struct {
-  @ffi.Int()
-  external int __count;
-
-  external UnnamedUnion1 __value;
-}
-
-final class UnnamedUnion1 extends ffi.Union {
-  @ffi.UnsignedInt()
-  external int __wch;
-
-  @ffi.Array.multi([4])
-  external ffi.Array<ffi.Char> __wchb;
-}
-
-final class _G_fpos_t extends ffi.Struct {
-  @__off_t()
-  external int __pos;
-
-  external __mbstate_t __state;
-}
-
-typedef __off_t = ffi.Long;
-
-final class _G_fpos64_t extends ffi.Struct {
-  @__off64_t()
-  external int __pos;
-
-  external __mbstate_t __state;
-}
-
-typedef __off64_t = ffi.Long;
+typedef FILE = _IO_FILE;
 
 final class _IO_FILE extends ffi.Struct {
   @ffi.Int()
@@ -21126,13 +40169,38 @@ final class _IO_FILE extends ffi.Struct {
 
 final class _IO_marker extends ffi.Opaque {}
 
+typedef __off_t = ffi.Long;
 typedef _IO_lock_t = ffi.Void;
+typedef __off64_t = ffi.Long;
 
 final class _IO_codecvt extends ffi.Opaque {}
 
 final class _IO_wide_data extends ffi.Opaque {}
 
-typedef FILE = _IO_FILE;
+typedef cookie_io_functions_t = _IO_cookie_io_functions_t;
+
+final class _IO_cookie_io_functions_t extends ffi.Struct {
+  external ffi.Pointer<cookie_read_function_t> read;
+
+  external ffi.Pointer<cookie_write_function_t> write;
+
+  external ffi.Pointer<cookie_seek_function_t> seek;
+
+  external ffi.Pointer<cookie_close_function_t> close;
+}
+
+typedef cookie_read_function_t = ffi.NativeFunction<
+    __ssize_t Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef __ssize_t = ffi.Long;
+typedef cookie_write_function_t = ffi.NativeFunction<
+    __ssize_t Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<ffi.Char> __buf, ffi.Size __nbytes)>;
+typedef cookie_seek_function_t = ffi.NativeFunction<
+    ffi.Int Function(ffi.Pointer<ffi.Void> __cookie,
+        ffi.Pointer<__off64_t> __pos, ffi.Int __w)>;
+typedef cookie_close_function_t
+    = ffi.NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Void> __cookie)>;
 
 final class __va_list_tag extends ffi.Struct {
   @ffi.UnsignedInt()
@@ -21146,9 +40214,30 @@ final class __va_list_tag extends ffi.Struct {
   external ffi.Pointer<ffi.Void> reg_save_area;
 }
 
-typedef __ssize_t = ffi.Long;
 typedef fpos_t = __fpos_t;
 typedef __fpos_t = _G_fpos_t;
+
+final class _G_fpos_t extends ffi.Struct {
+  @__off_t()
+  external int __pos;
+
+  external __mbstate_t __state;
+}
+
+final class __mbstate_t extends ffi.Struct {
+  @ffi.Int()
+  external int __count;
+
+  external UnnamedUnion1 __value;
+}
+
+final class UnnamedUnion1 extends ffi.Union {
+  @ffi.UnsignedInt()
+  external int __wch;
+
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Char> __wchb;
+}
 
 final class div_t extends ffi.Struct {
   @ffi.Int()
@@ -21172,11 +40261,6 @@ final class lldiv_t extends ffi.Struct {
 
   @ffi.LongLong()
   external int rem;
-}
-
-final class __sigset_t extends ffi.Struct {
-  @ffi.Array.multi([16])
-  external ffi.Array<ffi.UnsignedLong> __val;
 }
 
 final class timeval extends ffi.Struct {
@@ -21207,6 +40291,11 @@ final class fd_set extends ffi.Struct {
 
 typedef __fd_mask = ffi.Long;
 
+final class __sigset_t extends ffi.Struct {
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.UnsignedLong> __val;
+}
+
 final class __atomic_wide_counter extends ffi.Union {
   @ffi.UnsignedLongLong()
   external int __value64;
@@ -21222,14 +40311,38 @@ final class UnnamedStruct1 extends ffi.Struct {
   external int __high;
 }
 
-final class __pthread_internal_list extends ffi.Struct {
-  external ffi.Pointer<__pthread_internal_list> __prev;
+final class pthread_mutexattr_t extends ffi.Union {
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Char> __size;
 
-  external ffi.Pointer<__pthread_internal_list> __next;
+  @ffi.Int()
+  external int __align;
 }
 
-final class __pthread_internal_slist extends ffi.Struct {
-  external ffi.Pointer<__pthread_internal_slist> __next;
+final class pthread_condattr_t extends ffi.Union {
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.Int()
+  external int __align;
+}
+
+final class pthread_attr_t extends ffi.Union {
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.Long()
+  external int __align;
+}
+
+final class pthread_mutex_t extends ffi.Union {
+  external __pthread_mutex_s __data;
+
+  @ffi.Array.multi([40])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.Long()
+  external int __align;
 }
 
 final class __pthread_mutex_s extends ffi.Struct {
@@ -21258,6 +40371,53 @@ final class __pthread_mutex_s extends ffi.Struct {
 }
 
 typedef __pthread_list_t = __pthread_internal_list;
+
+final class __pthread_internal_list extends ffi.Struct {
+  external ffi.Pointer<__pthread_internal_list> __prev;
+
+  external ffi.Pointer<__pthread_internal_list> __next;
+}
+
+final class pthread_cond_t extends ffi.Union {
+  external __pthread_cond_s __data;
+
+  @ffi.Array.multi([48])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.LongLong()
+  external int __align;
+}
+
+final class __pthread_cond_s extends ffi.Struct {
+  external __atomic_wide_counter __wseq;
+
+  external __atomic_wide_counter __g1_start;
+
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.UnsignedInt> __g_refs;
+
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.UnsignedInt> __g_size;
+
+  @ffi.UnsignedInt()
+  external int __g1_orig_size;
+
+  @ffi.UnsignedInt()
+  external int __wrefs;
+
+  @ffi.Array.multi([2])
+  external ffi.Array<ffi.UnsignedInt> __g_signals;
+}
+
+final class pthread_rwlock_t extends ffi.Union {
+  external __pthread_rwlock_arch_t __data;
+
+  @ffi.Array.multi([56])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.Long()
+  external int __align;
+}
 
 final class __pthread_rwlock_arch_t extends ffi.Struct {
   @ffi.UnsignedInt()
@@ -21295,86 +40455,6 @@ final class __pthread_rwlock_arch_t extends ffi.Struct {
 
   @ffi.UnsignedInt()
   external int __flags;
-}
-
-final class __pthread_cond_s extends ffi.Struct {
-  external __atomic_wide_counter __wseq;
-
-  external __atomic_wide_counter __g1_start;
-
-  @ffi.Array.multi([2])
-  external ffi.Array<ffi.UnsignedInt> __g_refs;
-
-  @ffi.Array.multi([2])
-  external ffi.Array<ffi.UnsignedInt> __g_size;
-
-  @ffi.UnsignedInt()
-  external int __g1_orig_size;
-
-  @ffi.UnsignedInt()
-  external int __wrefs;
-
-  @ffi.Array.multi([2])
-  external ffi.Array<ffi.UnsignedInt> __g_signals;
-}
-
-final class __once_flag extends ffi.Struct {
-  @ffi.Int()
-  external int __data;
-}
-
-final class pthread_mutexattr_t extends ffi.Union {
-  @ffi.Array.multi([4])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.Int()
-  external int __align;
-}
-
-final class pthread_condattr_t extends ffi.Union {
-  @ffi.Array.multi([4])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.Int()
-  external int __align;
-}
-
-final class pthread_attr_t extends ffi.Union {
-  @ffi.Array.multi([56])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.Long()
-  external int __align;
-}
-
-final class pthread_mutex_t extends ffi.Union {
-  external __pthread_mutex_s __data;
-
-  @ffi.Array.multi([40])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.Long()
-  external int __align;
-}
-
-final class pthread_cond_t extends ffi.Union {
-  external __pthread_cond_s __data;
-
-  @ffi.Array.multi([48])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.LongLong()
-  external int __align;
-}
-
-final class pthread_rwlock_t extends ffi.Union {
-  external __pthread_rwlock_arch_t __data;
-
-  @ffi.Array.multi([56])
-  external ffi.Array<ffi.Char> __size;
-
-  @ffi.Long()
-  external int __align;
 }
 
 final class pthread_rwlockattr_t extends ffi.Union {
@@ -21437,9 +40517,12 @@ final class drand48_data extends ffi.Struct {
   external int __a;
 }
 
+typedef __uint32_t = ffi.UnsignedInt;
 typedef __compar_fn_t = ffi.Pointer<
     ffi.NativeFunction<
         ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>;
+typedef locale_t = __locale_t;
+typedef __locale_t = ffi.Pointer<__locale_struct>;
 
 final class __locale_struct extends ffi.Struct {
   @ffi.Array.multi([13])
@@ -21457,8 +40540,6 @@ final class __locale_struct extends ffi.Struct {
 
 final class __locale_data extends ffi.Opaque {}
 
-typedef locale_t = __locale_t;
-typedef __locale_t = ffi.Pointer<__locale_struct>;
 typedef int_least64_t = __int_least64_t;
 typedef __int_least64_t = __int64_t;
 typedef __int64_t = ffi.Long;
@@ -21548,8 +40629,8 @@ typedef rcutils_hash_map_t = rcutils_hash_map_s;
 ///  * \param[in] key The key that needs to be hashed
 ///  * \return A hash value for the provided string
 ///  */
-typedef rcutils_hash_map_key_hasher_t
-    = ffi.Pointer<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Void>)>>;
+typedef rcutils_hash_map_key_hasher_t = ffi
+    .Pointer<ffi.NativeFunction<ffi.Size Function(ffi.Pointer<ffi.Void> key)>>;
 
 /// The function signature for a key comparison function.
 /// /**
@@ -21561,7 +40642,8 @@ typedef rcutils_hash_map_key_hasher_t
 ///  */
 typedef rcutils_hash_map_key_cmp_t = ffi.Pointer<
     ffi.NativeFunction<
-        ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>)>>;
+        ffi.Int Function(
+            ffi.Pointer<ffi.Void> val1, ffi.Pointer<ffi.Void> val2)>>;
 
 /// The structure holding the metadata for a string array.
 final class rcutils_string_array_s extends ffi.Struct {
@@ -21627,6 +40709,10 @@ final class rcutils_log_location_s extends ffi.Struct {
 }
 
 /// The severity levels of log messages / loggers.
+/// /**
+///  * Note: all logging levels have their Least Significant Bit as 0, which is used as an
+///  * optimization.  If adding new logging levels, ensure that the new levels keep this property.
+///  */
 abstract class RCUTILS_LOG_SEVERITY {
   /// < The unset log level
   static const int RCUTILS_LOG_SEVERITY_UNSET = 0;
@@ -21659,12 +40745,12 @@ abstract class RCUTILS_LOG_SEVERITY {
 typedef rcutils_logging_output_handler_t = ffi.Pointer<
     ffi.NativeFunction<
         ffi.Void Function(
-            ffi.Pointer<rcutils_log_location_t>,
-            ffi.Int,
-            ffi.Pointer<ffi.Char>,
-            rcutils_time_point_value_t,
-            ffi.Pointer<ffi.Char>,
-            ffi.Pointer<ffi.Pointer<__va_list_tag>>)>>;
+            ffi.Pointer<rcutils_log_location_t> location,
+            ffi.Int severity,
+            ffi.Pointer<ffi.Char> name,
+            rcutils_time_point_value_t timestamp,
+            ffi.Pointer<ffi.Char> format,
+            ffi.Pointer<ffi.Pointer<__va_list_tag>> args)>>;
 
 /// The structure identifying the caller location in the source code.
 typedef rcutils_log_location_t = rcutils_log_location_s;
@@ -21698,6 +40784,17 @@ final class rmw_qos_incompatible_event_status_s extends ffi.Struct {
   /// incompatible the last time an incompatibility was detected.
   @ffi.Int32()
   external int last_policy_kind;
+}
+
+/// Incompatible type information provided by a topic.
+final class rmw_incompatible_type_status_s extends ffi.Struct {
+  /// Lifetime cumulative number of incompatible types detected.
+  @ffi.Int32()
+  external int total_count;
+
+  /// The incremental number of incompatible types detected since the status was read.
+  @ffi.Int32()
+  external int total_count_change;
 }
 
 /// QoS Liveliness Changed information provided by a subscription.
@@ -21741,6 +40838,28 @@ final class rmw_liveliness_lost_status_s extends ffi.Struct {
   /// The change in total_count since the last time the status was last read.
   @ffi.Int32()
   external int total_count_change;
+}
+
+final class rmw_matched_status_s extends ffi.Struct {
+  /// For publisher, the total cumulative count of subscribers matched to the concerned publisher.
+  ///
+  /// For subscriber, the total cumulative count of publishers matched to the concerned subscriber.
+  @ffi.Size()
+  external int total_count;
+
+  /// total_count change since last time the status was read.
+  @ffi.Size()
+  external int total_count_change;
+
+  /// For publisher, the number of subscribers currently matched to the concerned publisher.
+  ///
+  /// For subscriber, the number of publishers currently matched to the concerned subscriber.
+  @ffi.Size()
+  external int current_count;
+
+  /// The current_count change since last time the status was read.
+  @ffi.Int32()
+  external int current_count_change;
 }
 
 final class rmw_message_lost_status_s extends ffi.Struct {
@@ -21935,12 +41054,7 @@ final class rmw_subscription_options_s extends ffi.Struct {
   ///    * remote nodes, especially to avoid "double delivery" when both intra- and
   ///    * inter- process communication is taking place.
   ///    *
-  ///    * \todo(wjwwood): nail this down when participant mapping is sorted out.
-  ///    *   See: https://github.com/ros2/design/pull/250
-  ///    *
-  ///    * The definition of local is somewhat vague at the moment.
-  ///    * Right now it means local to the node, and that definition works best, but
-  ///    * may become more complicated when/if participants map to a context instead.
+  ///    * The definition of local means that in the same context.
   ///    */
   @ffi.Bool()
   external bool ignore_local_publications;
@@ -22145,7 +41259,7 @@ typedef rmw_guard_conditions_t = rmw_guard_conditions_s;
 final class rmw_request_id_s extends ffi.Struct {
   /// The guid of the writer associated with this request
   @ffi.Array.multi([16])
-  external ffi.Array<ffi.Int8> writer_guid;
+  external ffi.Array<ffi.Uint8> writer_guid;
 
   /// Sequence number of this service
   @ffi.Int64()
@@ -22180,6 +41294,25 @@ abstract class rmw_qos_reliability_policy_e {
 
   /// Reliability policy has not yet been set
   static const int RMW_QOS_POLICY_RELIABILITY_UNKNOWN = 3;
+
+  /// Will match the majority of endpoints and use a reliable policy if possible
+  ///   /**
+  ///    * A policy will be chosen at the time of creating a subscription or publisher.
+  ///    * A reliable policy will by chosen if it matches with all discovered endpoints,
+  ///    * otherwise a best effort policy will be chosen.
+  ///    *
+  ///    * The QoS policy reported by functions like `rmw_subscription_get_actual_qos` or
+  ///    * `rmw_publisher_get_actual_qos` may be best available, reliable, or best effort.
+  ///    *
+  ///    * Services and clients are not supported and default to the reliability value in
+  ///    * `rmw_qos_profile_services_default`.
+  ///    *
+  ///    * The middleware is not expected to update the policy after creating a subscription or
+  ///    * publisher, even if the chosen policy is incompatible with newly discovered endpoints.
+  ///    * Therefore, this policy should be used with care since non-deterministic behavior
+  ///    * can occur due to races with discovery.
+  ///    */
+  static const int RMW_QOS_POLICY_RELIABILITY_BEST_AVAILABLE = 4;
 }
 
 /// QoS history enumerations describing how samples endure
@@ -22210,6 +41343,28 @@ abstract class rmw_qos_durability_policy_e {
 
   /// Durability policy has not yet been set
   static const int RMW_QOS_POLICY_DURABILITY_UNKNOWN = 3;
+
+  /// Will match the majority of endpoints and use a transient local policy if possible
+  ///   /**
+  ///    * A policy will be chosen at the time of creating a subscription or publisher.
+  ///    * A transient local policy will by chosen if it matches with all discovered endpoints,
+  ///    * otherwise a volatile policy will be chosen.
+  ///    *
+  ///    * In the case that a volatile policy is chosen for a subscription, any messages sent before
+  ///    * the subscription was created by transient local publishers will not be received.
+  ///    *
+  ///    * The QoS policy reported by functions like `rmw_subscription_get_actual_qos` or
+  ///    * `rmw_publisher_get_actual_qos` may be best available, transient local, or volatile.
+  ///    *
+  ///    * Services and clients are not supported and default to the durability value in
+  ///    * `rmw_qos_profile_services_default`.
+  ///    *
+  ///    * The middleware is not expected to update the policy after creating a subscription or
+  ///    * publisher, even if the chosen policy is incompatible with newly discovered endpoints.
+  ///    * Therefore, this policy should be used with care since non-deterministic behavior
+  ///    * can occur due to races with discovery.
+  ///    */
+  static const int RMW_QOS_POLICY_DURABILITY_BEST_AVAILABLE = 4;
 }
 
 /// QoS liveliness enumerations that describe a publisher's reporting policy for its alive status.
@@ -22222,6 +41377,10 @@ abstract class rmw_qos_liveliness_policy_e {
 
   /// The signal that establishes a Topic is alive comes from the ROS rmw layer.
   static const int RMW_QOS_POLICY_LIVELINESS_AUTOMATIC = 1;
+
+  /// Explicitly asserting node liveliness is required in this case.
+  /// This option is deprecated, use RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC if your application
+  /// requires to assert liveliness manually.
   static const int RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE = 2;
 
   /// The signal that establishes a Topic is alive is at the Topic level. Only publishing a message
@@ -22232,6 +41391,25 @@ abstract class rmw_qos_liveliness_policy_e {
 
   /// Liveliness policy has not yet been set
   static const int RMW_QOS_POLICY_LIVELINESS_UNKNOWN = 4;
+
+  /// Will match the majority of endpoints and use a manual by topic policy if possible
+  ///   /**
+  ///    * A policy will be chosen at the time of creating a subscription or publisher.
+  ///    * A manual by topic policy will by chosen if it matches with all discovered endpoints,
+  ///    * otherwise an automatic policy will be chosen.
+  ///    *
+  ///    * The QoS policy reported by functions like `rmw_subscription_get_actual_qos` or
+  ///    * `rmw_publisher_get_actual_qos` may be best available, automatic, or manual by topic.
+  ///    *
+  ///    * Services and clients are not supported and default to the liveliness value in
+  ///    * `rmw_qos_profile_services_default`.
+  ///    *
+  ///    * The middleware is not expected to update the policy after creating a subscription or
+  ///    * publisher, even if the chosen policy is incompatible with newly discovered endpoints.
+  ///    * Therefore, this policy should be used with care since non-deterministic behavior
+  ///    * can occur due to races with discovery.
+  ///    */
+  static const int RMW_QOS_POLICY_LIVELINESS_BEST_AVAILABLE = 5;
 }
 
 /// ROS MiddleWare quality of service profile.
@@ -22253,7 +41431,7 @@ final class rmw_qos_profile_s extends ffi.Struct {
 
   /// The period at which messages are expected to be sent/received
   ///   /**
-  ///     * RMW_DURATION_UNSPEFICIED will use the RMW implementation's default value,
+  ///     * RMW_DURATION_UNSPECIFIED will use the RMW implementation's default value,
   ///     *   which may or may not be infinite.
   ///     * RMW_DURATION_INFINITE explicitly states that messages never miss a deadline expectation.
   ///     */
@@ -22293,13 +41471,18 @@ final class rmw_qos_profile_s extends ffi.Struct {
   external bool avoid_ros_namespace_conventions;
 }
 
-/// ROS graph ID of the topic
+/// Globally unique identifier for a ROS graph entity
+/// /**
+///  * This is expected to be globally unique within a ROS domain.
+///  * The identifier should be the same when reported both locally (where the entity was created)
+///  * and on remote hosts or processes.
+///  */
 final class rmw_gid_s extends ffi.Struct {
   /// Name of the rmw implementation
   external ffi.Pointer<ffi.Char> implementation_identifier;
 
-  /// Bype data Gid value
-  @ffi.Array.multi([24])
+  /// Byte data GID value
+  @ffi.Array.multi([16])
   external ffi.Array<ffi.Uint8> data;
 }
 
@@ -22398,7 +41581,12 @@ final class rmw_message_info_s extends ffi.Struct {
   external bool from_intra_process;
 }
 
-/// ROS graph ID of the topic
+/// Globally unique identifier for a ROS graph entity
+/// /**
+///  * This is expected to be globally unique within a ROS domain.
+///  * The identifier should be the same when reported both locally (where the entity was created)
+///  * and on remote hosts or processes.
+///  */
 typedef rmw_gid_t = rmw_gid_s;
 
 /// Information describing an rmw message
@@ -22892,7 +42080,994 @@ typedef rmw_qos_profile_t = rmw_qos_profile_s;
 /// Structure which encapsulates the options for creating a rcl_node_t.
 typedef rcl_node_options_t = rcl_node_options_s;
 
+/// sequence types for all basic types
+final class rosidl_runtime_c__float__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Float> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__double__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Double> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__long_double__Sequence extends ffi.Opaque {}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__char__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.SignedChar> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__wchar__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint16> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__boolean__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Bool> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__octet__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__uint8__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__int8__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Int8> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__uint16__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint16> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__int16__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Int16> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__uint32__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint32> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__int32__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Int32> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__uint64__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint64> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// sequence types for all basic types
+final class rosidl_runtime_c__int64__Sequence extends ffi.Struct {
+  external ffi.Pointer<ffi.Int64> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// An array of 8-bit characters terminated by a null byte.
+final class rosidl_runtime_c__String extends ffi.Struct {
+  /// The pointer to the first character, the sequence ends with a null byte.
+  external ffi.Pointer<ffi.Char> data;
+
+  /// The length of the string (excluding the null byte).
+  @ffi.Size()
+  external int size;
+
+  /// The capacity represents the number of allocated bytes (including the null byte).
+  @ffi.Size()
+  external int capacity;
+}
+
+final class rosidl_runtime_c__String__Sequence extends ffi.Struct {
+  external ffi.Pointer<rosidl_runtime_c__String> data;
+
+  /// !< The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// !< The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in srv/GetTypeDescription in the package type_description_interfaces.
+final class type_description_interfaces__srv__GetTypeDescription_Request
+    extends ffi.Struct {
+  external rosidl_runtime_c__String type_name;
+
+  /// REP-2011 RIHS hash string.
+  external rosidl_runtime_c__String type_hash;
+
+  /// Whether to return the original idl/msg/etc. source file(s) in the response.
+  @ffi.Bool()
+  external bool include_type_sources;
+}
+
+/// Struct for a sequence of type_description_interfaces__srv__GetTypeDescription_Request.
+final class type_description_interfaces__srv__GetTypeDescription_Request__Sequence
+    extends ffi.Struct {
+  external ffi
+      .Pointer<type_description_interfaces__srv__GetTypeDescription_Request>
+      data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/FieldType in the package type_description_interfaces.
+/// /**
+///   * Represents the type of a field and related meta-data.
+///  */
+final class type_description_interfaces__msg__FieldType extends ffi.Struct {
+  /// Identifying number for the type of the field, using one of the above constants.
+  @ffi.Uint8()
+  external int type_id;
+
+  /// Only used when the type is an array or a bounded sequence.
+  /// In the case of an array, this is the fixed capacity of the array.
+  /// In the case of a bounded sequence, this is the maximum capacity of the sequence.
+  /// In all other cases this field is unused.
+  @ffi.Uint64()
+  external int capacity;
+
+  /// Only used when the type is a fixed or bounded string/wstring, or a array/sequence of those.
+  /// In the case of a fixed string/wstring, it is the fixed length of the string.
+  /// In the case of a bounded string/wstring, it is the maximum capacity of the string.
+  /// In the case of an array/sequence of fixed string/wstring, it is the fixed length of the strings.
+  /// In the case of an array/sequence of bounded string/wstring, it is the maximum capacity of the strings.
+  /// It is not currently possible to have different string capacities per element in the array/sequence.
+  @ffi.Uint64()
+  external int string_capacity;
+
+  /// Only used when the type is a nested type or array/sequence of nested types.
+  /// This is limited to 255 characters.
+  /// TODO(wjwwood): this 255 character limit was chosen due to this being the limit
+  /// for DDSI-RTPS based middlewares, which is the most commonly used right now.
+  /// We lack a ROS 2 specific limit in our design documents, but we should update
+  /// this and/or link to the design doc when that is available.
+  external rosidl_runtime_c__String nested_type_name;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__FieldType.
+final class type_description_interfaces__msg__FieldType__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<type_description_interfaces__msg__FieldType> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/Field in the package type_description_interfaces.
+/// /**
+///   * Represents a single field in a type.
+///  */
+final class type_description_interfaces__msg__Field extends ffi.Struct {
+  /// Name of the field.
+  external rosidl_runtime_c__String name;
+
+  /// Type of the field, including details about the type like length, nested name, etc.
+  external type_description_interfaces__msg__FieldType type;
+
+  /// Literal default value of the field as a string, as it appeared in the original
+  /// message description file, whether that be .msg/.srv/.action or .idl.
+  external rosidl_runtime_c__String default_value;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__Field.
+final class type_description_interfaces__msg__Field__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<type_description_interfaces__msg__Field> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/IndividualTypeDescription in the package type_description_interfaces.
+/// /**
+///   * Represents a single type, without the types it references, if any.
+///  */
+final class type_description_interfaces__msg__IndividualTypeDescription
+    extends ffi.Struct {
+  /// Name of the type.
+  /// This is limited to 255 characters.
+  /// TODO(wjwwood): this 255 character limit was chosen due to this being the limit
+  /// for DDSI-RTPS based middlewares, which is the most commonly used right now.
+  /// We lack a ROS 2 specific limit in our design documents, but we should update
+  /// this and/or link to the design doc when that is available.
+  external rosidl_runtime_c__String type_name;
+
+  /// Fields of the type.
+  external type_description_interfaces__msg__Field__Sequence fields;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__IndividualTypeDescription.
+final class type_description_interfaces__msg__IndividualTypeDescription__Sequence
+    extends ffi.Struct {
+  external ffi
+      .Pointer<type_description_interfaces__msg__IndividualTypeDescription>
+      data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/TypeDescription in the package type_description_interfaces.
+/// /**
+///   * Represents a complete type description, including the type itself as well as the types it references.
+///  */
+final class type_description_interfaces__msg__TypeDescription
+    extends ffi.Struct {
+  /// Description of the type.
+  external type_description_interfaces__msg__IndividualTypeDescription
+      type_description;
+
+  /// Descriptions of all referenced types, recursively.
+  external type_description_interfaces__msg__IndividualTypeDescription__Sequence
+      referenced_type_descriptions;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__TypeDescription.
+final class type_description_interfaces__msg__TypeDescription__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<type_description_interfaces__msg__TypeDescription> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/TypeSource in the package type_description_interfaces.
+/// /**
+///   * Represents the original source of a ROS 2 interface definition.
+///  */
+final class type_description_interfaces__msg__TypeSource extends ffi.Struct {
+  /// ROS interface type name, in PACKAGE/NAMESPACE/TYPENAME format.
+  external rosidl_runtime_c__String type_name;
+
+  /// The type of the original source file, typically matching the file extension.
+  /// Well-known encodings: "idl", "msg", "srv", "action", "dynamic", "implicit".
+  /// "dynamic" specifies a type created programmatically by a user, thus having no source.
+  /// "implicit" specifies a type created automatically as a subtype of a
+  /// complex type (service or action) - such as the request message for a service.
+  /// Implicit types will have no contents, the full source will be available on the parent srv/action.
+  external rosidl_runtime_c__String encoding;
+
+  /// Dumped contents of the interface definition source file.
+  /// If `encoding` is "dynamic" or "implicit", this field will be empty.
+  external rosidl_runtime_c__String raw_file_contents;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__TypeSource.
+final class type_description_interfaces__msg__TypeSource__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<type_description_interfaces__msg__TypeSource> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/KeyValue in the package type_description_interfaces.
+/// /**
+///   * Represents an arbitrary key-value pair for application-specific information.
+///  */
+final class type_description_interfaces__msg__KeyValue extends ffi.Struct {
+  external rosidl_runtime_c__String key;
+
+  external rosidl_runtime_c__String value;
+}
+
+/// Struct for a sequence of type_description_interfaces__msg__KeyValue.
+final class type_description_interfaces__msg__KeyValue__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<type_description_interfaces__msg__KeyValue> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in srv/GetTypeDescription in the package type_description_interfaces.
+final class type_description_interfaces__srv__GetTypeDescription_Response
+    extends ffi.Struct {
+  @ffi.Bool()
+  external bool successful;
+
+  /// If `successful` is false, contains a reason for failure.
+  /// If `successful` is true, this is left empty.
+  external rosidl_runtime_c__String failure_reason;
+
+  /// The parsed type description which can be used programmatically.
+  external type_description_interfaces__msg__TypeDescription type_description;
+
+  /// A list containing the interface definition source text of the requested type,
+  /// plus all types it recursively depends on.
+  /// Each source text is a copy of the original contents of the
+  /// .msg, .srv, .action, .idl, or other file if it exists, including comments and whitespace.
+  /// Sources can be matched with IndividualTypeDescriptions by their `type_name`.
+  /// The `encoding` field of each entry informs how to interpret its contents.
+  external type_description_interfaces__msg__TypeSource__Sequence type_sources;
+
+  /// Key-value pairs of extra information.
+  external type_description_interfaces__msg__KeyValue__Sequence
+      extra_information;
+}
+
+/// Struct for a sequence of type_description_interfaces__srv__GetTypeDescription_Response.
+final class type_description_interfaces__srv__GetTypeDescription_Response__Sequence
+    extends ffi.Struct {
+  external ffi
+      .Pointer<type_description_interfaces__srv__GetTypeDescription_Response>
+      data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/Time in the package builtin_interfaces.
+/// /**
+///   * This message communicates ROS Time defined here:
+///   * https://design.ros2.org/articles/clock_and_time.html
+///  */
+final class builtin_interfaces__msg__Time extends ffi.Struct {
+  /// The seconds component, valid over all int32 values.
+  @ffi.Int32()
+  external int sec;
+
+  /// The nanoseconds component, valid in the range [0, 1e9), to be added to the seconds component.
+  /// e.g.
+  /// The time -1.7 seconds is represented as {sec: -2, nanosec: 3e8}
+  /// The time 1.7 seconds is represented as {sec: 1, nanosec: 7e8}
+  @ffi.Uint32()
+  external int nanosec;
+}
+
+/// Struct for a sequence of builtin_interfaces__msg__Time.
+final class builtin_interfaces__msg__Time__Sequence extends ffi.Struct {
+  external ffi.Pointer<builtin_interfaces__msg__Time> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/ServiceEventInfo in the package service_msgs.
+final class service_msgs__msg__ServiceEventInfo extends ffi.Struct {
+  /// The type of event this message represents
+  @ffi.Uint8()
+  external int event_type;
+
+  /// Timestamp for when the event occurred (sent or received time)
+  external builtin_interfaces__msg__Time stamp;
+
+  /// Unique identifier for the client that sent the service request
+  /// Note, this is only unique for the current session.
+  /// The size here has to match the size of rmw_dds_common/msg/Gid,
+  /// but unfortunately we cannot use that message directly due to a
+  /// circular dependency.
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Uint8> client_gid;
+
+  /// Sequence number for the request
+  /// Combined with the client ID, this creates a unique ID for the service transaction
+  @ffi.Int64()
+  external int sequence_number;
+}
+
+/// Struct for a sequence of service_msgs__msg__ServiceEventInfo.
+final class service_msgs__msg__ServiceEventInfo__Sequence extends ffi.Struct {
+  external ffi.Pointer<service_msgs__msg__ServiceEventInfo> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in srv/GetTypeDescription in the package type_description_interfaces.
+final class type_description_interfaces__srv__GetTypeDescription_Event
+    extends ffi.Struct {
+  external service_msgs__msg__ServiceEventInfo info;
+
+  external type_description_interfaces__srv__GetTypeDescription_Request__Sequence
+      request;
+
+  external type_description_interfaces__srv__GetTypeDescription_Response__Sequence
+      response;
+}
+
+/// Struct for a sequence of type_description_interfaces__srv__GetTypeDescription_Event.
+final class type_description_interfaces__srv__GetTypeDescription_Event__Sequence
+    extends ffi.Struct {
+  external ffi
+      .Pointer<type_description_interfaces__srv__GetTypeDescription_Event> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/FieldType in the package type_description_interfaces.
+/// /**
+///   * Represents the type of a field and related meta-data.
+///  */
+final class rosidl_runtime_c__type_description__FieldType extends ffi.Struct {
+  /// Identifying number for the type of the field, using one of the above constants.
+  @ffi.Uint8()
+  external int type_id;
+
+  /// Only used when the type is an array or a bounded sequence.
+  /// In the case of an array, this is the fixed capacity of the array.
+  /// In the case of a bounded sequence, this is the maximum capacity of the sequence.
+  /// In all other cases this field is unused.
+  @ffi.Uint64()
+  external int capacity;
+
+  /// Only used when the type is a fixed or bounded string/wstring, or a array/sequence of those.
+  /// In the case of a fixed string/wstring, it is the fixed length of the string.
+  /// In the case of a bounded string/wstring, it is the maximum capacity of the string.
+  /// In the case of an array/sequence of fixed string/wstring, it is the fixed length of the strings.
+  /// In the case of an array/sequence of bounded string/wstring, it is the maximum capacity of the strings.
+  /// It is not currently possible to have different string capacities per element in the array/sequence.
+  @ffi.Uint64()
+  external int string_capacity;
+
+  /// Only used when the type is a nested type or array/sequence of nested types.
+  /// This is limited to 255 characters.
+  /// TODO(wjwwood): this 255 character limit was chosen due to this being the limit
+  /// for DDSI-RTPS based middlewares, which is the most commonly used right now.
+  /// We lack a ROS 2 specific limit in our design documents, but we should update
+  /// this and/or link to the design doc when that is available.
+  external rosidl_runtime_c__String nested_type_name;
+}
+
+/// Struct for a sequence of rosidl_runtime_c__type_description__FieldType.
+final class rosidl_runtime_c__type_description__FieldType__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<rosidl_runtime_c__type_description__FieldType> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/Field in the package type_description_interfaces.
+/// /**
+///   * Represents a single field in a type.
+///  */
+final class rosidl_runtime_c__type_description__Field extends ffi.Struct {
+  /// Name of the field.
+  external rosidl_runtime_c__String name;
+
+  /// Type of the field, including details about the type like length, nested name, etc.
+  external rosidl_runtime_c__type_description__FieldType type;
+
+  /// Literal default value of the field as a string, as it appeared in the original
+  /// message description file, whether that be .msg/.srv/.action or .idl.
+  external rosidl_runtime_c__String default_value;
+}
+
+/// Struct for a sequence of rosidl_runtime_c__type_description__Field.
+final class rosidl_runtime_c__type_description__Field__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<rosidl_runtime_c__type_description__Field> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/IndividualTypeDescription in the package type_description_interfaces.
+/// /**
+///   * Represents a single type, without the types it references, if any.
+///  */
+final class rosidl_runtime_c__type_description__IndividualTypeDescription
+    extends ffi.Struct {
+  /// Name of the type.
+  /// This is limited to 255 characters.
+  /// TODO(wjwwood): this 255 character limit was chosen due to this being the limit
+  /// for DDSI-RTPS based middlewares, which is the most commonly used right now.
+  /// We lack a ROS 2 specific limit in our design documents, but we should update
+  /// this and/or link to the design doc when that is available.
+  external rosidl_runtime_c__String type_name;
+
+  /// Fields of the type.
+  external rosidl_runtime_c__type_description__Field__Sequence fields;
+}
+
+/// Struct for a sequence of rosidl_runtime_c__type_description__IndividualTypeDescription.
+final class rosidl_runtime_c__type_description__IndividualTypeDescription__Sequence
+    extends ffi.Struct {
+  external ffi
+      .Pointer<rosidl_runtime_c__type_description__IndividualTypeDescription>
+      data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/TypeDescription in the package type_description_interfaces.
+/// /**
+///   * Represents a complete type description, including the type itself as well as the types it references.
+///  */
+final class rosidl_runtime_c__type_description__TypeDescription
+    extends ffi.Struct {
+  /// Description of the type.
+  external rosidl_runtime_c__type_description__IndividualTypeDescription
+      type_description;
+
+  /// Descriptions of all referenced types, recursively.
+  external rosidl_runtime_c__type_description__IndividualTypeDescription__Sequence
+      referenced_type_descriptions;
+}
+
+/// Struct for a sequence of rosidl_runtime_c__type_description__TypeDescription.
+final class rosidl_runtime_c__type_description__TypeDescription__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+      data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+/// Struct defined in msg/TypeSource in the package type_description_interfaces.
+/// /**
+///   * Represents the original source of a ROS 2 interface definition.
+///  */
+final class rosidl_runtime_c__type_description__TypeSource extends ffi.Struct {
+  /// ROS interface type name, in PACKAGE/NAMESPACE/TYPENAME format.
+  external rosidl_runtime_c__String type_name;
+
+  /// The type of the original source file, typically matching the file extension.
+  /// Well-known encodings: "idl", "msg", "srv", "action", "dynamic", "implicit".
+  /// "dynamic" specifies a type created programmatically by a user, thus having no source.
+  /// "implicit" specifies a type created automatically as a subtype of a
+  /// complex type (service or action) - such as the request message for a service.
+  /// Implicit types will have no contents, the full source will be available on the parent srv/action.
+  external rosidl_runtime_c__String encoding;
+
+  /// Dumped contents of the interface definition source file.
+  /// If `encoding` is "dynamic" or "implicit", this field will be empty.
+  external rosidl_runtime_c__String raw_file_contents;
+}
+
+/// Struct for a sequence of rosidl_runtime_c__type_description__TypeSource.
+final class rosidl_runtime_c__type_description__TypeSource__Sequence
+    extends ffi.Struct {
+  external ffi.Pointer<rosidl_runtime_c__type_description__TypeSource> data;
+
+  /// The number of valid items in data
+  @ffi.Size()
+  external int size;
+
+  /// The number of allocated items in data
+  @ffi.Size()
+  external int capacity;
+}
+
+final class rcutils_sha256_ctx_s extends ffi.Struct {
+  @ffi.Array.multi([64])
+  external ffi.Array<ffi.Uint8> data;
+
+  @ffi.Size()
+  external int datalen;
+
+  @ffi.Uint64()
+  external int bitlen;
+
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.Uint32> state;
+}
+
+typedef rcutils_sha256_ctx_t = rcutils_sha256_ctx_s;
+
+/// A ROS 2 interface type hash per REP-2011 RIHS standard.
+final class rosidl_type_hash_s extends ffi.Struct {
+  @ffi.Uint8()
+  external int version;
+
+  @ffi.Array.multi([32])
+  external ffi.Array<ffi.Uint8> value;
+}
+
+/// A ROS 2 interface type hash per REP-2011 RIHS standard.
+typedef rosidl_type_hash_t = rosidl_type_hash_s;
+
+/// Contains rosidl message type support data
+final class rosidl_message_type_support_t extends ffi.Struct {
+  /// String identifier for the type_support.
+  external ffi.Pointer<ffi.Char> typesupport_identifier;
+
+  /// Pointer to the message type support library
+  external ffi.Pointer<ffi.Void> data;
+
+  /// Pointer to the message type support handler function
+  external rosidl_message_typesupport_handle_function func;
+
+  /// Pointer to function to get the hash of the message's description
+  external rosidl_message_get_type_hash_function get_type_hash_func;
+
+  /// Pointer to function to get the description of the type
+  external rosidl_message_get_type_description_function
+      get_type_description_func;
+
+  /// Pointer to function to get the text of the sources that defined the description of the type
+  external rosidl_message_get_type_description_sources_function
+      get_type_description_sources_func;
+}
+
+typedef rosidl_message_typesupport_handle_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_message_type_support_t> Function(
+            ffi.Pointer<rosidl_message_type_support_t>,
+            ffi.Pointer<ffi.Char>)>>;
+typedef rosidl_message_get_type_hash_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_type_hash_t> Function(
+            ffi.Pointer<rosidl_message_type_support_t>)>>;
+typedef rosidl_message_get_type_description_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+            Function(ffi.Pointer<rosidl_message_type_support_t>)>>;
+typedef rosidl_message_get_type_description_sources_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+            Function(ffi.Pointer<rosidl_message_type_support_t>)>>;
+
+/// Contains rosidl service type support data
+final class rosidl_service_type_support_t extends ffi.Struct {
+  /// String identifier for the type_support.
+  external ffi.Pointer<ffi.Char> typesupport_identifier;
+
+  /// Pointer to the service type support library
+  external ffi.Pointer<ffi.Void> data;
+
+  /// Pointer to the service type support handler function
+  external rosidl_service_typesupport_handle_function func;
+
+  /// Service request message typesupport
+  external ffi.Pointer<rosidl_message_type_support_t> request_typesupport;
+
+  /// Service response message typesupport
+  external ffi.Pointer<rosidl_message_type_support_t> response_typesupport;
+
+  /// Service event message typesupport
+  external ffi.Pointer<rosidl_message_type_support_t> event_typesupport;
+
+  /// Pointer to function to create the introspection message
+  external rosidl_event_message_create_handle_function_function
+      event_message_create_handle_function;
+
+  /// Pointer to function to finalize the introspection message
+  external rosidl_event_message_destroy_handle_function_function
+      event_message_destroy_handle_function;
+
+  /// Pointer to function to get the hash of the message's description
+  external rosidl_service_get_type_hash_function get_type_hash_func;
+
+  /// Pointer to function to get the description of the type
+  external rosidl_service_get_type_description_function
+      get_type_description_func;
+
+  /// Pointer to function to get the text of the sources that defined the description of the type
+  external rosidl_service_get_type_description_sources_function
+      get_type_description_sources_func;
+}
+
+typedef rosidl_service_typesupport_handle_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_service_type_support_t> Function(
+            ffi.Pointer<rosidl_service_type_support_t>,
+            ffi.Pointer<ffi.Char>)>>;
+
+/// Creates a ServiceEvent message for the service.
+/// /**
+///  * Instantiates a ServiceEvent message with the given info and request/response message.
+///  * The message is allocated using the given allocator and must be deallocated using
+///  * the rosidl_service_introspection_destroy_handle
+///  *
+///  * \param[in] info POD fields of service_msgs/msg/ServiceEventInfo to be passed from rcl
+///  * \param[in] allocator The allocator to use for allocating the ServiceEvent message
+///  * \param[in] request_message type-erased handle to request message from rcl. Can be NULL.
+///  * \param[in] response_message type-erased handle to request message from rcl. Can be NULL.
+///  * \return The built ServiceEvent message. Will return NULL if the message could not be built.
+///  **/
+typedef rosidl_event_message_create_handle_function_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<ffi.Void> Function(
+            ffi.Pointer<rosidl_service_introspection_info_t> info,
+            ffi.Pointer<rcutils_allocator_t> allocator,
+            ffi.Pointer<ffi.Void> request_message,
+            ffi.Pointer<ffi.Void> response_message)>>;
+typedef rosidl_service_introspection_info_t
+    = rosidl_service_introspection_info_s;
+
+final class rosidl_service_introspection_info_s extends ffi.Struct {
+  @ffi.Uint8()
+  external int event_type;
+
+  @ffi.Int32()
+  external int stamp_sec;
+
+  @ffi.Uint32()
+  external int stamp_nanosec;
+
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Uint8> client_gid;
+
+  @ffi.Int64()
+  external int sequence_number;
+}
+
+/// Destroys a ServiceEvent message
+/// /**
+///  * Destroys a ServiceEvent message returned by a rosidl_service_introspection_message_create_handle
+///  * by calling the corresponding __fini function then deallocating
+///  *
+///  * \param[in] event_message The message to destroy.
+///  * \param[in] allocator The allocator to use for deallocating the message.
+///  */
+typedef rosidl_event_message_destroy_handle_function_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Bool Function(ffi.Pointer<ffi.Void> event_message,
+            ffi.Pointer<rcutils_allocator_t> allocator)>>;
+typedef rosidl_service_get_type_hash_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_type_hash_t> Function(
+            ffi.Pointer<rosidl_service_type_support_t>)>>;
+typedef rosidl_service_get_type_description_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+            Function(ffi.Pointer<rosidl_service_type_support_t>)>>;
+typedef rosidl_service_get_type_description_sources_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+            Function(ffi.Pointer<rosidl_service_type_support_t>)>>;
+
+/// Contains rosidl action type support data.
+/// /*
+///  * Actions are built based on services(goal, result and cancel) and message (feedback and status).
+///  */
+final class rosidl_action_type_support_t extends ffi.Struct {
+  external ffi.Pointer<rosidl_service_type_support_t> goal_service_type_support;
+
+  external ffi.Pointer<rosidl_service_type_support_t>
+      result_service_type_support;
+
+  external ffi.Pointer<rosidl_service_type_support_t>
+      cancel_service_type_support;
+
+  external ffi.Pointer<rosidl_message_type_support_t>
+      feedback_message_type_support;
+
+  external ffi.Pointer<rosidl_message_type_support_t>
+      status_message_type_support;
+
+  /// Pointer to function to get the hash of the action's description
+  external rosidl_action_get_type_hash_function get_type_hash_func;
+
+  /// Pointer to function to get the description of the type
+  external rosidl_action_get_type_description_function
+      get_type_description_func;
+
+  /// Pointer to function to get the text of the sources that defined the description of the type
+  external rosidl_action_get_type_description_sources_function
+      get_type_description_sources_func;
+}
+
+typedef rosidl_action_get_type_hash_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_type_hash_t> Function(
+            ffi.Pointer<rosidl_action_type_support_t>)>>;
+typedef rosidl_action_get_type_description_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeDescription>
+            Function(ffi.Pointer<rosidl_action_type_support_t>)>>;
+typedef rosidl_action_get_type_description_sources_function = ffi.Pointer<
+    ffi.NativeFunction<
+        ffi.Pointer<rosidl_runtime_c__type_description__TypeSource__Sequence>
+            Function(ffi.Pointer<rosidl_action_type_support_t>)>>;
+
 final class rcl_node_impl_s extends ffi.Opaque {}
+
+/// Structure which encapsulates a ROS Service.
+final class rcl_service_s extends ffi.Struct {
+  /// Pointer to the service implementation
+  external ffi.Pointer<rcl_service_impl_t> impl;
+}
+
+/// Internal rcl implementation struct.
+typedef rcl_service_impl_t = rcl_service_impl_s;
+
+final class rcl_service_impl_s extends ffi.Opaque {}
 
 /// Structure which encapsulates a ROS Node.
 final class rcl_node_s extends ffi.Struct {
@@ -22911,23 +43086,8 @@ typedef rcl_node_t = rcl_node_s;
 /// Structure which encapsulates an rmw node
 typedef rmw_node_t = rmw_node_s;
 
-/// Contains rosidl message type support data
-final class rosidl_message_type_support_t extends ffi.Struct {
-  /// String identifier for the type_support.
-  external ffi.Pointer<ffi.Char> typesupport_identifier;
-
-  /// Pointer to the message type support library
-  external ffi.Pointer<ffi.Void> data;
-
-  /// Pointer to the message type support handler function
-  external rosidl_message_typesupport_handle_function func;
-}
-
-typedef rosidl_message_typesupport_handle_function = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Pointer<rosidl_message_type_support_t> Function(
-            ffi.Pointer<rosidl_message_type_support_t>,
-            ffi.Pointer<ffi.Char>)>>;
+/// Structure which encapsulates a ROS Service.
+typedef rcl_service_t = rcl_service_s;
 
 /// Time source type, used to indicate the source of a time measurement.
 /// /**
@@ -23107,6 +43267,10 @@ final class rcl_publisher_options_s extends ffi.Struct {
 
   /// rmw specific publisher options, e.g. the rmw implementation specific payload.
   external rmw_publisher_options_t rmw_publisher_options;
+
+  /// Disable flag to LoanedMessage, initialized via environmental variable.
+  @ffi.Bool()
+  external bool disable_loaned_message;
 }
 
 /// Structure which encapsulates a ROS Publisher.
@@ -23135,6 +43299,189 @@ typedef rmw_serialized_message_t = rcutils_uint8_array_t;
 
 /// Structure which encapsulates an rmw publisher
 typedef rmw_publisher_t = rmw_publisher_s;
+typedef char16_t = __uint_least16_t;
+typedef __uint_least16_t = __uint16_t;
+typedef __uint16_t = ffi.UnsignedShort;
+typedef mbstate_t = __mbstate_t;
+typedef char32_t = __uint_least32_t;
+typedef __uint_least32_t = __uint32_t;
+
+/// Serialization Support
+/// This is the main structure that encompasses:
+/// - impl - The library-specific objects or implementation details
+/// - methods - The shared serialization support interface, populated with serialization
+/// library-specific function pointers
+final class rosidl_dynamic_typesupport_serialization_support_s
+    extends ffi.Opaque {}
+
+/// Serialization Support Impl
+/// For anything necessary or useful for the operation of the serialization lib
+/// (e.g. singleton dynamic type and dynamic data factories)
+final class rosidl_dynamic_typesupport_serialization_support_impl_s
+    extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external ffi.Pointer<ffi.Char> serialization_library_identifier;
+
+  external ffi.Pointer<ffi.Void> handle;
+}
+
+/// =================================================================================================
+/// Interface
+/// =================================================================================================
+final class rosidl_dynamic_typesupport_serialization_support_interface_s
+    extends ffi.Opaque {}
+
+/// Dynamic Type Builder
+final class rosidl_dynamic_typesupport_dynamic_type_builder_s
+    extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external rosidl_dynamic_typesupport_dynamic_type_builder_impl_t impl;
+
+  /// !!! Lifetime is NOT managed by this struct
+  external ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+      serialization_support;
+}
+
+typedef rosidl_dynamic_typesupport_dynamic_type_builder_impl_t
+    = rosidl_dynamic_typesupport_dynamic_type_builder_impl_s;
+
+/// Dynamic Type Builder Impl
+final class rosidl_dynamic_typesupport_dynamic_type_builder_impl_s
+    extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external ffi.Pointer<ffi.Void> handle;
+}
+
+/// Forward Declarations ============================================================================
+typedef rosidl_dynamic_typesupport_serialization_support_t
+    = rosidl_dynamic_typesupport_serialization_support_s;
+
+/// Dynamic Type
+final class rosidl_dynamic_typesupport_dynamic_type_s extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external rosidl_dynamic_typesupport_dynamic_type_impl_t impl;
+
+  /// !!! Lifetime is NOT managed by this struct
+  external ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+      serialization_support;
+}
+
+typedef rosidl_dynamic_typesupport_dynamic_type_impl_t
+    = rosidl_dynamic_typesupport_dynamic_type_impl_s;
+
+/// Dynamic Type Impl
+final class rosidl_dynamic_typesupport_dynamic_type_impl_s extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external ffi.Pointer<ffi.Void> handle;
+}
+
+/// Dynamic Data
+final class rosidl_dynamic_typesupport_dynamic_data_s extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external rosidl_dynamic_typesupport_dynamic_data_impl_t impl;
+
+  /// !!! Lifetime is NOT managed by this struct
+  external ffi.Pointer<rosidl_dynamic_typesupport_serialization_support_t>
+      serialization_support;
+}
+
+typedef rosidl_dynamic_typesupport_dynamic_data_impl_t
+    = rosidl_dynamic_typesupport_dynamic_data_impl_s;
+
+/// Dynamic Data Impl
+final class rosidl_dynamic_typesupport_dynamic_data_impl_s extends ffi.Struct {
+  external rcutils_allocator_t allocator;
+
+  external ffi.Pointer<ffi.Void> handle;
+}
+
+typedef rosidl_dynamic_typesupport_dynamic_data_t
+    = rosidl_dynamic_typesupport_dynamic_data_s;
+
+/// =================================================================================================
+/// DYNAMIC TYPESUPPORT
+/// =================================================================================================
+/// ID for accessing specific members of dynamic type or dynamic data
+typedef rosidl_dynamic_typesupport_member_id_t = ffi.Size;
+typedef rosidl_dynamic_typesupport_dynamic_type_builder_t
+    = rosidl_dynamic_typesupport_dynamic_type_builder_s;
+typedef rosidl_dynamic_typesupport_dynamic_type_t
+    = rosidl_dynamic_typesupport_dynamic_type_s;
+typedef rosidl_dynamic_typesupport_serialization_support_impl_t
+    = rosidl_dynamic_typesupport_serialization_support_impl_s;
+typedef rosidl_dynamic_typesupport_serialization_support_interface_t
+    = rosidl_dynamic_typesupport_serialization_support_interface_s;
+
+/// RUNTIME INTERFACE REFLECTION TYPE SUPPORT =======================================================
+/// Every field of this struct is expected to be populated.
+///
+/// NOTE(methylDragon): There is an opportunity to defer the population of the members by waiting
+/// for discovery, but this path is currently not supported.
+///
+/// Ownership:
+/// - The struct owns its `description` field. It is responsible for deallocating it.
+/// - The struct owns its `serialization_support` field. It is responsible for deallocating it.
+/// - The struct owns its `dynamic_message_type` field. It is responsible for deallocating it.
+/// - The struct owns its `dynamic_message` field. It is responsible for deallocating it.
+///
+/// Downstream classes are expected to borrow the `serialization_support` field, and potentially the
+/// `dynamic_message_type` and `dynamic_message` fields. As such, it is important that this struct
+/// outlives those downstream classes.
+final class rosidl_dynamic_message_type_support_impl_s extends ffi.Opaque {}
+
+/// RUNTIME INTERFACE REFLECTION TYPE SUPPORT =======================================================
+/// Every field of this struct is expected to be populated.
+///
+/// NOTE(methylDragon): There is an opportunity to defer the population of the members by waiting
+/// for discovery, but this path is currently not supported.
+///
+/// Ownership:
+/// - The struct owns its `description` field. It is responsible for deallocating it.
+/// - The struct owns its `serialization_support` field. It is responsible for deallocating it.
+/// - The struct owns its `dynamic_message_type` field. It is responsible for deallocating it.
+/// - The struct owns its `dynamic_message` field. It is responsible for deallocating it.
+///
+/// Downstream classes are expected to borrow the `serialization_support` field, and potentially the
+/// `dynamic_message_type` and `dynamic_message` fields. As such, it is important that this struct
+/// outlives those downstream classes.
+typedef rosidl_dynamic_message_type_support_impl_t
+    = rosidl_dynamic_message_type_support_impl_s;
+
+/// List of optional rmw features.
+/// /**
+///  * Some of the features listed here might become mandatory in the feature, in which case all rmw
+///  * implementations should return `true`.
+///  *
+///  * There might be some optional features that are not listed here, but the goal is to have all of
+///  * them added.
+///  */
+abstract class rmw_feature_e {
+  /// `rmw_message_info_t.publication_sequence_number` is filled correctly
+  /// by the rmw implementation.
+  static const int RMW_FEATURE_MESSAGE_INFO_PUBLICATION_SEQUENCE_NUMBER = 0;
+
+  /// `rmw_message_info_t.reception_sequence_number` is filled correctly
+  /// by the rmw implementation.
+  static const int RMW_FEATURE_MESSAGE_INFO_RECEPTION_SEQUENCE_NUMBER = 1;
+
+  /// deferred description dynamic type rosidl_message_type_support_t structs are allowed, and the
+  /// middleware MUST populate them on type discovery
+  static const int RMW_MIDDLEWARE_SUPPORTS_TYPE_DISCOVERY = 2;
+
+  /// dynamic type subscriptions will use take_dynamic_message_with_info()
+  static const int RMW_MIDDLEWARE_CAN_TAKE_DYNAMIC_MESSAGE = 3;
+}
+
+typedef rmw_subscription_t = rmw_subscription_s;
+
+/// Allocation of memory for an rmw subscription
+typedef rmw_subscription_allocation_t = rmw_subscription_allocation_s;
 
 /// Structure to hold a sequence of ROS messages.
 final class rmw_message_sequence_s extends ffi.Struct {
@@ -23198,6 +43545,10 @@ final class rcl_subscription_options_s extends ffi.Struct {
 
   /// rmw specific subscription options, e.g. the rmw implementation specific payload.
   external rmw_subscription_options_t rmw_subscription_options;
+
+  /// Disable flag to LoanedMessage, initialized via environmental variable.
+  @ffi.Bool()
+  external bool disable_loaned_message;
 }
 
 final class rcl_subscription_content_filter_options_s extends ffi.Struct {
@@ -23212,10 +43563,6 @@ typedef rcl_subscription_t = rcl_subscription_s;
 typedef rcl_subscription_options_t = rcl_subscription_options_s;
 typedef rcl_subscription_content_filter_options_t
     = rcl_subscription_content_filter_options_s;
-
-/// Allocation of memory for an rmw subscription
-typedef rmw_subscription_allocation_t = rmw_subscription_allocation_s;
-typedef rmw_subscription_t = rmw_subscription_s;
 typedef rcl_event_callback_t = rmw_event_callback_t;
 
 /// Common event callback type signature.
@@ -23244,23 +43591,17 @@ typedef rmw_event_callback_t = ffi.Pointer<
         ffi.Void Function(
             ffi.Pointer<ffi.Void> user_data, ffi.Size number_of_events)>>;
 
-/// Contains rosidl service type support data
-final class rosidl_service_type_support_t extends ffi.Struct {
-  /// String identifier for the type_support.
-  external ffi.Pointer<ffi.Char> typesupport_identifier;
+/// The introspection state for a client or service.
+abstract class rcl_service_introspection_state_e {
+  /// Introspection disabled
+  static const int RCL_SERVICE_INTROSPECTION_OFF = 0;
 
-  /// Pointer to the service type support library
-  external ffi.Pointer<ffi.Void> data;
+  /// Introspect metadata only
+  static const int RCL_SERVICE_INTROSPECTION_METADATA = 1;
 
-  /// Pointer to the service type support handler function
-  external rosidl_service_typesupport_handle_function func;
+  /// Introspection metadata and contents
+  static const int RCL_SERVICE_INTROSPECTION_CONTENTS = 2;
 }
-
-typedef rosidl_service_typesupport_handle_function = ffi.Pointer<
-    ffi.NativeFunction<
-        ffi.Pointer<rosidl_service_type_support_t> Function(
-            ffi.Pointer<rosidl_service_type_support_t>,
-            ffi.Pointer<ffi.Char>)>>;
 
 final class rcl_client_impl_s extends ffi.Opaque {}
 
@@ -23295,17 +43636,6 @@ typedef rmw_service_info_t = rmw_service_info_s;
 /// A handle to an rmw service client
 typedef rmw_client_t = rmw_client_s;
 
-final class rcl_service_impl_s extends ffi.Opaque {}
-
-/// Structure which encapsulates a ROS Service.
-final class rcl_service_s extends ffi.Struct {
-  /// Pointer to the service implementation
-  external ffi.Pointer<rcl_service_impl_t> impl;
-}
-
-/// Internal rcl implementation struct.
-typedef rcl_service_impl_t = rcl_service_impl_s;
-
 /// Options available for a rcl service.
 final class rcl_service_options_s extends ffi.Struct {
   /// Middleware quality of service settings for the service.
@@ -23315,9 +43645,6 @@ final class rcl_service_options_s extends ffi.Struct {
   ///   /** For default behavior (malloc/free), see: rcl_get_default_allocator() */
   external rcl_allocator_t allocator;
 }
-
-/// Structure which encapsulates a ROS Service.
-typedef rcl_service_t = rcl_service_s;
 
 /// Options available for a rcl service.
 typedef rcl_service_options_t = rcl_service_options_s;
@@ -23348,14 +43675,18 @@ abstract class rmw_event_type_e {
   static const int RMW_EVENT_REQUESTED_DEADLINE_MISSED = 1;
   static const int RMW_EVENT_REQUESTED_QOS_INCOMPATIBLE = 2;
   static const int RMW_EVENT_MESSAGE_LOST = 3;
+  static const int RMW_EVENT_SUBSCRIPTION_INCOMPATIBLE_TYPE = 4;
+  static const int RMW_EVENT_SUBSCRIPTION_MATCHED = 5;
 
   /// publisher events
-  static const int RMW_EVENT_LIVELINESS_LOST = 4;
-  static const int RMW_EVENT_OFFERED_DEADLINE_MISSED = 5;
-  static const int RMW_EVENT_OFFERED_QOS_INCOMPATIBLE = 6;
+  static const int RMW_EVENT_LIVELINESS_LOST = 6;
+  static const int RMW_EVENT_OFFERED_DEADLINE_MISSED = 7;
+  static const int RMW_EVENT_OFFERED_QOS_INCOMPATIBLE = 8;
+  static const int RMW_EVENT_PUBLISHER_INCOMPATIBLE_TYPE = 9;
+  static const int RMW_EVENT_PUBLICATION_MATCHED = 10;
 
   /// sentinel value
-  static const int RMW_EVENT_INVALID = 7;
+  static const int RMW_EVENT_INVALID = 11;
 }
 
 /// Encapsulate the RMW event implementation, data, and type.
@@ -23426,6 +43757,25 @@ final class rcl_timer_s extends ffi.Struct {
 
 typedef rcl_timer_impl_t = rcl_timer_impl_s;
 
+/// Structure which encapsulates the on reset callback data
+final class rcl_timer_on_reset_callback_data_s extends ffi.Struct {
+  external rcl_event_callback_t on_reset_callback;
+
+  external ffi.Pointer<ffi.Void> user_data;
+
+  @ffi.Size()
+  external int reset_counter;
+}
+
+/// Structure which encapsulates timer information when called.
+final class rcl_timer_call_info_s extends ffi.Struct {
+  @rcl_time_point_value_t()
+  external int expected_call_time;
+
+  @rcl_time_point_value_t()
+  external int actual_call_time;
+}
+
 /// Structure which encapsulates a ROS Timer.
 typedef rcl_timer_t = rcl_timer_s;
 
@@ -23445,11 +43795,16 @@ typedef rcl_timer_t = rcl_timer_s;
 typedef rcl_timer_callback_t = ffi.Pointer<
     ffi.NativeFunction<ffi.Void Function(ffi.Pointer<rcl_timer_t>, ffi.Int64)>>;
 
+/// Structure which encapsulates timer information when called.
+typedef rcl_timer_call_info_t = rcl_timer_call_info_s;
+
 /// Enumeration of all of the publisher events that may fire.
 abstract class rcl_publisher_event_type_e {
   static const int RCL_PUBLISHER_OFFERED_DEADLINE_MISSED = 0;
   static const int RCL_PUBLISHER_LIVELINESS_LOST = 1;
   static const int RCL_PUBLISHER_OFFERED_INCOMPATIBLE_QOS = 2;
+  static const int RCL_PUBLISHER_INCOMPATIBLE_TYPE = 3;
+  static const int RCL_PUBLISHER_MATCHED = 4;
 }
 
 /// Enumeration of all of the subscription events that may fire.
@@ -23458,6 +43813,8 @@ abstract class rcl_subscription_event_type_e {
   static const int RCL_SUBSCRIPTION_LIVELINESS_CHANGED = 1;
   static const int RCL_SUBSCRIPTION_REQUESTED_INCOMPATIBLE_QOS = 2;
   static const int RCL_SUBSCRIPTION_MESSAGE_LOST = 3;
+  static const int RCL_SUBSCRIPTION_INCOMPATIBLE_TYPE = 4;
+  static const int RCL_SUBSCRIPTION_MATCHED = 5;
 }
 
 final class rcl_event_impl_s extends ffi.Opaque {}
@@ -23529,173 +43886,1041 @@ typedef rcl_wait_set_impl_t = rcl_wait_set_impl_s;
 /// Container for subscription's, guard condition's, etc to be waited on.
 typedef rcl_wait_set_t = rcl_wait_set_s;
 
-final class rosidl_runtime_c__float__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Float> data;
+/// Struct defined in msg/UUID in the package unique_identifier_msgs.
+/// /**
+///   * A universally unique identifier (UUID).
+///   *
+///   *  http://en.wikipedia.org/wiki/Universally_unique_identifier
+///   *  http://tools.ietf.org/html/rfc4122.html
+///  */
+final class unique_identifier_msgs__msg__UUID extends ffi.Struct {
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Uint8> uuid;
+}
 
+/// Struct for a sequence of unique_identifier_msgs__msg__UUID.
+final class unique_identifier_msgs__msg__UUID__Sequence extends ffi.Struct {
+  external ffi.Pointer<unique_identifier_msgs__msg__UUID> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__double__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Double> data;
+/// Struct defined in msg/GoalInfo in the package action_msgs.
+/// /**
+///   * Goal ID
+///  */
+final class action_msgs__msg__GoalInfo extends ffi.Struct {
+  external unique_identifier_msgs__msg__UUID goal_id;
 
+  /// Time when the goal was accepted
+  external builtin_interfaces__msg__Time stamp;
+}
+
+/// Struct for a sequence of action_msgs__msg__GoalInfo.
+final class action_msgs__msg__GoalInfo__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__msg__GoalInfo> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__long_double__Sequence extends ffi.Opaque {}
+/// Struct defined in msg/GoalStatus in the package action_msgs.
+/// /**
+///   * An action goal can be in one of these states after it is accepted by an action
+///   * server.
+///   *
+///   * For more information, see http://design.ros2.org/articles/actions.html
+///  */
+final class action_msgs__msg__GoalStatus extends ffi.Struct {
+  /// Goal info (contains ID and timestamp).
+  external action_msgs__msg__GoalInfo goal_info;
 
-final class rosidl_runtime_c__char__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.SignedChar> data;
+  /// Action goal state-machine status.
+  @ffi.Int8()
+  external int status;
+}
 
+/// Struct for a sequence of action_msgs__msg__GoalStatus.
+final class action_msgs__msg__GoalStatus__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__msg__GoalStatus> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__wchar__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint16> data;
+/// Struct defined in msg/GoalStatusArray in the package action_msgs.
+/// /**
+///   * An array of goal statuses.
+///  */
+final class action_msgs__msg__GoalStatusArray extends ffi.Struct {
+  external action_msgs__msg__GoalStatus__Sequence status_list;
+}
 
+/// Struct for a sequence of action_msgs__msg__GoalStatusArray.
+final class action_msgs__msg__GoalStatusArray__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__msg__GoalStatusArray> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__boolean__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Bool> data;
+/// Struct defined in srv/CancelGoal in the package action_msgs.
+final class action_msgs__srv__CancelGoal_Request extends ffi.Struct {
+  /// Goal info describing the goals to cancel, see above.
+  external action_msgs__msg__GoalInfo goal_info;
+}
 
+/// Struct for a sequence of action_msgs__srv__CancelGoal_Request.
+final class action_msgs__srv__CancelGoal_Request__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__srv__CancelGoal_Request> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__octet__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> data;
+/// Struct defined in srv/CancelGoal in the package action_msgs.
+final class action_msgs__srv__CancelGoal_Response extends ffi.Struct {
+  /// Return code, see above definitions.
+  @ffi.Int8()
+  external int return_code;
 
+  /// Goals that accepted the cancel request.
+  external action_msgs__msg__GoalInfo__Sequence goals_canceling;
+}
+
+/// Struct for a sequence of action_msgs__srv__CancelGoal_Response.
+final class action_msgs__srv__CancelGoal_Response__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__srv__CancelGoal_Response> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__uint8__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint8> data;
+/// Struct defined in srv/CancelGoal in the package action_msgs.
+final class action_msgs__srv__CancelGoal_Event extends ffi.Struct {
+  external service_msgs__msg__ServiceEventInfo info;
 
+  external action_msgs__srv__CancelGoal_Request__Sequence request;
+
+  external action_msgs__srv__CancelGoal_Response__Sequence response;
+}
+
+/// Struct for a sequence of action_msgs__srv__CancelGoal_Event.
+final class action_msgs__srv__CancelGoal_Event__Sequence extends ffi.Struct {
+  external ffi.Pointer<action_msgs__srv__CancelGoal_Event> data;
+
+  /// The number of valid items in data
   @ffi.Size()
   external int size;
 
+  /// The number of allocated items in data
   @ffi.Size()
   external int capacity;
 }
 
-final class rosidl_runtime_c__int8__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Int8> data;
+/// Struct with the action goal status array
+final class rcl_action_goal_status_array_s extends ffi.Struct {
+  /// Goal status array message
+  external action_msgs__msg__GoalStatusArray msg;
 
+  /// Allocator used to initialize this struct.
+  external rcl_allocator_t allocator;
+}
+
+/// Struct with the action cancel response
+final class rcl_action_cancel_response_s extends ffi.Struct {
+  /// Cancel goal response message
+  external action_msgs__srv__CancelGoal_Response msg;
+
+  /// Allocator used to initialize this struct.
+  external rcl_allocator_t allocator;
+}
+
+/// Goal state transition events
+abstract class rcl_action_goal_event_e {
+  static const int GOAL_EVENT_EXECUTE = 0;
+  static const int GOAL_EVENT_CANCEL_GOAL = 1;
+  static const int GOAL_EVENT_SUCCEED = 2;
+  static const int GOAL_EVENT_ABORT = 3;
+  static const int GOAL_EVENT_CANCELED = 4;
+  static const int GOAL_EVENT_NUM_EVENTS = 5;
+}
+
+/// Typedef generated messages for convenience
+typedef rcl_action_goal_info_t = action_msgs__msg__GoalInfo;
+
+/// Struct with the action goal status array
+typedef rcl_action_goal_status_array_t = rcl_action_goal_status_array_s;
+typedef rcl_action_cancel_request_t = action_msgs__srv__CancelGoal_Request;
+
+/// Struct with the action cancel response
+typedef rcl_action_cancel_response_t = rcl_action_cancel_response_s;
+
+final class rcl_action_client_impl_s extends ffi.Opaque {}
+
+/// Structure which encapsulates a ROS action client.
+final class rcl_action_client_s extends ffi.Struct {
+  /// Pointer to the action client implementation
+  external ffi.Pointer<rcl_action_client_impl_t> impl;
+}
+
+/// Internal action client implementation struct.
+typedef rcl_action_client_impl_t = rcl_action_client_impl_s;
+
+/// Options available for a rcl_action_client_t.
+final class rcl_action_client_options_s extends ffi.Struct {
+  /// Middleware quality of service settings for the action client.
+  /// Goal service quality of service
+  external rmw_qos_profile_t goal_service_qos;
+
+  /// Result service quality of service
+  external rmw_qos_profile_t result_service_qos;
+
+  /// Cancel service quality of service
+  external rmw_qos_profile_t cancel_service_qos;
+
+  /// Feedback topic quality of service
+  external rmw_qos_profile_t feedback_topic_qos;
+
+  /// Status topic quality of service
+  external rmw_qos_profile_t status_topic_qos;
+
+  /// Custom allocator for the action client, used for incidental allocations.
+  ///   /** For default behavior (malloc/free), see: rcl_get_default_allocator() */
+  external rcl_allocator_t allocator;
+}
+
+/// Structure which encapsulates a ROS action client.
+typedef rcl_action_client_t = rcl_action_client_s;
+
+/// Options available for a rcl_action_client_t.
+typedef rcl_action_client_options_t = rcl_action_client_options_s;
+
+/// Goal states
+/// TODO(jacobperron): Let states be defined by action_msgs/msg/goal_status.h
+/// Ideally, we could use an enum type directly from the message when the feature
+/// is available. Issue: https://github.com/ros2/rosidl/issues/260
+typedef rcl_action_goal_state_t = ffi.Int8;
+
+final class rcl_action_goal_handle_impl_s extends ffi.Opaque {}
+
+/// Goal handle for an action.
+final class rcl_action_goal_handle_s extends ffi.Struct {
+  /// Pointer to the action goal handle implementation
+  external ffi.Pointer<rcl_action_goal_handle_impl_t> impl;
+}
+
+/// Internal rcl action goal implementation struct.
+typedef rcl_action_goal_handle_impl_t = rcl_action_goal_handle_impl_s;
+
+/// Goal handle for an action.
+typedef rcl_action_goal_handle_t = rcl_action_goal_handle_s;
+
+final class rcl_action_server_impl_s extends ffi.Opaque {}
+
+/// Structure which encapsulates a ROS Action Server.
+final class rcl_action_server_s extends ffi.Struct {
+  /// Pointer to the action server implementation
+  external ffi.Pointer<rcl_action_server_impl_t> impl;
+}
+
+/// Internal rcl_action implementation struct.
+typedef rcl_action_server_impl_t = rcl_action_server_impl_s;
+
+/// Options available for a rcl_action_server_t.
+final class rcl_action_server_options_s extends ffi.Struct {
+  /// Middleware quality of service settings for the action server.
+  /// Goal service quality of service
+  external rmw_qos_profile_t goal_service_qos;
+
+  /// Cancel service quality of service
+  external rmw_qos_profile_t cancel_service_qos;
+
+  /// Result service quality of service
+  external rmw_qos_profile_t result_service_qos;
+
+  /// Feedback topic quality of service
+  external rmw_qos_profile_t feedback_topic_qos;
+
+  /// Status topic quality of service
+  external rmw_qos_profile_t status_topic_qos;
+
+  /// Custom allocator for the action server, used for incidental allocations.
+  ///   /** For default behavior (malloc/free), see: rcl_get_default_allocator() */
+  external rcl_allocator_t allocator;
+
+  /// Goal handles that have results longer than this time are deallocated.
+  external rcl_duration_t result_timeout;
+}
+
+/// Structure which encapsulates a ROS Action Server.
+typedef rcl_action_server_t = rcl_action_server_s;
+
+/// Options available for a rcl_action_server_t.
+typedef rcl_action_server_options_t = rcl_action_server_options_s;
+
+/// Associative array of topic or service names and types.
+final class rmw_names_and_types_s extends ffi.Struct {
+  /// Array of names
+  external rcutils_string_array_t names;
+
+  /// Dynamic array of arrays of type names, with the same length as `names`
+  external ffi.Pointer<rcutils_string_array_t> types;
+}
+
+/// Associative array of topic or service names and types.
+typedef rmw_names_and_types_t = rmw_names_and_types_s;
+
+/// A data structure that encapsulates the node name, node namespace,
+/// topic_type, gid, and qos_profile of publishers and subscriptions
+/// for a topic.
+final class rmw_topic_endpoint_info_s extends ffi.Struct {
+  /// Name of the node
+  external ffi.Pointer<ffi.Char> node_name;
+
+  /// Namespace of the node
+  external ffi.Pointer<ffi.Char> node_namespace;
+
+  /// The associated topic type's name
+  external ffi.Pointer<ffi.Char> topic_type;
+
+  /// Hashed value for topic type's description
+  external rosidl_type_hash_t topic_type_hash;
+
+  /// The endpoint type
+  @ffi.Int32()
+  external int endpoint_type;
+
+  /// The GID of the endpoint
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Uint8> endpoint_gid;
+
+  /// QoS profile of the endpoint
+  external rmw_qos_profile_t qos_profile;
+}
+
+/// A data structure that encapsulates the node name, node namespace,
+/// topic_type, gid, and qos_profile of publishers and subscriptions
+/// for a topic.
+typedef rmw_topic_endpoint_info_t = rmw_topic_endpoint_info_s;
+
+/// Array of topic endpoint information
+final class rmw_topic_endpoint_info_array_s extends ffi.Struct {
+  /// Size of the array.
   @ffi.Size()
   external int size;
 
-  @ffi.Size()
-  external int capacity;
+  /// Contiguous storage for topic endpoint information elements.
+  external ffi.Pointer<rmw_topic_endpoint_info_t> info_array;
 }
 
-final class rosidl_runtime_c__uint16__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint16> data;
+/// Array of topic endpoint information
+typedef rmw_topic_endpoint_info_array_t = rmw_topic_endpoint_info_array_s;
 
-  @ffi.Size()
-  external int size;
+/// A structure that contains topic names and types.
+typedef rcl_names_and_types_t = rmw_names_and_types_t;
 
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__int16__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Int16> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__uint32__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint32> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__int32__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Int32> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__uint64__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Uint64> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__int64__Sequence extends ffi.Struct {
-  external ffi.Pointer<ffi.Int64> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
-
-/// An array of 8-bit characters terminated by a null byte.
-final class rosidl_runtime_c__String extends ffi.Struct {
-  /// The pointer to the first character, the sequence ends with a null byte.
-  external ffi.Pointer<ffi.Char> data;
-
-  /// The length of the string (excluding the null byte).
-  @ffi.Size()
-  external int size;
-
-  /// The capacity represents the number of allocated bytes (including the null byte).
-  @ffi.Size()
-  external int capacity;
-}
-
-final class rosidl_runtime_c__String__Sequence extends ffi.Struct {
-  external ffi.Pointer<rosidl_runtime_c__String> data;
-
-  @ffi.Size()
-  external int size;
-
-  @ffi.Size()
-  external int capacity;
-}
+/// An array of topic endpoint information.
+typedef rcl_topic_endpoint_info_array_t = rmw_topic_endpoint_info_array_t;
 
 const int RMW_QOS_POLICY_DEPTH_SYSTEM_DEFAULT = 0;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_NOT_SET = 0;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE =
+    1;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8 = 2;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8 = 3;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16 = 4;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16 = 5;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32 = 6;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32 = 7;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64 = 8;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64 = 9;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT = 10;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE = 11;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE =
+    12;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR = 13;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR = 14;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN = 15;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE = 16;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING = 17;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING = 18;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING =
+    19;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING = 20;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING = 21;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING =
+    22;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY =
+    49;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_ARRAY =
+    50;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_ARRAY =
+    51;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_ARRAY =
+    52;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_ARRAY =
+    53;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_ARRAY =
+    54;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_ARRAY =
+    55;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_ARRAY =
+    56;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_ARRAY =
+    57;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_ARRAY =
+    58;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_ARRAY =
+    59;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY =
+    60;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_ARRAY =
+    61;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_ARRAY =
+    62;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_ARRAY = 63;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_ARRAY =
+    64;
+
+const int type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_ARRAY =
+    65;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_ARRAY = 66;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY =
+    67;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY =
+    68;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY =
+    69;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY =
+    70;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE =
+    97;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE =
+    98;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE =
+    99;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE =
+    100;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE =
+    101;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE =
+    102;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE =
+    103;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE =
+    104;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE =
+    105;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE =
+    106;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE =
+    107;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE =
+    108;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE =
+    109;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE =
+    110;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE =
+    111;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE =
+    112;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE =
+    113;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE =
+    114;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE =
+    115;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE =
+    116;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE =
+    117;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE =
+    118;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE =
+    145;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE =
+    146;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE =
+    147;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE =
+    148;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE =
+    149;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE =
+    150;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE =
+    151;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE =
+    152;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE =
+    153;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE =
+    154;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE =
+    155;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE =
+    156;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE =
+    157;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE =
+    158;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE =
+    159;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE =
+    160;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE =
+    161;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE =
+    162;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE =
+    163;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE =
+    164;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE =
+    165;
+
+const int
+    type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE =
+    166;
+
+const int
+    type_description_interfaces__msg__FieldType__nested_type_name__MAX_STRING_SIZE =
+    255;
+
+const int
+    type_description_interfaces__msg__IndividualTypeDescription__type_name__MAX_STRING_SIZE =
+    255;
+
+const int service_msgs__msg__ServiceEventInfo__REQUEST_SENT = 0;
+
+const int service_msgs__msg__ServiceEventInfo__REQUEST_RECEIVED = 1;
+
+const int service_msgs__msg__ServiceEventInfo__RESPONSE_SENT = 2;
+
+const int service_msgs__msg__ServiceEventInfo__RESPONSE_RECEIVED = 3;
+
+const int
+    type_description_interfaces__srv__GetTypeDescription_Event__request__MAX_SIZE =
+    1;
+
+const int
+    type_description_interfaces__srv__GetTypeDescription_Event__response__MAX_SIZE =
+    1;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NOT_SET = 0;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE = 1;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8 = 2;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8 = 3;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16 = 4;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16 = 5;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32 = 6;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32 = 7;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64 = 8;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64 = 9;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT = 10;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE = 11;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE = 12;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR = 13;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR = 14;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN =
+    15;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE = 16;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING = 17;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING =
+    18;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING = 19;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING =
+    20;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING =
+    21;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING =
+    22;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY =
+    49;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_ARRAY =
+    50;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_ARRAY = 51;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_ARRAY = 52;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_ARRAY = 53;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_ARRAY = 54;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_ARRAY = 55;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_ARRAY = 56;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_ARRAY = 57;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_ARRAY = 58;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_ARRAY = 59;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY =
+    60;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_ARRAY =
+    61;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_ARRAY = 62;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_ARRAY =
+    63;
+
+const int rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_ARRAY =
+    64;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_ARRAY = 65;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_ARRAY =
+    66;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY =
+    67;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY =
+    68;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY =
+    69;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY =
+    70;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE =
+    97;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE =
+    98;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE =
+    99;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE =
+    100;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE =
+    101;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE =
+    102;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE =
+    103;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE =
+    104;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE =
+    105;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE =
+    106;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE =
+    107;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE =
+    108;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE =
+    109;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE =
+    110;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE =
+    111;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE =
+    112;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE =
+    113;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE =
+    114;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE =
+    115;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE =
+    116;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE =
+    117;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE =
+    118;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE =
+    145;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE =
+    146;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE =
+    147;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE =
+    148;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE =
+    149;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE =
+    150;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE =
+    151;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE =
+    152;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE =
+    153;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE =
+    154;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE =
+    155;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE =
+    156;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE =
+    157;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE =
+    158;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE =
+    159;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE =
+    160;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE =
+    161;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE =
+    162;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE =
+    163;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE =
+    164;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE =
+    165;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE =
+    166;
+
+const int
+    rosidl_runtime_c__type_description__FieldType__nested_type_name__MAX_STRING_SIZE =
+    255;
+
+const int
+    rosidl_runtime_c__type_description__IndividualTypeDescription__type_name__MAX_STRING_SIZE =
+    255;
+
+const int action_msgs__msg__GoalStatus__STATUS_UNKNOWN = 0;
+
+const int action_msgs__msg__GoalStatus__STATUS_ACCEPTED = 1;
+
+const int action_msgs__msg__GoalStatus__STATUS_EXECUTING = 2;
+
+const int action_msgs__msg__GoalStatus__STATUS_CANCELING = 3;
+
+const int action_msgs__msg__GoalStatus__STATUS_SUCCEEDED = 4;
+
+const int action_msgs__msg__GoalStatus__STATUS_CANCELED = 5;
+
+const int action_msgs__msg__GoalStatus__STATUS_ABORTED = 6;
+
+const int action_msgs__srv__CancelGoal_Response__ERROR_NONE = 0;
+
+const int action_msgs__srv__CancelGoal_Response__ERROR_REJECTED = 1;
+
+const int action_msgs__srv__CancelGoal_Response__ERROR_UNKNOWN_GOAL_ID = 2;
+
+const int action_msgs__srv__CancelGoal_Response__ERROR_GOAL_TERMINATED = 3;
+
+const int action_msgs__srv__CancelGoal_Event__request__MAX_SIZE = 1;
+
+const int action_msgs__srv__CancelGoal_Event__response__MAX_SIZE = 1;
 
 const int true1 = 1;
 
@@ -23704,6 +44929,8 @@ const int false1 = 0;
 const int __bool_true_false_are_defined = 1;
 
 const int NULL = 0;
+
+const int RCUTILS_HAS_NONNULL = 1;
 
 const int RCUTILS_RET_OK = 0;
 
@@ -23943,8 +45170,6 @@ const int WINT_MIN = 0;
 
 const int WINT_MAX = 4294967295;
 
-const int RMW_DEFAULT_DOMAIN_ID = -1;
-
 const int RMW_RET_OK = 0;
 
 const int RMW_RET_ERROR = 1;
@@ -23961,7 +45186,9 @@ const int RMW_RET_INCORRECT_RMW_IMPLEMENTATION = 12;
 
 const int RMW_RET_NODE_NAME_NON_EXISTENT = 203;
 
-const int __GNUC_VA_LIST = 1;
+const int RMW_DISCOVERY_OPTIONS_STATIC_PEERS_MAX_LENGTH = 256;
+
+const int RMW_DEFAULT_DOMAIN_ID = -1;
 
 const int _STDIO_H = 1;
 
@@ -23983,6 +45210,8 @@ const int _IO_ERR_SEEN = 32;
 
 const int _IO_USER_LOCK = 32768;
 
+const int __cookie_io_functions_t_defined = 1;
+
 const int _IOFBF = 0;
 
 const int _IOLBF = 1;
@@ -24001,11 +45230,11 @@ const int SEEK_END = 2;
 
 const String P_tmpdir = '/tmp';
 
-const int _BITS_STDIO_LIM_H = 1;
-
 const int L_tmpnam = 20;
 
 const int TMP_MAX = 238328;
+
+const int _BITS_STDIO_LIM_H = 1;
 
 const int FILENAME_MAX = 4096;
 
@@ -24201,7 +45430,7 @@ const String RCUTILS_LOGGING_SEPARATOR_STRING = '.';
 
 const int RCUTILS_DEFAULT_LOGGER_DEFAULT_LEVEL = 20;
 
-const int RMW_GID_STORAGE_SIZE = 24;
+const int RMW_GID_STORAGE_SIZE = 16;
 
 const String RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE_DEPRECATED_MSG =
     'RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_NODE is deprecated. Use RMW_QOS_POLICY_LIVELINESS_MANUAL_BY_TOPIC if manually asserted liveliness is needed.';
@@ -24233,6 +45462,8 @@ const int RCL_RET_SERVICE_NAME_INVALID = 104;
 const int RCL_RET_UNKNOWN_SUBSTITUTION = 105;
 
 const int RCL_RET_ALREADY_SHUTDOWN = 106;
+
+const int RCL_RET_NOT_FOUND = 107;
 
 const int RCL_RET_NODE_INVALID = 200;
 
@@ -24284,6 +45515,8 @@ const int RCL_RET_LIFECYCLE_STATE_REGISTERED = 3000;
 
 const int RCL_RET_LIFECYCLE_STATE_NOT_REGISTERED = 3001;
 
+const int RCL_ACTION_RET_NOT_TERMINATED_YET = 4001;
+
 const String RCL_ROS_ARGS_FLAG = '--ros-args';
 
 const String RCL_ROS_ARGS_EXPLICIT_END_TOKEN = '--';
@@ -24304,6 +45537,8 @@ const String RCL_SHORT_ENCLAVE_FLAG = '-e';
 
 const String RCL_LOG_LEVEL_FLAG = '--log-level';
 
+const String RCL_EXTERNAL_LOG_FILE_NAME_PREFIX = '--log-file-name';
+
 const String RCL_EXTERNAL_LOG_CONFIG_FLAG = '--log-config-file';
 
 const String RCL_LOG_STDOUT_FLAG_SUFFIX = 'stdout-logs';
@@ -24312,12 +45547,299 @@ const String RCL_LOG_ROSOUT_FLAG_SUFFIX = 'rosout-logs';
 
 const String RCL_LOG_EXT_LIB_FLAG_SUFFIX = 'external-lib-logs';
 
-const int __alignas_is_defined = 1;
-
-const int __alignof_is_defined = 1;
-
 const int RCL_CONTEXT_ATOMIC_INSTANCE_ID_STORAGE_SIZE = 8;
 
 const int RCL_DEFAULT_DOMAIN_ID = -1;
 
 const int RCL_NODE_OPTIONS_DEFAULT_DOMAIN_ID = -1;
+
+const int RCUTILS_SHA256_BLOCK_SIZE = 32;
+
+const int ROSIDL_TYPE_HASH_VERSION_UNSET = 0;
+
+const int ROSIDL_TYPE_HASH_SIZE = 32;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_NOT_SET = 0;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_NESTED_TYPE = 1;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT8 = 2;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT8 = 3;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT16 = 4;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT16 = 5;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT32 = 6;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT32 = 7;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT64 = 8;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT64 = 9;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT = 10;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT32 = 10;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_DOUBLE = 11;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT64 = 11;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_LONG_DOUBLE = 12;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT128 = 12;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_CHAR = 13;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WCHAR = 14;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOOLEAN = 15;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BYTE = 16;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_STRING = 17;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WSTRING = 18;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_STRING = 19;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_WSTRING = 20;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_STRING = 21;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_WSTRING = 22;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_SEQUENCE_TYPE_DELIMITER = 48;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_ARRAY_OFFSET = 48;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_UNBOUNDED_SEQUENCE_OFFSET = 96;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_BOUNDED_SEQUENCE_OFFSET = 144;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_NESTED_TYPE_ARRAY = 49;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT8_ARRAY = 50;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT8_ARRAY = 51;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT16_ARRAY = 52;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT16_ARRAY = 53;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT32_ARRAY = 54;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT32_ARRAY = 55;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT64_ARRAY = 56;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT64_ARRAY = 57;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT_ARRAY = 58;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT32_ARRAY = 58;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_DOUBLE_ARRAY = 59;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT64_ARRAY = 59;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_LONG_DOUBLE_ARRAY = 60;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT128_ARRAY = 60;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_CHAR_ARRAY = 61;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WCHAR_ARRAY = 62;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOOLEAN_ARRAY = 63;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BYTE_ARRAY = 64;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_STRING_ARRAY = 65;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WSTRING_ARRAY = 66;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_STRING_ARRAY = 67;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_WSTRING_ARRAY = 68;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_STRING_ARRAY = 69;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_WSTRING_ARRAY = 70;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE =
+    97;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT8_BOUNDED_SEQUENCE = 98;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT8_BOUNDED_SEQUENCE = 99;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT16_BOUNDED_SEQUENCE = 100;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT16_BOUNDED_SEQUENCE = 101;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT32_BOUNDED_SEQUENCE = 102;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT32_BOUNDED_SEQUENCE = 103;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT64_BOUNDED_SEQUENCE = 104;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT64_BOUNDED_SEQUENCE = 105;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE = 106;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT32_BOUNDED_SEQUENCE = 106;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE = 107;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT64_BOUNDED_SEQUENCE = 107;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE =
+    108;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT128_BOUNDED_SEQUENCE = 108;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_CHAR_BOUNDED_SEQUENCE = 109;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE = 110;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE = 111;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BYTE_BOUNDED_SEQUENCE = 112;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_STRING_BOUNDED_SEQUENCE = 113;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE = 114;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE =
+    115;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE =
+    116;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE = 117;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE =
+    118;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE =
+    145;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE = 146;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE = 147;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE = 148;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE = 149;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE = 150;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE = 151;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE = 152;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE = 153;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE = 154;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT32_UNBOUNDED_SEQUENCE =
+    154;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE = 155;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT64_UNBOUNDED_SEQUENCE =
+    155;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE =
+    156;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FLOAT128_UNBOUNDED_SEQUENCE =
+    156;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE = 157;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE = 158;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE =
+    159;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE = 160;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE = 161;
+
+const int ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE =
+    162;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE = 163;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE =
+    164;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE =
+    165;
+
+const int
+    ROSIDL_DYNAMIC_TYPESUPPORT_FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE =
+    166;
+
+const String RCL_SERVICE_INTROSPECTION_TOPIC_POSTFIX = '/_service_event';
+
+const int RCUTILS_LOG_MIN_SEVERITY_DEBUG = 0;
+
+const int RCUTILS_LOG_MIN_SEVERITY_INFO = 1;
+
+const int RCUTILS_LOG_MIN_SEVERITY_WARN = 2;
+
+const int RCUTILS_LOG_MIN_SEVERITY_ERROR = 3;
+
+const int RCUTILS_LOG_MIN_SEVERITY_FATAL = 4;
+
+const int RCUTILS_LOG_MIN_SEVERITY_NONE = 5;
+
+const int RCUTILS_LOG_MIN_SEVERITY = 0;
+
+const int RCL_RET_ACTION_NAME_INVALID = 2000;
+
+const int RCL_RET_ACTION_GOAL_ACCEPTED = 2100;
+
+const int RCL_RET_ACTION_GOAL_REJECTED = 2101;
+
+const int RCL_RET_ACTION_CLIENT_INVALID = 2102;
+
+const int RCL_RET_ACTION_CLIENT_TAKE_FAILED = 2103;
+
+const int RCL_RET_ACTION_SERVER_INVALID = 2200;
+
+const int RCL_RET_ACTION_SERVER_TAKE_FAILED = 2201;
+
+const int RCL_RET_ACTION_GOAL_HANDLE_INVALID = 2300;
+
+const int RCL_RET_ACTION_GOAL_EVENT_INVALID = 2301;
+
+const int UUID_SIZE = 16;
+
+const int GOAL_STATE_UNKNOWN = 0;
+
+const int GOAL_STATE_ACCEPTED = 1;
+
+const int GOAL_STATE_EXECUTING = 2;
+
+const int GOAL_STATE_CANCELING = 3;
+
+const int GOAL_STATE_SUCCEEDED = 4;
+
+const int GOAL_STATE_CANCELED = 5;
+
+const int GOAL_STATE_ABORTED = 6;
+
+const int GOAL_STATE_NUM_STATES = 7;
+
+const int INVAILD_GOAL_TERMINAL_TIMESTAMP = -1;

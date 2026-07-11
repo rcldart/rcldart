@@ -1,0 +1,8 @@
+# rmw_cyclonedds overlay — the SAME rmw rcldart uses on Linux/Android/no-ROS, so
+# one DDS across every platform. On iOS prefer a CycloneDDS unicast config
+# (AppleRosBootstrap peers/cyclonedaUri) since sandbox multicast is unreliable.
+# iceoryx shared-memory transport is disabled (ENABLE_SHM=OFF) — not needed on
+# mobile and avoids an extra dependency.
+repositories:
+  eclipse-cyclonedds/cyclonedds: { type: git, url: https://github.com/eclipse-cyclonedds/cyclonedds.git, version: releases/0.10.x }
+  ros2/rmw_cyclonedds:      { type: git, url: https://github.com/ros2/rmw_cyclonedds.git,       version: jazzy }

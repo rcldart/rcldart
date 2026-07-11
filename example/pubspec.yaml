@@ -46,6 +46,26 @@ dependencies:
   logger: ^2.3.0
   logging: ^1.2.0
 
+  # Custom interfaces generated from rcldart_ws.
+  rcldart_msgs:
+    git:
+      url: https://github.com/rcldart/rcldart_msgs.git
+  diagnostic_msgs:
+    git:
+      url: https://github.com/ros2/common_interfaces.git
+
+# Resolve the sibling packages locally (they are checked out next to rcldart).
+dependency_overrides:
+  rcldart_utils:
+    path: ../rcldart_utils
+  std_msgs:
+    path: ../std_msgs
+  # Custom interfaces generated in rcldart_ws (colcon-built + gen_dart_package).
+  rcldart_msgs:
+    path: ../rcldart_ws/dart/rcldart_msgs
+  diagnostic_msgs:
+    path: ../rcldart_ws/dart/diagnostic_msgs
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -6,18 +6,26 @@ files:
     symbols:
       c:@E@RCUTILS_LOG_SEVERITY:
         name: RCUTILS_LOG_SEVERITY
+      c:@E@rcl_action_goal_event_e:
+        name: rcl_action_goal_event_e
       c:@E@rcl_clock_change_e:
         name: rcl_clock_change_e
       c:@E@rcl_clock_type_e:
         name: rcl_clock_type_e
       c:@E@rcl_publisher_event_type_e:
         name: rcl_publisher_event_type_e
+      c:@E@rcl_service_introspection_state_e:
+        name: rcl_service_introspection_state_e
       c:@E@rcl_subscription_event_type_e:
         name: rcl_subscription_event_type_e
+      c:@E@rmw_automatic_discovery_range_e:
+        name: rmw_automatic_discovery_range_e
       c:@E@rmw_endpoint_type_e:
         name: rmw_endpoint_type_e
       c:@E@rmw_event_type_e:
         name: rmw_event_type_e
+      c:@E@rmw_feature_e:
+        name: rmw_feature_e
       c:@E@rmw_localhost_only_e:
         name: rmw_localhost_only_e
       c:@E@rmw_qos_compatibility_type_e:
@@ -40,8 +48,412 @@ files:
         name: rmw_log_severity_t
       c:@Ea@RMW_QOS_POLICY_DEPTH_SYSTEM_DEFAULT@RMW_QOS_POLICY_DEPTH_SYSTEM_DEFAULT:
         name: RMW_QOS_POLICY_DEPTH_SYSTEM_DEFAULT
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_ABORTED@action_msgs__msg__GoalStatus__STATUS_ABORTED:
+        name: action_msgs__msg__GoalStatus__STATUS_ABORTED
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_ACCEPTED@action_msgs__msg__GoalStatus__STATUS_ACCEPTED:
+        name: action_msgs__msg__GoalStatus__STATUS_ACCEPTED
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_CANCELED@action_msgs__msg__GoalStatus__STATUS_CANCELED:
+        name: action_msgs__msg__GoalStatus__STATUS_CANCELED
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_CANCELING@action_msgs__msg__GoalStatus__STATUS_CANCELING:
+        name: action_msgs__msg__GoalStatus__STATUS_CANCELING
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_EXECUTING@action_msgs__msg__GoalStatus__STATUS_EXECUTING:
+        name: action_msgs__msg__GoalStatus__STATUS_EXECUTING
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_SUCCEEDED@action_msgs__msg__GoalStatus__STATUS_SUCCEEDED:
+        name: action_msgs__msg__GoalStatus__STATUS_SUCCEEDED
+      c:@Ea@action_msgs__msg__GoalStatus__STATUS_UNKNOWN@action_msgs__msg__GoalStatus__STATUS_UNKNOWN:
+        name: action_msgs__msg__GoalStatus__STATUS_UNKNOWN
+      c:@Ea@action_msgs__srv__CancelGoal_Event__request__MAX_SIZE@action_msgs__srv__CancelGoal_Event__request__MAX_SIZE:
+        name: action_msgs__srv__CancelGoal_Event__request__MAX_SIZE
+      c:@Ea@action_msgs__srv__CancelGoal_Event__response__MAX_SIZE@action_msgs__srv__CancelGoal_Event__response__MAX_SIZE:
+        name: action_msgs__srv__CancelGoal_Event__response__MAX_SIZE
+      c:@Ea@action_msgs__srv__CancelGoal_Response__ERROR_GOAL_TERMINATED@action_msgs__srv__CancelGoal_Response__ERROR_GOAL_TERMINATED:
+        name: action_msgs__srv__CancelGoal_Response__ERROR_GOAL_TERMINATED
+      c:@Ea@action_msgs__srv__CancelGoal_Response__ERROR_NONE@action_msgs__srv__CancelGoal_Response__ERROR_NONE:
+        name: action_msgs__srv__CancelGoal_Response__ERROR_NONE
+      c:@Ea@action_msgs__srv__CancelGoal_Response__ERROR_REJECTED@action_msgs__srv__CancelGoal_Response__ERROR_REJECTED:
+        name: action_msgs__srv__CancelGoal_Response__ERROR_REJECTED
+      c:@Ea@action_msgs__srv__CancelGoal_Response__ERROR_UNKNOWN_GOAL_ID@action_msgs__srv__CancelGoal_Response__ERROR_UNKNOWN_GOAL_ID:
+        name: action_msgs__srv__CancelGoal_Response__ERROR_UNKNOWN_GOAL_ID
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NOT_SET@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NOT_SET:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_NOT_SET
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_ARRAY@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_ARRAY:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_ARRAY
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE@rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE:
+        name: rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@rosidl_runtime_c__type_description__FieldType__nested_type_name__MAX_STRING_SIZE@rosidl_runtime_c__type_description__FieldType__nested_type_name__MAX_STRING_SIZE:
+        name: rosidl_runtime_c__type_description__FieldType__nested_type_name__MAX_STRING_SIZE
+      c:@Ea@rosidl_runtime_c__type_description__IndividualTypeDescription__type_name__MAX_STRING_SIZE@rosidl_runtime_c__type_description__IndividualTypeDescription__type_name__MAX_STRING_SIZE:
+        name: rosidl_runtime_c__type_description__IndividualTypeDescription__type_name__MAX_STRING_SIZE
+      c:@Ea@service_msgs__msg__ServiceEventInfo__REQUEST_RECEIVED@service_msgs__msg__ServiceEventInfo__REQUEST_RECEIVED:
+        name: service_msgs__msg__ServiceEventInfo__REQUEST_RECEIVED
+      c:@Ea@service_msgs__msg__ServiceEventInfo__REQUEST_SENT@service_msgs__msg__ServiceEventInfo__REQUEST_SENT:
+        name: service_msgs__msg__ServiceEventInfo__REQUEST_SENT
+      c:@Ea@service_msgs__msg__ServiceEventInfo__RESPONSE_RECEIVED@service_msgs__msg__ServiceEventInfo__RESPONSE_RECEIVED:
+        name: service_msgs__msg__ServiceEventInfo__RESPONSE_RECEIVED
+      c:@Ea@service_msgs__msg__ServiceEventInfo__RESPONSE_SENT@service_msgs__msg__ServiceEventInfo__RESPONSE_SENT:
+        name: service_msgs__msg__ServiceEventInfo__RESPONSE_SENT
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOOLEAN_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BOUNDED_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_BYTE_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_CHAR_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_DOUBLE_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FIXED_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT16_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT32_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT64_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_INT8_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_LONG_DOUBLE_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_NESTED_TYPE_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_NOT_SET@type_description_interfaces__msg__FieldType__FIELD_TYPE_NOT_SET:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_NOT_SET
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_STRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT16_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT32_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT64_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_UINT8_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WCHAR_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_ARRAY@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_ARRAY:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_ARRAY
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_BOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE@type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE:
+        name: type_description_interfaces__msg__FieldType__FIELD_TYPE_WSTRING_UNBOUNDED_SEQUENCE
+      c:@Ea@type_description_interfaces__msg__FieldType__nested_type_name__MAX_STRING_SIZE@type_description_interfaces__msg__FieldType__nested_type_name__MAX_STRING_SIZE:
+        name: type_description_interfaces__msg__FieldType__nested_type_name__MAX_STRING_SIZE
+      c:@Ea@type_description_interfaces__msg__IndividualTypeDescription__type_name__MAX_STRING_SIZE@type_description_interfaces__msg__IndividualTypeDescription__type_name__MAX_STRING_SIZE:
+        name: type_description_interfaces__msg__IndividualTypeDescription__type_name__MAX_STRING_SIZE
+      c:@Ea@type_description_interfaces__srv__GetTypeDescription_Event__request__MAX_SIZE@type_description_interfaces__srv__GetTypeDescription_Event__request__MAX_SIZE:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__request__MAX_SIZE
+      c:@Ea@type_description_interfaces__srv__GetTypeDescription_Event__response__MAX_SIZE@type_description_interfaces__srv__GetTypeDescription_Event__response__MAX_SIZE:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__response__MAX_SIZE
       c:@F@_Exit:
         name: _Exit
+      c:@F@__asprintf:
+        name: __asprintf
       c:@F@__assert:
         name: __assert
       c:@F@__assert_fail:
@@ -54,6 +466,8 @@ files:
         name: __getdelim
       c:@F@__memcmpeq:
         name: __memcmpeq
+      c:@F@__mempcpy:
+        name: __mempcpy
       c:@F@__overflow:
         name: __overflow
       c:@F@__stpcpy:
@@ -72,10 +486,218 @@ files:
         name: abort
       c:@F@abs:
         name: abs
+      c:@F@action_msgs__msg__GoalInfo__Sequence__are_equal:
+        name: action_msgs__msg__GoalInfo__Sequence__are_equal
+      c:@F@action_msgs__msg__GoalInfo__Sequence__copy:
+        name: action_msgs__msg__GoalInfo__Sequence__copy
+      c:@F@action_msgs__msg__GoalInfo__Sequence__create:
+        name: action_msgs__msg__GoalInfo__Sequence__create
+      c:@F@action_msgs__msg__GoalInfo__Sequence__destroy:
+        name: action_msgs__msg__GoalInfo__Sequence__destroy
+      c:@F@action_msgs__msg__GoalInfo__Sequence__fini:
+        name: action_msgs__msg__GoalInfo__Sequence__fini
+      c:@F@action_msgs__msg__GoalInfo__Sequence__init:
+        name: action_msgs__msg__GoalInfo__Sequence__init
+      c:@F@action_msgs__msg__GoalInfo__are_equal:
+        name: action_msgs__msg__GoalInfo__are_equal
+      c:@F@action_msgs__msg__GoalInfo__copy:
+        name: action_msgs__msg__GoalInfo__copy
+      c:@F@action_msgs__msg__GoalInfo__create:
+        name: action_msgs__msg__GoalInfo__create
+      c:@F@action_msgs__msg__GoalInfo__destroy:
+        name: action_msgs__msg__GoalInfo__destroy
+      c:@F@action_msgs__msg__GoalInfo__fini:
+        name: action_msgs__msg__GoalInfo__fini
+      c:@F@action_msgs__msg__GoalInfo__get_individual_type_description_source:
+        name: action_msgs__msg__GoalInfo__get_individual_type_description_source
+      c:@F@action_msgs__msg__GoalInfo__get_type_description:
+        name: action_msgs__msg__GoalInfo__get_type_description
+      c:@F@action_msgs__msg__GoalInfo__get_type_description_sources:
+        name: action_msgs__msg__GoalInfo__get_type_description_sources
+      c:@F@action_msgs__msg__GoalInfo__get_type_hash:
+        name: action_msgs__msg__GoalInfo__get_type_hash
+      c:@F@action_msgs__msg__GoalInfo__init:
+        name: action_msgs__msg__GoalInfo__init
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__are_equal:
+        name: action_msgs__msg__GoalStatusArray__Sequence__are_equal
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__copy:
+        name: action_msgs__msg__GoalStatusArray__Sequence__copy
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__create:
+        name: action_msgs__msg__GoalStatusArray__Sequence__create
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__destroy:
+        name: action_msgs__msg__GoalStatusArray__Sequence__destroy
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__fini:
+        name: action_msgs__msg__GoalStatusArray__Sequence__fini
+      c:@F@action_msgs__msg__GoalStatusArray__Sequence__init:
+        name: action_msgs__msg__GoalStatusArray__Sequence__init
+      c:@F@action_msgs__msg__GoalStatusArray__are_equal:
+        name: action_msgs__msg__GoalStatusArray__are_equal
+      c:@F@action_msgs__msg__GoalStatusArray__copy:
+        name: action_msgs__msg__GoalStatusArray__copy
+      c:@F@action_msgs__msg__GoalStatusArray__create:
+        name: action_msgs__msg__GoalStatusArray__create
+      c:@F@action_msgs__msg__GoalStatusArray__destroy:
+        name: action_msgs__msg__GoalStatusArray__destroy
+      c:@F@action_msgs__msg__GoalStatusArray__fini:
+        name: action_msgs__msg__GoalStatusArray__fini
+      c:@F@action_msgs__msg__GoalStatusArray__get_individual_type_description_source:
+        name: action_msgs__msg__GoalStatusArray__get_individual_type_description_source
+      c:@F@action_msgs__msg__GoalStatusArray__get_type_description:
+        name: action_msgs__msg__GoalStatusArray__get_type_description
+      c:@F@action_msgs__msg__GoalStatusArray__get_type_description_sources:
+        name: action_msgs__msg__GoalStatusArray__get_type_description_sources
+      c:@F@action_msgs__msg__GoalStatusArray__get_type_hash:
+        name: action_msgs__msg__GoalStatusArray__get_type_hash
+      c:@F@action_msgs__msg__GoalStatusArray__init:
+        name: action_msgs__msg__GoalStatusArray__init
+      c:@F@action_msgs__msg__GoalStatus__Sequence__are_equal:
+        name: action_msgs__msg__GoalStatus__Sequence__are_equal
+      c:@F@action_msgs__msg__GoalStatus__Sequence__copy:
+        name: action_msgs__msg__GoalStatus__Sequence__copy
+      c:@F@action_msgs__msg__GoalStatus__Sequence__create:
+        name: action_msgs__msg__GoalStatus__Sequence__create
+      c:@F@action_msgs__msg__GoalStatus__Sequence__destroy:
+        name: action_msgs__msg__GoalStatus__Sequence__destroy
+      c:@F@action_msgs__msg__GoalStatus__Sequence__fini:
+        name: action_msgs__msg__GoalStatus__Sequence__fini
+      c:@F@action_msgs__msg__GoalStatus__Sequence__init:
+        name: action_msgs__msg__GoalStatus__Sequence__init
+      c:@F@action_msgs__msg__GoalStatus__are_equal:
+        name: action_msgs__msg__GoalStatus__are_equal
+      c:@F@action_msgs__msg__GoalStatus__copy:
+        name: action_msgs__msg__GoalStatus__copy
+      c:@F@action_msgs__msg__GoalStatus__create:
+        name: action_msgs__msg__GoalStatus__create
+      c:@F@action_msgs__msg__GoalStatus__destroy:
+        name: action_msgs__msg__GoalStatus__destroy
+      c:@F@action_msgs__msg__GoalStatus__fini:
+        name: action_msgs__msg__GoalStatus__fini
+      c:@F@action_msgs__msg__GoalStatus__get_individual_type_description_source:
+        name: action_msgs__msg__GoalStatus__get_individual_type_description_source
+      c:@F@action_msgs__msg__GoalStatus__get_type_description:
+        name: action_msgs__msg__GoalStatus__get_type_description
+      c:@F@action_msgs__msg__GoalStatus__get_type_description_sources:
+        name: action_msgs__msg__GoalStatus__get_type_description_sources
+      c:@F@action_msgs__msg__GoalStatus__get_type_hash:
+        name: action_msgs__msg__GoalStatus__get_type_hash
+      c:@F@action_msgs__msg__GoalStatus__init:
+        name: action_msgs__msg__GoalStatus__init
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__are_equal:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__copy:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__copy
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__create:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__create
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__destroy:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__destroy
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__fini:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__fini
+      c:@F@action_msgs__srv__CancelGoal_Event__Sequence__init:
+        name: action_msgs__srv__CancelGoal_Event__Sequence__init
+      c:@F@action_msgs__srv__CancelGoal_Event__are_equal:
+        name: action_msgs__srv__CancelGoal_Event__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Event__copy:
+        name: action_msgs__srv__CancelGoal_Event__copy
+      c:@F@action_msgs__srv__CancelGoal_Event__create:
+        name: action_msgs__srv__CancelGoal_Event__create
+      c:@F@action_msgs__srv__CancelGoal_Event__destroy:
+        name: action_msgs__srv__CancelGoal_Event__destroy
+      c:@F@action_msgs__srv__CancelGoal_Event__fini:
+        name: action_msgs__srv__CancelGoal_Event__fini
+      c:@F@action_msgs__srv__CancelGoal_Event__get_individual_type_description_source:
+        name: action_msgs__srv__CancelGoal_Event__get_individual_type_description_source
+      c:@F@action_msgs__srv__CancelGoal_Event__get_type_description:
+        name: action_msgs__srv__CancelGoal_Event__get_type_description
+      c:@F@action_msgs__srv__CancelGoal_Event__get_type_description_sources:
+        name: action_msgs__srv__CancelGoal_Event__get_type_description_sources
+      c:@F@action_msgs__srv__CancelGoal_Event__get_type_hash:
+        name: action_msgs__srv__CancelGoal_Event__get_type_hash
+      c:@F@action_msgs__srv__CancelGoal_Event__init:
+        name: action_msgs__srv__CancelGoal_Event__init
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__are_equal:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__copy:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__copy
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__create:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__create
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__destroy:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__destroy
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__fini:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__fini
+      c:@F@action_msgs__srv__CancelGoal_Request__Sequence__init:
+        name: action_msgs__srv__CancelGoal_Request__Sequence__init
+      c:@F@action_msgs__srv__CancelGoal_Request__are_equal:
+        name: action_msgs__srv__CancelGoal_Request__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Request__copy:
+        name: action_msgs__srv__CancelGoal_Request__copy
+      c:@F@action_msgs__srv__CancelGoal_Request__create:
+        name: action_msgs__srv__CancelGoal_Request__create
+      c:@F@action_msgs__srv__CancelGoal_Request__destroy:
+        name: action_msgs__srv__CancelGoal_Request__destroy
+      c:@F@action_msgs__srv__CancelGoal_Request__fini:
+        name: action_msgs__srv__CancelGoal_Request__fini
+      c:@F@action_msgs__srv__CancelGoal_Request__get_individual_type_description_source:
+        name: action_msgs__srv__CancelGoal_Request__get_individual_type_description_source
+      c:@F@action_msgs__srv__CancelGoal_Request__get_type_description:
+        name: action_msgs__srv__CancelGoal_Request__get_type_description
+      c:@F@action_msgs__srv__CancelGoal_Request__get_type_description_sources:
+        name: action_msgs__srv__CancelGoal_Request__get_type_description_sources
+      c:@F@action_msgs__srv__CancelGoal_Request__get_type_hash:
+        name: action_msgs__srv__CancelGoal_Request__get_type_hash
+      c:@F@action_msgs__srv__CancelGoal_Request__init:
+        name: action_msgs__srv__CancelGoal_Request__init
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__are_equal:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__copy:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__copy
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__create:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__create
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__destroy:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__destroy
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__fini:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__fini
+      c:@F@action_msgs__srv__CancelGoal_Response__Sequence__init:
+        name: action_msgs__srv__CancelGoal_Response__Sequence__init
+      c:@F@action_msgs__srv__CancelGoal_Response__are_equal:
+        name: action_msgs__srv__CancelGoal_Response__are_equal
+      c:@F@action_msgs__srv__CancelGoal_Response__copy:
+        name: action_msgs__srv__CancelGoal_Response__copy
+      c:@F@action_msgs__srv__CancelGoal_Response__create:
+        name: action_msgs__srv__CancelGoal_Response__create
+      c:@F@action_msgs__srv__CancelGoal_Response__destroy:
+        name: action_msgs__srv__CancelGoal_Response__destroy
+      c:@F@action_msgs__srv__CancelGoal_Response__fini:
+        name: action_msgs__srv__CancelGoal_Response__fini
+      c:@F@action_msgs__srv__CancelGoal_Response__get_individual_type_description_source:
+        name: action_msgs__srv__CancelGoal_Response__get_individual_type_description_source
+      c:@F@action_msgs__srv__CancelGoal_Response__get_type_description:
+        name: action_msgs__srv__CancelGoal_Response__get_type_description
+      c:@F@action_msgs__srv__CancelGoal_Response__get_type_description_sources:
+        name: action_msgs__srv__CancelGoal_Response__get_type_description_sources
+      c:@F@action_msgs__srv__CancelGoal_Response__get_type_hash:
+        name: action_msgs__srv__CancelGoal_Response__get_type_hash
+      c:@F@action_msgs__srv__CancelGoal_Response__init:
+        name: action_msgs__srv__CancelGoal_Response__init
+      c:@F@action_msgs__srv__CancelGoal__get_individual_type_description_source:
+        name: action_msgs__srv__CancelGoal__get_individual_type_description_source
+      c:@F@action_msgs__srv__CancelGoal__get_type_description:
+        name: action_msgs__srv__CancelGoal__get_type_description
+      c:@F@action_msgs__srv__CancelGoal__get_type_description_sources:
+        name: action_msgs__srv__CancelGoal__get_type_description_sources
+      c:@F@action_msgs__srv__CancelGoal__get_type_hash:
+        name: action_msgs__srv__CancelGoal__get_type_hash
       c:@F@aligned_alloc:
         name: aligned_alloc
       c:@F@alloca:
         name: alloca
+      c:@F@arc4random:
+        name: arc4random
+      c:@F@arc4random_buf:
+        name: arc4random_buf
+      c:@F@arc4random_uniform:
+        name: arc4random_uniform
+      c:@F@asprintf:
+        name: asprintf
       c:@F@at_quick_exit:
         name: at_quick_exit
       c:@F@atexit:
@@ -96,6 +718,10 @@ files:
         name: bsearch
       c:@F@bzero:
         name: bzero
+      c:@F@c16rtomb:
+        name: c16rtomb
+      c:@F@c32rtomb:
+        name: c32rtomb
       c:@F@calloc:
         name: calloc
       c:@F@clearenv:
@@ -170,6 +796,8 @@ files:
         name: fmemopen
       c:@F@fopen:
         name: fopen
+      c:@F@fopencookie:
+        name: fopencookie
       c:@F@fprintf:
         name: fprintf
       c:@F@fputc:
@@ -272,6 +900,10 @@ files:
         name: malloc
       c:@F@mblen:
         name: mblen
+      c:@F@mbrtoc16:
+        name: mbrtoc16
+      c:@F@mbrtoc32:
+        name: mbrtoc32
       c:@F@mbstowcs:
         name: mbstowcs
       c:@F@mbtowc:
@@ -284,8 +916,12 @@ files:
         name: memcmp
       c:@F@memcpy:
         name: memcpy
+      c:@F@memmem:
+        name: memmem
       c:@F@memmove:
         name: memmove
+      c:@F@mempcpy:
+        name: mempcpy
       c:@F@memset:
         name: memset
       c:@F@mkdtemp:
@@ -346,6 +982,156 @@ files:
         name: random
       c:@F@random_r:
         name: random_r
+      c:@F@rcl_action_accept_new_goal:
+        name: rcl_action_accept_new_goal
+      c:@F@rcl_action_cancel_response_fini:
+        name: rcl_action_cancel_response_fini
+      c:@F@rcl_action_cancel_response_init:
+        name: rcl_action_cancel_response_init
+      c:@F@rcl_action_client_fini:
+        name: rcl_action_client_fini
+      c:@F@rcl_action_client_get_action_name:
+        name: rcl_action_client_get_action_name
+      c:@F@rcl_action_client_get_default_options:
+        name: rcl_action_client_get_default_options
+      c:@F@rcl_action_client_get_options:
+        name: rcl_action_client_get_options
+      c:@F@rcl_action_client_init:
+        name: rcl_action_client_init
+      c:@F@rcl_action_client_is_valid:
+        name: rcl_action_client_is_valid
+      c:@F@rcl_action_client_set_cancel_client_callback:
+        name: rcl_action_client_set_cancel_client_callback
+      c:@F@rcl_action_client_set_feedback_subscription_callback:
+        name: rcl_action_client_set_feedback_subscription_callback
+      c:@F@rcl_action_client_set_goal_client_callback:
+        name: rcl_action_client_set_goal_client_callback
+      c:@F@rcl_action_client_set_result_client_callback:
+        name: rcl_action_client_set_result_client_callback
+      c:@F@rcl_action_client_set_status_subscription_callback:
+        name: rcl_action_client_set_status_subscription_callback
+      c:@F@rcl_action_client_wait_set_get_entities_ready:
+        name: rcl_action_client_wait_set_get_entities_ready
+      c:@F@rcl_action_client_wait_set_get_num_entities:
+        name: rcl_action_client_wait_set_get_num_entities
+      c:@F@rcl_action_expire_goals:
+        name: rcl_action_expire_goals
+      c:@F@rcl_action_get_client_names_and_types_by_node:
+        name: rcl_action_get_client_names_and_types_by_node
+      c:@F@rcl_action_get_goal_status_array:
+        name: rcl_action_get_goal_status_array
+      c:@F@rcl_action_get_names_and_types:
+        name: rcl_action_get_names_and_types
+      c:@F@rcl_action_get_server_names_and_types_by_node:
+        name: rcl_action_get_server_names_and_types_by_node
+      c:@F@rcl_action_get_zero_initialized_cancel_request:
+        name: rcl_action_get_zero_initialized_cancel_request
+      c:@F@rcl_action_get_zero_initialized_cancel_response:
+        name: rcl_action_get_zero_initialized_cancel_response
+      c:@F@rcl_action_get_zero_initialized_client:
+        name: rcl_action_get_zero_initialized_client
+      c:@F@rcl_action_get_zero_initialized_goal_handle:
+        name: rcl_action_get_zero_initialized_goal_handle
+      c:@F@rcl_action_get_zero_initialized_goal_info:
+        name: rcl_action_get_zero_initialized_goal_info
+      c:@F@rcl_action_get_zero_initialized_goal_status_array:
+        name: rcl_action_get_zero_initialized_goal_status_array
+      c:@F@rcl_action_get_zero_initialized_server:
+        name: rcl_action_get_zero_initialized_server
+      c:@F@rcl_action_goal_handle_fini:
+        name: rcl_action_goal_handle_fini
+      c:@F@rcl_action_goal_handle_get_goal_terminal_timestamp:
+        name: rcl_action_goal_handle_get_goal_terminal_timestamp
+      c:@F@rcl_action_goal_handle_get_info:
+        name: rcl_action_goal_handle_get_info
+      c:@F@rcl_action_goal_handle_get_status:
+        name: rcl_action_goal_handle_get_status
+      c:@F@rcl_action_goal_handle_init:
+        name: rcl_action_goal_handle_init
+      c:@F@rcl_action_goal_handle_is_active:
+        name: rcl_action_goal_handle_is_active
+      c:@F@rcl_action_goal_handle_is_cancelable:
+        name: rcl_action_goal_handle_is_cancelable
+      c:@F@rcl_action_goal_handle_is_valid:
+        name: rcl_action_goal_handle_is_valid
+      c:@F@rcl_action_goal_status_array_fini:
+        name: rcl_action_goal_status_array_fini
+      c:@F@rcl_action_goal_status_array_init:
+        name: rcl_action_goal_status_array_init
+      c:@F@rcl_action_notify_goal_done:
+        name: rcl_action_notify_goal_done
+      c:@F@rcl_action_process_cancel_request:
+        name: rcl_action_process_cancel_request
+      c:@F@rcl_action_publish_feedback:
+        name: rcl_action_publish_feedback
+      c:@F@rcl_action_publish_status:
+        name: rcl_action_publish_status
+      c:@F@rcl_action_send_cancel_request:
+        name: rcl_action_send_cancel_request
+      c:@F@rcl_action_send_cancel_response:
+        name: rcl_action_send_cancel_response
+      c:@F@rcl_action_send_goal_request:
+        name: rcl_action_send_goal_request
+      c:@F@rcl_action_send_goal_response:
+        name: rcl_action_send_goal_response
+      c:@F@rcl_action_send_result_request:
+        name: rcl_action_send_result_request
+      c:@F@rcl_action_send_result_response:
+        name: rcl_action_send_result_response
+      c:@F@rcl_action_server_fini:
+        name: rcl_action_server_fini
+      c:@F@rcl_action_server_get_action_name:
+        name: rcl_action_server_get_action_name
+      c:@F@rcl_action_server_get_default_options:
+        name: rcl_action_server_get_default_options
+      c:@F@rcl_action_server_get_goal_handles:
+        name: rcl_action_server_get_goal_handles
+      c:@F@rcl_action_server_get_options:
+        name: rcl_action_server_get_options
+      c:@F@rcl_action_server_goal_exists:
+        name: rcl_action_server_goal_exists
+      c:@F@rcl_action_server_init:
+        name: rcl_action_server_init
+      c:@F@rcl_action_server_is_available:
+        name: rcl_action_server_is_available
+      c:@F@rcl_action_server_is_valid:
+        name: rcl_action_server_is_valid
+      c:@F@rcl_action_server_is_valid_except_context:
+        name: rcl_action_server_is_valid_except_context
+      c:@F@rcl_action_server_set_cancel_service_callback:
+        name: rcl_action_server_set_cancel_service_callback
+      c:@F@rcl_action_server_set_goal_service_callback:
+        name: rcl_action_server_set_goal_service_callback
+      c:@F@rcl_action_server_set_result_service_callback:
+        name: rcl_action_server_set_result_service_callback
+      c:@F@rcl_action_server_wait_set_get_entities_ready:
+        name: rcl_action_server_wait_set_get_entities_ready
+      c:@F@rcl_action_server_wait_set_get_num_entities:
+        name: rcl_action_server_wait_set_get_num_entities
+      c:@F@rcl_action_take_cancel_request:
+        name: rcl_action_take_cancel_request
+      c:@F@rcl_action_take_cancel_response:
+        name: rcl_action_take_cancel_response
+      c:@F@rcl_action_take_feedback:
+        name: rcl_action_take_feedback
+      c:@F@rcl_action_take_goal_request:
+        name: rcl_action_take_goal_request
+      c:@F@rcl_action_take_goal_response:
+        name: rcl_action_take_goal_response
+      c:@F@rcl_action_take_result_request:
+        name: rcl_action_take_result_request
+      c:@F@rcl_action_take_result_response:
+        name: rcl_action_take_result_response
+      c:@F@rcl_action_take_status:
+        name: rcl_action_take_status
+      c:@F@rcl_action_transition_goal_state:
+        name: rcl_action_transition_goal_state
+      c:@F@rcl_action_update_goal_state:
+        name: rcl_action_update_goal_state
+      c:@F@rcl_action_wait_set_add_action_client:
+        name: rcl_action_wait_set_add_action_client
+      c:@F@rcl_action_wait_set_add_action_server:
+        name: rcl_action_wait_set_add_action_server
       c:@F@rcl_arguments_copy:
         name: rcl_arguments_copy
       c:@F@rcl_arguments_fini:
@@ -368,6 +1154,8 @@ files:
         name: rcl_arguments_get_unparsed_ros
       c:@F@rcl_borrow_loaned_message:
         name: rcl_borrow_loaned_message
+      c:@F@rcl_client_configure_service_introspection:
+        name: rcl_client_configure_service_introspection
       c:@F@rcl_client_fini:
         name: rcl_client_fini
       c:@F@rcl_client_get_default_options:
@@ -414,6 +1202,14 @@ files:
         name: rcl_context_get_rmw_context
       c:@F@rcl_context_is_valid:
         name: rcl_context_is_valid
+      c:@F@rcl_count_clients:
+        name: rcl_count_clients
+      c:@F@rcl_count_publishers:
+        name: rcl_count_publishers
+      c:@F@rcl_count_services:
+        name: rcl_count_services
+      c:@F@rcl_count_subscribers:
+        name: rcl_count_subscribers
       c:@F@rcl_difference_times:
         name: rcl_difference_times
       c:@F@rcl_disable_ros_time_override:
@@ -428,10 +1224,30 @@ files:
         name: rcl_event_is_valid
       c:@F@rcl_event_set_callback:
         name: rcl_event_set_callback
+      c:@F@rcl_get_client_names_and_types_by_node:
+        name: rcl_get_client_names_and_types_by_node
       c:@F@rcl_get_default_domain_id:
         name: rcl_get_default_domain_id
       c:@F@rcl_get_disable_loaned_message:
         name: rcl_get_disable_loaned_message
+      c:@F@rcl_get_node_names:
+        name: rcl_get_node_names
+      c:@F@rcl_get_node_names_with_enclaves:
+        name: rcl_get_node_names_with_enclaves
+      c:@F@rcl_get_publisher_names_and_types_by_node:
+        name: rcl_get_publisher_names_and_types_by_node
+      c:@F@rcl_get_publishers_info_by_topic:
+        name: rcl_get_publishers_info_by_topic
+      c:@F@rcl_get_service_names_and_types:
+        name: rcl_get_service_names_and_types
+      c:@F@rcl_get_service_names_and_types_by_node:
+        name: rcl_get_service_names_and_types_by_node
+      c:@F@rcl_get_subscriber_names_and_types_by_node:
+        name: rcl_get_subscriber_names_and_types_by_node
+      c:@F@rcl_get_subscriptions_info_by_topic:
+        name: rcl_get_subscriptions_info_by_topic
+      c:@F@rcl_get_topic_names_and_types:
+        name: rcl_get_topic_names_and_types
       c:@F@rcl_get_zero_initialized_arguments:
         name: rcl_get_zero_initialized_arguments
       c:@F@rcl_get_zero_initialized_client:
@@ -500,6 +1316,10 @@ files:
         name: rcl_log_levels_init
       c:@F@rcl_log_levels_shrink_to_size:
         name: rcl_log_levels_shrink_to_size
+      c:@F@rcl_names_and_types_fini:
+        name: rcl_names_and_types_fini
+      c:@F@rcl_names_and_types_init:
+        name: rcl_names_and_types_init
       c:@F@rcl_node_fini:
         name: rcl_node_fini
       c:@F@rcl_node_get_default_options:
@@ -534,6 +1354,10 @@ files:
         name: rcl_node_options_fini
       c:@F@rcl_node_resolve_name:
         name: rcl_node_resolve_name
+      c:@F@rcl_node_type_description_service_handle_request:
+        name: rcl_node_type_description_service_handle_request
+      c:@F@rcl_node_type_description_service_init:
+        name: rcl_node_type_description_service_init
       c:@F@rcl_parse_arguments:
         name: rcl_parse_arguments
       c:@F@rcl_publish:
@@ -586,6 +1410,8 @@ files:
         name: rcl_send_request
       c:@F@rcl_send_response:
         name: rcl_send_response
+      c:@F@rcl_service_configure_service_introspection:
+        name: rcl_service_configure_service_introspection
       c:@F@rcl_service_fini:
         name: rcl_service_fini
       c:@F@rcl_service_get_default_options:
@@ -604,6 +1430,8 @@ files:
         name: rcl_service_request_subscription_get_actual_qos
       c:@F@rcl_service_response_publisher_get_actual_qos:
         name: rcl_service_response_publisher_get_actual_qos
+      c:@F@rcl_service_server_is_available:
+        name: rcl_service_server_is_available
       c:@F@rcl_service_set_on_new_request_callback:
         name: rcl_service_set_on_new_request_callback
       c:@F@rcl_set_ros_time_override:
@@ -660,6 +1488,8 @@ files:
         name: rcl_system_clock_init
       c:@F@rcl_take:
         name: rcl_take
+      c:@F@rcl_take_dynamic_message:
+        name: rcl_take_dynamic_message
       c:@F@rcl_take_event:
         name: rcl_take_event
       c:@F@rcl_take_loaned_message:
@@ -678,6 +1508,8 @@ files:
         name: rcl_take_serialized_message
       c:@F@rcl_timer_call:
         name: rcl_timer_call
+      c:@F@rcl_timer_call_with_info:
+        name: rcl_timer_call_with_info
       c:@F@rcl_timer_cancel:
         name: rcl_timer_cancel
       c:@F@rcl_timer_clock:
@@ -694,6 +1526,8 @@ files:
         name: rcl_timer_get_callback
       c:@F@rcl_timer_get_guard_condition:
         name: rcl_timer_get_guard_condition
+      c:@F@rcl_timer_get_next_call_time:
+        name: rcl_timer_get_next_call_time
       c:@F@rcl_timer_get_period:
         name: rcl_timer_get_period
       c:@F@rcl_timer_get_time_since_last_call:
@@ -702,16 +1536,24 @@ files:
         name: rcl_timer_get_time_until_next_call
       c:@F@rcl_timer_init:
         name: rcl_timer_init
+      c:@F@rcl_timer_init2:
+        name: rcl_timer_init2
       c:@F@rcl_timer_is_canceled:
         name: rcl_timer_is_canceled
       c:@F@rcl_timer_is_ready:
         name: rcl_timer_is_ready
       c:@F@rcl_timer_reset:
         name: rcl_timer_reset
+      c:@F@rcl_timer_set_on_reset_callback:
+        name: rcl_timer_set_on_reset_callback
       c:@F@rcl_trigger_guard_condition:
         name: rcl_trigger_guard_condition
       c:@F@rcl_wait:
         name: rcl_wait
+      c:@F@rcl_wait_for_publishers:
+        name: rcl_wait_for_publishers
+      c:@F@rcl_wait_for_subscribers:
+        name: rcl_wait_for_subscribers
       c:@F@rcl_wait_set_add_client:
         name: rcl_wait_set_add_client
       c:@F@rcl_wait_set_add_event:
@@ -824,6 +1666,8 @@ files:
         name: rcutils_initialize_error_handling_thread_local_storage
       c:@F@rcutils_log:
         name: rcutils_log
+      c:@F@rcutils_log_internal:
+        name: rcutils_log_internal
       c:@F@rcutils_logging_console_output_handler:
         name: rcutils_logging_console_output_handler
       c:@F@rcutils_logging_format_message:
@@ -856,12 +1700,20 @@ files:
         name: rcutils_logging_shutdown
       c:@F@rcutils_qsort:
         name: rcutils_qsort
+      c:@F@rcutils_raw_steady_time_now:
+        name: rcutils_raw_steady_time_now
       c:@F@rcutils_reallocf:
         name: rcutils_reallocf
       c:@F@rcutils_reset_error:
         name: rcutils_reset_error
       c:@F@rcutils_set_error_state:
         name: rcutils_set_error_state
+      c:@F@rcutils_sha256_final:
+        name: rcutils_sha256_final
+      c:@F@rcutils_sha256_init:
+        name: rcutils_sha256_init
+      c:@F@rcutils_sha256_update:
+        name: rcutils_sha256_update
       c:@F@rcutils_snprintf:
         name: rcutils_snprintf
       c:@F@rcutils_steady_time_now:
@@ -908,6 +1760,8 @@ files:
         name: rcutils_string_map_unset
       c:@F@rcutils_system_time_now:
         name: rcutils_system_time_now
+      c:@F@rcutils_time_point_value_as_date_string:
+        name: rcutils_time_point_value_as_date_string
       c:@F@rcutils_time_point_value_as_nanoseconds_string:
         name: rcutils_time_point_value_as_nanoseconds_string
       c:@F@rcutils_time_point_value_as_seconds_string:
@@ -948,8 +1802,12 @@ files:
         name: rmw_compare_gids_equal
       c:@F@rmw_context_fini:
         name: rmw_context_fini
+      c:@F@rmw_count_clients:
+        name: rmw_count_clients
       c:@F@rmw_count_publishers:
         name: rmw_count_publishers
+      c:@F@rmw_count_services:
+        name: rmw_count_services
       c:@F@rmw_count_subscribers:
         name: rmw_count_subscribers
       c:@F@rmw_create_client:
@@ -982,10 +1840,22 @@ files:
         name: rmw_destroy_subscription
       c:@F@rmw_destroy_wait_set:
         name: rmw_destroy_wait_set
+      c:@F@rmw_discovery_options_copy:
+        name: rmw_discovery_options_copy
+      c:@F@rmw_discovery_options_equal:
+        name: rmw_discovery_options_equal
+      c:@F@rmw_discovery_options_fini:
+        name: rmw_discovery_options_fini
+      c:@F@rmw_discovery_options_init:
+        name: rmw_discovery_options_init
       c:@F@rmw_event_fini:
         name: rmw_event_fini
       c:@F@rmw_event_set_callback:
         name: rmw_event_set_callback
+      c:@F@rmw_event_type_is_supported:
+        name: rmw_event_type_is_supported
+      c:@F@rmw_feature_supported:
+        name: rmw_feature_supported
       c:@F@rmw_fini_publisher_allocation:
         name: rmw_fini_publisher_allocation
       c:@F@rmw_fini_subscription_allocation:
@@ -996,6 +1866,8 @@ files:
         name: rmw_get_default_security_options
       c:@F@rmw_get_default_subscription_options:
         name: rmw_get_default_subscription_options
+      c:@F@rmw_get_gid_for_client:
+        name: rmw_get_gid_for_client
       c:@F@rmw_get_gid_for_publisher:
         name: rmw_get_gid_for_publisher
       c:@F@rmw_get_implementation_identifier:
@@ -1008,10 +1880,14 @@ files:
         name: rmw_get_serialization_format
       c:@F@rmw_get_serialized_message_size:
         name: rmw_get_serialized_message_size
+      c:@F@rmw_get_topic_names_and_types:
+        name: rmw_get_topic_names_and_types
       c:@F@rmw_get_zero_initialized_content_filter_options:
         name: rmw_get_zero_initialized_content_filter_options
       c:@F@rmw_get_zero_initialized_context:
         name: rmw_get_zero_initialized_context
+      c:@F@rmw_get_zero_initialized_discovery_options:
+        name: rmw_get_zero_initialized_discovery_options
       c:@F@rmw_get_zero_initialized_event:
         name: rmw_get_zero_initialized_event
       c:@F@rmw_get_zero_initialized_init_options:
@@ -1022,8 +1898,14 @@ files:
         name: rmw_get_zero_initialized_message_info_sequence
       c:@F@rmw_get_zero_initialized_message_sequence:
         name: rmw_get_zero_initialized_message_sequence
+      c:@F@rmw_get_zero_initialized_names_and_types:
+        name: rmw_get_zero_initialized_names_and_types
       c:@F@rmw_get_zero_initialized_security_options:
         name: rmw_get_zero_initialized_security_options
+      c:@F@rmw_get_zero_initialized_topic_endpoint_info:
+        name: rmw_get_zero_initialized_topic_endpoint_info
+      c:@F@rmw_get_zero_initialized_topic_endpoint_info_array:
+        name: rmw_get_zero_initialized_topic_endpoint_info_array
       c:@F@rmw_init:
         name: rmw_init
       c:@F@rmw_init_options_copy:
@@ -1044,6 +1926,12 @@ files:
         name: rmw_message_sequence_fini
       c:@F@rmw_message_sequence_init:
         name: rmw_message_sequence_init
+      c:@F@rmw_names_and_types_check_zero:
+        name: rmw_names_and_types_check_zero
+      c:@F@rmw_names_and_types_fini:
+        name: rmw_names_and_types_fini
+      c:@F@rmw_names_and_types_init:
+        name: rmw_names_and_types_init
       c:@F@rmw_node_assert_liveliness:
         name: rmw_node_assert_liveliness
       c:@F@rmw_node_get_graph_guard_condition:
@@ -1080,6 +1968,8 @@ files:
         name: rmw_send_request
       c:@F@rmw_send_response:
         name: rmw_send_response
+      c:@F@rmw_serialization_support_init:
+        name: rmw_serialization_support_init
       c:@F@rmw_serialize:
         name: rmw_serialize
       c:@F@rmw_service_request_subscription_get_actual_qos:
@@ -1116,6 +2006,10 @@ files:
         name: rmw_subscription_set_on_new_message_callback
       c:@F@rmw_take:
         name: rmw_take
+      c:@F@rmw_take_dynamic_message:
+        name: rmw_take_dynamic_message
+      c:@F@rmw_take_dynamic_message_with_info:
+        name: rmw_take_dynamic_message_with_info
       c:@F@rmw_take_event:
         name: rmw_take_event
       c:@F@rmw_take_loaned_message:
@@ -1142,10 +2036,492 @@ files:
         name: rmw_time_normalize
       c:@F@rmw_time_total_nsec:
         name: rmw_time_total_nsec
+      c:@F@rmw_topic_endpoint_info_array_check_zero:
+        name: rmw_topic_endpoint_info_array_check_zero
+      c:@F@rmw_topic_endpoint_info_array_fini:
+        name: rmw_topic_endpoint_info_array_fini
+      c:@F@rmw_topic_endpoint_info_array_init_with_size:
+        name: rmw_topic_endpoint_info_array_init_with_size
+      c:@F@rmw_topic_endpoint_info_fini:
+        name: rmw_topic_endpoint_info_fini
+      c:@F@rmw_topic_endpoint_info_set_endpoint_type:
+        name: rmw_topic_endpoint_info_set_endpoint_type
+      c:@F@rmw_topic_endpoint_info_set_gid:
+        name: rmw_topic_endpoint_info_set_gid
+      c:@F@rmw_topic_endpoint_info_set_node_name:
+        name: rmw_topic_endpoint_info_set_node_name
+      c:@F@rmw_topic_endpoint_info_set_node_namespace:
+        name: rmw_topic_endpoint_info_set_node_namespace
+      c:@F@rmw_topic_endpoint_info_set_qos_profile:
+        name: rmw_topic_endpoint_info_set_qos_profile
+      c:@F@rmw_topic_endpoint_info_set_topic_type:
+        name: rmw_topic_endpoint_info_set_topic_type
+      c:@F@rmw_topic_endpoint_info_set_topic_type_hash:
+        name: rmw_topic_endpoint_info_set_topic_type_hash
       c:@F@rmw_trigger_guard_condition:
         name: rmw_trigger_guard_condition
       c:@F@rmw_wait:
         name: rmw_wait
+      c:@F@rosidl_dynamic_message_type_support_handle_fini:
+        name: rosidl_dynamic_message_type_support_handle_fini
+      c:@F@rosidl_dynamic_message_type_support_handle_impl_fini:
+        name: rosidl_dynamic_message_type_support_handle_impl_fini
+      c:@F@rosidl_dynamic_message_type_support_handle_impl_init:
+        name: rosidl_dynamic_message_type_support_handle_impl_init
+      c:@F@rosidl_dynamic_message_type_support_handle_init:
+        name: rosidl_dynamic_message_type_support_handle_init
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_clear_all_values:
+        name: rosidl_dynamic_typesupport_dynamic_data_clear_all_values
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values:
+        name: rosidl_dynamic_typesupport_dynamic_data_clear_nonkey_values
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data:
+        name: rosidl_dynamic_typesupport_dynamic_data_clear_sequence_data
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_clear_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_clear_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_clone:
+        name: rosidl_dynamic_typesupport_dynamic_data_clone
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_deserialize:
+        name: rosidl_dynamic_typesupport_dynamic_data_deserialize
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_destroy:
+        name: rosidl_dynamic_typesupport_dynamic_data_destroy
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_equals:
+        name: rosidl_dynamic_typesupport_dynamic_data_equals
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_fini:
+        name: rosidl_dynamic_typesupport_dynamic_data_fini
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_array_index:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_array_index
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_bool_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_bool_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_bounded_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_bounded_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_byte_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_byte_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_char_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_char_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_complex_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_complex_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_fixed_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_fixed_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_float32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_float32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_float64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_float64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_int16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_int16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_int32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_int32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_int64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_int64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_int8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_int8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_item_count:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_item_count
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_member_id_at_index
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_member_id_by_name
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_name:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_name
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_uint16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_uint16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_uint32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_uint32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_uint64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_uint64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_uint8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_uint8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_wchar_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_wchar_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_get_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_get_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type:
+        name: rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder:
+        name: rosidl_dynamic_typesupport_dynamic_data_init_from_dynamic_type_builder
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_bool_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_bool_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_bounded_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_bounded_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_byte_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_byte_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_char_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_char_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_complex_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_complex_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_complex_value_copy
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_fixed_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_fixed_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_float32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_float32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_float64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_float64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_int16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_int16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_int32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_int32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_int64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_int64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_int8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_int8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_sequence_data
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_uint16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_uint32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_uint64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_uint8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_wchar_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_insert_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_loan_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_loan_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data:
+        name: rosidl_dynamic_typesupport_dynamic_data_remove_sequence_data
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_return_and_destroy_loaned_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_return_loaned_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_return_loaned_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_serialize:
+        name: rosidl_dynamic_typesupport_dynamic_data_serialize
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_bool_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_bool_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_bounded_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_bounded_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_byte_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_byte_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_char_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_char_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_complex_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_complex_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_fixed_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_fixed_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_float32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_float32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_float64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_float64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_int16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_int16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_int32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_int32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_int64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_int64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_int8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_int8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_string_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_string_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_uint16_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_uint16_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_uint32_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_uint32_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_uint64_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_uint64_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_uint8_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_uint8_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_wchar_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_wchar_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_data_set_wstring_value:
+        name: rosidl_dynamic_typesupport_dynamic_data_set_wstring_value
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bool_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_string_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_bounded_wstring_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_byte_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_char_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_char_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_char_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_char_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_array_member_builder
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_bounded_sequence_member_builder
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_member_builder
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_complex_unbounded_sequence_member_builder
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_string_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_fixed_wstring_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float128_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float32_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_float64_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int16_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int32_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int64_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_int8_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_string_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_string_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_string_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_string_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint16_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint32_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint64_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_uint8_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wchar_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_array_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_bounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_add_wstring_unbounded_sequence_member
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_clone:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_clone
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_destroy:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_destroy
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_fini:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_fini
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_get_name:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_get_name
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_init:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_init
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_init_from_description
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_builder_set_name:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_set_name
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_clone:
+        name: rosidl_dynamic_typesupport_dynamic_type_clone
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_destroy:
+        name: rosidl_dynamic_typesupport_dynamic_type_destroy
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_equals:
+        name: rosidl_dynamic_typesupport_dynamic_type_equals
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_fini:
+        name: rosidl_dynamic_typesupport_dynamic_type_fini
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_get_member_count:
+        name: rosidl_dynamic_typesupport_dynamic_type_get_member_count
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_get_name:
+        name: rosidl_dynamic_typesupport_dynamic_type_get_name
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_init_from_description:
+        name: rosidl_dynamic_typesupport_dynamic_type_init_from_description
+      c:@F@rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder:
+        name: rosidl_dynamic_typesupport_dynamic_type_init_from_dynamic_type_builder
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_data_impl
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_builder_impl
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_dynamic_type_impl
+      c:@F@rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl:
+        name: rosidl_dynamic_typesupport_get_zero_initialized_serialization_support_impl
+      c:@F@rosidl_dynamic_typesupport_serialization_support_fini:
+        name: rosidl_dynamic_typesupport_serialization_support_fini
+      c:@F@rosidl_dynamic_typesupport_serialization_support_get_library_identifier:
+        name: rosidl_dynamic_typesupport_serialization_support_get_library_identifier
+      c:@F@rosidl_dynamic_typesupport_serialization_support_init:
+        name: rosidl_dynamic_typesupport_serialization_support_init
+      c:@F@rosidl_get_dynamic_message_type_support_type_description_function:
+        name: rosidl_get_dynamic_message_type_support_type_description_function
+      c:@F@rosidl_get_dynamic_message_type_support_type_description_sources_function:
+        name: rosidl_get_dynamic_message_type_support_type_description_sources_function
+      c:@F@rosidl_get_dynamic_message_type_support_type_hash_function:
+        name: rosidl_get_dynamic_message_type_support_type_hash_function
+      c:@F@rosidl_get_dynamic_typesupport_identifier:
+        name: rosidl_get_dynamic_typesupport_identifier
+      c:@F@rosidl_get_zero_initialized_message_type_support_handle:
+        name: rosidl_get_zero_initialized_message_type_support_handle
+      c:@F@rosidl_get_zero_initialized_type_hash:
+        name: rosidl_get_zero_initialized_type_hash
+      c:@F@rosidl_parse_type_hash_string:
+        name: rosidl_parse_type_hash_string
+      c:@F@rosidl_stringify_type_hash:
+        name: rosidl_stringify_type_hash
+      c:@F@rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal:
+        name: rosidl_typesupport_c__create_service_event_message__action_msgs__srv__CancelGoal
+      c:@F@rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription:
+        name: rosidl_typesupport_c__create_service_event_message__type_description_interfaces__srv__GetTypeDescription
+      c:@F@rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal:
+        name: rosidl_typesupport_c__destroy_service_event_message__action_msgs__srv__CancelGoal
+      c:@F@rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription:
+        name: rosidl_typesupport_c__destroy_service_event_message__type_description_interfaces__srv__GetTypeDescription
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalInfo
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatus
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__msg__GoalStatusArray
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Event
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Request
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response:
+        name: rosidl_typesupport_c__get_message_type_support_handle__action_msgs__srv__CancelGoal_Response
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event:
+        name: rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Event
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request:
+        name: rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Request
+      c:@F@rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response:
+        name: rosidl_typesupport_c__get_message_type_support_handle__type_description_interfaces__srv__GetTypeDescription_Response
+      c:@F@rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal:
+        name: rosidl_typesupport_c__get_service_type_support_handle__action_msgs__srv__CancelGoal
+      c:@F@rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription:
+        name: rosidl_typesupport_c__get_service_type_support_handle__type_description_interfaces__srv__GetTypeDescription
       c:@F@rpmatch:
         name: rpmatch
       c:@F@scanf:
@@ -1194,10 +2570,14 @@ files:
         name: strcasecmp
       c:@F@strcasecmp_l:
         name: strcasecmp_l
+      c:@F@strcasestr:
+        name: strcasestr
       c:@F@strcat:
         name: strcat
       c:@F@strchr:
         name: strchr
+      c:@F@strchrnul:
+        name: strchrnul
       c:@F@strcmp:
         name: strcmp
       c:@F@strcoll:
@@ -1216,6 +2596,10 @@ files:
         name: strerror_l
       c:@F@strerror_r:
         name: strerror_r
+      c:@F@strlcat:
+        name: strlcat
+      c:@F@strlcpy:
+        name: strlcpy
       c:@F@strlen:
         name: strlen
       c:@F@strncasecmp:
@@ -1278,12 +2662,118 @@ files:
         name: tmpnam
       c:@F@tmpnam_r:
         name: tmpnam_r
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__get_individual_type_description_source
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__get_type_description:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__get_type_description
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__get_type_description_sources
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__get_type_hash
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Event__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__get_individual_type_description_source
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__get_type_description:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__get_type_description
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__get_type_description_sources
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__get_type_hash
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Request__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__are_equal:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__are_equal
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__copy:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__copy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__create:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__create
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__destroy:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__destroy
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__fini:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__fini
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__get_individual_type_description_source
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__get_type_description:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__get_type_description
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__get_type_description_sources
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__get_type_hash
+      c:@F@type_description_interfaces__srv__GetTypeDescription_Response__init:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__init
+      c:@F@type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source:
+        name: type_description_interfaces__srv__GetTypeDescription__get_individual_type_description_source
+      c:@F@type_description_interfaces__srv__GetTypeDescription__get_type_description:
+        name: type_description_interfaces__srv__GetTypeDescription__get_type_description
+      c:@F@type_description_interfaces__srv__GetTypeDescription__get_type_description_sources:
+        name: type_description_interfaces__srv__GetTypeDescription__get_type_description_sources
+      c:@F@type_description_interfaces__srv__GetTypeDescription__get_type_hash:
+        name: type_description_interfaces__srv__GetTypeDescription__get_type_hash
       c:@F@ungetc:
         name: ungetc
       c:@F@unsetenv:
         name: unsetenv
       c:@F@valloc:
         name: valloc
+      c:@F@vasprintf:
+        name: vasprintf
       c:@F@vdprintf:
         name: vdprintf
       c:@F@vfprintf:
@@ -1308,14 +2798,14 @@ files:
         name: RCL_DISABLE_LOANED_MESSAGES_ENV_VAR
       c:@RCL_DOMAIN_ID_ENV_VAR:
         name: RCL_DOMAIN_ID_ENV_VAR
-      c:@S@_G_fpos64_t:
-        name: _G_fpos64_t
       c:@S@_G_fpos_t:
         name: _G_fpos_t
       c:@S@_IO_FILE:
         name: _IO_FILE
       c:@S@_IO_codecvt:
         name: _IO_codecvt
+      c:@S@_IO_cookie_io_functions_t:
+        name: _IO_cookie_io_functions_t
       c:@S@_IO_marker:
         name: _IO_marker
       c:@S@_IO_wide_data:
@@ -1328,18 +2818,64 @@ files:
         name: __pthread_cond_s
       c:@S@__pthread_internal_list:
         name: __pthread_internal_list
-      c:@S@__pthread_internal_slist:
-        name: __pthread_internal_slist
       c:@S@__pthread_mutex_s:
         name: __pthread_mutex_s
       c:@S@__pthread_rwlock_arch_t:
         name: __pthread_rwlock_arch_t
       c:@S@__va_list_tag:
         name: __va_list_tag
+      c:@S@action_msgs__msg__GoalInfo:
+        name: action_msgs__msg__GoalInfo
+      c:@S@action_msgs__msg__GoalInfo__Sequence:
+        name: action_msgs__msg__GoalInfo__Sequence
+      c:@S@action_msgs__msg__GoalStatus:
+        name: action_msgs__msg__GoalStatus
+      c:@S@action_msgs__msg__GoalStatusArray:
+        name: action_msgs__msg__GoalStatusArray
+      c:@S@action_msgs__msg__GoalStatusArray__Sequence:
+        name: action_msgs__msg__GoalStatusArray__Sequence
+      c:@S@action_msgs__msg__GoalStatus__Sequence:
+        name: action_msgs__msg__GoalStatus__Sequence
+      c:@S@action_msgs__srv__CancelGoal_Event:
+        name: action_msgs__srv__CancelGoal_Event
+      c:@S@action_msgs__srv__CancelGoal_Event__Sequence:
+        name: action_msgs__srv__CancelGoal_Event__Sequence
+      c:@S@action_msgs__srv__CancelGoal_Request:
+        name: action_msgs__srv__CancelGoal_Request
+      c:@S@action_msgs__srv__CancelGoal_Request__Sequence:
+        name: action_msgs__srv__CancelGoal_Request__Sequence
+      c:@S@action_msgs__srv__CancelGoal_Response:
+        name: action_msgs__srv__CancelGoal_Response
+      c:@S@action_msgs__srv__CancelGoal_Response__Sequence:
+        name: action_msgs__srv__CancelGoal_Response__Sequence
+      c:@S@builtin_interfaces__msg__Time:
+        name: builtin_interfaces__msg__Time
+      c:@S@builtin_interfaces__msg__Time__Sequence:
+        name: builtin_interfaces__msg__Time__Sequence
       c:@S@drand48_data:
         name: drand48_data
       c:@S@random_data:
         name: random_data
+      c:@S@rcl_action_cancel_response_s:
+        name: rcl_action_cancel_response_s
+      c:@S@rcl_action_client_impl_s:
+        name: rcl_action_client_impl_s
+      c:@S@rcl_action_client_options_s:
+        name: rcl_action_client_options_s
+      c:@S@rcl_action_client_s:
+        name: rcl_action_client_s
+      c:@S@rcl_action_goal_handle_impl_s:
+        name: rcl_action_goal_handle_impl_s
+      c:@S@rcl_action_goal_handle_s:
+        name: rcl_action_goal_handle_s
+      c:@S@rcl_action_goal_status_array_s:
+        name: rcl_action_goal_status_array_s
+      c:@S@rcl_action_server_impl_s:
+        name: rcl_action_server_impl_s
+      c:@S@rcl_action_server_options_s:
+        name: rcl_action_server_options_s
+      c:@S@rcl_action_server_s:
+        name: rcl_action_server_s
       c:@S@rcl_arguments_impl_s:
         name: rcl_arguments_impl_s
       c:@S@rcl_arguments_s:
@@ -1422,8 +2958,12 @@ files:
         name: rcl_time_jump_s
       c:@S@rcl_time_point_s:
         name: rcl_time_point_s
+      c:@S@rcl_timer_call_info_s:
+        name: rcl_timer_call_info_s
       c:@S@rcl_timer_impl_s:
         name: rcl_timer_impl_s
+      c:@S@rcl_timer_on_reset_callback_data_s:
+        name: rcl_timer_on_reset_callback_data_s
       c:@S@rcl_timer_s:
         name: rcl_timer_s
       c:@S@rcl_variant_s:
@@ -1450,6 +2990,8 @@ files:
         name: rcutils_hash_map_s
       c:@S@rcutils_log_location_s:
         name: rcutils_log_location_s
+      c:@S@rcutils_sha256_ctx_s:
+        name: rcutils_sha256_ctx_s
       c:@S@rcutils_string_array_s:
         name: rcutils_string_array_s
       c:@S@rcutils_string_map_impl_s:
@@ -1466,6 +3008,8 @@ files:
         name: rmw_context_impl_s
       c:@S@rmw_context_s:
         name: rmw_context_s
+      c:@S@rmw_discovery_options_s:
+        name: rmw_discovery_options_s
       c:@S@rmw_event_s:
         name: rmw_event_s
       c:@S@rmw_events_s:
@@ -1476,6 +3020,8 @@ files:
         name: rmw_guard_condition_s
       c:@S@rmw_guard_conditions_s:
         name: rmw_guard_conditions_s
+      c:@S@rmw_incompatible_type_status_s:
+        name: rmw_incompatible_type_status_s
       c:@S@rmw_init_options_impl_s:
         name: rmw_init_options_impl_s
       c:@S@rmw_init_options_s:
@@ -1484,6 +3030,8 @@ files:
         name: rmw_liveliness_changed_status_s
       c:@S@rmw_liveliness_lost_status_s:
         name: rmw_liveliness_lost_status_s
+      c:@S@rmw_matched_status_s:
+        name: rmw_matched_status_s
       c:@S@rmw_message_info_s:
         name: rmw_message_info_s
       c:@S@rmw_message_info_sequence_s:
@@ -1492,10 +3040,14 @@ files:
         name: rmw_message_lost_status_s
       c:@S@rmw_message_sequence_s:
         name: rmw_message_sequence_s
+      c:@S@rmw_names_and_types_s:
+        name: rmw_names_and_types_s
       c:@S@rmw_node_s:
         name: rmw_node_s
       c:@S@rmw_offered_deadline_missed_status_s:
         name: rmw_offered_deadline_missed_status_s
+      c:@S@rmw_peer_address_s:
+        name: rmw_peer_address_s
       c:@S@rmw_publisher_allocation_s:
         name: rmw_publisher_allocation_s
       c:@S@rmw_publisher_options_s:
@@ -1530,8 +3082,34 @@ files:
         name: rmw_subscriptions_s
       c:@S@rmw_time_s:
         name: rmw_time_s
+      c:@S@rmw_topic_endpoint_info_array_s:
+        name: rmw_topic_endpoint_info_array_s
+      c:@S@rmw_topic_endpoint_info_s:
+        name: rmw_topic_endpoint_info_s
       c:@S@rmw_wait_set_s:
         name: rmw_wait_set_s
+      c:@S@rosidl_action_type_support_t:
+        name: rosidl_action_type_support_t
+      c:@S@rosidl_dynamic_message_type_support_impl_s:
+        name: rosidl_dynamic_message_type_support_impl_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_data_impl_s:
+        name: rosidl_dynamic_typesupport_dynamic_data_impl_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_data_s:
+        name: rosidl_dynamic_typesupport_dynamic_data_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_type_builder_impl_s:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_impl_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_type_builder_s:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_type_impl_s:
+        name: rosidl_dynamic_typesupport_dynamic_type_impl_s
+      c:@S@rosidl_dynamic_typesupport_dynamic_type_s:
+        name: rosidl_dynamic_typesupport_dynamic_type_s
+      c:@S@rosidl_dynamic_typesupport_serialization_support_impl_s:
+        name: rosidl_dynamic_typesupport_serialization_support_impl_s
+      c:@S@rosidl_dynamic_typesupport_serialization_support_interface_s:
+        name: rosidl_dynamic_typesupport_serialization_support_interface_s
+      c:@S@rosidl_dynamic_typesupport_serialization_support_s:
+        name: rosidl_dynamic_typesupport_serialization_support_s
       c:@S@rosidl_message_type_support_t:
         name: rosidl_message_type_support_t
       c:@S@rosidl_runtime_c__Sequence__bound:
@@ -1560,6 +3138,26 @@ files:
         name: rosidl_runtime_c__long_double__Sequence
       c:@S@rosidl_runtime_c__octet__Sequence:
         name: rosidl_runtime_c__octet__Sequence
+      c:@S@rosidl_runtime_c__type_description__Field:
+        name: rosidl_runtime_c__type_description__Field
+      c:@S@rosidl_runtime_c__type_description__FieldType:
+        name: rosidl_runtime_c__type_description__FieldType
+      c:@S@rosidl_runtime_c__type_description__FieldType__Sequence:
+        name: rosidl_runtime_c__type_description__FieldType__Sequence
+      c:@S@rosidl_runtime_c__type_description__Field__Sequence:
+        name: rosidl_runtime_c__type_description__Field__Sequence
+      c:@S@rosidl_runtime_c__type_description__IndividualTypeDescription:
+        name: rosidl_runtime_c__type_description__IndividualTypeDescription
+      c:@S@rosidl_runtime_c__type_description__IndividualTypeDescription__Sequence:
+        name: rosidl_runtime_c__type_description__IndividualTypeDescription__Sequence
+      c:@S@rosidl_runtime_c__type_description__TypeDescription:
+        name: rosidl_runtime_c__type_description__TypeDescription
+      c:@S@rosidl_runtime_c__type_description__TypeDescription__Sequence:
+        name: rosidl_runtime_c__type_description__TypeDescription__Sequence
+      c:@S@rosidl_runtime_c__type_description__TypeSource:
+        name: rosidl_runtime_c__type_description__TypeSource
+      c:@S@rosidl_runtime_c__type_description__TypeSource__Sequence:
+        name: rosidl_runtime_c__type_description__TypeSource__Sequence
       c:@S@rosidl_runtime_c__uint16__Sequence:
         name: rosidl_runtime_c__uint16__Sequence
       c:@S@rosidl_runtime_c__uint32__Sequence:
@@ -1570,20 +3168,64 @@ files:
         name: rosidl_runtime_c__uint8__Sequence
       c:@S@rosidl_runtime_c__wchar__Sequence:
         name: rosidl_runtime_c__wchar__Sequence
+      c:@S@rosidl_service_introspection_info_s:
+        name: rosidl_service_introspection_info_s
       c:@S@rosidl_service_type_support_t:
         name: rosidl_service_type_support_t
+      c:@S@rosidl_type_hash_s:
+        name: rosidl_type_hash_s
+      c:@S@service_msgs__msg__ServiceEventInfo:
+        name: service_msgs__msg__ServiceEventInfo
+      c:@S@service_msgs__msg__ServiceEventInfo__Sequence:
+        name: service_msgs__msg__ServiceEventInfo__Sequence
       c:@S@timespec:
         name: timespec
       c:@S@timeval:
         name: timeval
-      c:@SA@__fsid_t:
-        name: __fsid_t
+      c:@S@type_description_interfaces__msg__Field:
+        name: type_description_interfaces__msg__Field
+      c:@S@type_description_interfaces__msg__FieldType:
+        name: type_description_interfaces__msg__FieldType
+      c:@S@type_description_interfaces__msg__FieldType__Sequence:
+        name: type_description_interfaces__msg__FieldType__Sequence
+      c:@S@type_description_interfaces__msg__Field__Sequence:
+        name: type_description_interfaces__msg__Field__Sequence
+      c:@S@type_description_interfaces__msg__IndividualTypeDescription:
+        name: type_description_interfaces__msg__IndividualTypeDescription
+      c:@S@type_description_interfaces__msg__IndividualTypeDescription__Sequence:
+        name: type_description_interfaces__msg__IndividualTypeDescription__Sequence
+      c:@S@type_description_interfaces__msg__KeyValue:
+        name: type_description_interfaces__msg__KeyValue
+      c:@S@type_description_interfaces__msg__KeyValue__Sequence:
+        name: type_description_interfaces__msg__KeyValue__Sequence
+      c:@S@type_description_interfaces__msg__TypeDescription:
+        name: type_description_interfaces__msg__TypeDescription
+      c:@S@type_description_interfaces__msg__TypeDescription__Sequence:
+        name: type_description_interfaces__msg__TypeDescription__Sequence
+      c:@S@type_description_interfaces__msg__TypeSource:
+        name: type_description_interfaces__msg__TypeSource
+      c:@S@type_description_interfaces__msg__TypeSource__Sequence:
+        name: type_description_interfaces__msg__TypeSource__Sequence
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Event:
+        name: type_description_interfaces__srv__GetTypeDescription_Event
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Event__Sequence:
+        name: type_description_interfaces__srv__GetTypeDescription_Event__Sequence
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Request:
+        name: type_description_interfaces__srv__GetTypeDescription_Request
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Request__Sequence:
+        name: type_description_interfaces__srv__GetTypeDescription_Request__Sequence
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Response:
+        name: type_description_interfaces__srv__GetTypeDescription_Response
+      c:@S@type_description_interfaces__srv__GetTypeDescription_Response__Sequence:
+        name: type_description_interfaces__srv__GetTypeDescription_Response__Sequence
+      c:@S@unique_identifier_msgs__msg__UUID:
+        name: unique_identifier_msgs__msg__UUID
+      c:@S@unique_identifier_msgs__msg__UUID__Sequence:
+        name: unique_identifier_msgs__msg__UUID__Sequence
       c:@SA@__mbstate_t:
         name: __mbstate_t
       c:@SA@__mbstate_t@U@__mbstate_t.h@451:
         name: UnnamedUnion1
-      c:@SA@__once_flag:
-        name: __once_flag
       c:@SA@__sigset_t:
         name: __sigset_t
       c:@SA@div_t:
@@ -1594,8 +3236,6 @@ files:
         name: ldiv_t
       c:@SA@lldiv_t:
         name: lldiv_t
-      c:@SA@max_align_t:
-        name: max_align_t
       c:@T@FILE:
         name: FILE
       c:@T@_IO_lock_t:
@@ -1626,12 +3266,36 @@ files:
         name: __syscall_slong_t
       c:@T@__time_t:
         name: __time_t
+      c:@T@__uint16_t:
+        name: __uint16_t
+      c:@T@__uint32_t:
+        name: __uint32_t
+      c:@T@__uint_least16_t:
+        name: __uint_least16_t
+      c:@T@__uint_least32_t:
+        name: __uint_least32_t
+      c:@T@char16_t:
+        name: char16_t
+      c:@T@char32_t:
+        name: char32_t
+      c:@T@cookie_close_function_t:
+        name: cookie_close_function_t
+      c:@T@cookie_io_functions_t:
+        name: cookie_io_functions_t
+      c:@T@cookie_read_function_t:
+        name: cookie_read_function_t
+      c:@T@cookie_seek_function_t:
+        name: cookie_seek_function_t
+      c:@T@cookie_write_function_t:
+        name: cookie_write_function_t
       c:@T@fpos_t:
         name: fpos_t
       c:@T@int_least64_t:
         name: int_least64_t
       c:@T@locale_t:
         name: locale_t
+      c:@T@mbstate_t:
+        name: mbstate_t
       c:@U@pthread_attr_t:
         name: pthread_attr_t
       c:@UA@__atomic_wide_counter:
@@ -1656,18 +3320,38 @@ files:
         name: pthread_rwlockattr_t
       c:@g_rcutils_log_severity_names:
         name: g_rcutils_log_severity_names
-      c:@g_rcutils_logging_default_logger_level:
-        name: g_rcutils_logging_default_logger_level
       c:@g_rcutils_logging_initialized:
         name: g_rcutils_logging_initialized
-      c:@g_rcutils_logging_output_handler:
-        name: g_rcutils_logging_output_handler
+      c:@goal_event_descriptions:
+        name: goal_event_descriptions
+      c:@goal_state_descriptions:
+        name: goal_state_descriptions
+      c:@rosidl_dynamic_typesupport_c__identifier:
+        name: rosidl_dynamic_typesupport_c__identifier
       c:@stderr:
         name: stderr
       c:@stdin:
         name: stdin
       c:@stdout:
         name: stdout
+      c:action_client.h@T@rcl_action_client_impl_t:
+        name: rcl_action_client_impl_t
+      c:action_client.h@T@rcl_action_client_options_t:
+        name: rcl_action_client_options_t
+      c:action_client.h@T@rcl_action_client_t:
+        name: rcl_action_client_t
+      c:action_server.h@T@rcl_action_server_impl_t:
+        name: rcl_action_server_impl_t
+      c:action_server.h@T@rcl_action_server_options_t:
+        name: rcl_action_server_options_t
+      c:action_server.h@T@rcl_action_server_t:
+        name: rcl_action_server_t
+      c:action_type_support_struct.h@T@rosidl_action_get_type_description_function:
+        name: rosidl_action_get_type_description_function
+      c:action_type_support_struct.h@T@rosidl_action_get_type_description_sources_function:
+        name: rosidl_action_get_type_description_sources_function
+      c:action_type_support_struct.h@T@rosidl_action_get_type_hash_function:
+        name: rosidl_action_get_type_hash_function
       c:allocator.h@T@rcl_allocator_t:
         name: rcl_allocator_t
       c:allocator.h@T@rcutils_allocator_t:
@@ -1692,6 +3376,14 @@ files:
         name: rcl_context_instance_id_t
       c:context.h@T@rcl_context_t:
         name: rcl_context_t
+      c:default_qos.h@rcl_action_qos_profile_status_default:
+        name: rcl_action_qos_profile_status_default
+      c:discovery_options.h@T@rmw_discovery_options_t:
+        name: rmw_discovery_options_t
+      c:discovery_options.h@T@rmw_peer_address_t:
+        name: rmw_peer_address_t
+      c:dynamic_message_type_support_struct.h@T@rosidl_dynamic_message_type_support_impl_t:
+        name: rosidl_dynamic_message_type_support_impl_t
       c:error_handling.h@T@rcutils_error_state_t:
         name: rcutils_error_state_t
       c:error_handling.h@T@rcutils_error_string_t:
@@ -1706,6 +3398,14 @@ files:
         name: rcl_event_callback_t
       c:event_callback_type.h@T@rmw_event_callback_t:
         name: rmw_event_callback_t
+      c:goal_handle.h@T@rcl_action_goal_handle_impl_t:
+        name: rcl_action_goal_handle_impl_t
+      c:goal_handle.h@T@rcl_action_goal_handle_t:
+        name: rcl_action_goal_handle_t
+      c:graph.h@T@rcl_names_and_types_t:
+        name: rcl_names_and_types_t
+      c:graph.h@T@rcl_topic_endpoint_info_array_t:
+        name: rcl_topic_endpoint_info_array_t
       c:guard_condition.h@T@rcl_guard_condition_impl_t:
         name: rcl_guard_condition_impl_t
       c:guard_condition.h@T@rcl_guard_condition_options_t:
@@ -1742,12 +3442,22 @@ files:
         name: rmw_message_info_sequence_t
       c:message_sequence.h@T@rmw_message_sequence_t:
         name: rmw_message_sequence_t
+      c:message_type_support_struct.h@T@rosidl_message_get_type_description_function:
+        name: rosidl_message_get_type_description_function
+      c:message_type_support_struct.h@T@rosidl_message_get_type_description_sources_function:
+        name: rosidl_message_get_type_description_sources_function
+      c:message_type_support_struct.h@T@rosidl_message_get_type_hash_function:
+        name: rosidl_message_get_type_hash_function
       c:message_type_support_struct.h@T@rosidl_message_typesupport_handle_function:
         name: rosidl_message_typesupport_handle_function
+      c:names_and_types.h@T@rmw_names_and_types_t:
+        name: rmw_names_and_types_t
       c:node.h@T@rcl_node_impl_t:
         name: rcl_node_impl_t
       c:node.h@T@rcl_node_t:
         name: rcl_node_t
+      c:node.h@T@rcl_service_t:
+        name: rcl_service_t
       c:node_options.h@T@rcl_node_options_t:
         name: rcl_node_options_t
       c:publisher.h@T@rcl_publisher_impl_t:
@@ -1756,6 +3466,8 @@ files:
         name: rcl_publisher_options_t
       c:publisher.h@T@rcl_publisher_t:
         name: rcl_publisher_t
+      c:qos_profiles.h@rmw_qos_profile_best_available:
+        name: rmw_qos_profile_best_available
       c:qos_profiles.h@rmw_qos_profile_default:
         name: rmw_qos_profile_default
       c:qos_profiles.h@rmw_qos_profile_parameter_events:
@@ -1784,10 +3496,22 @@ files:
         name: rcl_service_impl_t
       c:service.h@T@rcl_service_options_t:
         name: rcl_service_options_t
-      c:service.h@T@rcl_service_t:
-        name: rcl_service_t
+      c:service_type_support_struct.h@T@rosidl_event_message_create_handle_function_function:
+        name: rosidl_event_message_create_handle_function_function
+      c:service_type_support_struct.h@T@rosidl_event_message_destroy_handle_function_function:
+        name: rosidl_event_message_destroy_handle_function_function
+      c:service_type_support_struct.h@T@rosidl_service_get_type_description_function:
+        name: rosidl_service_get_type_description_function
+      c:service_type_support_struct.h@T@rosidl_service_get_type_description_sources_function:
+        name: rosidl_service_get_type_description_sources_function
+      c:service_type_support_struct.h@T@rosidl_service_get_type_hash_function:
+        name: rosidl_service_get_type_hash_function
+      c:service_type_support_struct.h@T@rosidl_service_introspection_info_t:
+        name: rosidl_service_introspection_info_t
       c:service_type_support_struct.h@T@rosidl_service_typesupport_handle_function:
         name: rosidl_service_typesupport_handle_function
+      c:sha256.h@T@rcutils_sha256_ctx_t:
+        name: rcutils_sha256_ctx_t
       c:string_array.h@T@rcutils_string_array_t:
         name: rcutils_string_array_t
       c:string_map.h@T@rcutils_string_map_t:
@@ -1830,12 +3554,30 @@ files:
         name: rmw_time_point_value_t
       c:time.h@T@rmw_time_t:
         name: rmw_time_t
+      c:timer.h@T@rcl_timer_call_info_t:
+        name: rcl_timer_call_info_t
       c:timer.h@T@rcl_timer_callback_t:
         name: rcl_timer_callback_t
       c:timer.h@T@rcl_timer_impl_t:
         name: rcl_timer_impl_t
       c:timer.h@T@rcl_timer_t:
         name: rcl_timer_t
+      c:topic_endpoint_info.h@T@rmw_topic_endpoint_info_t:
+        name: rmw_topic_endpoint_info_t
+      c:topic_endpoint_info_array.h@T@rmw_topic_endpoint_info_array_t:
+        name: rmw_topic_endpoint_info_array_t
+      c:type_hash.h@T@rosidl_type_hash_t:
+        name: rosidl_type_hash_t
+      c:types.h@T@rcl_action_cancel_request_t:
+        name: rcl_action_cancel_request_t
+      c:types.h@T@rcl_action_cancel_response_t:
+        name: rcl_action_cancel_response_t
+      c:types.h@T@rcl_action_goal_info_t:
+        name: rcl_action_goal_info_t
+      c:types.h@T@rcl_action_goal_state_t:
+        name: rcl_action_goal_state_t
+      c:types.h@T@rcl_action_goal_status_array_t:
+        name: rcl_action_goal_status_array_t
       c:types.h@T@rcl_bool_array_t:
         name: rcl_bool_array_t
       c:types.h@T@rcl_byte_array_t:
@@ -1896,6 +3638,26 @@ files:
         name: rmw_subscriptions_t
       c:types.h@T@rmw_wait_set_t:
         name: rmw_wait_set_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_data_impl_t:
+        name: rosidl_dynamic_typesupport_dynamic_data_impl_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_data_t:
+        name: rosidl_dynamic_typesupport_dynamic_data_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_type_builder_impl_t:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_impl_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_type_builder_t:
+        name: rosidl_dynamic_typesupport_dynamic_type_builder_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_type_impl_t:
+        name: rosidl_dynamic_typesupport_dynamic_type_impl_t
+      c:types.h@T@rosidl_dynamic_typesupport_dynamic_type_t:
+        name: rosidl_dynamic_typesupport_dynamic_type_t
+      c:types.h@T@rosidl_dynamic_typesupport_member_id_t:
+        name: rosidl_dynamic_typesupport_member_id_t
+      c:types.h@T@rosidl_dynamic_typesupport_serialization_support_impl_t:
+        name: rosidl_dynamic_typesupport_serialization_support_impl_t
+      c:types.h@T@rosidl_dynamic_typesupport_serialization_support_interface_t:
+        name: rosidl_dynamic_typesupport_serialization_support_interface_t
+      c:types.h@T@rosidl_dynamic_typesupport_serialization_support_t:
+        name: rosidl_dynamic_typesupport_serialization_support_t
       c:uint8_array.h@T@rcutils_uint8_array_t:
         name: rcutils_uint8_array_t
       c:wait.h@T@rcl_wait_set_impl_t:

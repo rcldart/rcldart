@@ -27,3 +27,16 @@ migrate_working_dir/
 **/doc/api/
 .dart_tool/
 build/
+
+# Android: bundled ROS 2 closure is large & machine-generated — keep folders, not libs
+android/src/main/jniLibs/**/*.so
+android/src/main/assets/ros_ament/
+!android/src/main/jniLibs/**/.gitkeep
+
+# Apple: cross-compiled ROS 2 dylibs are large & machine-generated — keep folders, not libs
+ios/ros/**/*.dylib
+ios/ros/**/share/
+macos/ros/**/*.dylib
+macos/ros/share/
+!ios/ros/**/.gitkeep
+!macos/ros/**/.gitkeep
